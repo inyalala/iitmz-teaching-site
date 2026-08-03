@@ -1068,6 +1068,25 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<p>By the end of this lecture, you can:</p>
+<ul>
+<li>Write a Python class with a constructor, attributes, and a method</li>
+<li>Explain what <code>self</code> refers to and why it is passed automatically</li>
+<li>Spot the most common first-time mistake in <code>__init__</code></li>
+</ul>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li>Why a tuple is not good enough</li>
+<li>A class is a blueprint: <code>Point</code></li>
+<li>Attributes vs. methods</li>
+<li>The mistake almost everyone makes once</li>
+<li>Quiz, then summary</li>
+</ol>
+</section>
 <section id="why-we-start-here-not-with-data-structures" class="slide level2">
 <h2>Why we start here, not with data structures</h2>
 <ul>
@@ -1203,10 +1222,34 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="before-next-lecture" class="slide level2">
-<h2>Before next lecture</h2>
+<section id="quiz-spot-the-bug" class="slide level2">
+<h2>Quiz — spot the bug</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a><span class="kw">class</span> Rectangle:</span>
+<span id="cb7-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, w, h):</span>
+<span id="cb7-3"><a href aria-label="3"></a>        w <span class="op">=</span> w</span>
+<span id="cb7-4"><a href aria-label="4"></a>        h <span class="op">=</span> h</span>
+<span id="cb7-5"><a href aria-label="5"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
+<span id="cb7-6"><a href aria-label="6"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">*</span> <span class="va">self</span>.h</span>
+<span id="cb7-7"><a href aria-label="7"></a></span>
+<span id="cb7-8"><a href aria-label="8"></a>r <span class="op">=</span> Rectangle(<span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb7-9"><a href aria-label="9"></a><span class="bu">print</span>(r.area())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What happens when this runs? Why?</strong></p>
+</section>
+<section id="quiz-answer" class="slide level2">
+<h2>Quiz — answer</h2>
 <ul>
-<li>Have: a class, a constructor, attributes, a method taking another object</li>
+<li><code>AttributeError: &#39;Rectangle&#39; object has no attribute &#39;w&#39;</code></li>
+<li><code>w = w</code> and <code>h = h</code> never touch <code>self</code> — same bug as the <code>Point</code> example</li>
+<li><code>area()</code> reaches for <code>self.w</code>, which was never set</li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>A class is a blueprint; an object is one instance built from it</li>
+<li><code>__init__</code> runs once per object; <code>self</code> is that specific object</li>
+<li>Attributes hold data (<code>self.x</code>); methods hold behavior (<code>def area(self)</code>)</li>
+<li>The #1 first-time bug: forgetting <code>self.</code> on the left-hand side</li>
 <li>Next: what happens when data is changed carelessly — encapsulation</li>
 </ul>
 

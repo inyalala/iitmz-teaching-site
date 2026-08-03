@@ -442,7 +442,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr. Innocent Nyalala">
-  <title>Data Structures as Classes, and Why We Count Operations</title>
+  <title>Big-O: Why We Count Operations, Not Seconds</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1056,7 +1056,7 @@ margin-right: 0; }
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Data Structures as Classes, and Why We Count Operations</h1>
+  <h1 class="title">Big-O: Why We Count Operations, Not Seconds</h1>
   <p class="subtitle">Programming and Data Structures — Week 1, Lecture 4</p>
 
 <div class="quarto-title-authors">
@@ -1068,146 +1068,140 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
-<section id="from-shape-to-stack" class="slide level2">
-<h2>From Shape to Stack</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-code-line-numbers="1-2|4-5|7-8|10-11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a><span class="kw">class</span> Stack:</span>
-<span id="cb1-2"><a href aria-label="2"></a>    <span class="co">&quot;&quot;&quot;Last-in, first-out collection.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href aria-label="3"></a></span>
-<span id="cb1-4"><a href aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb1-5"><a href aria-label="5"></a>        <span class="va">self</span>._items <span class="op">=</span> []          <span class="co"># hidden: nothing outside touches this list directly</span></span>
-<span id="cb1-6"><a href aria-label="6"></a></span>
-<span id="cb1-7"><a href aria-label="7"></a>    <span class="kw">def</span> push(<span class="va">self</span>, item):</span>
-<span id="cb1-8"><a href aria-label="8"></a>        <span class="va">self</span>._items.append(item)  <span class="co"># add to the end</span></span>
-<span id="cb1-9"><a href aria-label="9"></a></span>
-<span id="cb1-10"><a href aria-label="10"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
-<span id="cb1-11"><a href aria-label="11"></a>        <span class="cf">return</span> <span class="va">self</span>._items.pop()  <span class="co"># remove and return from the end</span></span>
-<span id="cb1-12"><a href aria-label="12"></a></span>
-<span id="cb1-13"><a href aria-label="13"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
-<span id="cb1-14"><a href aria-label="14"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>._items) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<p>By the end of this lecture, you can:</p>
 <ul>
-<li>Constructor, hidden state, methods that enforce correctness</li>
-<li>Exactly the pattern every data structure this term follows, from arrays onward</li>
+<li>Explain why we measure cost in operations, not seconds</li>
+<li>Classify a piece of code as O(1), O(log n), O(n), O(n log n), or O(n²)</li>
+<li>Predict, without running it, which of two approaches will slow down first</li>
 </ul>
 </section>
-<section id="tracing-it" class="slide level2">
-<h2>Tracing it</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a>s <span class="op">=</span> Stack()</span>
-<span id="cb2-2"><a href aria-label="2"></a>s.push(<span class="dv">1</span>)</span>
-<span id="cb2-3"><a href aria-label="3"></a>s.push(<span class="dv">2</span>)</span>
-<span id="cb2-4"><a href aria-label="4"></a><span class="bu">print</span>(s.pop())        <span class="co"># 2 — the most recently pushed item comes back first</span></span>
-<span id="cb2-5"><a href aria-label="5"></a><span class="bu">print</span>(s.is_empty())   <span class="co"># False — one item, &quot;1&quot;, is still inside</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li>The contact list problem</li>
+<li>Five complexity classes, one real example each</li>
+<li>The chart that makes it visual</li>
+<li>Quiz: classify five snippets, live</li>
+<li>Summary</li>
+</ol>
+</section>
+<section id="the-problem-finding-a-contact" class="slide level2">
+<h2>The problem: finding a contact</h2>
 <ul>
-<li><code>_items</code> is a Python list, but nothing outside <code>Stack</code> should know that</li>
-<li>Callers only ever see <code>push</code>, <code>pop</code>, <code>is_empty</code></li>
-<li>Swap the internal list for a linked list later — no caller code changes</li>
+<li>Your phone has 1,000 contacts, unsorted by nothing in particular</li>
+<li>You want “Amina.” How does the phone find her?</li>
+<li>Two candidate approaches. Which one should the app actually use?</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>contacts <span class="op">=</span> [<span class="st">&quot;Zara&quot;</span>, <span class="st">&quot;Amina&quot;</span>, <span class="st">&quot;John&quot;</span>, <span class="st">&quot;Priya&quot;</span>, ...]  <span class="co"># 1,000 names, unsorted</span></span>
+<span id="cb1-2"><a href aria-label="2"></a></span>
+<span id="cb1-3"><a href aria-label="3"></a><span class="kw">def</span> find_linear(contacts, name):</span>
+<span id="cb1-4"><a href aria-label="4"></a>    <span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(contacts):</span>
+<span id="cb1-5"><a href aria-label="5"></a>        <span class="cf">if</span> c <span class="op">==</span> name:</span>
+<span id="cb1-6"><a href aria-label="6"></a>            <span class="cf">return</span> i</span>
+<span id="cb1-7"><a href aria-label="7"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="class-1-o1-the-speed-dial-slot" class="slide level2">
+<h2>Class 1 — O(1): the speed-dial slot</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a>speed_dial <span class="op">=</span> {<span class="dv">1</span>: <span class="st">&quot;Mum&quot;</span>, <span class="dv">2</span>: <span class="st">&quot;Amina&quot;</span>, <span class="dv">3</span>: <span class="st">&quot;Work&quot;</span>}</span>
+<span id="cb2-2"><a href aria-label="2"></a><span class="bu">print</span>(speed_dial[<span class="dv">2</span>])   <span class="co"># &quot;Amina&quot; — one lookup, regardless of dict size</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Cost does not depend on how many contacts exist</li>
+<li>Dictionary/hash lookup, array index — same cost at 10 or 10 million entries</li>
 </ul>
 </section>
-<section id="why-counting-operations-not-using-a-stopwatch" class="slide level2">
-<h2>Why “counting operations,” not “using a stopwatch”</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a><span class="im">import</span> time</span>
-<span id="cb3-2"><a href aria-label="2"></a></span>
-<span id="cb3-3"><a href aria-label="3"></a><span class="kw">def</span> linear_search(items, target):</span>
-<span id="cb3-4"><a href aria-label="4"></a>    <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(items):</span>
-<span id="cb3-5"><a href aria-label="5"></a>        <span class="cf">if</span> x <span class="op">==</span> target:</span>
-<span id="cb3-6"><a href aria-label="6"></a>            <span class="cf">return</span> i</span>
-<span id="cb3-7"><a href aria-label="7"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb3-8"><a href aria-label="8"></a></span>
-<span id="cb3-9"><a href aria-label="9"></a>data <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1_000_000</span>))</span>
-<span id="cb3-10"><a href aria-label="10"></a>start <span class="op">=</span> time.perf_counter()</span>
-<span id="cb3-11"><a href aria-label="11"></a>linear_search(data, <span class="dv">999_999</span>)</span>
-<span id="cb3-12"><a href aria-label="12"></a><span class="bu">print</span>(time.perf_counter() <span class="op">-</span> start)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="class-2-olog-n-the-guessing-game" class="slide level2">
+<h2>Class 2 — O(log n): the guessing game</h2>
 <ul>
-<li>Run on a laptop: some milliseconds. On a phone: a different number.</li>
-<li>After a Python upgrade: a third number</li>
-<li>The stopwatch measures the hardware, not the algorithm</li>
+<li>Play: guess a number 1–1,000. I say “higher” or “lower.” How many guesses, worst case?</li>
+<li>Answer: about 10. Each guess cuts the range in half.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a><span class="kw">def</span> binary_search(sorted_contacts, name):</span>
+<span id="cb3-2"><a href aria-label="2"></a>    lo, hi <span class="op">=</span> <span class="dv">0</span>, <span class="bu">len</span>(sorted_contacts) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href aria-label="3"></a>    <span class="cf">while</span> lo <span class="op">&lt;=</span> hi:</span>
+<span id="cb3-4"><a href aria-label="4"></a>        mid <span class="op">=</span> (lo <span class="op">+</span> hi) <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb3-5"><a href aria-label="5"></a>        <span class="cf">if</span> sorted_contacts[mid] <span class="op">==</span> name:</span>
+<span id="cb3-6"><a href aria-label="6"></a>            <span class="cf">return</span> mid</span>
+<span id="cb3-7"><a href aria-label="7"></a>        <span class="cf">elif</span> sorted_contacts[mid] <span class="op">&lt;</span> name:</span>
+<span id="cb3-8"><a href aria-label="8"></a>            lo <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-9"><a href aria-label="9"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-10"><a href aria-label="10"></a>            hi <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-11"><a href aria-label="11"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="class-3-on-checking-every-contact" class="slide level2">
+<h2>Class 3 — O(n): checking every contact</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href aria-label="1"></a><span class="kw">def</span> find_linear(contacts, name):</span>
+<span id="cb4-2"><a href aria-label="2"></a>    <span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(contacts):</span>
+<span id="cb4-3"><a href aria-label="3"></a>        <span class="cf">if</span> c <span class="op">==</span> name:</span>
+<span id="cb4-4"><a href aria-label="4"></a>            <span class="cf">return</span> i</span>
+<span id="cb4-5"><a href aria-label="5"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Worst case (name is last, or missing): checks all n contacts</li>
+<li>Double the contacts, double the worst-case checks — a straight line</li>
 </ul>
 </section>
-<section id="what-actually-stays-true-across-machines" class="slide level2">
-<h2>What actually stays true across machines</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Input size</th>
-<th>Comparisons (worst case)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1,000</td>
-<td>1,000</td>
-</tr>
-<tr class="even">
-<td>1,000,000</td>
-<td>1,000,000</td>
-</tr>
-<tr class="odd">
-<td>1,000,000,000</td>
-<td>1,000,000,000</td>
-</tr>
-</tbody>
-</table>
+<section id="class-4-on-log-n-sorting-the-list-first" class="slide level2">
+<h2>Class 4 — O(n log n): sorting the list first</h2>
 <ul>
-<li>Worst case: one comparison per element, every time</li>
-<li>Double the list → double the comparisons, on any machine</li>
-<li><strong>That growth rate</strong> is what Big-O describes</li>
+<li>To binary-search, the list must be sorted first</li>
+<li>A good sort (merge sort, Week 2) costs O(n log n) — worse than O(n), better than O(n²)</li>
+<li>Worth it if you search the <em>same</em> list many times</li>
 </ul>
 </section>
-<section id="naming-the-growth-rate" class="slide level2">
-<h2>Naming the growth rate</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><span class="math inline">\(n\)</span></th>
-<th><span class="math inline">\(O(n)\)</span> linear search</th>
-<th><span class="math inline">\(O(\log n)\)</span> binary search</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1,000</td>
-<td>1,000</td>
-<td>~10</td>
-</tr>
-<tr class="even">
-<td>1,000,000</td>
-<td>1,000,000</td>
-<td>~20</td>
-</tr>
-<tr class="odd">
-<td>1,000,000,000</td>
-<td>1,000,000,000</td>
-<td>~30</td>
-</tr>
-</tbody>
-</table>
+<section id="class-5-on²-comparing-every-pair" class="slide level2">
+<h2>Class 5 — O(n²): comparing every pair</h2>
 <ul>
-<li><span class="math inline">\(O(n)\)</span>: cost grows in direct proportion to input size <span class="math inline">\(n\)</span></li>
-<li><span class="math inline">\(O(\log n)\)</span>: binary search on a sorted list — doubling input adds one comparison</li>
-<li>At a billion elements: thirty comparisons versus a billion</li>
+<li>Real question: does anyone in this class share a birthday?</li>
+<li>Naive approach: compare every student to every other student</li>
+<li>1,000 students → roughly 500,000 comparisons</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href aria-label="1"></a><span class="kw">def</span> has_duplicate_birthday(birthdays):</span>
+<span id="cb5-2"><a href aria-label="2"></a>    n <span class="op">=</span> <span class="bu">len</span>(birthdays)</span>
+<span id="cb5-3"><a href aria-label="3"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb5-4"><a href aria-label="4"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n):</span>
+<span id="cb5-5"><a href aria-label="5"></a>            <span class="cf">if</span> birthdays[i] <span class="op">==</span> birthdays[j]:</span>
+<span id="cb5-6"><a href aria-label="6"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb5-7"><a href aria-label="7"></a>    <span class="cf">return</span> <span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="the-chart-that-makes-it-visual" class="slide level2">
+<h2>The chart that makes it visual</h2>
+
+<img role="img" aria-label="Bar chart comparing operation counts at n=1000 for O(1), O(log n), O(n), O(n log n), and O(n squared), with O(n squared) at one million operations." data-src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjgwIDMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiPgogIDx0ZXh0IHg9IjIwIiB5PSIyNCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBhMTYyOCI+T3BlcmF0aW9ucyBuZWVkZWQgdG8gcHJvY2VzcyBuID0gMSwwMDAgY29udGFjdHM8L3RleHQ+CgogIDwhLS0gYXhpcyAtLT4KICA8bGluZSB4MT0iMTQwIiB5MT0iNDAiIHgyPSIxNDAiIHkyPSIyNzAiIHN0cm9rZT0iI2NiZDVlMSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjE0MCIgeTE9IjI3MCIgeDI9IjY2MCIgeTI9IjI3MCIgc3Ryb2tlPSIjY2JkNWUxIiBzdHJva2Utd2lkdGg9IjEiLz4KCiAgPCEtLSBiYXJzOiBPKDEpPTEsIE8obG9nIG4pPTEwLCBPKG4pPTEwMDAsIE8obiBsb2cgbik9MTAwMDAsIE8obl4yKT0xMDAwMDAwIC0tPgogIDwhLS0gbG9nIHNjYWxlIGZvciByZWFkYWJpbGl0eTogYmFyIGxlbmd0aCBwcm9wb3J0aW9uYWwgdG8gbG9nMTAodmFsdWUpKzEgLS0+CiAgPGc+CiAgICA8cmVjdCB4PSIxNDUiIHk9IjI1NSIgd2lkdGg9IjgiICAgaGVpZ2h0PSIxNSIgZmlsbD0iIzIyYzU1ZSIvPgogICAgPHRleHQgeD0iMTU4IiB5PSIyNTIiIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiMwYTE2MjgiPk8oMSkgPSAxIG9wZXJhdGlvbjwvdGV4dD4KCiAgICA8cmVjdCB4PSIxNDUiIHk9IjIyNSIgd2lkdGg9IjgwIiAgaGVpZ2h0PSIxNSIgZmlsbD0iIzg0Y2MxNiIvPgogICAgPHRleHQgeD0iMjMwIiB5PSIyMzciIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiMwYTE2MjgiPk8obG9nIG4pICYjODc3NjsgMTAgb3BlcmF0aW9uczwvdGV4dD4KCiAgICA8cmVjdCB4PSIxNDUiIHk9IjE5NSIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNSIgZmlsbD0iI0M1QTA1OSIvPgogICAgPHRleHQgeD0iMzkwIiB5PSIyMDciIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiMwYTE2MjgiPk8obikgPSAxLDAwMCBvcGVyYXRpb25zPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE0NSIgeT0iMTY1IiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjZjU5ZTBiIi8+CiAgICA8dGV4dCB4PSI0NzAiIHk9IjE3NyIgZm9udC1zaXplPSIxMSIgZmlsbD0iIzBhMTYyOCI+TyhuIGxvZyBuKSAmIzg3NzY7IDEwLDAwMCBvcGVyYXRpb25zPC90ZXh0PgoKICAgIDxyZWN0IHg9IjE0NSIgeT0iMTM1IiB3aWR0aD0iNDgwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjZWY0NDQ0Ii8+CiAgICA8dGV4dCB4PSI2MjkiIHk9IjEzMiIgZm9udC1zaXplPSIxMSIgZmlsbD0iIzBhMTYyOCIgdGV4dC1hbmNob3I9ImVuZCI+TyhuJiMxNzg7KSA9IDEsMDAwLDAwMCBvcGVyYXRpb25zPC90ZXh0PgogIDwvZz4KCiAgPHRleHQgeD0iMTQwIiB5PSIyOTIiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM2NDc0OGIiPkJhciBsZW5ndGggaXMgbG9nLXNjYWxlZCDigJQgTyhuJiMxNzg7KSBpcyBub3QgNDgweCB3b3JzZSB0aGFuIE8oMSksIGl0IGlzIDEsMDAwLDAwMHggd29yc2UuPC90ZXh0PgogIDx0ZXh0IHg9IjE0MCIgeT0iMzA4IiBmb250LXNpemU9IjEwIiBmaWxsPSIjNjQ3NDhiIj5BdCBuID0gMSwwMDAsIGFuIE8obiYjMTc4OykgYXBwcm9hY2ggY2hlY2tpbmcgYWxsIGJpcnRoZGF5IHBhaXJzIGluIGEgY2xhc3Mgb2YgMSwwMDAgZG9lcyBvbmUgbWlsbGlvbiBjb21wYXJpc29ucy48L3RleHQ+Cjwvc3ZnPgo=" alt="Bar chart comparing operation counts at n=1000 for O(1), O(log n), O(n), O(n log n), and O(n squared), with O(n squared) at one million operations." class="r-stretch"></section>
+<section id="quiz-classify-these-right-now" class="slide level2">
+<h2>Quiz — classify these, right now</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a><span class="co"># A</span></span>
+<span id="cb6-2"><a href aria-label="2"></a><span class="kw">def</span> a(items):</span>
+<span id="cb6-3"><a href aria-label="3"></a>    <span class="cf">return</span> items[<span class="dv">0</span>]</span>
+<span id="cb6-4"><a href aria-label="4"></a></span>
+<span id="cb6-5"><a href aria-label="5"></a><span class="co"># B</span></span>
+<span id="cb6-6"><a href aria-label="6"></a><span class="kw">def</span> b(items, target):</span>
+<span id="cb6-7"><a href aria-label="7"></a>    <span class="cf">for</span> x <span class="kw">in</span> items:</span>
+<span id="cb6-8"><a href aria-label="8"></a>        <span class="cf">if</span> x <span class="op">==</span> target: <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb6-9"><a href aria-label="9"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb6-10"><a href aria-label="10"></a></span>
+<span id="cb6-11"><a href aria-label="11"></a><span class="co"># C</span></span>
+<span id="cb6-12"><a href aria-label="12"></a><span class="kw">def</span> c(items):</span>
+<span id="cb6-13"><a href aria-label="13"></a>    <span class="cf">for</span> i <span class="kw">in</span> items:</span>
+<span id="cb6-14"><a href aria-label="14"></a>        <span class="cf">for</span> j <span class="kw">in</span> items:</span>
+<span id="cb6-15"><a href aria-label="15"></a>            <span class="bu">print</span>(i, j)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Pause. Classify A, B, and C before the next slide.</strong></p>
+</section>
+<section id="quiz-answers" class="slide level2">
+<h2>Quiz — answers</h2>
+<ul>
+<li><strong>A</strong> — <code>O(1)</code>. One index access, regardless of list size.</li>
+<li><strong>B</strong> — <code>O(n)</code>. Worst case scans the whole list once.</li>
+<li><strong>C</strong> — <code>O(n²)</code>. A loop inside a loop, both over the same n items.</li>
 </ul>
 </section>
-<section id="best-worst-and-average-case" class="slide level2">
-<h2>Best, worst, and average case</h2>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
 <ul>
-<li>Target in the first slot: <strong>best case</strong>, 1 comparison</li>
-<li>Target last, or absent: <strong>worst case</strong>, <span class="math inline">\(n\)</span> comparisons</li>
-<li>Big-O describes the worst case unless stated otherwise — the guarantee you can rely on</li>
-</ul>
-</section>
-<section id="exercise-bring-to-lab" class="slide level2">
-<h2>Exercise (bring to lab)</h2>
-<ul>
-<li>Write <code>count_comparisons(items, target)</code> — returns the comparison count, not the index</li>
-<li>Run on lists of length 10, 100, 1,000, target absent every time</li>
-<li>Confirm the count scales linearly with length</li>
-</ul>
-</section>
-<section id="where-this-course-goes-next" class="slide level2">
-<h2>Where this course goes next</h2>
-<ul>
-<li>Week 2: arrays and dynamic arrays</li>
-<li>First data structure built as a class in this course</li>
-<li>First place we measure cost formally</li>
+<li>We count operations, not seconds, because seconds depend on the machine</li>
+<li>O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) — in order of how badly they scale</li>
+<li>Choosing the right structure is choosing the right growth rate</li>
+<li>Next: Week 2, arrays — the first structure we measure formally</li>
 </ul>
 
 </section>

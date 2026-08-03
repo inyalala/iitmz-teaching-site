@@ -1068,6 +1068,25 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<p>By the end of this lecture, you can:</p>
+<ul>
+<li>Write a subclass using <code>class Child(Parent):</code></li>
+<li>Explain polymorphism: same method call, different behavior per object</li>
+<li>Distinguish “is-a” (inheritance) from “has-a” (composition)</li>
+</ul>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li>The repetition problem: <code>Circle</code> and <code>Square</code></li>
+<li>Inheritance: naming the relationship</li>
+<li>Polymorphism: one call, many behaviors</li>
+<li>MTech: composition vs. inheritance, duck typing</li>
+<li>Quiz, then summary</li>
+</ol>
+</section>
 <section id="the-repetition-problem" class="slide level2">
 <h2>The repetition problem</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a><span class="kw">class</span> Circle:</span>
@@ -1174,12 +1193,32 @@ Triangle 10.0</code></pre>
 <li>Confirm it prints correctly in the loop with zero changes to the loop</li>
 </ul>
 </section>
-<section id="before-next-lecture" class="slide level2">
-<h2>Before next lecture</h2>
+<section id="quiz-is-a-or-has-a" class="slide level2">
+<h2>Quiz — is-a or has-a?</h2>
+<p>For each pair, is it inheritance (“is-a”) or composition (“has-a”)?</p>
+<ol type="1">
+<li><code>Dog</code> and <code>Animal</code></li>
+<li><code>Car</code> and <code>Wheel</code></li>
+<li><code>SavingsAccount</code> and <code>BankAccount</code></li>
+<li><code>House</code> and <code>Room</code></li>
+</ol>
+</section>
+<section id="quiz-answers" class="slide level2">
+<h2>Quiz — answers</h2>
+<ol type="1">
+<li><code>Dog(Animal)</code> — <strong>is-a</strong>. A dog genuinely is a kind of animal.</li>
+<li><code>Car</code> has a <code>Wheel</code> — <strong>has-a</strong>. A car is not a kind of wheel.</li>
+<li><code>SavingsAccount(BankAccount)</code> — <strong>is-a</strong>. A savings account is a kind of account.</li>
+<li><code>House</code> has <code>Room</code>s — <strong>has-a</strong>. A house is not a kind of room.</li>
+</ol>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
 <ul>
-<li>We have a working <code>Shape</code> family</li>
-<li>Next: why every data structure this term follows this same pattern</li>
-<li>And why we count operations, not seconds</li>
+<li>Inheritance: <code>class Child(Parent):</code> — names an “is-a” relationship</li>
+<li>Polymorphism: same call, <code>s.area()</code>, different behavior per object type</li>
+<li>Composition (“has-a”) is the default; inheritance only when “is-a” is genuinely true</li>
+<li>Next: why every data structure this term follows this same class pattern, and why we count operations, not seconds</li>
 </ul>
 
 </section>

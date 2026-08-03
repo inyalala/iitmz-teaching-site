@@ -1068,6 +1068,25 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<p>By the end of this lecture, you can:</p>
+<ul>
+<li>Explain what encapsulation means and why <code>_balance</code> has an underscore</li>
+<li>Write a method that refuses an invalid change instead of allowing it</li>
+<li>Argue why encapsulation is a contract, not a lock</li>
+</ul>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li>The gap Lecture 1 left open</li>
+<li><code>BankAccount</code>: hiding data behind checked methods</li>
+<li>A second example: <code>Temperature</code></li>
+<li>What encapsulation is not</li>
+<li>Quiz, then summary</li>
+</ol>
+</section>
 <section id="last-time-and-the-gap-it-leaves" class="slide level2">
 <h2>Last time, and the gap it leaves</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>p <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">4</span>)</span>
@@ -1173,11 +1192,34 @@ display:block!important;
 <li>Explain in one sentence: why would direct assignment to <code>self._celsius</code> make this method pointless?</li>
 </ul>
 </section>
-<section id="before-next-lecture" class="slide level2">
-<h2>Before next lecture</h2>
+<section id="quiz-find-the-gap" class="slide level2">
+<h2>Quiz — find the gap</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a><span class="kw">class</span> Wallet:</span>
+<span id="cb6-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cents<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb6-3"><a href aria-label="3"></a>        <span class="va">self</span>.cents <span class="op">=</span> cents          <span class="co"># no underscore — deliberately, for this quiz</span></span>
+<span id="cb6-4"><a href aria-label="4"></a></span>
+<span id="cb6-5"><a href aria-label="5"></a>    <span class="kw">def</span> add(<span class="va">self</span>, amount):</span>
+<span id="cb6-6"><a href aria-label="6"></a>        <span class="va">self</span>.cents <span class="op">+=</span> amount</span>
+<span id="cb6-7"><a href aria-label="7"></a></span>
+<span id="cb6-8"><a href aria-label="8"></a>w <span class="op">=</span> Wallet(<span class="dv">500</span>)</span>
+<span id="cb6-9"><a href aria-label="9"></a>w.cents <span class="op">=</span> <span class="op">-</span><span class="dv">9999</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What’s wrong with this class, and how would you fix it using today’s pattern?</strong></p>
+</section>
+<section id="quiz-answer" class="slide level2">
+<h2>Quiz — answer</h2>
 <ul>
-<li><code>BankAccount</code> and <code>Temperature</code>: unrelated classes, same shape</li>
-<li>Next: classes that are not just similarly shaped, but genuinely <em>related</em></li>
+<li><code>cents</code> is public — nothing stops <code>w.cents = -9999</code></li>
+<li>Fix: rename to <code>_cents</code>, add <code>add</code>/<code>spend</code> methods that validate, add <code>balance()</code> to read</li>
+<li>Same shape as <code>BankAccount</code>, applied to a new class</li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Encapsulation: state changes only through the object’s own methods</li>
+<li>Leading underscore is a convention, not a lock — a documented “don’t touch”</li>
+<li>Two independent examples, one shape: check before you change</li>
+<li>Next: classes that are genuinely <em>related</em>, not just similarly shaped</li>
 </ul>
 
 </section>
