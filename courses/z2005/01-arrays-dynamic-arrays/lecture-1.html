@@ -442,7 +442,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr. Innocent Nyalala">
-  <title>Classes and Objects</title>
+  <title>Static Arrays: Contiguous Memory</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1056,8 +1056,8 @@ margin-right: 0; }
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Classes and Objects</h1>
-  <p class="subtitle">Programming and Data Structures — Week 1, Lecture 1</p>
+  <h1 class="title">Static Arrays: Contiguous Memory</h1>
+  <p class="subtitle">Programming and Data Structures — Week 2, Lecture 1</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1068,193 +1068,58 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
-<section id="welcome-to-programming-and-data-structures" class="slide level2">
-<h2>Welcome to Programming and Data Structures</h2>
-<ul>
-<li>15 credits, Core course, Odd Semester (October 2026 – January 2027)</li>
-<li>4 lecture sessions + 2 lab sessions every week, for 15 weeks</li>
-<li>Prerequisite: Introduction to Programming in Python — we build on it, we do not re-teach it</li>
-<li>This is the course that makes every later data science and AI course possible</li>
-</ul>
-</section>
-<section id="what-you-will-be-able-to-do-by-january" class="slide level2">
-<h2>What you will be able to do by January</h2>
-<ul>
-<li>Design Python classes using encapsulation, inheritance, and polymorphism</li>
-<li>Implement stacks, queues, linked lists, binary trees, hash tables, and heaps from first principles</li>
-<li>Analyze running time with big-O and justify a structure choice by that analysis</li>
-<li>Apply dynamic programming and greedy strategies to optimization problems</li>
-<li>Represent graphs and apply BFS, DFS, and A* to real problems</li>
-<li>Explain, with a working example, why parallel and randomized approaches matter in practice</li>
-</ul>
-</section>
-<section id="the-15-week-roadmap" class="slide level2">
-<h2>The 15-week roadmap</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Object-oriented programming, then algorithms (this week)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Arrays and dynamic arrays</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Stacks and queues</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Linked lists</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Simple sorting</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Advanced sorting</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Binary trees</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="the-15-week-roadmap-continued" class="slide level2">
-<h2>The 15-week roadmap, continued</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>8</td>
-<td>Hash tables and heaps</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Dynamic programming</td>
-</tr>
-<tr class="odd">
-<td>10</td>
-<td>Greedy algorithms</td>
-</tr>
-<tr class="even">
-<td>11</td>
-<td>Introduction to graphs</td>
-</tr>
-<tr class="odd">
-<td>12–13</td>
-<td>Graph algorithms: BFS, DFS, A*</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Parallel and randomized algorithms</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>Project presentations and review</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="how-your-grade-is-composed" class="slide level2">
-<h2>How your grade is composed</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Component</th>
-<th>Weight</th>
-<th>Detail</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>In-class assignments</td>
-<td>20%</td>
-<td>Seven assignments, in lab, bi-weekly</td>
-</tr>
-<tr class="even">
-<td>Quizzes</td>
-<td>15%</td>
-<td>Two written quizzes: modules 1–5, then 6–9</td>
-</tr>
-<tr class="odd">
-<td>Course project</td>
-<td>25%</td>
-<td>Proposal, two milestones, final submission, presentation</td>
-</tr>
-<tr class="even">
-<td>End-semester examination</td>
-<td>40%</td>
-<td>Practical and theory, in lab</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="textbooks-and-how-to-use-them" class="slide level2">
-<h2>Textbooks and how to use them</h2>
-<ul>
-<li><strong>Required</strong>: Lafore, Broder &amp; Canning, <em>Data Structures and Algorithms in Python</em> (1st ed., Addison Wesley, 2022)</li>
-<li><strong>Reference</strong>: Skiena, <em>The Algorithm Design Manual</em> (2nd ed., Springer, 2008)</li>
-<li>Lafore et al. is the primary text — readings are assigned from it every week</li>
-<li>Skiena is for going deeper once a structure already makes sense</li>
-</ul>
-</section>
-<section id="policies-you-need-to-know-from-day-one" class="slide level2">
-<h2>Policies you need to know from day one</h2>
-<ul>
-<li><strong>Attendance</strong>: expected at all lectures and labs; lab work is submitted before the session ends</li>
-<li><strong>Late work</strong>: 10% off per day late, up to 3 days; each student has 3 no-questions-asked late days for the semester</li>
-<li><strong>Integrity</strong>: discuss ideas freely; never share or copy code — every line you submit, you must be able to explain</li>
-<li><strong>AI tools</strong>: fine for explaining concepts or reading errors; not for generating a submitted solution — declare material AI contribution in a header comment</li>
-</ul>
-</section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <p>By the end of this lecture, you can:</p>
 <ul>
-<li>Write a Python class with a constructor, attributes, and a method</li>
-<li>Explain what <code>self</code> refers to and why it is passed automatically</li>
-<li>Spot the most common first-time mistake in <code>__init__</code></li>
+<li>Explain why <code>arr[i]</code> costs O(1), in terms of memory addresses</li>
+<li>Compute the address of any element given a base address and element size</li>
+<li>State the one thing a plain array can never do after creation</li>
+<li>Explain why a 2D array is really a 1D array wearing a disguise</li>
 </ul>
 </section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ol type="1">
-<li>Why a tuple is not good enough</li>
-<li>A class is a blueprint: <code>Point</code></li>
-<li>Attributes vs. methods</li>
-<li>The mistake almost everyone makes once</li>
+<li>The apartment building analogy</li>
+<li>What “contiguous memory” actually means</li>
+<li>The address arithmetic behind O(1) indexing, worked in full</li>
+<li>Why references break the “same size” assumption — and why it still works</li>
+<li>The wall every array hits</li>
+<li>Two-dimensional arrays: row-major layout</li>
+<li>Two full worked traces</li>
 <li>Quiz, then summary</li>
 </ol>
 </section>
-<section id="why-we-start-here-not-with-data-structures" class="slide level2">
-<h2>Why we start here, not with data structures</h2>
+<section id="the-apartment-building-analogy" class="slide level2">
+<h2>The apartment building analogy</h2>
 <ul>
-<li>Every structure this term — stack, queue, list, tree, graph — is a <strong>Python class</strong></li>
-<li>Shaky classes now means shaky everything from Week 2 onward</li>
-<li>Goal today: read any <code>class</code> block and explain exactly what runs</li>
+<li>An array is like an apartment building with numbered flats, all the same size</li>
+<li>Flat 0 is at the ground floor entrance; flat 1 is exactly one flat-width further; flat 2, two flat-widths</li>
+<li>The building manager never <em>searches</em> for flat 47 — they compute its position: entrance + 47 × (flat width)</li>
+<li>A linked list, by contrast, is a scavenger hunt: each flat only tells you where the <em>next</em> one is</li>
+</ul>
+</section>
+<section id="from-one-object-to-many" class="slide level2">
+<h2>From one object to many</h2>
+<ul>
+<li>Week 1: one <code>Point</code>, one <code>BankAccount</code> at a time</li>
+<li>Now: 1,000 exam scores. Where do they live?</li>
+<li>A Python <code>list</code> is the obvious answer — but what is it, underneath?</li>
+</ul>
+</section>
+<section id="contiguous-memory-the-physical-picture" class="slide level2">
+<h2>Contiguous memory: the physical picture</h2>
+<pre><code>Memory address:   1000   1004   1008   1012   1016
+Value:            [ 67 ] [ 88 ] [ 45 ] [ 92 ] [ 71 ]
+Index:              0      1      2      3      4</code></pre>
+<ul>
+<li>Each score is a 4-byte integer</li>
+<li>They sit back-to-back in memory — no gaps, no detours</li>
+<li>“Contiguous” = one unbroken block, not scattered</li>
 </ul>
 <aside class="notes">
-<p>Open by asking who has used a class before, in any language. Follow with “what’s the difference between a class and an object” — expect confused or circular answers even from students who claim familiarity. That confusion is the whole reason this lecture exists, and it is worth surfacing before you start, not after.</p>
+<p>Draw this on the board as an actual strip of boxes with addresses above each one before showing any code. Students who have only ever seen <code>arr[i]</code> as syntax benefit enormously from seeing the memory layout once, concretely.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1267,149 +1132,154 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="the-problem-before-the-solution" class="slide level2">
-<h2>The problem, before the solution</h2>
+<section id="why-4-bytes-specifically" class="slide level2">
+<h2>Why 4 bytes, specifically</h2>
 <ul>
-<li>Tracking points on a plane; need distance between two of them</li>
-<li>Tuple works, but says nothing about what the numbers mean</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>p1 <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb1-2"><a href aria-label="2"></a>p2 <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb1-3"><a href aria-label="3"></a>distance <span class="op">=</span> ((p1[<span class="dv">0</span>] <span class="op">-</span> p2[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> (p1[<span class="dv">1</span>] <span class="op">-</span> p2[<span class="dv">1</span>]) <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="a-class-is-a-blueprint" class="slide level2">
-<h2>A class is a blueprint</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-5|7-9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a><span class="kw">class</span> Point:</span>
-<span id="cb2-2"><a href aria-label="2"></a>    <span class="co">&quot;&quot;&quot;A point in the 2D plane.&quot;&quot;&quot;</span></span>
-<span id="cb2-3"><a href aria-label="3"></a></span>
-<span id="cb2-4"><a href aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):      <span class="co"># runs once, when a Point is created</span></span>
-<span id="cb2-5"><a href aria-label="5"></a>        <span class="va">self</span>.x <span class="op">=</span> x                  <span class="co"># self.x is THIS point&#39;s x, not some</span></span>
-<span id="cb2-6"><a href aria-label="6"></a>        <span class="va">self</span>.y <span class="op">=</span> y                  <span class="co"># global variable named x</span></span>
-<span id="cb2-7"><a href aria-label="7"></a></span>
-<span id="cb2-8"><a href aria-label="8"></a>    <span class="kw">def</span> distance_to(<span class="va">self</span>, other):</span>
-<span id="cb2-9"><a href aria-label="9"></a>        dx <span class="op">=</span> <span class="va">self</span>.x <span class="op">-</span> other.x</span>
-<span id="cb2-10"><a href aria-label="10"></a>        dy <span class="op">=</span> <span class="va">self</span>.y <span class="op">-</span> other.y</span>
-<span id="cb2-11"><a href aria-label="11"></a>        <span class="cf">return</span> (dx <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> dy <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><code>class Point:</code> — the blueprint</li>
-<li><code>__init__</code> — runs automatically when you write <code>Point(0, 0)</code></li>
-<li><code>self</code> — the specific object the method was called on</li>
+<li>A standard 32-bit integer needs 4 bytes to represent values from <span class="math inline">\(-2^{31}\)</span> to <span class="math inline">\(2^{31}-1\)</span></li>
+<li>A <code>double</code> (64-bit float) needs 8 bytes</li>
+<li>The element size in the address formula is fixed by the <em>type</em>, decided once, at array creation</li>
 </ul>
 </section>
-<section id="class-vs.-object-drawn-out" class="slide level2">
-<h2>Class vs. object, drawn out</h2>
+<section id="the-address-formula" class="slide level2">
+<h2>The address formula</h2>
+<p><span class="math display">\[\text{address}(i) = \text{base\_address} + i \times \text{element\_size}\]</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a>base <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb2-2"><a href aria-label="2"></a>element_size <span class="op">=</span> <span class="dv">4</span>     <span class="co"># bytes, for a 4-byte int</span></span>
+<span id="cb2-3"><a href aria-label="3"></a>i <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-4"><a href aria-label="4"></a>address <span class="op">=</span> base <span class="op">+</span> i <span class="op">*</span> element_size</span>
+<span id="cb2-5"><a href aria-label="5"></a><span class="bu">print</span>(address)   <span class="co"># 1012 — matches the picture above</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>One multiplication, one addition — regardless of array size or index</li>
+<li>This is <em>why</em> <code>arr[i]</code> is O(1): it is arithmetic, not a search</li>
+</ul>
+</section>
+<section id="worked-example-1-small-numbers" class="slide level2">
+<h2>Worked example 1 — small numbers</h2>
+<p>Array of 4-byte ints, base address 500. Find <code>address(0)</code>, <code>address(1)</code>, <code>address(5)</code>.</p>
+<ul>
+<li><span class="math inline">\(\text{address}(0) = 500 + 0 \times 4 = 500\)</span></li>
+<li><span class="math inline">\(\text{address}(1) = 500 + 1 \times 4 = 504\)</span></li>
+<li><span class="math inline">\(\text{address}(5) = 500 + 5 \times 4 = 520\)</span></li>
+</ul>
+</section>
+<section id="worked-example-2-a-larger-element-size" class="slide level2">
+<h2>Worked example 2 — a larger element size</h2>
+<p>Array of 8-byte doubles, base address 2000. Find <code>address(10)</code>.</p>
+<p><span class="math display">\[\text{address}(10) = 2000 + 10 \times 8 = 2080\]</span></p>
+<ul>
+<li>Double the element size → double the offset, for the same index</li>
+</ul>
+</section>
+<section id="why-this-breaks-for-a-list-of-point-objects" class="slide level2">
+<h2>Why this breaks for a list of <code>Point</code> objects</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a>points <span class="op">=</span> [Point(<span class="dv">0</span>, <span class="dv">0</span>), Point(<span class="dv">1</span>, <span class="dv">1</span>), Point(<span class="dv">2</span>, <span class="dv">2</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>A <code>Point</code> is not a fixed 4 bytes — Python stores <em>references</em>, not the objects themselves</li>
+<li>The array of references is still contiguous and fixed-size; each reference is the same size</li>
+<li><code>points[i]</code> is still O(1) — one hop to the reference, then one hop to the object</li>
+</ul>
+</section>
+<section id="tracing-the-two-hop-lookup" class="slide level2">
+<h2>Tracing the two-hop lookup</h2>
+<pre><code>Reference array (base 4000, 8-byte pointers):
+  address 4000: pointer → 6032
+  address 4008: pointer → 6104
+  address 4016: pointer → 6176
 
-<img role="img" aria-label="A class block labeled Point on the left, with two arrows pointing to two boxes labeled p1 and p2 on the right, each holding concrete x and y values." data-src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzIwIDMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiPgogIDxyZWN0IHg9IjIwIiB5PSIzMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMCIgZmlsbD0iIzBhMTYyOCIvPgogIDx0ZXh0IHg9IjEzMCIgeT0iNjAiIGZpbGw9IiNDNUEwNTkiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPmNsYXNzIFBvaW50PC90ZXh0PgogIDxsaW5lIHgxPSI0MCIgeTE9IjcyIiB4Mj0iMjIwIiB5Mj0iNzIiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MCIgeT0iOTgiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPmRlZiBfX2luaXRfXyhzZWxmLCB4LCB5KTo8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjExOCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ICAgIHNlbGYueCA9IHg8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjEzOCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ICAgIHNlbGYueSA9IHk8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjE2OCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ZGVmIGRpc3RhbmNlX3RvKDwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMTg4IiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIj4gICAgc2VsZiwgb3RoZXIpOjwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMjA4IiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjExIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGwtb3BhY2l0eT0iMC43Ij4uLi4gcmV0dXJucyBhIGZsb2F0PC90ZXh0PgogIDx0ZXh0IHg9IjEzMCIgeT0iMjU1IiBmaWxsPSIjNDc1NTY5IiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj50aGUgYmx1ZXByaW50ICh3cml0dGVuIG9uY2UpPC90ZXh0PgoKICA8cGF0aCBkPSJNMjYwIDEwMCBMMzQwIDEwMCIgc3Ryb2tlPSIjOTRhM2I4IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHBhdGggZD0iTTI2MCAxNzAgTDM0MCAxNzAiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iOTAiIGZpbGw9IiM5NGEzYjgiIGZvbnQtc2l6ZT0iMTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBvaW50KDAsIDApPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMTYwIiBmaWxsPSIjOTRhM2I4IiBmb250LXNpemU9IjExIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qb2ludCgzLCA0KTwvdGV4dD4KCiAgPHJlY3QgeD0iMzYwIiB5PSI2MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiNmZGYzZTAiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MzUiIHk9Ijg1IiBmaWxsPSIjMGExNjI4IiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5wMTwvdGV4dD4KICA8dGV4dCB4PSI0MzUiIHk9IjEwOCIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+eCA9IDA8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIxMjYiIGZpbGw9IiMwYTE2MjgiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnkgPSAwPC90ZXh0PgoKICA8cmVjdCB4PSIzNjAiIHk9IjE1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiNmZGYzZTAiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MzUiIHk9IjE3NSIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+cDI8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIxOTgiIGZpbGw9IiMwYTE2MjgiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnggPSAzPC90ZXh0PgogIDx0ZXh0IHg9IjQzNSIgeT0iMjE2IiBmaWxsPSIjMGExNjI4IiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj55ID0gNDwvdGV4dD4KCiAgPHRleHQgeD0iNTQwIiB5PSIxNTAiIGZpbGw9IiM0NzU1NjkiIGZvbnQtc2l6ZT0iMTIiPnAxLmRpc3RhbmNlX3RvKHAyKTwvdGV4dD4KICA8dGV4dCB4PSI1NDAiIHk9IjE3MCIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCI+PSA1LjA8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIyNTUiIGZpbGw9IiM0NzU1NjkiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPm9iamVjdHMgKGJ1aWx0IGZyb20gdGhlIGJsdWVwcmludCk8L3RleHQ+CgogIDxkZWZzPgogICAgPG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSI4IiBtYXJrZXJIZWlnaHQ9IjgiIHJlZlg9IjYiIHJlZlk9IjQiIG9yaWVudD0iYXV0byI+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDgsNCBMMCw4IFoiIGZpbGw9IiM5NGEzYjgiLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KPC9zdmc+Cg==" alt="A class block labeled Point on the left, with two arrows pointing to two boxes labeled p1 and p2 on the right, each holding concrete x and y values." class="r-stretch"><ul>
-<li>One class, written once</li>
-<li>Many objects, each with their own <code>x</code> and <code>y</code></li>
+points[1]  →  address(1) = 4000 + 1*8 = 4008  →  read pointer 6104
+           →  follow to address 6104: the actual Point(1, 1) object</code></pre>
+</section>
+<section id="the-wall-arrays-cannot-grow" class="slide level2">
+<h2>The wall: arrays cannot grow</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href aria-label="1"></a>scores <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">5</span>     <span class="co"># a fixed block of exactly 5 slots, addresses 1000-1016</span></span>
+<span id="cb5-2"><a href aria-label="2"></a>scores[<span class="dv">5</span>] <span class="op">=</span> <span class="dv">99</span>        <span class="co"># IndexError — there is no address 1020 reserved for us</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>The memory <em>right after</em> the array may already belong to something else</li>
+<li>Growing in place would mean overwriting someone else’s data</li>
+<li>The only safe option: allocate a brand new, bigger block elsewhere</li>
 </ul>
 </section>
-<section id="running-it" class="slide level2">
-<h2>Running it</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a>p1 <span class="op">=</span> Point(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb3-2"><a href aria-label="2"></a>p2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb3-3"><a href aria-label="3"></a><span class="bu">print</span>(p1.distance_to(p2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>5.0</code></pre>
+<section id="back-to-the-apartment-analogy" class="slide level2">
+<h2>Back to the apartment analogy</h2>
 <ul>
-<li><code>p1.distance_to(p2)</code> reads as “ask <code>p1</code> to compute its distance to <code>p2</code>”</li>
-<li><code>self</code> = <code>p1</code>, <code>other</code> = <code>p2</code> — the object is passed silently, first</li>
+<li>The building next door might already have its own owner</li>
+<li>You cannot “just add a floor” if the building above is someone else’s</li>
+<li>Solution: buy a bigger plot elsewhere, move everyone in, demolish the old building</li>
 </ul>
 </section>
-<section id="attributes-vs.-methods" class="slide level2">
-<h2>Attributes vs. methods</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Holds data</th>
-<th>Holds behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Attribute</strong></td>
-<td><code>self.x</code>, <code>self.y</code></td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td><strong>Method</strong></td>
-<td>—</td>
-<td><code>distance_to(self, other)</code></td>
-</tr>
-</tbody>
-</table>
+<section id="two-dimensional-arrays-still-one-flat-block" class="slide level2">
+<h2>Two-dimensional arrays: still one flat block</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a>grid <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb6-2"><a href aria-label="2"></a>        [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb6-3"><a href aria-label="3"></a>        [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Attribute: a value stored on the object</li>
-<li>Method: a function stored on the class, called through an object</li>
-<li><code>self</code> is passed automatically — never write it yourself when calling</li>
+<li>Looks like rows and columns — but memory has no rows, only one long line of addresses</li>
+<li>Row-major layout: store row 0 completely, then row 1, then row 2</li>
+<li>Flattened: <code>1, 2, 3, 4, 5, 6, 7, 8, 9</code> — one contiguous array of 9 elements</li>
 </ul>
 </section>
-<section id="common-first-mistake" class="slide level2">
-<h2>Common first mistake</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href aria-label="1"></a><span class="kw">class</span> Point:</span>
-<span id="cb5-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
-<span id="cb5-3"><a href aria-label="3"></a>        x <span class="op">=</span> x        <span class="co"># </span><span class="al">BUG</span><span class="co">: assigns to the local parameter, not self.x</span></span>
-<span id="cb5-4"><a href aria-label="4"></a>        y <span class="op">=</span> y</span>
-<span id="cb5-5"><a href aria-label="5"></a></span>
-<span id="cb5-6"><a href aria-label="6"></a>p <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb5-7"><a href aria-label="7"></a><span class="bu">print</span>(p.x)   <span class="co"># AttributeError: &#39;Point&#39; object has no attribute &#39;x&#39;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="the-row-major-address-formula" class="slide level2">
+<h2>The row-major address formula</h2>
+<p><span class="math display">\[\text{address}(r, c) = \text{base} + (r \times \text{num\_cols} + c) \times \text{element\_size}\]</span></p>
 <ul>
-<li>Forgetting <code>self.</code> is the #1 bug in a first <code>__init__</code></li>
-<li><code>x = x</code> throws the value away — the object never gets an <code>x</code> at all</li>
+<li><code>r * num_cols</code> skips past every complete row before row <span class="math inline">\(r\)</span></li>
+<li><code>+ c</code> then moves across to column <span class="math inline">\(c\)</span> within that row</li>
 </ul>
 </section>
-<section id="live-coding-exercise-5-minutes" class="slide level2">
-<h2>Live coding exercise (5 minutes)</h2>
+<section id="worked-example-3-indexing-a-2d-grid" class="slide level2">
+<h2>Worked example 3 — indexing a 2D grid</h2>
+<p>3×3 int grid (4-byte elements), base address 8000, <code>num_cols = 3</code>. Find <code>grid[2][1]</code> (row 2, column 1 = value <code>8</code>).</p>
+<p><span class="math display">\[\text{address}(2, 1) = 8000 + (2 \times 3 + 1) \times 4 = 8000 + 28 = 8028\]</span></p>
+</section>
+<section id="full-worked-trace-building-a-dynamic-arrays-cousin-a-fixed-lookup-table" class="slide level2">
+<h2>Full worked trace — building a dynamic array’s cousin: a fixed lookup table</h2>
+<p>Task: store 12 months’ average temperatures, find August’s value.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a>temps <span class="op">=</span> [<span class="dv">22</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">27</span>, <span class="dv">29</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">31</span>, <span class="dv">29</span>, <span class="dv">27</span>, <span class="dv">24</span>, <span class="dv">22</span>]</span>
+<span id="cb7-2"><a href aria-label="2"></a><span class="co">#          J   F   M   A   M   J   J   A   S   O   N   D</span></span>
+<span id="cb7-3"><a href aria-label="3"></a>august <span class="op">=</span> temps[<span class="dv">7</span>]     <span class="co"># address(7) = base + 7*4, one step, done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="live-exercise-5-minutes" class="slide level2">
+<h2>Live exercise (5 minutes)</h2>
 <ul>
-<li>Extend <code>Point</code> with <code>midpoint(self, other)</code></li>
-<li>Returns a new <code>Point</code> sitting exactly between <code>self</code> and <code>other</code></li>
+<li>An array of 8-byte floats starts at address 2000</li>
+<li>What address holds <code>arr[6]</code>?</li>
+<li>What is the very last valid index for an array of 10 elements?</li>
+<li>A 4×5 int grid, base 0, <code>num_cols = 5</code>: what address holds <code>grid[3][2]</code>?</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a><span class="kw">def</span> midpoint(<span class="va">self</span>, other):</span>
-<span id="cb6-2"><a href aria-label="2"></a>    <span class="cf">return</span> Point((<span class="va">self</span>.x <span class="op">+</span> other.x) <span class="op">/</span> <span class="dv">2</span>,</span>
-<span id="cb6-3"><a href aria-label="3"></a>                  (<span class="va">self</span>.y <span class="op">+</span> other.y) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p>Live-code this one rather than showing it pre-written — the value is in watching <code>Point(...)</code> get called again from inside the method.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
 </section>
-<section id="quiz-spot-the-bug" class="slide level2">
-<h2>Quiz — spot the bug</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a><span class="kw">class</span> Rectangle:</span>
-<span id="cb7-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, w, h):</span>
-<span id="cb7-3"><a href aria-label="3"></a>        w <span class="op">=</span> w</span>
-<span id="cb7-4"><a href aria-label="4"></a>        h <span class="op">=</span> h</span>
-<span id="cb7-5"><a href aria-label="5"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb7-6"><a href aria-label="6"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">*</span> <span class="va">self</span>.h</span>
-<span id="cb7-7"><a href aria-label="7"></a></span>
-<span id="cb7-8"><a href aria-label="8"></a>r <span class="op">=</span> Rectangle(<span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb7-9"><a href aria-label="9"></a><span class="bu">print</span>(r.area())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>What happens when this runs? Why?</strong></p>
+<section id="quiz-compute-it-1d" class="slide level2">
+<h2>Quiz — compute it (1D)</h2>
+<p>An array of 4-byte integers has base address 3000.</p>
+<p><strong>What address holds <code>arr[7]</code>?</strong></p>
 </section>
-<section id="quiz-answer" class="slide level2">
-<h2>Quiz — answer</h2>
+<section id="quiz-answer-1d" class="slide level2">
+<h2>Quiz — answer (1D)</h2>
 <ul>
-<li><code>AttributeError: &#39;Rectangle&#39; object has no attribute &#39;w&#39;</code></li>
-<li><code>w = w</code> and <code>h = h</code> never touch <code>self</code> — same bug as the <code>Point</code> example</li>
-<li><code>area()</code> reaches for <code>self.w</code>, which was never set</li>
+<li><span class="math inline">\(3000 + 7 \times 4 = 3028\)</span></li>
+<li>Same arithmetic regardless of how large the array is</li>
+</ul>
+</section>
+<section id="quiz-compute-it-2d" class="slide level2">
+<h2>Quiz — compute it (2D)</h2>
+<p>A 6×4 int grid (4-byte elements), base address 0, <code>num_cols = 4</code>.</p>
+<p><strong>What address holds <code>grid[3][2]</code>?</strong></p>
+</section>
+<section id="quiz-answer-2d" class="slide level2">
+<h2>Quiz — answer (2D)</h2>
+<p><span class="math display">\[\text{address}(3,2) = 0 + (3\times4 + 2)\times4 = 0 + 14\times4 = 56\]</span></p>
+<ul>
+<li>Three full rows (12 elements) skipped, then 2 more within row 3</li>
 </ul>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>A class is a blueprint; an object is one instance built from it</li>
-<li><code>__init__</code> runs once per object; <code>self</code> is that specific object</li>
-<li>Attributes hold data (<code>self.x</code>); methods hold behavior (<code>def area(self)</code>)</li>
-<li>The #1 first-time bug: forgetting <code>self.</code> on the left-hand side</li>
-<li>Next: what happens when data is changed carelessly — encapsulation</li>
+<li>Arrays are one contiguous block; <code>address(i) = base + i * element_size</code></li>
+<li>That formula is <em>why</em> <code>arr[i]</code> is O(1) — arithmetic, not search</li>
+<li>References let arrays hold varied objects without breaking the formula</li>
+<li>2D arrays are one flat block underneath; row-major adds <code>r * num_cols</code> before <code>+ c</code></li>
+<li>A fixed array cannot safely grow in place; the memory after it is not reserved</li>
+<li>Next: how Python’s list grows anyway — dynamic arrays and amortized cost</li>
 </ul>
 
 </section>

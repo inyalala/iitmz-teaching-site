@@ -442,7 +442,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Dr. Innocent Nyalala">
-  <title>Classes and Objects</title>
+  <title>Array Operations: Where the Real Cost Hides</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1056,8 +1056,8 @@ margin-right: 0; }
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Classes and Objects</h1>
-  <p class="subtitle">Programming and Data Structures — Week 1, Lecture 1</p>
+  <h1 class="title">Array Operations: Where the Real Cost Hides</h1>
+  <p class="subtitle">Programming and Data Structures — Week 2, Lecture 4</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1068,348 +1068,246 @@ Dr. Innocent Nyalala
 </div>
 
 </section>
-<section id="welcome-to-programming-and-data-structures" class="slide level2">
-<h2>Welcome to Programming and Data Structures</h2>
-<ul>
-<li>15 credits, Core course, Odd Semester (October 2026 – January 2027)</li>
-<li>4 lecture sessions + 2 lab sessions every week, for 15 weeks</li>
-<li>Prerequisite: Introduction to Programming in Python — we build on it, we do not re-teach it</li>
-<li>This is the course that makes every later data science and AI course possible</li>
-</ul>
-</section>
-<section id="what-you-will-be-able-to-do-by-january" class="slide level2">
-<h2>What you will be able to do by January</h2>
-<ul>
-<li>Design Python classes using encapsulation, inheritance, and polymorphism</li>
-<li>Implement stacks, queues, linked lists, binary trees, hash tables, and heaps from first principles</li>
-<li>Analyze running time with big-O and justify a structure choice by that analysis</li>
-<li>Apply dynamic programming and greedy strategies to optimization problems</li>
-<li>Represent graphs and apply BFS, DFS, and A* to real problems</li>
-<li>Explain, with a working example, why parallel and randomized approaches matter in practice</li>
-</ul>
-</section>
-<section id="the-15-week-roadmap" class="slide level2">
-<h2>The 15-week roadmap</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Object-oriented programming, then algorithms (this week)</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Arrays and dynamic arrays</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Stacks and queues</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Linked lists</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Simple sorting</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Advanced sorting</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Binary trees</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="the-15-week-roadmap-continued" class="slide level2">
-<h2>The 15-week roadmap, continued</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>8</td>
-<td>Hash tables and heaps</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Dynamic programming</td>
-</tr>
-<tr class="odd">
-<td>10</td>
-<td>Greedy algorithms</td>
-</tr>
-<tr class="even">
-<td>11</td>
-<td>Introduction to graphs</td>
-</tr>
-<tr class="odd">
-<td>12–13</td>
-<td>Graph algorithms: BFS, DFS, A*</td>
-</tr>
-<tr class="even">
-<td>14</td>
-<td>Parallel and randomized algorithms</td>
-</tr>
-<tr class="odd">
-<td>15</td>
-<td>Project presentations and review</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="how-your-grade-is-composed" class="slide level2">
-<h2>How your grade is composed</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Component</th>
-<th>Weight</th>
-<th>Detail</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>In-class assignments</td>
-<td>20%</td>
-<td>Seven assignments, in lab, bi-weekly</td>
-</tr>
-<tr class="even">
-<td>Quizzes</td>
-<td>15%</td>
-<td>Two written quizzes: modules 1–5, then 6–9</td>
-</tr>
-<tr class="odd">
-<td>Course project</td>
-<td>25%</td>
-<td>Proposal, two milestones, final submission, presentation</td>
-</tr>
-<tr class="even">
-<td>End-semester examination</td>
-<td>40%</td>
-<td>Practical and theory, in lab</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="textbooks-and-how-to-use-them" class="slide level2">
-<h2>Textbooks and how to use them</h2>
-<ul>
-<li><strong>Required</strong>: Lafore, Broder &amp; Canning, <em>Data Structures and Algorithms in Python</em> (1st ed., Addison Wesley, 2022)</li>
-<li><strong>Reference</strong>: Skiena, <em>The Algorithm Design Manual</em> (2nd ed., Springer, 2008)</li>
-<li>Lafore et al. is the primary text — readings are assigned from it every week</li>
-<li>Skiena is for going deeper once a structure already makes sense</li>
-</ul>
-</section>
-<section id="policies-you-need-to-know-from-day-one" class="slide level2">
-<h2>Policies you need to know from day one</h2>
-<ul>
-<li><strong>Attendance</strong>: expected at all lectures and labs; lab work is submitted before the session ends</li>
-<li><strong>Late work</strong>: 10% off per day late, up to 3 days; each student has 3 no-questions-asked late days for the semester</li>
-<li><strong>Integrity</strong>: discuss ideas freely; never share or copy code — every line you submit, you must be able to explain</li>
-<li><strong>AI tools</strong>: fine for explaining concepts or reading errors; not for generating a submitted solution — declare material AI contribution in a header comment</li>
-</ul>
-</section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <p>By the end of this lecture, you can:</p>
 <ul>
-<li>Write a Python class with a constructor, attributes, and a method</li>
-<li>Explain what <code>self</code> refers to and why it is passed automatically</li>
-<li>Spot the most common first-time mistake in <code>__init__</code></li>
+<li>State the cost of insert/delete at the end, middle, and start of an array, and explain <em>why</em> each differs</li>
+<li>Trace, element by element, the shifting required by a middle insertion or deletion</li>
+<li>Compare Python’s <code>list.insert(0, x)</code> against <code>append(x)</code> with real numbers</li>
+<li>Choose the right end of a list to grow from, given a program’s access pattern</li>
 </ul>
 </section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ol type="1">
-<li>Why a tuple is not good enough</li>
-<li>A class is a blueprint: <code>Point</code></li>
-<li>Attributes vs. methods</li>
-<li>The mistake almost everyone makes once</li>
+<li>The queue-at-the-cinema analogy</li>
+<li>Insert/delete at the end: the easy case</li>
+<li>Insert/delete in the middle: the shifting problem, traced fully</li>
+<li>Insert/delete at the start: the worst case, traced fully</li>
+<li>Search: linear vs. binary, revisited with insertion in mind</li>
+<li>Measuring it for real in Python</li>
+<li>MTech: why <code>collections.deque</code> exists</li>
 <li>Quiz, then summary</li>
 </ol>
 </section>
-<section id="why-we-start-here-not-with-data-structures" class="slide level2">
-<h2>Why we start here, not with data structures</h2>
+<section id="the-cinema-queue-analogy" class="slide level2">
+<h2>The cinema-queue analogy</h2>
 <ul>
-<li>Every structure this term — stack, queue, list, tree, graph — is a <strong>Python class</strong></li>
-<li>Shaky classes now means shaky everything from Week 2 onward</li>
-<li>Goal today: read any <code>class</code> block and explain exactly what runs</li>
+<li>200 people queuing for a cinema, standing shoulder to shoulder, no gaps</li>
+<li>A latecomer wants to join <strong>at the back</strong> — trivial, one person, done</li>
+<li>A latecomer’s friend insists they join <strong>near the front</strong> — everyone behind that point must shuffle back one space</li>
+<li>The friend’s friend insists on joining <strong>at the very front</strong> — the <em>entire</em> queue shuffles back</li>
 </ul>
-<aside class="notes">
-<p>Open by asking who has used a class before, in any language. Follow with “what’s the difference between a class and an object” — expect confused or circular answers even from students who claim familiarity. That confusion is the whole reason this lecture exists, and it is worth surfacing before you start, not after.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
 </section>
-<section id="the-problem-before-the-solution" class="slide level2">
-<h2>The problem, before the solution</h2>
+<section id="insertdelete-at-the-end-the-easy-case" class="slide level2">
+<h2>Insert/delete at the end: the easy case</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>scores <span class="op">=</span> [<span class="dv">67</span>, <span class="dv">88</span>, <span class="dv">45</span>, <span class="dv">92</span>, <span class="dv">71</span>]</span>
+<span id="cb1-2"><a href aria-label="2"></a>scores.append(<span class="dv">60</span>)     <span class="co"># [67, 88, 45, 92, 71, 60]</span></span>
+<span id="cb1-3"><a href aria-label="3"></a>scores.pop()           <span class="co"># removes 60, back to [67, 88, 45, 92, 71]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Tracking points on a plane; need distance between two of them</li>
-<li>Tuple works, but says nothing about what the numbers mean</li>
+<li>No existing element needs to move — the new element goes in the next free slot</li>
+<li>Cost: O(1) to insert, O(1) to remove (ignoring the occasional amortized resize from Lecture 2/3)</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>p1 <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb1-2"><a href aria-label="2"></a>p2 <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb1-3"><a href aria-label="3"></a>distance <span class="op">=</span> ((p1[<span class="dv">0</span>] <span class="op">-</span> p2[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> (p1[<span class="dv">1</span>] <span class="op">-</span> p2[<span class="dv">1</span>]) <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="a-class-is-a-blueprint" class="slide level2">
-<h2>A class is a blueprint</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-2|4-5|7-9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a><span class="kw">class</span> Point:</span>
-<span id="cb2-2"><a href aria-label="2"></a>    <span class="co">&quot;&quot;&quot;A point in the 2D plane.&quot;&quot;&quot;</span></span>
-<span id="cb2-3"><a href aria-label="3"></a></span>
-<span id="cb2-4"><a href aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):      <span class="co"># runs once, when a Point is created</span></span>
-<span id="cb2-5"><a href aria-label="5"></a>        <span class="va">self</span>.x <span class="op">=</span> x                  <span class="co"># self.x is THIS point&#39;s x, not some</span></span>
-<span id="cb2-6"><a href aria-label="6"></a>        <span class="va">self</span>.y <span class="op">=</span> y                  <span class="co"># global variable named x</span></span>
-<span id="cb2-7"><a href aria-label="7"></a></span>
-<span id="cb2-8"><a href aria-label="8"></a>    <span class="kw">def</span> distance_to(<span class="va">self</span>, other):</span>
-<span id="cb2-9"><a href aria-label="9"></a>        dx <span class="op">=</span> <span class="va">self</span>.x <span class="op">-</span> other.x</span>
-<span id="cb2-10"><a href aria-label="10"></a>        dy <span class="op">=</span> <span class="va">self</span>.y <span class="op">-</span> other.y</span>
-<span id="cb2-11"><a href aria-label="11"></a>        <span class="cf">return</span> (dx <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> dy <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="insert-in-the-middle-setting-up-the-trace" class="slide level2">
+<h2>Insert in the middle: setting up the trace</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href aria-label="1"></a>scores <span class="op">=</span> [<span class="dv">67</span>, <span class="dv">88</span>, <span class="dv">45</span>, <span class="dv">92</span>, <span class="dv">71</span>]</span>
+<span id="cb2-2"><a href aria-label="2"></a>scores.insert(<span class="dv">2</span>, <span class="dv">99</span>)     <span class="co"># insert 99 at index 2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Before: <code>[67, 88, 45, 92, 71]</code> — indices 0,1,2,3,4</p>
+<p>Goal: <code>[67, 88, 99, 45, 92, 71]</code> — 99 now sits at index 2</p>
+</section>
+<section id="insert-in-the-middle-the-trace-element-by-element" class="slide level2">
+<h2>Insert in the middle: the trace, element by element</h2>
+<pre><code>Step 1: move index 4 (71) → index 5:  [67, 88, 45, 92, 71, 71]
+Step 2: move index 3 (92) → index 4:  [67, 88, 45, 92, 92, 71]
+Step 3: move index 2 (45) → index 3:  [67, 88, 45, 45, 92, 71]
+Step 4: write 99 into index 2:        [67, 88, 99, 45, 92, 71]</code></pre>
 <ul>
-<li><code>class Point:</code> — the blueprint</li>
-<li><code>__init__</code> — runs automatically when you write <code>Point(0, 0)</code></li>
-<li><code>self</code> — the specific object the method was called on</li>
+<li>Shift happens <strong>right to left</strong> — moving left to right would overwrite data before it is copied</li>
 </ul>
 </section>
-<section id="class-vs.-object-drawn-out" class="slide level2">
-<h2>Class vs. object, drawn out</h2>
-
-<img role="img" aria-label="A class block labeled Point on the left, with two arrows pointing to two boxes labeled p1 and p2 on the right, each holding concrete x and y values." data-src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzIwIDMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiPgogIDxyZWN0IHg9IjIwIiB5PSIzMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMCIgZmlsbD0iIzBhMTYyOCIvPgogIDx0ZXh0IHg9IjEzMCIgeT0iNjAiIGZpbGw9IiNDNUEwNTkiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPmNsYXNzIFBvaW50PC90ZXh0PgogIDxsaW5lIHgxPSI0MCIgeTE9IjcyIiB4Mj0iMjIwIiB5Mj0iNzIiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MCIgeT0iOTgiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPmRlZiBfX2luaXRfXyhzZWxmLCB4LCB5KTo8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjExOCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ICAgIHNlbGYueCA9IHg8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjEzOCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ICAgIHNlbGYueSA9IHk8L3RleHQ+CiAgPHRleHQgeD0iNDAiIHk9IjE2OCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+ZGVmIGRpc3RhbmNlX3RvKDwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMTg4IiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIj4gICAgc2VsZiwgb3RoZXIpOjwvdGV4dD4KICA8dGV4dCB4PSI0MCIgeT0iMjA4IiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjExIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGwtb3BhY2l0eT0iMC43Ij4uLi4gcmV0dXJucyBhIGZsb2F0PC90ZXh0PgogIDx0ZXh0IHg9IjEzMCIgeT0iMjU1IiBmaWxsPSIjNDc1NTY5IiBmb250LXNpemU9IjEyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj50aGUgYmx1ZXByaW50ICh3cml0dGVuIG9uY2UpPC90ZXh0PgoKICA8cGF0aCBkPSJNMjYwIDEwMCBMMzQwIDEwMCIgc3Ryb2tlPSIjOTRhM2I4IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHBhdGggZD0iTTI2MCAxNzAgTDM0MCAxNzAiIHN0cm9rZT0iIzk0YTNiOCIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDx0ZXh0IHg9IjMwMCIgeT0iOTAiIGZpbGw9IiM5NGEzYjgiIGZvbnQtc2l6ZT0iMTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBvaW50KDAsIDApPC90ZXh0PgogIDx0ZXh0IHg9IjMwMCIgeT0iMTYwIiBmaWxsPSIjOTRhM2I4IiBmb250LXNpemU9IjExIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qb2ludCgzLCA0KTwvdGV4dD4KCiAgPHJlY3QgeD0iMzYwIiB5PSI2MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiNmZGYzZTAiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MzUiIHk9Ijg1IiBmaWxsPSIjMGExNjI4IiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5wMTwvdGV4dD4KICA8dGV4dCB4PSI0MzUiIHk9IjEwOCIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+eCA9IDA8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIxMjYiIGZpbGw9IiMwYTE2MjgiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnkgPSAwPC90ZXh0PgoKICA8cmVjdCB4PSIzNjAiIHk9IjE1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiNmZGYzZTAiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8dGV4dCB4PSI0MzUiIHk9IjE3NSIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+cDI8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIxOTgiIGZpbGw9IiMwYTE2MjgiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIHRleHQtYW5jaG9yPSJtaWRkbGUiPnggPSAzPC90ZXh0PgogIDx0ZXh0IHg9IjQzNSIgeT0iMjE2IiBmaWxsPSIjMGExNjI4IiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj55ID0gNDwvdGV4dD4KCiAgPHRleHQgeD0iNTQwIiB5PSIxNTAiIGZpbGw9IiM0NzU1NjkiIGZvbnQtc2l6ZT0iMTIiPnAxLmRpc3RhbmNlX3RvKHAyKTwvdGV4dD4KICA8dGV4dCB4PSI1NDAiIHk9IjE3MCIgZmlsbD0iIzBhMTYyOCIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjcwMCI+PSA1LjA8L3RleHQ+CiAgPHRleHQgeD0iNDM1IiB5PSIyNTUiIGZpbGw9IiM0NzU1NjkiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPm9iamVjdHMgKGJ1aWx0IGZyb20gdGhlIGJsdWVwcmludCk8L3RleHQ+CgogIDxkZWZzPgogICAgPG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSI4IiBtYXJrZXJIZWlnaHQ9IjgiIHJlZlg9IjYiIHJlZlk9IjQiIG9yaWVudD0iYXV0byI+CiAgICAgIDxwYXRoIGQ9Ik0wLDAgTDgsNCBMMCw4IFoiIGZpbGw9IiM5NGEzYjgiLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KPC9zdmc+Cg==" alt="A class block labeled Point on the left, with two arrows pointing to two boxes labeled p1 and p2 on the right, each holding concrete x and y values." class="r-stretch"><ul>
-<li>One class, written once</li>
-<li>Many objects, each with their own <code>x</code> and <code>y</code></li>
-</ul>
-</section>
-<section id="running-it" class="slide level2">
-<h2>Running it</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a>p1 <span class="op">=</span> Point(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb3-2"><a href aria-label="2"></a>p2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb3-3"><a href aria-label="3"></a><span class="bu">print</span>(p1.distance_to(p2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>5.0</code></pre>
+<section id="insert-in-the-middle-counting-the-cost" class="slide level2">
+<h2>Insert in the middle: counting the cost</h2>
 <ul>
-<li><code>p1.distance_to(p2)</code> reads as “ask <code>p1</code> to compute its distance to <code>p2</code>”</li>
-<li><code>self</code> = <code>p1</code>, <code>other</code> = <code>p2</code> — the object is passed silently, first</li>
+<li>Inserting at index <span class="math inline">\(k\)</span> into an array of <span class="math inline">\(n\)</span> elements shifts <span class="math inline">\(n - k\)</span> elements</li>
+<li>Insert near the end (large <span class="math inline">\(k\)</span>): few shifts, cheap</li>
+<li>Insert near the start (small <span class="math inline">\(k\)</span>): many shifts, expensive</li>
+<li>Average over all positions: roughly <span class="math inline">\(n/2\)</span> shifts — <strong>O(n)</strong></li>
 </ul>
 </section>
-<section id="attributes-vs.-methods" class="slide level2">
-<h2>Attributes vs. methods</h2>
+<section id="delete-in-the-middle-the-mirror-image" class="slide level2">
+<h2>Delete in the middle: the mirror image</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href aria-label="1"></a>scores <span class="op">=</span> [<span class="dv">67</span>, <span class="dv">88</span>, <span class="dv">99</span>, <span class="dv">45</span>, <span class="dv">92</span>, <span class="dv">71</span>]</span>
+<span id="cb4-2"><a href aria-label="2"></a><span class="kw">del</span> scores[<span class="dv">2</span>]     <span class="co"># remove index 2 (99)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Step 1: move index 3 (45) → index 2:  [67, 88, 45, 45, 92, 71]
+Step 2: move index 4 (92) → index 3:  [67, 88, 45, 92, 92, 71]
+Step 3: move index 5 (71) → index 4:  [67, 88, 45, 92, 71, 71]
+Step 4: shrink length by 1:           [67, 88, 45, 92, 71]</code></pre>
+<ul>
+<li>Shift direction reverses: <strong>left to right</strong> this time, closing the gap</li>
+</ul>
+</section>
+<section id="insertdelete-at-the-start-the-worst-case" class="slide level2">
+<h2>Insert/delete at the start: the worst case</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a>scores <span class="op">=</span> [<span class="dv">67</span>, <span class="dv">88</span>, <span class="dv">45</span>, <span class="dv">92</span>, <span class="dv">71</span>]</span>
+<span id="cb6-2"><a href aria-label="2"></a>scores.insert(<span class="dv">0</span>, <span class="dv">99</span>)     <span class="co"># every single element must shift right</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Before:  [67, 88, 45, 92, 71]
+Shift:   [67, 67, 88, 45, 92, 71]  (conceptually — all 5 elements move)
+Insert:  [99, 67, 88, 45, 92, 71]</code></pre>
+<ul>
+<li><span class="math inline">\(k = 0\)</span>: shifts <span class="math inline">\(n - 0 = n\)</span> elements — <strong>every element in the array</strong></li>
+</ul>
+</section>
+<section id="summary-table-cost-by-position" class="slide level2">
+<h2>Summary table: cost by position</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th></th>
-<th>Holds data</th>
-<th>Holds behavior</th>
+<th>Operation</th>
+<th>At the end</th>
+<th>In the middle</th>
+<th>At the start</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Attribute</strong></td>
-<td><code>self.x</code>, <code>self.y</code></td>
-<td>—</td>
+<td>Insert</td>
+<td>O(1) amortized</td>
+<td>O(n)</td>
+<td>O(n)</td>
 </tr>
 <tr class="even">
-<td><strong>Method</strong></td>
-<td>—</td>
-<td><code>distance_to(self, other)</code></td>
+<td>Delete</td>
+<td>O(1)</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr class="odd">
+<td>Access by index</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="reconnecting-to-search-from-week-1" class="slide level2">
+<h2>Reconnecting to search from Week 1</h2>
 <ul>
-<li>Attribute: a value stored on the object</li>
-<li>Method: a function stored on the class, called through an object</li>
-<li><code>self</code> is passed automatically — never write it yourself when calling</li>
+<li>Week 1 Lecture 4: linear search O(n), binary search O(log n) — but binary search needs a <strong>sorted</strong> array</li>
+<li>Keeping an array sorted means every insertion must land at the <em>correct</em> position, not just anywhere</li>
+<li>Finding the correct position: O(log n) via binary search. Making room for it: O(n) via shifting</li>
+<li>Net cost of inserting into a sorted array: <strong>O(n)</strong>, dominated by the shift, not the search</li>
 </ul>
 </section>
-<section id="common-first-mistake" class="slide level2">
-<h2>Common first mistake</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href aria-label="1"></a><span class="kw">class</span> Point:</span>
-<span id="cb5-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
-<span id="cb5-3"><a href aria-label="3"></a>        x <span class="op">=</span> x        <span class="co"># </span><span class="al">BUG</span><span class="co">: assigns to the local parameter, not self.x</span></span>
-<span id="cb5-4"><a href aria-label="4"></a>        y <span class="op">=</span> y</span>
-<span id="cb5-5"><a href aria-label="5"></a></span>
-<span id="cb5-6"><a href aria-label="6"></a>p <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb5-7"><a href aria-label="7"></a><span class="bu">print</span>(p.x)   <span class="co"># AttributeError: &#39;Point&#39; object has no attribute &#39;x&#39;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="measuring-it-for-real-in-python" class="slide level2">
+<h2>Measuring it for real in Python</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href aria-label="1"></a><span class="im">import</span> time</span>
+<span id="cb8-2"><a href aria-label="2"></a></span>
+<span id="cb8-3"><a href aria-label="3"></a><span class="kw">def</span> time_it(fn):</span>
+<span id="cb8-4"><a href aria-label="4"></a>    start <span class="op">=</span> time.perf_counter()</span>
+<span id="cb8-5"><a href aria-label="5"></a>    fn()</span>
+<span id="cb8-6"><a href aria-label="6"></a>    <span class="cf">return</span> time.perf_counter() <span class="op">-</span> start</span>
+<span id="cb8-7"><a href aria-label="7"></a></span>
+<span id="cb8-8"><a href aria-label="8"></a>n <span class="op">=</span> <span class="dv">100_000</span></span>
+<span id="cb8-9"><a href aria-label="9"></a>data <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(n))</span>
+<span id="cb8-10"><a href aria-label="10"></a></span>
+<span id="cb8-11"><a href aria-label="11"></a>t_end <span class="op">=</span> time_it(<span class="kw">lambda</span>: data.append(<span class="dv">0</span>) <span class="kw">or</span> data.pop())</span>
+<span id="cb8-12"><a href aria-label="12"></a>t_start <span class="op">=</span> time_it(<span class="kw">lambda</span>: data.insert(<span class="dv">0</span>, <span class="dv">0</span>) <span class="kw">and</span> data.pop(<span class="dv">0</span>))</span>
+<span id="cb8-13"><a href aria-label="13"></a><span class="bu">print</span>(<span class="ss">f&quot;end: </span><span class="sc">{</span>t_end<span class="sc">:.6f}</span><span class="ss">s   start: </span><span class="sc">{</span>t_start<span class="sc">:.6f}</span><span class="ss">s&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Forgetting <code>self.</code> is the #1 bug in a first <code>__init__</code></li>
-<li><code>x = x</code> throws the value away — the object never gets an <code>x</code> at all</li>
+<li>Expect <code>t_start</code> to be dramatically larger than <code>t_end</code> for large <span class="math inline">\(n\)</span></li>
+<li>The gap grows <em>with</em> <span class="math inline">\(n\)</span> — this is the O(n) vs. O(1) difference, measured, not assumed</li>
 </ul>
 </section>
-<section id="live-coding-exercise-5-minutes" class="slide level2">
-<h2>Live coding exercise (5 minutes)</h2>
+<section id="mtech-addition-why-collections.deque-exists" class="slide level2">
+<h2>MTech addition — why <code>collections.deque</code> exists</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb9-2"><a href aria-label="2"></a>d <span class="op">=</span> deque([<span class="dv">67</span>, <span class="dv">88</span>, <span class="dv">45</span>, <span class="dv">92</span>, <span class="dv">71</span>])</span>
+<span id="cb9-3"><a href aria-label="3"></a>d.appendleft(<span class="dv">99</span>)   <span class="co"># O(1) — NOT O(n) like list.insert(0, ...)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Extend <code>Point</code> with <code>midpoint(self, other)</code></li>
-<li>Returns a new <code>Point</code> sitting exactly between <code>self</code> and <code>other</code></li>
+<li><code>deque</code> is implemented as a <strong>doubly linked list of fixed-size blocks</strong>, not one contiguous array</li>
+<li>Trades away O(1) <em>random</em> index access for O(1) insertion at <em>both</em> ends</li>
+<li>Use <code>list</code> when you mostly index and append; use <code>deque</code> when you push/pop from both ends</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a><span class="kw">def</span> midpoint(<span class="va">self</span>, other):</span>
-<span id="cb6-2"><a href aria-label="2"></a>    <span class="cf">return</span> Point((<span class="va">self</span>.x <span class="op">+</span> other.x) <span class="op">/</span> <span class="dv">2</span>,</span>
-<span id="cb6-3"><a href aria-label="3"></a>                  (<span class="va">self</span>.y <span class="op">+</span> other.y) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p>Live-code this one rather than showing it pre-written — the value is in watching <code>Point(...)</code> get called again from inside the method.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
 </section>
-<section id="quiz-spot-the-bug" class="slide level2">
-<h2>Quiz — spot the bug</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a><span class="kw">class</span> Rectangle:</span>
-<span id="cb7-2"><a href aria-label="2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, w, h):</span>
-<span id="cb7-3"><a href aria-label="3"></a>        w <span class="op">=</span> w</span>
-<span id="cb7-4"><a href aria-label="4"></a>        h <span class="op">=</span> h</span>
-<span id="cb7-5"><a href aria-label="5"></a>    <span class="kw">def</span> area(<span class="va">self</span>):</span>
-<span id="cb7-6"><a href aria-label="6"></a>        <span class="cf">return</span> <span class="va">self</span>.w <span class="op">*</span> <span class="va">self</span>.h</span>
-<span id="cb7-7"><a href aria-label="7"></a></span>
-<span id="cb7-8"><a href aria-label="8"></a>r <span class="op">=</span> Rectangle(<span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb7-9"><a href aria-label="9"></a><span class="bu">print</span>(r.area())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>What happens when this runs? Why?</strong></p>
+<section id="mtech-addition-the-trade-off-table" class="slide level2">
+<h2>MTech addition — the trade-off table</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th><code>list</code></th>
+<th><code>deque</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Append at end</td>
+<td>O(1) amortized</td>
+<td>O(1)</td>
+</tr>
+<tr class="even">
+<td>Append at start</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr class="odd">
+<td>Access by index</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr class="even">
+<td>Contiguous in memory</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a-full-worked-trace-tying-it-all-together" class="slide level2">
+<h2>A full worked trace tying it all together</h2>
+<p>Task: maintain a sorted leaderboard of 6 scores, insert a new score of 80.</p>
+<pre><code>Before:   [45, 60, 71, 88, 92, 99]     (sorted, 6 elements)
+Step 1:   binary search for position → 80 belongs at index 3  (O(log 6) ≈ 3 comparisons)
+Step 2:   shift [88, 92, 99] right by one → [45, 60, 71, _, 88, 92, 99]
+Step 3:   write 80 into index 3 → [45, 60, 71, 80, 88, 92, 99]</code></pre>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<ul>
+<li>Using only <code>list</code>, implement <code>insert_sorted(arr, x)</code>: find the correct position via binary search, then insert</li>
+<li>Time it against plain <code>arr.append(x)</code> for <span class="math inline">\(n = 10{,}000\)</span> and <span class="math inline">\(n = 100{,}000\)</span></li>
+<li>Confirm the ratio of times roughly doubles as <span class="math inline">\(n\)</span> doubles — evidence of O(n), not O(log n)</li>
+</ul>
+</section>
+<section id="quiz-predict-the-cost" class="slide level2">
+<h2>Quiz — predict the cost</h2>
+<p>For an array of 1,000 elements, rank these from cheapest to most expensive:</p>
+<ol type="1">
+<li><code>arr.append(x)</code></li>
+<li><code>arr.insert(500, x)</code></li>
+<li><code>arr.insert(0, x)</code></li>
+</ol>
 </section>
 <section id="quiz-answer" class="slide level2">
 <h2>Quiz — answer</h2>
-<ul>
-<li><code>AttributeError: &#39;Rectangle&#39; object has no attribute &#39;w&#39;</code></li>
-<li><code>w = w</code> and <code>h = h</code> never touch <code>self</code> — same bug as the <code>Point</code> example</li>
-<li><code>area()</code> reaches for <code>self.w</code>, which was never set</li>
-</ul>
+<ol type="1">
+<li><code>arr.append(x)</code> — O(1) amortized, no shifting</li>
+<li><code>arr.insert(500, x)</code> — O(n), shifts roughly 500 elements</li>
+<li><code>arr.insert(0, x)</code> — O(n), shifts all 1,000 elements — the most expensive of the three</li>
+</ol>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>A class is a blueprint; an object is one instance built from it</li>
-<li><code>__init__</code> runs once per object; <code>self</code> is that specific object</li>
-<li>Attributes hold data (<code>self.x</code>); methods hold behavior (<code>def area(self)</code>)</li>
-<li>The #1 first-time bug: forgetting <code>self.</code> on the left-hand side</li>
-<li>Next: what happens when data is changed carelessly — encapsulation</li>
+<li>End insert/delete: O(1) — no shifting needed</li>
+<li>Middle insert/delete: O(n) — shifts roughly <span class="math inline">\(n-k\)</span> elements</li>
+<li>Start insert/delete: O(n), worst case — shifts <em>all</em> <span class="math inline">\(n\)</span> elements</li>
+<li>Index access is always O(1), regardless of position</li>
+<li><code>deque</code> trades O(1) index access for O(1) insertion at both ends</li>
+<li>Next: stacks and queues — disciplined interfaces built on exactly these trade-offs</li>
 </ul>
 
 </section>
