@@ -1,0 +1,55 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" font-family="Georgia, 'Playfair Display', serif">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0f1f38"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="85%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#C5A059" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#C5A059" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+
+  <!-- top accent rule -->
+  <rect x="0" y="0" width="1280" height="6" fill="#C5A059"/>
+
+  <!-- IIT Madras Zanzibar logo (official) -->
+  <rect x="80" y="55" width="200" height="70" rx="8" fill="rgba(255,255,255,0.96)"/>
+  <image x="90" y="63" width="180" height="54" xlink:href="assets/brand/iitmz-logo.png" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- title -->
+  <text x="100" y="230" fill="#ffffff" font-size="56" font-weight="700">Course Materials</text>
+  <text x="100" y="272" fill="#C5A059" font-size="28" font-style="italic">Dr. Innocent Nyalala</text>
+
+  <line x1="100" y1="300" x2="1180" y2="300" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <!-- course list -->
+  <g font-family="Inter, sans-serif">
+    <circle cx="112" cy="352" r="4" fill="#C5A059"/>
+    <text x="130" y="358" fill="#e5e7eb" font-size="21" font-weight="600">Z2005 / Z5007</text>
+    <text x="130" y="382" fill="#94a3b8" font-size="15">Programming and Data Structures</text>
+
+    <circle cx="112" cy="424" r="4" fill="#C5A059"/>
+    <text x="130" y="430" fill="#e5e7eb" font-size="21" font-weight="600">Z2004</text>
+    <text x="130" y="454" fill="#94a3b8" font-size="15">Database Management Systems</text>
+
+    <circle cx="660" cy="352" r="4" fill="#C5A059"/>
+    <text x="678" y="358" fill="#e5e7eb" font-size="21" font-weight="600">Z5008</text>
+    <text x="678" y="382" fill="#94a3b8" font-size="15">Big Data Lab</text>
+  </g>
+
+  <!-- footer -->
+  <line x1="100" y1="520" x2="1180" y2="520" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="100" y="565" fill="#94a3b8" font-family="Inter, sans-serif" font-size="16">Lecture slides &#183; Lab exercises &#183; Reference notebooks</text>
+  <text x="100" y="592" fill="#6b7280" font-family="Inter, sans-serif" font-size="14">inyalala.github.io/iitmz-teaching-site</text>
+
+  <circle cx="1040" cy="565" r="3" fill="#C5A059"/>
+  <text x="1055" y="570" fill="#C5A059" font-family="Inter, sans-serif" font-size="14" font-weight="600">CC BY-NC-SA 4.0</text>
+
+  <!-- SAAIL Lab affiliation mark -->
+  <rect x="1000" y="30" width="180" height="80" rx="8" fill="rgba(255,255,255,0.96)"/>
+  <image x="1012" y="38" width="156" height="64" xlink:href="assets/brand/saail-lab-logo.png" preserveAspectRatio="xMidYMid meet"/>
+</svg>
