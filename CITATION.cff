@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use these course materials, please cite as below."
+title: "Course Materials — IIT Madras Zanzibar"
+type: dataset
+authors:
+  - family-names: "Nyalala"
+    given-names: "Innocent"
+    affiliation: "IIT Madras Zanzibar"
+abstract: >
+  Lecture slides, lab exercises, and reference notebooks for courses taught
+  at IIT Madras Zanzibar, including Programming and Data Structures (Z2005
+  / Z5007), Database Management Systems (Z2004), and Big Data Lab (Z5008).
+repository-code: "https://github.com/inyalala/iitmz-teaching-site"
+url: "https://inyalala.github.io/iitmz-teaching-site/"
+license: CC-BY-NC-SA-4.0
+keywords:
+  - data-structures
+  - algorithms
+  - teaching-materials
+  - database-management-systems
+  - big-data
+  - computer-science-education
