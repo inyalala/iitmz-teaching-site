@@ -1,0 +1,44 @@
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, Carlito, sans-serif" font-size="13">
+  <text x="20" y="20" font-size="14" font-weight="bold" fill="#0a1628">Reduction tree: eight chunks combined to one result</text>
+
+  <!-- leaves -->
+  <g fill="#C5A059">
+    <circle cx="70" cy="280" r="18"/><circle cx="160" cy="280" r="18"/>
+    <circle cx="250" cy="280" r="18"/><circle cx="340" cy="280" r="18"/>
+    <circle cx="430" cy="280" r="18"/><circle cx="520" cy="280" r="18"/>
+    <circle cx="610" cy="280" r="18"/><circle cx="670" cy="280" r="10"/>
+  </g>
+  <g fill="#0a1628" font-weight="bold" text-anchor="middle">
+    <text x="70" y="284">c1</text><text x="160" y="284">c2</text>
+    <text x="250" y="284">c3</text><text x="340" y="284">c4</text>
+    <text x="430" y="284">c5</text><text x="520" y="284">c6</text>
+    <text x="610" y="284">c7</text><text x="670" y="284" font-size="9">c8</text>
+  </g>
+
+  <!-- level 1 -->
+  <g stroke="#0a1628" stroke-width="1.5">
+    <line x1="70" y1="262" x2="115" y2="220"/><line x1="160" y1="262" x2="115" y2="220"/>
+    <line x1="250" y1="262" x2="295" y2="220"/><line x1="340" y1="262" x2="295" y2="220"/>
+    <line x1="430" y1="262" x2="475" y2="220"/><line x1="520" y1="262" x2="475" y2="220"/>
+    <line x1="610" y1="262" x2="640" y2="220"/><line x1="670" y1="270" x2="640" y2="220"/>
+  </g>
+  <g fill="#7c9a92">
+    <circle cx="115" cy="210" r="16"/><circle cx="295" cy="210" r="16"/>
+    <circle cx="475" cy="210" r="16"/><circle cx="640" cy="210" r="16"/>
+  </g>
+
+  <!-- level 2 -->
+  <line x1="115" y1="194" x2="205" y2="150" stroke="#0a1628" stroke-width="1.5"/>
+  <line x1="295" y1="194" x2="205" y2="150" stroke="#0a1628" stroke-width="1.5"/>
+  <line x1="475" y1="194" x2="560" y2="150" stroke="#0a1628" stroke-width="1.5"/>
+  <line x1="640" y1="194" x2="560" y2="150" stroke="#0a1628" stroke-width="1.5"/>
+  <g fill="#4d7c92">
+    <circle cx="205" cy="140" r="16"/><circle cx="560" cy="140" r="16"/>
+  </g>
+
+  <!-- root -->
+  <line x1="205" y1="124" x2="380" y2="70" stroke="#0a1628" stroke-width="2"/>
+  <line x1="560" y1="124" x2="380" y2="70" stroke="#0a1628" stroke-width="2"/>
+  <circle cx="380" cy="55" r="20" fill="#A8813A"/>
+  <text x="380" y="60" text-anchor="middle" fill="#fff" font-weight="bold">result</text>
+</svg>

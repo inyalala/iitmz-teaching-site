@@ -7,7 +7,6 @@
 <meta name="description" content="Z2005 Programming and Data Structures (BS) — IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials."/>
 <title>Z2005 Programming and Data Structures | Dr. Innocent Nyalala</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 <style>
   :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;}
   *{box-sizing:border-box;}
@@ -50,8 +49,7 @@
   .person p.role{margin:0;color:var(--muted);font-size:.8rem;}
   .person a{color:var(--gold-dark);font-size:.82rem;text-decoration:none;}
   .person a:hover{text-decoration:underline;}
-  .meta-row{display:flex;gap:10px;font-size:.85rem;color:var(--ink);margin-top:12px;padding-top:12px;border-top:1px solid #f1f1f1;}
-  .meta-row i{color:var(--gold);width:16px;}
+  .meta-row{font-size:.85rem;color:var(--ink);margin-top:12px;padding-top:12px;border-top:1px solid #f1f1f1;}
   table.sched{width:100%;border-collapse:collapse;font-size:.88rem;}
   table.sched th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
   table.sched td{padding:9px 10px;border-bottom:1px solid #f5f5f5;}
@@ -67,7 +65,6 @@
   .grade-bar p.note{margin:6px 0 0;color:var(--muted);font-size:.78rem;}
   .textbook{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f5f5f5;}
   .textbook:last-child{border-bottom:none;}
-  .textbook i{color:var(--gold);margin-top:3px;}
   .textbook p.title{margin:0;font-weight:700;color:var(--navy);font-size:.92rem;}
   .textbook p.authors{margin:2px 0 0;color:var(--muted);font-size:.82rem;}
   .textbook span.role{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:auto;flex-shrink:0;height:fit-content;}
@@ -77,11 +74,14 @@
   .policy:last-child{border-bottom:none;}
   .policy p.label{margin:0 0 4px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight:700;}
   .policy p.text{margin:0;font-size:.88rem;line-height:1.6;color:var(--ink);}
-  .materials-cta{background:var(--navy);border-radius:12px;padding:26px 28px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  .materials-cta h3{margin:0 0 4px;font-family:'Playfair Display',serif;font-size:1.15rem;}
-  .materials-cta p{margin:0;color:#9aa5b8;font-size:.85rem;}
-  .materials-cta a{background:var(--gold);color:var(--navy);font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:.85rem;white-space:nowrap;}
-  .materials-cta a:hover{background:var(--gold-dark);}
+  table.materials{width:100%;border-collapse:collapse;font-size:.88rem;}
+  table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
+  table.materials td{padding:10px;border-bottom:1px solid #f5f5f5;vertical-align:top;}
+  table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
+  table.materials td.topic{color:var(--ink);}
+  table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
+  table.materials td.link a:hover{text-decoration:underline;}
+  .pending{color:var(--muted);font-style:italic;}
 </style>
 </head>
 <body>
@@ -94,7 +94,7 @@
       <p class="campus">Zanzibar Campus</p>
     </div>
   </div>
-  <a class="back" href="../../index.html"><i class="fas fa-arrow-left"></i> All courses</a>
+  <a class="back" href="../../index.html">&larr; All courses</a>
   <nav>
     <p class="group">Z2005 &middot; BS</p>
     <a href="#overview" class="active">Overview</a>
@@ -108,7 +108,7 @@
   </nav>
   <div class="switch">
     <p>Other offering</p>
-    <a href="../z5007/index.html"><i class="fas fa-arrow-right"></i> Z5007 (MTech)</a>
+    <a href="../z5007/index.html">Z5007 (MTech) &rarr;</a>
   </div>
 </aside>
 
@@ -139,11 +139,11 @@
           <div>
             <p class="name">Dr. Innocent Nyalala</p>
             <p class="role">Assistant Professor of Data Science and AI &middot; Head, SAAIL Lab</p>
-            <a href="mailto:innocent@iitmz.ac.in"><i class="fas fa-envelope"></i> innocent@iitmz.ac.in</a>
+            <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a>
           </div>
         </div>
-        <div class="meta-row"><i class="fas fa-location-dot"></i> Door 105, Room F1, Engineering Building</div>
-        <div class="meta-row"><i class="fas fa-clock"></i> Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
+        <div class="meta-row">Office: Door 105, Room F1, Engineering Building</div>
+        <div class="meta-row">Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
       </div>
     </section>
 
@@ -174,14 +174,82 @@
 
     <section id="materials">
       <h2>Materials</h2>
-      <div class="materials-cta">
-        <div>
-          <h3>Week 1 &mdash; Object-Oriented Programming, then Algorithms</h3>
-          <p>Lecture PDFs, slides, notebook, and lab sheet.</p>
-        </div>
-        <a href="00-oop-then-algorithms/index.html">View Week 1 <i class="fas fa-arrow-right"></i></a>
+      <div class="card">
+        <table class="materials">
+          <tr><th>Week</th><th>Topic</th><th>Materials</th></tr>
+          <tr>
+            <td class="wk">1</td>
+            <td class="topic">Object-Oriented Programming, then Algorithms</td>
+            <td class="link"><a href="00-oop-then-algorithms/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">2</td>
+            <td class="topic">Arrays and Dynamic Arrays</td>
+            <td class="link"><a href="01-arrays-dynamic-arrays/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">3</td>
+            <td class="topic">Stacks and Queues</td>
+            <td class="link"><a href="02-stacks-queues/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">4</td>
+            <td class="topic">Linked Lists</td>
+            <td class="link"><a href="03-linked-lists/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">5</td>
+            <td class="topic">Simple Sorting</td>
+            <td class="link"><a href="04-simple-sorting/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">6</td>
+            <td class="topic">Advanced Sorting Algorithms</td>
+            <td class="link"><a href="05-advanced-sorting/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">7</td>
+            <td class="topic">Binary Trees</td>
+            <td class="link"><a href="06-binary-trees/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">8</td>
+            <td class="topic">Hash Tables and Heaps</td>
+            <td class="link"><a href="07-hash-tables-heaps/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">9</td>
+            <td class="topic">Dynamic Programming</td>
+            <td class="link"><a href="08-dynamic-programming/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">10</td>
+            <td class="topic">Greedy Algorithms</td>
+            <td class="link"><a href="09-greedy-algorithms/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">11</td>
+            <td class="topic">Introduction to Graphs</td>
+            <td class="link"><a href="10-intro-graphs/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">12&ndash;13</td>
+            <td class="topic">Graph Algorithms: Dijkstra, A*, Bellman-Ford, Prim's</td>
+            <td class="link"><a href="11-graph-algorithms/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">14</td>
+            <td class="topic">Parallel and Randomized Algorithms</td>
+            <td class="link"><a href="12-parallel-randomized/index.html">Lectures, lab, notebook</a></td>
+          </tr>
+          <tr>
+            <td class="wk">15</td>
+            <td class="topic">Project Presentations and Review</td>
+            <td class="link"><a href="13-project-review/index.html">Course review, rubric, exam prep</a></td>
+          </tr>
+        </table>
       </div>
-      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">More weeks are added as the semester progresses.</p>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Each week's materials go live as they are completed; this table is updated in step.</p>
     </section>
 
     <section id="grading">
@@ -214,12 +282,10 @@
       <h2>Resources</h2>
       <div class="card">
         <div class="textbook">
-          <i class="fas fa-book"></i>
           <div><p class="title">Data Structures and Algorithms in Python</p><p class="authors">Robert Lafore, Ami Broder, and Jeremy Canning &middot; Addison Wesley, 2022</p></div>
           <span class="role role-required">Required</span>
         </div>
         <div class="textbook">
-          <i class="fas fa-book"></i>
           <div><p class="title">The Algorithm Design Manual</p><p class="authors">Steven S. Skiena &middot; Springer, 2008</p></div>
           <span class="role role-reference">Reference</span>
         </div>

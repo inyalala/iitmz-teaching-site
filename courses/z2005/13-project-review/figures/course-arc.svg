@@ -1,0 +1,40 @@
+<svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, Carlito, sans-serif" font-size="12">
+  <text x="20" y="20" font-size="14" font-weight="bold" fill="#0a1628">Course arc: Weeks 2 through 14</text>
+  <line x1="40" y1="140" x2="860" y2="140" stroke="#0a1628" stroke-width="2"/>
+
+  <g text-anchor="middle">
+    <circle cx="70" cy="140" r="8" fill="#C5A059"/>
+    <text x="70" y="170" fill="#333">Wk2</text><text x="70" y="185" font-size="10" fill="#666">Arrays</text>
+
+    <circle cx="150" cy="140" r="8" fill="#C5A059"/>
+    <text x="150" y="170" fill="#333">Wk3</text><text x="150" y="185" font-size="10" fill="#666">Stacks/Queues</text>
+
+    <circle cx="230" cy="140" r="8" fill="#C5A059"/>
+    <text x="230" y="170" fill="#333">Wk4</text><text x="230" y="185" font-size="10" fill="#666">Linked Lists</text>
+
+    <circle cx="310" cy="140" r="8" fill="#7c9a92"/>
+    <text x="310" y="170" fill="#333">Wk5-6</text><text x="310" y="185" font-size="10" fill="#666">Sorting</text>
+
+    <circle cx="390" cy="140" r="8" fill="#C5A059"/>
+    <text x="390" y="170" fill="#333">Wk7</text><text x="390" y="185" font-size="10" fill="#666">Trees</text>
+
+    <circle cx="470" cy="140" r="8" fill="#C5A059"/>
+    <text x="470" y="170" fill="#333">Wk8</text><text x="470" y="185" font-size="10" fill="#666">Hash/Heaps</text>
+
+    <circle cx="550" cy="140" r="8" fill="#4d7c92"/>
+    <text x="550" y="170" fill="#333">Wk9-10</text><text x="550" y="185" font-size="10" fill="#666">DP/Greedy</text>
+
+    <circle cx="650" cy="140" r="8" fill="#A8813A"/>
+    <text x="650" y="170" fill="#333">Wk11-13</text><text x="650" y="185" font-size="10" fill="#666">Graphs</text>
+
+    <circle cx="770" cy="140" r="8" fill="#8a4d92"/>
+    <text x="770" y="170" fill="#333">Wk14</text><text x="770" y="185" font-size="10" fill="#666">Parallel/Random</text>
+
+    <circle cx="850" cy="140" r="8" fill="#333"/>
+    <text x="850" y="170" fill="#333">Wk15</text><text x="850" y="185" font-size="10" fill="#666">Review</text>
+  </g>
+
+  <text x="450" y="230" text-anchor="middle" fill="#888" font-size="11">
+    Foundational structures &#8594; algorithmic techniques &#8594; graphs and capstone &#8594; consolidation
+  </text>
+</svg>
