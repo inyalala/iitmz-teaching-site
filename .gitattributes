@@ -1,0 +1,24 @@
+# This repository ships compiled Quarto output (slide decks, labs, handouts)
+# alongside hand-authored navigation pages and reference notebooks. The rules
+# below tell GitHub's language statistics to reflect that distinction: the
+# compiled decks are generated artifacts, not hand-authored HTML, so they are
+# excluded from the language bar. Hand-written index.html navigation pages are
+# NOT excluded, since those are genuinely authored by hand.
+
+# Quarto-rendered lecture decks, labs, and handouts (self-contained HTML, all
+# CSS/JS embedded inline) — compiled output, not hand-authored
+courses/**/lecture-*.html linguist-generated=true
+courses/**/lab.html linguist-generated=true
+courses/**/project-rubric.html linguist-generated=true
+courses/**/exam-prep.html linguist-generated=true
+
+# Bundled/vendored library assets shipped alongside rendered output
+**/*_files/** linguist-vendored=true
+
+# PowerPoint exports are compiled output, not source
+*.pptx linguist-vendored=true
+
+# Reference notebooks are genuinely authored content — ensure they are never
+# treated as generated, so they count correctly as Jupyter Notebook / Python
+*.ipynb linguist-generated=false
+*.ipynb linguist-documentation=false
