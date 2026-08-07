@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>A1: OOP Foundations — Z2005 In-Class Assignment | Dr. Innocent Nyalala</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;max-width:740px;padding:48px 32px 90px;}
+  .back{font-size:.85rem;color:var(--gold-dark);text-decoration:none;display:inline-flex;align-items:center;gap:5px;margin-bottom:20px;}
+  .back:hover{text-decoration:underline;}
+  .header-band{background:var(--navy);color:#fff;border-radius:10px;padding:24px 28px;margin-bottom:28px;}
+  .header-band h1{font-family:'Playfair Display',serif;font-size:1.6rem;margin:0 0 6px;color:#fff;}
+  .header-band .meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:12px;font-size:.82rem;color:#94a3b8;}
+  .header-band .meta span strong{color:var(--gold);margin-right:4px;}
+  section{margin-bottom:36px;}
+  section h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.1rem;border-bottom:2px solid var(--gold);padding-bottom:.3em;margin-bottom:14px;}
+  p{font-size:.92rem;line-height:1.7;margin:0 0 12px;}
+  ol,ul{font-size:.92rem;line-height:1.75;padding-left:1.4em;}
+  li{margin-bottom:6px;}
+  .task{background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:18px 20px;margin-bottom:16px;}
+  .task p.t-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight:700;margin:0 0 8px;}
+  .task p.t-title{font-weight:700;color:var(--navy);margin:0 0 8px;font-size:.95rem;}
+  .task p.t-desc{margin:0 0 8px;font-size:.9rem;line-height:1.6;}
+  .task p.t-marks{color:var(--gold-dark);font-weight:700;font-size:.85rem;margin:0;}
+  code,pre{background:#f1f5f9;border-radius:4px;font-family:'Courier New',monospace;font-size:.85em;}
+  code{padding:2px 6px;}
+  pre{padding:14px 16px;overflow-x:auto;line-height:1.6;margin:12px 0;}
+  .policy-box{background:#fef9ec;border-left:4px solid var(--gold);padding:14px 18px;border-radius:0 8px 8px 0;font-size:.88rem;line-height:1.65;margin-bottom:24px;}
+  .marks-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+  .ms-card{border:1px solid #eee;border-radius:8px;padding:12px;text-align:center;}
+  .ms-card p.ms-val{font-size:1.4rem;font-weight:700;color:var(--navy);margin:0 0 2px;}
+  .ms-card p.ms-label{font-size:.72rem;color:var(--muted);margin:0;text-transform:uppercase;letter-spacing:.05em;}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid #eee;font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">&larr; All Assignments</a>
+
+<div class="header-band">
+  <h1>Assignment 1: OOP Foundations</h1>
+  <div class="meta">
+    <span><strong>Course:</strong> Z2005 Programming and Data Structures (BS)</span>
+    <span><strong>Due:</strong> End of Week 2 lab session</span>
+    <span><strong>Total:</strong> 20 marks</span>
+    <span><strong>Format:</strong> In-class, individual</span>
+  </div>
+</div>
+
+<div class="policy-box">
+  <strong>Rules:</strong> This is an in-class assignment. Complete it independently during the lab session. You may refer to your notebook and course slides. No internet access, no AI tools, no collaboration. Submit via the course portal before you leave the lab.
+</div>
+
+<div class="marks-summary">
+  <div class="ms-card"><p class="ms-val">3</p><p class="ms-label">Tasks</p></div>
+  <div class="ms-card"><p class="ms-val">20</p><p class="ms-label">Total marks</p></div>
+  <div class="ms-card"><p class="ms-val">90 min</p><p class="ms-label">Duration</p></div>
+</div>
+
+<section>
+  <h2>Learning Outcomes Assessed</h2>
+  <ul>
+    <li>Design Python classes using encapsulation, inheritance, and polymorphism</li>
+    <li>Implement dunder methods for operator overloading and string representation</li>
+    <li>Write test cases using <code>assert</code> to verify class behavior</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Task 1 &mdash; Class Design (7 marks)</h2>
+  <div class="task">
+    <p class="t-label">Task 1a &mdash; 4 marks</p>
+    <p class="t-title">Implement a <code>BankAccount</code> class</p>
+    <p class="t-desc">Create a class <code>BankAccount</code> with:</p>
+    <ul>
+      <li>A private attribute <code>_balance</code> initialized from the constructor argument (default 0)</li>
+      <li>Method <code>deposit(amount)</code> that adds <code>amount</code> to the balance (raise <code>ValueError</code> if amount &le; 0)</li>
+      <li>Method <code>withdraw(amount)</code> that subtracts <code>amount</code> (raise <code>ValueError</code> if amount &le; 0 or if it would cause overdraft)</li>
+      <li>Property <code>balance</code> that returns the current balance (read-only)</li>
+      <li><code>__str__</code> that returns <code>"BankAccount(balance=X)"</code> where X is the balance</li>
+    </ul>
+    <p class="t-marks">4 marks: 1 per correct method/property; 1 for both error cases handled</p>
+  </div>
+  <div class="task">
+    <p class="t-label">Task 1b &mdash; 3 marks</p>
+    <p class="t-title">Write test cases</p>
+    <p class="t-desc">Write <strong>three</strong> <code>assert</code>-based test cases that verify your <code>BankAccount</code> implementation. At least one test must check that a <code>ValueError</code> is raised correctly (use a <code>try/except</code> block).</p>
+    <p class="t-marks">3 marks: 1 per valid, passing test case</p>
+  </div>
+</section>
+
+<section>
+  <h2>Task 2 &mdash; Inheritance and Polymorphism (8 marks)</h2>
+  <div class="task">
+    <p class="t-label">Task 2 &mdash; 8 marks</p>
+    <p class="t-title">Design an animal hierarchy</p>
+    <p class="t-desc">
+      Create a base class <code>Animal</code> with:
+      <ul>
+        <li>Constructor that accepts <code>name</code> (string) and <code>age</code> (int)</li>
+        <li>Method <code>speak()</code> that returns <code>"..."</code> (base default)</li>
+        <li><code>__str__</code> that returns <code>"Animal(name, age)"</code></li>
+      </ul>
+      Then create subclasses <code>Dog</code>, <code>Cat</code>, and <code>Parrot</code>, each overriding <code>speak()</code> to return an appropriate sound string.<br/><br/>
+      Finally, write a function <code>chorus(animals)</code> that accepts a list of <code>Animal</code> objects and returns a list of strings, each formatted as <code>"[name] says: [sound]"</code>. Demonstrate it works with a mixed list containing at least one of each animal type.
+    </p>
+    <p class="t-marks">8 marks: 2 for base class, 1 per subclass (3), 2 for <code>chorus</code> function and correct output</p>
+  </div>
+</section>
+
+<section>
+  <h2>Task 3 &mdash; Operator Overloading (5 marks)</h2>
+  <div class="task">
+    <p class="t-label">Task 3 &mdash; 5 marks</p>
+    <p class="t-title">Implement a <code>Vector2D</code> class</p>
+    <p class="t-desc">
+      Create a class <code>Vector2D(x, y)</code> that supports:
+      <ul>
+        <li><code>__add__</code>: vector addition (returns a new <code>Vector2D</code>)</li>
+        <li><code>__sub__</code>: vector subtraction (returns a new <code>Vector2D</code>)</li>
+        <li><code>__mul__</code>: scalar multiplication, where the scalar is a number on the right side</li>
+        <li><code>__eq__</code>: equality check</li>
+        <li><code>__repr__</code>: returns <code>"Vector2D(x, y)"</code></li>
+      </ul>
+      Verify with: <code>assert Vector2D(1,2) + Vector2D(3,4) == Vector2D(4,6)</code>
+    </p>
+    <p class="t-marks">5 marks: 1 per dunder method</p>
+  </div>
+</section>
+
+<section>
+  <h2>Submission</h2>
+  <p>Submit a single <code>.py</code> file named <code>a1_[your_roll_number].py</code> via the course portal before the end of the lab session. Your file must run without errors from top to bottom. All <code>assert</code> statements must pass.</p>
+</section>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. All course materials are licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  These materials may not be reproduced or redistributed without attribution. Commercial use is prohibited.
+</footer>
+
+</body>
+</html>
