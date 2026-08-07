@@ -127,6 +127,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Prove, in two to four sentences, why a sorting algorithm that is stable and comparison-based cannot possibly achieve fewer comparisons than an equivalent unstable algorithm solving the same problem — connect your argument to the decision-tree model from Lecture 4 (hint: does requiring stability change how many distinguishable output orderings exist?).</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Simulate an external counting sort for a dataset too large to fit in memory: given a large list of integers in a bounded range, process it in fixed-size chunks (e.g.&nbsp;10,000 at a time), maintaining a single running count array across chunks, then produce the final sorted output by a second pass over the count array. Compare this two-pass, bounded-memory approach against simply calling your Week 5 <code>counting_sort</code> on the whole list at once, and note what changes when the data no longer fits comfortably in RAM.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

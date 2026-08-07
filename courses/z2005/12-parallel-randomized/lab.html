@@ -124,6 +124,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Implement the median-of-medians pivot-selection strategy referenced in Lecture 4’s MTech addition (grouping into fives, recursively finding the median of group medians), and use it inside a guaranteed-worst-case-linear-time selection function. Construct an adversarial input (e.g., an already-sorted array, which is a known worst case for naive first-element-pivot selection) and confirm your median-of-medians selection still completes without quadratic blowup, while a naive fixed-pivot selection function measurably slows down on the same input.</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Implement a parallel merge sort using Python&rsquo;s <code>multiprocessing.Pool</code>: split the input into <code>num_workers</code> chunks, sort each chunk in a separate process, then merge the sorted chunks sequentially in the main process. Measure wall-clock time on a 500,000-element random list with 1, 2, and 4 workers, and report whether the observed speedup is close to, or well short of, the number of workers &mdash; and offer one sentence on why merging remains sequential here.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

@@ -122,6 +122,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Implement <code>Polynomial</code> from Lecture 4 with <code>add_term</code>, <code>evaluate(x)</code>, and <code>add(other)</code> (merging two polynomials). Test that <code>(x^3 + 2x) + (x^3 - 2x + 5)</code> correctly simplifies to <code>2x^3 + 5</code> — note that adding two polynomials can <em>cancel</em> terms entirely, which your merge logic must handle (a term whose coefficients sum to zero should not remain in the result).</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Implement <code>merge_k_sorted_lists(lists)</code> that merges <code>k</code> sorted singly linked lists into one sorted linked list, using a min-heap over the current head of each list (rather than merging two lists at a time repeatedly). Analyze the time complexity in terms of <code>k</code> and the total number of nodes <code>n</code>, and briefly explain why this is the pattern used by external merge stages in large-scale sort-and-shuffle pipelines.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

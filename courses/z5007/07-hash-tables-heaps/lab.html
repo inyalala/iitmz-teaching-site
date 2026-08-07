@@ -93,6 +93,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Implement the “does this item already exist?” priority queue extension from Lecture 4’s exercise: combine a <code>HashTable</code> (item → present in queue, O(1) check) with a <code>MinHeap</code>, exposing <code>push</code>, <code>pop</code>, and <code>contains(item)</code>. Write two to three sentences explaining why a naive heap alone cannot answer <code>contains</code> in better than O(n).</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Design a streaming <code>TopKFrequent</code> tracker for a service that sees a continuous stream of item IDs: maintain a hash table mapping item to count plus a min-heap of size <code>k</code> holding the current top-<code>k</code> most frequent items, updating both on every <code>record(item)</code> call and exposing <code>top_k()</code> in O(k log k). Test it by streaming 10,000 random item IDs drawn from a skewed distribution (a few items much more frequent than the rest) and confirm <code>top_k()</code> matches the true top-k computed by sorting all counts.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

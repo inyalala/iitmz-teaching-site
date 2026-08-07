@@ -122,6 +122,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Apply the five-step method from Lecture 4, in writing, to the “longest increasing subsequence” problem (Lecture 4’s exercise), then implement it. Confirm your implementation’s result on <code>[10, 9, 2, 5, 3, 7, 101, 18]</code> matches the known correct answer of length 4 (e.g., <code>[2, 3, 7, 18]</code> or <code>[2, 3, 7, 101]</code>).</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Re-implement your Week 8 <code>lcs</code> function using only O(min(m, n)) space instead of a full 2D table (you only need the previous row to compute the current one, and only the length, not the reconstruction, is required for this version). Verify the length-only result matches your original full-table <code>lcs</code> on several test strings, and note in one or two sentences why a diff tool comparing two large files would care about this space reduction.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

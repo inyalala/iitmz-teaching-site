@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>Question Bank — Z2005 Programming and Data Structures | Dr. Innocent Nyalala</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;
+        --easy:#15803d;--easy-bg:#f0fdf4;--inter:#b45309;--inter-bg:#fffbeb;--hard:#b91c1c;--hard-bg:#fef2f2;}
+  *{box-sizing:border-box;}
+  html{background:#fff;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+  #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  #sidebar .badge{width:34px;height:34px;border-radius:50%;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+  #sidebar .brand-text p{margin:0;line-height:1.25;}
+  #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
+  #sidebar a.back:hover{color:var(--gold);}
+  #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+  #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
+  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s;}
+  #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+  #sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
+  #sidebar .switch{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);}
+  #sidebar .switch p{font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;margin:0 0 8px;}
+  #sidebar .switch a{display:block;color:#94a3b8;font-size:.8rem;text-decoration:none;padding:5px 0;}
+  #sidebar .switch a:hover{color:var(--gold);}
+  #main{flex:1;min-width:0;}
+  .topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
+  .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
+  .topbar a:hover{color:var(--gold-dark);}
+  .content{max-width:860px;margin:0 auto;padding:40px 40px 90px;}
+  .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
+  .content > p.lede{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:32px;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;background:#f8fafc;border-radius:8px;border:1px solid #eee;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:.82rem;}
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot-e{background:var(--easy);}
+  .dot-m{background:var(--inter);}
+  .dot-h{background:var(--hard);}
+  .weight-guide{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px;}
+  .wg-card{border-radius:8px;padding:12px 14px;border:1px solid #e5e7eb;}
+  .wg-card p.wg-label{margin:0 0 4px;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#94a3b8;}
+  .wg-card p.wg-name{margin:0 0 6px;font-weight:700;font-size:.9rem;color:var(--navy);}
+  .wg-card .wg-tiers{font-size:.78rem;color:var(--muted);line-height:1.6;}
+  .week-block{margin-bottom:48px;scroll-margin-top:24px;}
+  .week-header{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;}
+  .week-header h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.15rem;margin:0;}
+  .week-header .wnum{font-size:.7rem;font-weight:700;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .week-divider{border:none;border-top:2px solid var(--gold);margin:6px 0 0;}
+  .tier-tabs{display:flex;gap:0;border-radius:0;overflow:hidden;border:1px solid #e5e7eb;border-top:none;border-bottom:none;}
+  .tier-tab{padding:8px 0;font-size:.8rem;font-weight:600;cursor:pointer;border:none;border-bottom:2px solid #e5e7eb;background:#f8fafc;color:#64748b;transition:background .15s,color .15s,border-color .15s;flex:1;text-align:center;}
+  .tier-tab.active-e{background:var(--easy-bg);color:var(--easy);border-bottom-color:var(--easy);}
+  .tier-tab.active-m{background:var(--inter-bg);color:var(--inter);border-bottom-color:var(--inter);}
+  .tier-tab.active-h{background:var(--hard-bg);color:var(--hard);border-bottom-color:var(--hard);}
+  .qs-panel{display:none;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;}
+  .qs-panel.shown{display:block;}
+  .q-item{padding:16px 20px;border-bottom:1px solid #f1f1f1;}
+  .q-item:last-child{border-bottom:none;}
+  .q-meta{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .q-num{font-size:.7rem;font-weight:700;color:#94a3b8;min-width:24px;}
+  .q-tag{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;}
+  .tag-e{background:var(--easy-bg);color:var(--easy);}
+  .tag-m{background:var(--inter-bg);color:var(--inter);}
+  .tag-h{background:var(--hard-bg);color:var(--hard);}
+  .q-weight{font-size:.7rem;color:#94a3b8;margin-left:auto;}
+  .q-text{font-size:.9rem;line-height:1.6;color:var(--ink);margin:0 0 6px;}
+  .q-hint{font-size:.78rem;color:var(--muted);font-style:italic;margin:0;}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:3px;font-family:'Courier New',monospace;font-size:.85em;}
+  @media(max-width:640px){#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}.weight-guide{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="brand">
+    <div class="badge">IIT</div>
+    <div class="brand-text">
+      <p class="school">IIT Madras</p>
+      <p class="campus">Zanzibar Campus</p>
+    </div>
+  </div>
+  <a class="back" href="../index.html">&larr; Z2005 Overview</a>
+  <nav>
+    <p class="group">Weeks</p>
+    <a href="#w00">W00 &mdash; OOP Foundations</a>
+    <a href="#w01">W01 &mdash; Arrays</a>
+    <a href="#w02">W02 &mdash; Stacks &amp; Queues</a>
+    <a href="#w03">W03 &mdash; Linked Lists</a>
+    <a href="#w04">W04 &mdash; Sorting &amp; Search</a>
+    <a href="#w05">W05 &mdash; Advanced Sorting</a>
+    <a href="#w06">W06 &mdash; Trees &amp; B-Trees</a>
+    <a href="#w07">W07 &mdash; Hash &amp; Heaps</a>
+    <a href="#w08">W08 &mdash; Dynamic Programming</a>
+    <a href="#w09">W09 &mdash; Greedy Algorithms</a>
+    <a href="#w10">W10 &mdash; Intro to Graphs</a>
+    <a href="#w11">W11 &mdash; Graph Algorithms</a>
+    <a href="#w12">W12 &mdash; Parallel &amp; Randomized</a>
+  </nav>
+  <div class="switch">
+    <p>Other offering</p>
+    <a href="../../z5007/question-bank/index.html">Z5007 Question Bank &rarr;</a>
+  </div>
+</aside>
+
+<div id="main">
+  <div class="topbar">
+    <div class="codes"><strong style="color:var(--navy)">Z2005</strong><span>BS</span><span style="background:#f1f5f9;color:#64748b;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-left:6px;">Question Bank</span></div>
+    <div>
+      <a href="https://inyalala.github.io/">Main site</a>
+      <a href="../../../index.html">All courses</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Question Bank</h1>
+    <p class="lede">Organized by week and difficulty. Use this bank to self-test between lectures, prepare for quizzes, or review before the end-semester exam. Questions are not a substitute for lab notebooks and assigned problems.</p>
+
+    <div class="legend">
+      <div class="legend-item"><div class="dot dot-e"></div><strong>Easy</strong>&nbsp;&mdash; recall and direct application</div>
+      <div class="legend-item"><div class="dot dot-m"></div><strong>Intermediate</strong>&nbsp;&mdash; multi-step reasoning</div>
+      <div class="legend-item"><div class="dot dot-h"></div><strong>Advanced</strong>&nbsp;&mdash; design, proof, or optimization</div>
+    </div>
+
+    <div class="weight-guide">
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Quizzes (30%)</p><div class="wg-tiers">Easy + some Intermediate<br/>Short-answer or MCQ</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Assignments (10%)</p><div class="wg-tiers">Intermediate + some Advanced<br/>Coding or analytical</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">End-Sem Exam (40%)</p><div class="wg-tiers">All levels, emphasis Advanced<br/>Written + coding portions</div></div>
+    </div>
+
+    <!-- WEEK 00 -->
+    <div class="week-block" id="w00">
+      <div class="week-header"><span class="wnum">Week 00</span><h2>OOP Foundations</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w00','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w00','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w00','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w00-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between a <code>class</code> and an <code>object</code> in Python?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the role of <code>__init__</code> in a Python class? When is it called?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does <code>self</code> refer to inside a method? Must it be named <code>self</code>?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define <em>encapsulation</em> and give one benefit it provides in large codebases.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q5</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Write a class <code>Rectangle</code> with attributes <code>width</code> and <code>height</code> and a method <code>area()</code>.</p></div>
+      </div>
+      <div class="qs-panel" id="w00-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement a class <code>BankAccount</code> with a private balance, methods <code>deposit(amount)</code>, <code>withdraw(amount)</code> (raise <code>ValueError</code> on overdraft), and <code>get_balance()</code>. Write three <code>assert</code>-based test cases.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz / Assignment</span></div><p class="q-text">Explain the difference between method overriding and method overloading. Which does Python support natively? How is the other typically simulated?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Create a class hierarchy: base class <code>Animal</code> with a <code>speak()</code> method; subclasses <code>Dog</code>, <code>Cat</code>, <code>Parrot</code> each override <code>speak()</code>. Demonstrate polymorphism by iterating over a mixed list of animals.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement both <code>__str__</code> and <code>__repr__</code> for a <code>Point(x, y)</code> class. When does Python call each automatically?</p></div>
+      </div>
+      <div class="qs-panel" id="w00-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design an <code>ImmutableVector</code> class whose elements cannot be changed after construction. Which dunder methods do you override and why?</p><p class="q-hint">Hint: consider <code>__setattr__</code> and <code>__delattr__</code>.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain Python's MRO for multiple inheritance. For classes B and C both inheriting from A, and D inheriting from B and C, what is the MRO of D? Show how <code>super()</code> cooperates with this chain.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Implement a <code>Singleton</code> metaclass so that any class using it as metaclass can only ever have one instance. Write tests confirming that two calls to <code>MyClass()</code> return the same object.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 01 -->
+    <div class="week-block" id="w01">
+      <div class="week-header"><span class="wnum">Week 01</span><h2>Arrays and Dynamic Arrays</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w01','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w01','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w01','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w01-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the time complexity of accessing an element by index in a Python list? Why?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the amortized time complexity of appending to a Python list? Briefly explain what "amortized" means.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Given <code>[4, 2, 7, 1, 9]</code>, write Python code to find the maximum element without using the built-in <code>max()</code>.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between a static array and a dynamic array?</p></div>
+      </div>
+      <div class="qs-panel" id="w01-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement <code>rotate_right(arr, k)</code> that rotates <code>arr</code> right by <code>k</code> positions in-place in O(n) time using the reverse trick. Verify with <code>assert</code> statements.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain why inserting at index 0 of a Python list is O(n). Show what work must be done for a list of 5 elements.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write <code>two_sum(arr, target)</code> that returns the indices of two numbers summing to <code>target</code> in O(n) time using a hash map.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement a 2D matrix class supporting <code>get(row, col)</code>, <code>set(row, col, val)</code>, and <code>transpose()</code>. What is the time complexity of <code>transpose()</code>?</p></div>
+      </div>
+      <div class="qs-panel" id="w01-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove that the amortized cost of appending to a doubling dynamic array is O(1) using the potential method or the accounting method.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a data structure supporting <code>push(x)</code>, <code>pop()</code>, and <code>get_max()</code> all in O(1) time and O(n) space. Write Python code for all three operations.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Find the length of the longest subarray with sum equal to zero in an unsorted array. Design an O(n) solution and justify your approach.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 02 -->
+    <div class="week-block" id="w02">
+      <div class="week-header"><span class="wnum">Week 02</span><h2>Stacks and Queues</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w02','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w02','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w02','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w02-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does LIFO stand for? Which data structure follows this principle?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">List two real-world examples of a queue (FIFO) and two examples of a stack (LIFO).</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What happens if you call <code>pop()</code> on an empty stack? How should a well-implemented stack handle this?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What are the time complexities of <code>enqueue</code> and <code>dequeue</code> using a Python <code>collections.deque</code>?</p></div>
+      </div>
+      <div class="qs-panel" id="w02-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write <code>is_balanced(s)</code> returning <code>True</code> if <code>s</code> contains balanced brackets <code>()</code> <code>[]</code> <code>{}</code>. Use a stack. Analyze time and space complexity.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement a queue using two stacks. Show that each element is moved at most twice, giving amortized O(1) per operation.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Trace the evaluation of postfix expression <code>3 4 + 2 * 7 -</code> using a stack. Show the stack state after each token.</p></div>
+      </div>
+      <div class="qs-panel" id="w02-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a <code>MinStack</code> supporting <code>push(x)</code>, <code>pop()</code>, <code>top()</code>, and <code>get_min()</code> all in O(1) time, using O(n) space while avoiding duplicate minimum storage when possible.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Implement a monotonic stack to find the next greater element for every element in an array in O(n) time. Explain why the naive O(n&sup2;) can be reduced.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 03 -->
+    <div class="week-block" id="w03">
+      <div class="week-header"><span class="wnum">Week 03</span><h2>Linked Lists</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w03','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w03','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w03','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w03-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Time complexity of inserting at the head of a singly linked list? At the tail without a tail pointer?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What distinguishes a doubly linked list from a singly linked list? Name one operation that is faster in a doubly linked list.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Sketch the node structure for a singly linked list. What does the <code>next</code> field of the last node contain?</p></div>
+      </div>
+      <div class="qs-panel" id="w03-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write <code>reverse_ll(head)</code> to reverse a singly linked list in-place in O(n) time and O(1) extra space. Trace through a 4-node example.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement <code>find_middle(head)</code> using the fast/slow pointer technique. What is its time complexity?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Describe Floyd's cycle detection algorithm. What is its time complexity, and why does it work?</p></div>
+      </div>
+      <div class="qs-panel" id="w03-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Merge k sorted linked lists into one sorted list using a min-heap. Analyze time complexity in terms of total nodes N and number of lists k.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Determine if a linked list is a palindrome in O(n) time and O(1) extra space. Outline your approach, including how to restore the list.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 04 -->
+    <div class="week-block" id="w04">
+      <div class="week-header"><span class="wnum">Week 04</span><h2>Simple Sorting and Search</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w04','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w04','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w04','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w04-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Worst-case time complexity of Bubble Sort and Insertion Sort? When does Insertion Sort approach O(n)?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What precondition must hold for binary search to work? What is its time complexity?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Trace binary search on <code>[1,3,5,7,9,11,13]</code> for value <code>7</code>. How many comparisons are needed?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Is Selection Sort stable? Explain with an example.</p></div>
+      </div>
+      <div class="qs-panel" id="w04-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement both iterative and recursive binary search. Compare stack usage and discuss a risk with the recursive version on very large arrays.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write <code>find_first_occurrence(arr, target)</code> using binary search that returns the index of the first occurrence in a sorted array with duplicates. Handle the case where the element does not exist.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Count all occurrences of a target in a sorted array in O(log n) time. Show your approach.</p></div>
+      </div>
+      <div class="qs-panel" id="w04-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A sorted array has been rotated at an unknown pivot (e.g., <code>[4,5,6,7,0,1,2]</code>). Design an O(log n) algorithm to find a target. Prove correctness.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove that any comparison-based sorting algorithm requires &Omega;(n log n) comparisons in the worst case using the decision-tree argument.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 05 -->
+    <div class="week-block" id="w05">
+      <div class="week-header"><span class="wnum">Week 05</span><h2>Advanced Sorting</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w05','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w05','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w05','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w05-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Average and worst-case time complexities of QuickSort? When does the worst case arise?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">MergeSort always runs in O(n log n). What is its space complexity and why is it generally less cache-friendly than QuickSort?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Counting Sort and under what conditions does it run in O(n)?</p></div>
+      </div>
+      <div class="qs-panel" id="w05-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement the Lomuto partition scheme and full recursive QuickSort. Trace <code>[3,6,8,10,1,2,1]</code> using the first element as pivot.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement MergeSort from scratch. Measure its runtime on 10,000 random integers and compare to Python's built-in <code>sorted()</code>. Discuss the difference.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Why must the inner sort in Radix Sort (e.g., Counting Sort) be stable for Radix Sort to produce a correct result?</p></div>
+      </div>
+      <div class="qs-panel" id="w05-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Implement 3-way QuickSort (Dutch National Flag partitioning). Analyze its complexity on an array with many repeated elements versus standard QuickSort.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Given two sorted arrays of sizes m and n, design an O(log(m+n)) algorithm to find the k-th smallest element among all elements. Prove correctness.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 06 -->
+    <div class="week-block" id="w06">
+      <div class="week-header"><span class="wnum">Week 06</span><h2>Binary Trees and B-Trees</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w06','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w06','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w06','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w06-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What property distinguishes a BST from a general binary tree?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">List and briefly describe the three depth-first traversals (in-order, pre-order, post-order).</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a B-tree of order m? What is the minimum and maximum number of keys a non-root internal node can hold?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Why are B-trees preferred over BSTs for database indexes and file systems?</p></div>
+      </div>
+      <div class="qs-panel" id="w06-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement <code>bst_insert</code>, <code>bst_search</code>, and <code>bst_delete</code> handling all three cases (leaf, one child, two children). Analyze time complexity.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Trace the insertion of keys <code>[10, 20, 5, 15, 25]</code> into an order-4 B-tree. Draw the tree after each insertion, showing any splits.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">A BST contains keys <code>[5,3,7,1,4,6,8]</code>. Write the in-order traversal sequence and explain why it always yields sorted output.</p></div>
+      </div>
+      <div class="qs-panel" id="w06-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove that an AVL tree with n nodes has height at most 1.44 log&sub2;(n+2), starting from the minimum-node formula for an AVL tree of height h.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Compare B-trees and Red-Black trees. For what values of n and access patterns would you prefer a B-tree? Justify quantitatively using I/O block-read cost.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a function to check whether a binary tree is height-balanced in O(n) (single pass). Explain why a naive two-pass approach is O(n&sup2;).</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 07 -->
+    <div class="week-block" id="w07">
+      <div class="week-header"><span class="wnum">Week 07</span><h2>Hash Tables and Heaps</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w07','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w07','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w07','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w07-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a hash collision? Name two strategies for resolving it.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a min-heap? State the heap property. What is the time complexity of <code>extract_min</code>?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the load factor of a hash table and how does it affect performance?</p></div>
+      </div>
+      <div class="qs-panel" id="w07-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement a hash table with separate chaining: <code>insert(key, value)</code>, <code>get(key)</code>, <code>delete(key)</code>. State the expected time complexity for each operation.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement a binary min-heap with <code>insert(val)</code>, <code>extract_min()</code>, and <code>heapify(arr)</code> (O(n) build). Explain why building with repeated insertions is O(n log n) but heapify is O(n).</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Use a max-heap to implement HeapSort. What are its time and space complexities? Is it stable?</p></div>
+      </div>
+      <div class="qs-panel" id="w07-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a system to find the median of a data stream in O(log n) per insertion and O(1) per median query using two heaps. Prove correctness and analyze space complexity.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain consistent hashing and why it is preferable to modular hashing in distributed systems. How many keys are remapped on average when a new node is added?</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 08 -->
+    <div class="week-block" id="w08">
+      <div class="week-header"><span class="wnum">Week 08</span><h2>Dynamic Programming</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w08','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w08','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w08','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w08-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What two properties must a problem have for dynamic programming to apply?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Difference between top-down (memoization) and bottom-up (tabulation) DP? When would you prefer each?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Write the Fibonacci recurrence. How does memoization reduce complexity from O(2^n) to O(n)?</p></div>
+      </div>
+      <div class="qs-panel" id="w08-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement 0/1 Knapsack using bottom-up DP. Trace through an example with 4 items and capacity W = 7.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a DP solution for Longest Common Subsequence. What is its time and space complexity? Can you reduce space to O(min(m,n))?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Coin change with <code>[1,5,10,25]</code> for amount 36. Write the DP recurrence and fill the table for amounts 0 through 36.</p></div>
+      </div>
+      <div class="qs-panel" id="w08-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a DP algorithm for edit distance (Levenshtein). Prove the recurrence is correct and show how to recover the edit operations from the DP table.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Matrix chain multiplication: given n matrices, find the optimal parenthesization minimizing scalar multiplications. Derive the recurrence, state its complexity, and solve a 4-matrix example.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 09 -->
+    <div class="week-block" id="w09">
+      <div class="week-header"><span class="wnum">Week 09</span><h2>Greedy Algorithms</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w09','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w09','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w09','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w09-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a greedy algorithm? Give one example where it is optimal and one where it fails.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Describe the greedy activity selection algorithm. What does it sort by and what is its time complexity?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What graph property must hold for Prim's or Kruskal's algorithm to produce a minimum spanning tree?</p></div>
+      </div>
+      <div class="qs-panel" id="w09-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Kruskal's MST using Union-Find with path compression and union by rank. Apply to a graph with 6 nodes and 9 edges. State total time complexity.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Huffman coding for <code>{'a':5,'b':9,'c':12,'d':13,'e':16,'f':45}</code>. What is the total encoded length versus fixed 3-bit encoding?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the fractional knapsack problem. Why does the greedy (sort by value/weight ratio) approach work here but not for 0/1 knapsack?</p></div>
+      </div>
+      <div class="qs-panel" id="w09-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove the correctness of the greedy activity selection algorithm using an exchange argument.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a greedy algorithm to minimize total weighted completion time on a single machine. Prove that shortest-job-first is optimal for equal weights and the weight/processing-time ratio rule is optimal in the weighted case.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 10 -->
+    <div class="week-block" id="w10">
+      <div class="week-header"><span class="wnum">Week 10</span><h2>Introduction to Graphs</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w10','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w10','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w10','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w10-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Difference between an adjacency matrix and an adjacency list? When is each preferred?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Time complexity of BFS and DFS? What data structures do they use?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define a directed acyclic graph (DAG). Give a real-world example.</p></div>
+      </div>
+      <div class="qs-panel" id="w10-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement BFS and DFS for an adjacency list graph. Use BFS to find the shortest path (edge count) between two nodes in an unweighted graph.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement topological sort using Kahn's algorithm. What happens if the algorithm finishes before processing all nodes?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Use DFS to detect a cycle in a directed graph. Explain the three-color (white/gray/black) scheme.</p></div>
+      </div>
+      <div class="qs-panel" id="w10-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Describe Tarjan's SCC algorithm. What is its time complexity? Apply it to a self-constructed 6-node graph and identify the SCCs.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove that a graph is bipartite if and only if it contains no odd-length cycle. Describe an O(V+E) BFS-based bipartiteness test.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 11 -->
+    <div class="week-block" id="w11">
+      <div class="week-header"><span class="wnum">Week 11</span><h2>Graph Algorithms</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w11','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w11','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w11','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w11-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Dijkstra's algorithm used for? Time complexity with a binary heap?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does Floyd-Warshall compute and what is its time complexity?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the max-flow min-cut theorem?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Can Dijkstra's algorithm handle negative edge weights? Why or why not?</p></div>
+      </div>
+      <div class="qs-panel" id="w11-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Dijkstra's algorithm with a priority queue. Apply to a 5-node weighted graph. Trace the priority queue and distance table at each step.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Floyd-Warshall. Show how to detect negative cycles using the diagonal. Run it on a 4-node graph with one negative edge.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Ford-Fulkerson (Edmonds-Karp). Apply to a 4-node flow network. Identify the min-cut in the final residual graph.</p></div>
+      </div>
+      <div class="qs-panel" id="w11-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove the max-flow min-cut theorem. Your proof must clearly define s-t cuts and show max flow equals min cut capacity.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Compare Bellman-Ford and Floyd-Warshall for graphs with possible negative edges (no negative cycles). Which is preferred for which problem? State both complexities.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design an O(V+E) algorithm to find all bridges in an undirected graph. Explain how DFS discovery and low values are used.</p></div>
+      </div>
+    </div>
+
+    <!-- WEEK 12 -->
+    <div class="week-block" id="w12">
+      <div class="week-header"><span class="wnum">Week 12</span><h2>Parallel and Randomized Algorithms</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'w12','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'w12','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'w12','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="w12-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does Amdahl's law state? If 80% of a program can be parallelized, what is the theoretical maximum speedup?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Rabin-Karp string matching? What is its average-case time complexity and what causes the worst case?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a Las Vegas algorithm? How does it differ from a Monte Carlo algorithm?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Why is TSP classified as NP-hard? What does this mean practically for solving it?</p></div>
+      </div>
+      <div class="qs-panel" id="w12-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement Rabin-Karp string search with a rolling hash. Demonstrate on text <code>"abcabd"</code> and pattern <code>"abd"</code>. Handle spurious hits and explain O(1) hash update.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Implement backtracking to solve N-Queens. How many solutions exist for N=8? Estimate the pruning ratio versus brute force.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the nearest-neighbor heuristic for TSP. Is it guaranteed optimal? Give a simple 4-city counterexample where it fails.</p></div>
+      </div>
+      <div class="qs-panel" id="w12-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Analyze Randomized QuickSort. Show that the expected number of comparisons is O(n log n) using indicator random variables.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Describe the parallel prefix sum algorithm for n elements and p processors. What are the work and span complexities? When does the parallel version outperform the sequential one?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a 2-approximation algorithm for metric TSP using minimum spanning trees. Prove the approximation ratio.</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTier(btn, week, tier) {
+  const tabs = btn.parentElement.querySelectorAll('.tier-tab');
+  tabs.forEach(t => { t.className = 'tier-tab'; });
+  btn.classList.add(tier === 'e' ? 'active-e' : tier === 'm' ? 'active-m' : 'active-h');
+  ['e','m','h'].forEach(t => {
+    const p = document.getElementById(week + '-' + t);
+    if (p) p.classList.remove('shown');
+  });
+  const target = document.getElementById(week + '-' + tier);
+  if (target) target.classList.add('shown');
+}
+</script>
+</body>
+</html>

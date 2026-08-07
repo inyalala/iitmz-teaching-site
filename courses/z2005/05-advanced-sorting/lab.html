@@ -124,6 +124,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Building on Week 6 Lecture 4’s leaderboard case study, implement a <code>Leaderboard</code> class backed by counting sort (for bulk load, scores 0-10,000) plus a plain Python <code>list</code> kept re-sorted after every update (a deliberately naive placeholder for the “maintained structure” Weeks 7-8 will properly implement). Instrument it to count total comparisons across 1,000 simulated score updates, and write two to three sentences on what a properly maintained tree or heap structure would save, quantitatively, over this placeholder.</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Implement a three-way partitioning ("Dutch national flag") quicksort variant that groups elements into "less than pivot", "equal to pivot", and "greater than pivot" in a single partition pass, then recurses only on the less-than and greater-than sections. Benchmark it against your ordinary Lomuto quicksort from Part B on an array of 10,000 integers where every value is one of only 5 distinct numbers (heavy duplicates), and report both timings.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>

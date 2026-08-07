@@ -122,6 +122,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="mtech-addition">MTech addition</h2>
 <p>Implement <code>fractional_knapsack</code> exactly as in Lecture 4, and confirm it achieves total value 240 on the lecture’s worked example (weights=[10,20,30], values=[60,100,120], capacity=50). Then implement brute-force 0/1 knapsack for the same instance and confirm it achieves only 220 — write two to three sentences explaining, in your own words, why the 0/1 constraint specifically breaks the continuous exchange argument that makes the fractional version’s greedy strategy correct.</p>
 </section>
+<section id="on-your-own-optional-ungraded" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own-optional-ungraded">On Your Own (Optional, Ungraded)</h2>
+<p><strong>This part is optional and ungraded.</strong> It is not submitted, not part of the autograder, and not assessed in any way &mdash; it exists purely as extra practice if you want to go further with this week&rsquo;s material after the graded lab tasks are done. There is no deadline attached to it.</p>
+<p>Implement <code>job_sequencing(jobs)</code>, where each job has a deadline and a profit, and you must choose a schedule (each job takes one time unit, at most one job per unit, no job scheduled after its deadline) that maximizes total profit, using a greedy strategy (sort by profit descending, place each job in the latest available slot at or before its deadline). Test on jobs <code>[(deadline=2, profit=100), (deadline=1, profit=19), (deadline=2, profit=27), (deadline=1, profit=25), (deadline=3, profit=15)]</code> and report which jobs are scheduled and the total profit.</p>
+</section>
 <section id="submitting" class="level2">
 <h2 class="anchored" data-anchor-id="submitting">Submitting</h2>
 <p>Push to your assignment repository before the lab session ends. The public tests run automatically; check that they pass before you leave.</p>
