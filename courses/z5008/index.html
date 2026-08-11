@@ -34,7 +34,7 @@
   .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
   .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
   .topbar a:hover{color:var(--gold-dark);}
-  .content{max-width:820px;margin:0 auto;padding:40px 40px 90px;}
+  .content{padding:40px 40px 90px;}
   .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
   .content > p.lede{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:36px;}
   section{margin-bottom:42px;scroll-margin-top:24px;}
@@ -78,12 +78,7 @@
   table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
   table.materials td{padding:10px;border-bottom:1px solid #f5f5f5;vertical-align:top;}
   table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
-  table.materials td.phase{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding:10px 8px;}
   table.materials td.topic{color:var(--ink);}
-  table.materials td.tools{color:var(--muted);font-size:.82rem;}
-  .phase-found{color:#800000;background:rgba(128,0,0,.06);}
-  .phase-stream{color:#0064B4;background:rgba(0,100,180,.06);}
-  .phase-ml{color:#008C46;background:rgba(0,140,70,.06);}
   table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
   table.materials td.link a:hover{text-decoration:underline;}
   .pending{color:var(--muted);font-style:italic;}
@@ -125,18 +120,10 @@
   <div class="content">
     <section id="overview">
       <h1>Big Data Lab</h1>
-      <p class="lede">A hands-on laboratory course covering the full modern big data engineering stack. Students build end-to-end pipelines using Apache Spark, Delta Lake, Apache Iceberg, Kafka, and MLflow, progressing from lakehouse foundations through real-time streaming to distributed machine learning and MLOps. Every session is a two-hour-forty-minute lab with working code as the deliverable. Even Semester 2026.</p>
+      <p class="lede">A hands-on laboratory course covering the full modern big data engineering stack. Students build end-to-end pipelines using Apache Spark, Delta Lake, Apache Iceberg, Kafka, and MLflow, progressing from lakehouse foundations through real-time streaming to distributed machine learning and MLOps. Every session is a two-hour-forty-minute lab with working code as the deliverable. Even Semester, March 2026 &ndash; July 2026.</p>
       <div class="grid2">
         <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Term</p><p style="margin:0;font-weight:600;color:var(--navy)">Even Semester, March 2026 &ndash; July 2026</p></div>
-        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Credits</p><p style="margin:0;font-weight:600;color:var(--navy)">MTech Core &middot; Monday 2:00&ndash;4:40 PM</p></div>
-      </div>
-      <div class="card" style="margin-top:16px;">
-        <p style="margin:0 0 6px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Three Phases</p>
-        <p style="margin:0;font-size:.88rem;color:var(--ink)">
-          <strong style="color:#800000;">Foundations</strong> (W1&ndash;7) &mdash; Docker, PySpark 3.5, Delta Lake, Apache Iceberg, Airflow, performance tuning.&ensp;
-          <strong style="color:#0064B4;">Streaming</strong> (W9&ndash;10) &mdash; Kafka, Redpanda, Spark Structured Streaming, stateful processing.&ensp;
-          <strong style="color:#008C46;">ML &amp; MLOps</strong> (W11&ndash;15) &mdash; Grafana, Streamlit, Spark MLlib, Ray, MLflow, BentoML, Prometheus.
-        </p>
+        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Schedule</p><p style="margin:0;font-weight:600;color:var(--navy)">MTech Core &middot; Monday, 2:00 PM &ndash; 4:40 PM</p></div>
       </div>
     </section>
 
@@ -151,7 +138,7 @@
             <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a>
           </div>
         </div>
-        <div class="meta-row">Office: Door 105, Room F1, Engineering Building</div>
+        <div class="meta-row">Office: Door 105, Room F1</div>
         <div class="meta-row">Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
       </div>
     </section>
@@ -177,7 +164,7 @@
         <li><span class="num">5</span> Build real-time streaming pipelines with Apache Kafka and Spark Structured Streaming, implementing watermarks, window aggregations, and exactly-once semantics.</li>
         <li><span class="num">6</span> Create live observability dashboards with Grafana and Prometheus, and deploy interactive data applications with Streamlit.</li>
         <li><span class="num">7</span> Train and tune distributed ML models with Spark MLlib and Ray, tracking experiments and registering models with MLflow.</li>
-        <li><span class="num">8</span> Package and deploy ML models as production REST APIs using BentoML and Docker, with Prometheus monitoring and OpenLineage data lineage.</li>
+        <li><span class="num">8</span> Package and deploy ML models as production REST APIs using BentoML and Docker, with monitoring and data lineage via OpenLineage.</li>
       </ol>
     </section>
 
@@ -185,118 +172,104 @@
       <h2>Materials</h2>
       <div class="card">
         <table class="materials">
-          <tr><th>Lab</th><th>Phase</th><th>Topic</th><th>Key Tools</th></tr>
+          <tr><th>Lab</th><th>Topic</th><th>Slides</th></tr>
           <tr>
-            <td class="wk">1</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Course Orientation &amp; Big Data Landscape 2026 &mdash; environment setup, first PySpark job, Delta Lake write, Spark UI exploration</td>
-            <td class="tools">Docker, PySpark 3.5, Delta Lake, MinIO</td>
+            <td class="wk">Lab 1</td>
+            <td class="topic">Course Orientation and Big Data Landscape 2026: Docker setup, first PySpark job, Delta Lake write, Spark UI exploration</td>
+            <td class="link"><a href="slides/lab01_lab01_course_overview.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">2</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Lakehouse Architecture &amp; Delta Lake Foundations &mdash; Delta tables, ACID operations, time travel, MERGE/UPSERT patterns</td>
-            <td class="tools">Delta Lake, MinIO, PySpark</td>
+            <td class="wk">Lab 2</td>
+            <td class="topic">Lakehouse Architecture and Delta Lake Foundations: ACID operations, time travel, MERGE/UPSERT patterns</td>
+            <td class="link"><a href="slides/lab02_lab02_lakehouse.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">3</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Apache Iceberg &amp; Data Governance &mdash; Iceberg table creation, schema evolution, partition evolution, catalog operations</td>
-            <td class="tools">Apache Iceberg, PySpark, Nessie Catalog</td>
+            <td class="wk">Lab 3</td>
+            <td class="topic">Apache Iceberg and Data Governance: table creation, schema evolution, partition evolution, Nessie Catalog</td>
+            <td class="link"><a href="slides/lab03_lab03_delta_iceberg.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">4</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Apache Spark 3.5+ Foundations &amp; DataFrame API &mdash; DataFrame operations, reading CSV/JSON/Parquet, transformations and actions</td>
-            <td class="tools">PySpark, Spark SQL, Spark UI</td>
+            <td class="wk">Lab 4</td>
+            <td class="topic">Apache Spark 3.5 Foundations and DataFrame API: reading CSV/JSON/Parquet, transformations and actions</td>
+            <td class="link"><a href="slides/lab04_lab04_spark_foundations.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">5</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Spark SQL, Joins &amp; Window Functions &mdash; complex SQL queries, all join types, window functions on time-series data</td>
-            <td class="tools">PySpark SQL, JupyterLab</td>
+            <td class="wk">Lab 5</td>
+            <td class="topic">Spark SQL, Joins and Window Functions: complex SQL queries, all join types, window functions on time-series data</td>
+            <td class="link"><a href="slides/lab05_lab05_spark_sql_tuning.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">6</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Spark Performance Tuning &amp; Adaptive Query Execution &mdash; profile slow queries, fix data skew, tune partitioning, benchmark AQE</td>
-            <td class="tools">Spark UI, AQE, PySpark</td>
+            <td class="wk">Lab 6</td>
+            <td class="topic">Spark Performance Tuning and Adaptive Query Execution: profile slow queries, fix data skew, benchmark AQE</td>
+            <td class="link"><a href="slides/lab06_lab06_airflow.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">7</td>
-            <td class="phase phase-found">Foundations</td>
-            <td class="topic">Data Orchestration: Apache Airflow &amp; Dagster &mdash; build Airflow DAGs, schedule batch Spark jobs, build a Dagster pipeline</td>
-            <td class="tools">Airflow 2.9, Dagster, Python</td>
+            <td class="wk">Lab 7</td>
+            <td class="topic">Data Orchestration: Apache Airflow and Dagster: build Airflow DAGs, schedule batch Spark jobs, Dagster pipelines</td>
+            <td class="link"><a href="slides/lab07_lab07_kafka_streaming.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">9</td>
-            <td class="phase phase-stream">Streaming</td>
-            <td class="topic">Real-Time Streaming: Apache Kafka &amp; Redpanda &mdash; produce/consume messages, create topics, stream data into Delta Lake</td>
-            <td class="tools">Kafka 3.7, kafka-python, PySpark</td>
+            <td class="wk">Lab 9</td>
+            <td class="topic">Real-Time Streaming with Apache Kafka and Redpanda: produce/consume messages, stream data into Delta Lake</td>
+            <td class="link"><a href="slides/lab08_lab08_structured_streaming.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">10</td>
-            <td class="phase phase-stream">Streaming</td>
-            <td class="topic">Spark Structured Streaming &amp; Stateful Processing &mdash; streaming pipeline, watermarks, window aggregations, exactly-once semantics</td>
-            <td class="tools">PySpark Structured Streaming, Kafka</td>
+            <td class="wk">Lab 10</td>
+            <td class="topic">Spark Structured Streaming and Stateful Processing: watermarks, window aggregations, exactly-once semantics</td>
+            <td class="link"><a href="slides/lab09_lab09_visualization.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">11</td>
-            <td class="phase phase-ml">ML &amp; MLOps</td>
-            <td class="topic">Big Data Visualisation: Grafana, Streamlit &amp; Superset &mdash; live Grafana dashboard, Streamlit data app, real-time metrics</td>
-            <td class="tools">Grafana, Streamlit, Prometheus</td>
+            <td class="wk">Lab 11</td>
+            <td class="topic">Big Data Visualisation: Grafana, Streamlit and Superset: live dashboards, Streamlit data apps, real-time metrics</td>
+            <td class="link"><a href="slides/lab10_lab10_distributed_ml.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">13</td>
-            <td class="phase phase-ml">ML &amp; MLOps</td>
-            <td class="topic">Distributed ML: Spark MLlib &amp; Ray &mdash; train classification model with MLlib, distributed hyperparameter tuning with Ray</td>
-            <td class="tools">Spark MLlib, Ray, PySpark</td>
+            <td class="wk">Lab 13</td>
+            <td class="topic">Distributed ML with Spark MLlib and Ray: train classification model, distributed hyperparameter tuning</td>
+            <td class="link"><a href="slides/lab11_lab11_mlops_mlflow.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">14</td>
-            <td class="phase phase-ml">ML &amp; MLOps</td>
-            <td class="topic">MLOps: MLflow Tracking &amp; Model Registry &mdash; log experiments, compare runs, register models, promote to staging/production</td>
-            <td class="tools">MLflow, PySpark, Python</td>
+            <td class="wk">Lab 14</td>
+            <td class="topic">MLOps with MLflow: log experiments, compare runs, register models, promote to staging and production</td>
+            <td class="link"><a href="slides/lab14_lab14_project_integration.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">15</td>
-            <td class="phase phase-ml">ML &amp; MLOps</td>
-            <td class="topic">Model Deployment: BentoML &amp; Docker APIs &mdash; package MLflow model, build REST API, test with curl/Postman</td>
-            <td class="tools">BentoML, Docker, FastAPI</td>
+            <td class="wk">Lab 15</td>
+            <td class="topic">Model Deployment with BentoML and Docker: package MLflow model, build and test REST API</td>
+            <td class="link"><a href="slides/lab15_lab15_presentations.pdf">Slides</a></td>
           </tr>
           <tr>
-            <td class="wk">15</td>
-            <td class="phase phase-ml">ML &amp; MLOps</td>
-            <td class="topic">Monitoring, Scaling &amp; Data Governance &mdash; Prometheus alerts, Grafana dashboards, data lineage with OpenLineage</td>
-            <td class="tools">Prometheus, Grafana, OpenLineage</td>
+            <td class="wk">Lab 15b</td>
+            <td class="topic">Monitoring, Scaling and Data Governance: Prometheus alerts, Grafana dashboards, OpenLineage data lineage</td>
+            <td class="link"><a href="slides/lab13_prometheus_vs_grafana.pdf">Slides</a></td>
           </tr>
         </table>
       </div>
-      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Lab handouts, notebooks, and slide PDFs are released the morning of each session via the course repository.</p>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Lab notebooks and handouts are released the morning of each session via the course repository.</p>
     </section>
 
     <section id="grading">
       <h2>Grading</h2>
       <div class="card">
         <div class="grade-bar">
-          <div class="row"><strong>Lab assignments (A1&ndash;A13)</strong><span class="pct">TBA%</span></div>
+          <div class="row"><strong>Lab assignments (A1&ndash;A13)</strong><span class="pct">TBA</span></div>
           <div class="track"><div class="fill" style="width:30%"></div></div>
-          <p class="note">One per session; submitted at the end of each lab. Graded on working code and written reflections.</p>
+          <p class="note">One per session, submitted at the end of each lab. Graded on working code and written reflection.</p>
         </div>
         <div class="grade-bar">
           <div class="row"><strong>Quiz 1</strong><span class="pct">15%</span></div>
           <div class="track"><div class="fill" style="width:15%"></div></div>
-          <p class="note">16 Apr 2026 &middot; Written theory quiz (90 min) &middot; Covers Foundations phase (W1&ndash;6).</p>
+          <p class="note">Apr 16, 2026 &middot; Written theory quiz (90 min) &middot; Covers Labs 1&ndash;6 (Foundations phase).</p>
         </div>
         <div class="grade-bar">
-          <div class="row"><strong>Course project</strong><span class="pct">TBA%</span></div>
+          <div class="row"><strong>Course project</strong><span class="pct">TBA</span></div>
           <div class="track"><div class="fill" style="width:30%"></div></div>
-          <p class="note">End-to-end big data pipeline using tools from all three phases &middot; Milestones: Mar&ndash;Jun &middot; Code freeze W15.</p>
+          <p class="note">End-to-end big data pipeline using tools from all three phases &middot; Code freeze at Lab 15.</p>
         </div>
         <div class="grade-bar">
-          <div class="row"><strong>End-semester examination</strong><span class="pct">TBA%</span></div>
+          <div class="row"><strong>End-semester examination</strong><span class="pct">TBA</span></div>
           <div class="track"><div class="fill" style="width:25%"></div></div>
-          <p class="note">Jun&ndash;Jul 2026 &middot; Theory and practical components.</p>
+          <p class="note">June &ndash; July 2026 &middot; Theory and practical components.</p>
         </div>
       </div>
     </section>
@@ -317,17 +290,8 @@
           <span class="role role-reference">Reference</span>
         </div>
         <div class="policy" style="border-top:1px solid #f5f5f5;padding-top:14px;margin-top:14px;">
-          <p class="label">Materials Repository</p>
-          <p class="text">All lab handouts, notebooks, and slides are version-controlled and public: <a href="https://github.com/inyalala/iitmz-teaching-site" target="_blank" rel="noopener" style="color:var(--gold-dark);font-weight:600;">github.com/inyalala/iitmz-teaching-site</a>.</p>
-        </div>
-        <div class="policy">
           <p class="label">Infrastructure</p>
-          <p class="text">
-            All labs run on a Docker-Compose environment provided at the start of the course. Students run everything locally or on the lab machines &mdash; no cloud account required.<br/>
-            <a href="https://spark.apache.org/docs/latest/" target="_blank" rel="noopener" style="color:var(--gold-dark);">Apache Spark Documentation</a> &middot;
-            <a href="https://docs.delta.io/latest/index.html" target="_blank" rel="noopener" style="color:var(--gold-dark);">Delta Lake Docs</a> &middot;
-            <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener" style="color:var(--gold-dark);">MLflow Docs</a>
-          </p>
+          <p class="text">All labs run on a Docker Compose environment provided at the start of the course. Students run everything locally or on lab machines; no cloud account required.</p>
         </div>
       </div>
     </section>
@@ -335,15 +299,14 @@
     <section id="policies">
       <h2>Policies</h2>
       <div class="card">
-        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance is mandatory at all lab sessions. Lab work is submitted before the session ends; you cannot replicate the hands-on practice outside the structured session.</p></div>
+        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance is mandatory at all lab sessions. Lab work is submitted before the session ends; the hands-on practice cannot be replicated outside the structured session.</p></div>
         <div class="policy"><p class="label">Late work</p><p class="text">Late work is not accepted. Deadlines are fixed and announced in advance; submit what you have by the deadline. No extensions.</p></div>
-        <div class="policy"><p class="label">Academic integrity</p><p class="text">Discussing approaches is encouraged; submitting another student's code is not. Every notebook you submit must reflect your own work, which you can explain and extend.</p></div>
-        <div class="policy"><p class="label">Use of AI tools</p><p class="text">AI assistants may be used to explain API behaviour and debug errors. Solutions generated by AI and submitted without understanding are a violation of academic integrity. Declare any material AI contribution in a notebook header cell.</p></div>
+        <div class="policy"><p class="label">Academic integrity</p><p class="text">Discussing approaches is encouraged; submitting another student's code is not. Every notebook you submit must reflect your own work, which you can explain and extend. Declare any material AI contribution in a notebook header cell.</p></div>
       </div>
     </section>
   </div>
 
-  <footer style="max-width:820px;margin:0 auto;padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
+  <footer style="padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
     &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#A8813A;">CC BY-NC-SA 4.0</a>.
     Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.

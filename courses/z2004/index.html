@@ -34,7 +34,7 @@
   .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
   .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
   .topbar a:hover{color:var(--gold-dark);}
-  .content{max-width:820px;margin:0 auto;padding:40px 40px 90px;}
+  .content{padding:40px 40px 90px;}
   .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
   .content > p.lede{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:36px;}
   section{margin-bottom:42px;scroll-margin-top:24px;}
@@ -78,7 +78,6 @@
   table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
   table.materials td{padding:10px;border-bottom:1px solid #f5f5f5;vertical-align:top;}
   table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
-  table.materials td.mod{font-weight:600;color:var(--navy2);font-size:.82rem;white-space:nowrap;}
   table.materials td.topic{color:var(--ink);}
   table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
   table.materials td.link a:hover{text-decoration:underline;}
@@ -121,14 +120,10 @@
   <div class="content">
     <section id="overview">
       <h1>Database Management Systems</h1>
-      <p class="lede">Databases are the backbone of every modern AI system. This course equips students with the complete database skill stack: from first principles of data modelling, through relational algebra and SQL mastery, to indexing, query optimisation, and the NoSQL and vector database paradigms that power today's AI pipelines. Even Semester 2026.</p>
+      <p class="lede">A theory-first introduction to database systems: data modeling with ER diagrams, the relational model, relational algebra, and SQL from foundations through advanced queries. The course continues with normalization, storage structures, indexing, transaction management, and modern data systems including NoSQL, vector databases, and RAG pipelines. Students complete a semester-long project building a database-backed application. Even Semester 2026.</p>
       <div class="grid2">
         <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Term</p><p style="margin:0;font-weight:600;color:var(--navy)">Even Semester, March 2026 &ndash; July 2026</p></div>
-        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Credits</p><p style="margin:0;font-weight:600;color:var(--navy)">10 (Core) &middot; Year 2, BS Data Science &amp; AI</p></div>
-      </div>
-      <div class="card" style="margin-top:16px;">
-        <p style="margin:0 0 6px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Database Platforms</p>
-        <p style="margin:0;font-size:.88rem;color:var(--ink)"><strong>SQL Server 2022 (T-SQL)</strong> &mdash; primary platform, Weeks 1&ndash;12 (enterprise standard, SSMS tooling). &nbsp;<strong>PostgreSQL 16</strong> &mdash; from Week 13 onwards (open-source, pgvector for AI/ML workloads).</p>
+        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Credits</p><p style="margin:0;font-weight:600;color:var(--navy)">10 (Core) &middot; Structure 3-1-0-0-6-10</p></div>
       </div>
     </section>
 
@@ -143,7 +138,7 @@
             <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a>
           </div>
         </div>
-        <div class="meta-row">Office: Door 105, Room F1, Engineering Building</div>
+        <div class="meta-row">Office: Door 105, Room F1</div>
         <div class="meta-row">Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
       </div>
     </section>
@@ -152,9 +147,9 @@
       <h2>Schedule</h2>
       <div class="card">
         <table class="sched">
-          <tr><th>Session</th><th>Frequency</th><th>Time / Room</th></tr>
-          <tr><td>Lecture</td><td>3 per week, 50 min</td><td>TBA</td></tr>
-          <tr><td>Tutorial</td><td>1 per week, 50 min</td><td>TBA</td></tr>
+          <tr><th>Session</th><th>Frequency</th><th>Details</th></tr>
+          <tr><td>Lecture</td><td>3 per week</td><td>50 min each</td></tr>
+          <tr><td>Tutorial</td><td>1 per week</td><td>50 min &middot; SQL problem sets and schema sketches</td></tr>
         </table>
       </div>
     </section>
@@ -163,16 +158,13 @@
       <h2>Learning Outcomes</h2>
       <p style="color:var(--muted);font-size:.88rem;margin-top:-8px;margin-bottom:16px;">On successful completion, a student will be able to:</p>
       <ol class="outcomes">
-        <li><span class="num">1</span> Design a complete ER diagram for a real-world domain, including strong and weak entities, all attribute types, cardinality ratios, participation constraints, ISA hierarchies, and aggregation.</li>
-        <li><span class="num">2</span> Formally define a relation using set theory; identify superkeys, candidate keys, and primary keys; apply integrity constraints; map any ER diagram to a relational schema using all eight mapping rules.</li>
-        <li><span class="num">3</span> Construct correct relational algebra expressions using all fundamental and derived operators; build expression trees; apply Tuple and Domain Relational Calculus.</li>
-        <li><span class="num">4</span> Write syntactically correct DDL and DML statements in both T-SQL and PostgreSQL; apply all constraint types; handle NULL values correctly.</li>
-        <li><span class="num">5</span> Write complex queries using aggregate functions, GROUP BY, HAVING, all six join types, scalar and correlated subqueries, and EXISTS/NOT EXISTS.</li>
-        <li><span class="num">6</span> Write CTEs including recursive CTEs; apply all window functions with PARTITION BY and frame specifications; create stored procedures and triggers.</li>
-        <li><span class="num">7</span> Compute attribute closures and canonical covers; identify all normal forms (1NF through BCNF and 4NF); decompose a schema and verify losslessness and dependency preservation.</li>
-        <li><span class="num">8</span> Describe the storage hierarchy and I/O cost model; trace B<sup>+</sup>-Tree operations; read EXPLAIN ANALYZE output and justify index design decisions.</li>
-        <li><span class="num">9</span> State and apply the ACID properties; determine conflict-serialisability using a precedence graph; apply Two-Phase Locking; describe ARIES-style log-based crash recovery.</li>
-        <li><span class="num">10</span> Apply the CAP theorem to classify NoSQL systems; generate and store text embeddings in a vector database (pgvector); design a complete RAG pipeline architecture.</li>
+        <li><span class="num">1</span> Design and refine entity-relationship diagrams for real-world data requirements, and convert ER schemas to normalized relational schemas.</li>
+        <li><span class="num">2</span> Write relational algebra expressions for queries involving selection, projection, join, set operations, and division.</li>
+        <li><span class="num">3</span> Compose correct and efficient SQL queries using joins, subqueries, aggregation, window functions, CTEs, and stored procedures in SQL Server and PostgreSQL.</li>
+        <li><span class="num">4</span> Apply functional dependency theory and normalization through BCNF and 4NF to eliminate redundancy and anomalies.</li>
+        <li><span class="num">5</span> Explain how databases store data on disk, and describe B-tree and hash-based index structures and their effect on query performance.</li>
+        <li><span class="num">6</span> Describe the ACID properties of transactions and explain concurrency control (2PL) and crash recovery mechanisms.</li>
+        <li><span class="num">7</span> Compare relational, document, key-value, and vector database paradigms, and implement a RAG pipeline over a vector database.</li>
       </ol>
     </section>
 
@@ -180,99 +172,99 @@
       <h2>Materials</h2>
       <div class="card">
         <table class="materials">
-          <tr><th>Weeks</th><th>Module</th><th>Topics</th><th>Slides</th></tr>
+          <tr><th>Module</th><th>Weeks</th><th>Topic</th><th>Slides</th></tr>
           <tr>
-            <td class="wk">1&ndash;2</td>
-            <td class="mod">M1</td>
-            <td class="topic">Foundations and Data Modelling &mdash; DBMS intro, ER model, weak entities, extended ER, ISA hierarchies</td>
-            <td class="link"><a href="https://github.com/inyalala/iitmz-teaching-site/tree/main/courses/z2004" target="_blank" rel="noopener">Lecture files</a></td>
+            <td class="wk">M1</td>
+            <td class="topic">1&ndash;2</td>
+            <td class="topic">Foundations and Data Modelling: DBMS intro, ER model, weak entities, extended ER</td>
+            <td class="link"><a href="lectures/L01.pdf">L01</a> &middot; <a href="lectures/L02.pdf">L02</a> &middot; <a href="lectures/L03.pdf">L03</a> &middot; <a href="lectures/L04.pdf">L04</a> &middot; <a href="lectures/L05.pdf">L05</a> &middot; <a href="lectures/L06.pdf">L06</a></td>
           </tr>
           <tr>
-            <td class="wk">3</td>
-            <td class="mod">M2</td>
-            <td class="topic">Relational Model &mdash; relations, schemas, keys, integrity constraints, ER-to-relational mapping</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M2</td>
+            <td class="topic">3</td>
+            <td class="topic">Relational Model: relations, schemas, keys, integrity constraints</td>
+            <td class="link"><a href="lectures/L07.pdf">L07</a> &middot; <a href="lectures/L08.pdf">L08</a> &middot; <a href="lectures/L09_ER_to_Relational_Mapping.pdf">L09</a></td>
           </tr>
           <tr>
-            <td class="wk">4&ndash;5</td>
-            <td class="mod">M3</td>
-            <td class="topic">Relational Algebra &mdash; &sigma;, &pi;, joins, set ops, division; expression trees; Tuple and Domain Relational Calculus</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M3</td>
+            <td class="topic">4&ndash;5</td>
+            <td class="topic">Relational Algebra: selection, projection, join, set operations, division</td>
+            <td class="link"><a href="lectures/L10_Relational_Algebra_I.pdf">L10</a> &middot; <a href="lectures/L11_Relational_Algebra_II.pdf">L11</a> &middot; <a href="lectures/L12_Relational_Algebra_III.pdf">L12</a> &middot; <a href="lectures/L13_Tuple_Relational_Calculus.pdf">L13</a> &middot; <a href="lectures/L14_Domain_Relational_Calculus.pdf">L14</a></td>
           </tr>
           <tr>
-            <td class="wk">6&ndash;7</td>
-            <td class="mod">M4</td>
-            <td class="topic">SQL Foundations &mdash; DDL, DML, SELECT, WHERE, ORDER BY, constraints, NULL handling (T-SQL and PostgreSQL)</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M4</td>
+            <td class="topic">6&ndash;7</td>
+            <td class="topic">SQL Foundations: DDL, DML, SELECT, WHERE, ORDER BY</td>
+            <td class="link"><a href="lectures/L15_SQL_DDL.pdf">L15</a> &middot; <a href="lectures/L16_SQL_Basic_SELECT.pdf">L16</a> &middot; <a href="lectures/L17_SQL_DML_Insert_Update_Delete.pdf">L17</a></td>
           </tr>
           <tr>
-            <td class="wk">8&ndash;9</td>
-            <td class="mod">M5</td>
-            <td class="topic">SQL Intermediate &mdash; aggregation, GROUP BY, HAVING, all six join types, scalar and correlated subqueries, EXISTS</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M5</td>
+            <td class="topic">8&ndash;9</td>
+            <td class="topic">SQL Intermediate: aggregation, GROUP BY, joins, subqueries</td>
+            <td class="link"><a href="lectures/L18_SQL_Aggregation.pdf">L18</a> &middot; <a href="lectures/L19.pdf">L19</a> &middot; <a href="lectures/L20.pdf">L20</a> &middot; <a href="lectures/L21.pdf">L21</a></td>
           </tr>
           <tr>
-            <td class="wk">10</td>
-            <td class="mod">M6</td>
-            <td class="topic">SQL Advanced &mdash; CTEs, recursive CTEs, window functions (ranking, offset, frames), stored procedures, triggers</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M6</td>
+            <td class="topic">10</td>
+            <td class="topic">SQL Advanced: CTEs, window functions, triggers, stored procedures</td>
+            <td class="link"><a href="lectures/L24_CTEs_Recursive_Queries.pdf">L24</a> &middot; <a href="lectures/L25_Window_Functions_I.pdf">L25</a> &middot; <a href="lectures/L26_Window_Functions_II.pdf">L26</a></td>
           </tr>
           <tr>
-            <td class="wk">11&ndash;12</td>
-            <td class="mod">M7</td>
-            <td class="topic">Normalisation and FD Theory &mdash; functional dependencies, Armstrong's axioms, 1NF, 2NF, 3NF, BCNF, 4NF, decomposition</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M7</td>
+            <td class="topic">11&ndash;12</td>
+            <td class="topic">Normalization and FD Theory: functional dependencies, Armstrong's axioms, 1NF through BCNF, 4NF</td>
+            <td class="link"><a href="lectures/L30_Functional_Dependencies.pdf">L30</a> &middot; <a href="lectures/L32_Normal_Forms_1NF_BCNF.pdf">L32</a> &middot; <a href="lectures/L33_4NF_5NF_Decomposition.pdf">L33</a></td>
           </tr>
           <tr>
-            <td class="wk">13</td>
-            <td class="mod">M8</td>
-            <td class="topic">Storage and Indexing &mdash; B<sup>+</sup>-Tree, hashing, heap files, buffer pool, clustered vs. unclustered, EXPLAIN ANALYZE</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M8</td>
+            <td class="topic">13</td>
+            <td class="topic">Storage and Indexing: B-tree, hashing, heap files, buffer pool</td>
+            <td class="link"><a href="lectures/L34.pdf">L34</a> &middot; <span class="pending">L35&ndash;L38 coming</span></td>
           </tr>
           <tr>
-            <td class="wk">14</td>
-            <td class="mod">M9</td>
-            <td class="topic">Query Processing and Transactions &mdash; query pipeline, ACID, conflict-serialisability, 2PL, deadlocks, ARIES recovery</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M9</td>
+            <td class="topic">14</td>
+            <td class="topic">Query Processing and Transactions: query pipeline, ACID, 2PL, recovery</td>
+            <td class="link"><a href="lectures/L28_Transactions_SQL.pdf">L28</a> &middot; <span class="pending">L39&ndash;L41 coming</span></td>
           </tr>
           <tr>
-            <td class="wk">15&ndash;17</td>
-            <td class="mod">M10</td>
-            <td class="topic">Modern and AI Data Systems &mdash; NoSQL paradigms (key-value, document, column, graph), vector databases, pgvector, RAG pipeline architecture</td>
-            <td class="link"><span class="pending">Lecture files</span></td>
+            <td class="wk">M10</td>
+            <td class="topic">15&ndash;17</td>
+            <td class="topic">Modern and AI Data Systems: NoSQL, vector databases, embeddings, RAG pipelines, cloud databases</td>
+            <td class="link"><a href="lectures/L45_Cloud_Databases.pdf">L45</a> &middot; <span class="pending">L42&ndash;L44 coming</span></td>
           </tr>
         </table>
       </div>
-      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Lecture slides are Beamer PDFs; files go live as they are released each week.</p>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Additional reference documents: <a href="lectures/schedule.pdf" style="color:var(--gold-dark);">Course Schedule</a> &middot; <a href="lectures/sql-reference.pdf" style="color:var(--gold-dark);">SQL Reference</a> &middot; <a href="lectures/project-guidelines.pdf" style="color:var(--gold-dark);">Project Guidelines</a></p>
     </section>
 
     <section id="grading">
       <h2>Grading</h2>
       <div class="card">
         <div class="grade-bar">
-          <div class="row"><strong>In-class assignments (ICA)</strong><span class="pct">10%</span></div>
+          <div class="row"><strong>Assignments (ICA)</strong><span class="pct">10%</span></div>
           <div class="track"><div class="fill" style="width:10%"></div></div>
-          <p class="note">Fortnightly, during lecture hours. Graded on completion and demonstrated reasoning.</p>
+          <p class="note">Fortnightly SQL puzzles, schema sketches, think-pair-share.</p>
         </div>
         <div class="grade-bar">
           <div class="row"><strong>Quiz 1</strong><span class="pct">15%</span></div>
           <div class="track"><div class="fill" style="width:15%"></div></div>
-          <p class="note">16&ndash;17 Apr 2026 &middot; Covers M1&ndash;M3 (ER Model, Relational Model, Relational Algebra) &middot; 60 min, closed book.</p>
+          <p class="note">Apr 16&ndash;17 &middot; Covers M1 (ER), M2 (Relational Model), M3 (Relational Algebra).</p>
         </div>
         <div class="grade-bar">
-          <div class="row"><strong>Quiz 2</strong><span class="pct">15%</span></div>
-          <div class="track"><div class="fill" style="width:15%"></div></div>
-          <p class="note">28&ndash;29 May 2026 &middot; Covers M4&ndash;M6 (SQL Foundations, Intermediate, Advanced) &middot; 75 min, one A4 cheat sheet.</p>
-        </div>
-        <div class="grade-bar">
-          <div class="row"><strong>Semester project</strong><span class="pct">20%</span></div>
+          <div class="row"><strong>Quiz 2</strong><span class="pct">20%</span></div>
           <div class="track"><div class="fill" style="width:20%"></div></div>
-          <p class="note">RAG Pipeline or Recommendation Engine &middot; Groups of 3 &middot; 5 milestones across March&ndash;June.</p>
+          <p class="note">May 28&ndash;29 &middot; Covers M4&ndash;M6 (SQL Basics through Advanced).</p>
         </div>
         <div class="grade-bar">
-          <div class="row"><strong>End-semester examination</strong><span class="pct">40%</span></div>
-          <div class="track"><div class="fill" style="width:40%"></div></div>
-          <p class="note">29 Jun &ndash; 3 Jul 2026 &middot; 3-hour sitting &middot; All 10 modules &middot; MCQ + ER/RA + SQL + Modern Systems.</p>
+          <div class="row"><strong>Semester Project</strong><span class="pct">20%</span></div>
+          <div class="track"><div class="fill" style="width:20%"></div></div>
+          <p class="note">RAG Pipeline or Recommendation Engine &middot; Milestones throughout the semester &middot; Final submission Jun 30, 2026.</p>
+        </div>
+        <div class="grade-bar">
+          <div class="row"><strong>End-semester examination</strong><span class="pct">35%</span></div>
+          <div class="track"><div class="fill" style="width:35%"></div></div>
+          <p class="note">Jun 29 &ndash; Jul 3, 2026 &middot; All modules with emphasis on M7&ndash;M10.</p>
         </div>
       </div>
     </section>
@@ -281,11 +273,11 @@
       <h2>Resources</h2>
       <div class="card">
         <div class="textbook">
-          <div><p class="title">Database System Concepts (7th ed.)</p><p class="authors">Silberschatz, Korth, and Sudarshan &middot; McGraw-Hill, 2019</p></div>
+          <div><p class="title">Database System Concepts (7th ed.)</p><p class="authors">Abraham Silberschatz, Henry Korth, S. Sudarshan &middot; McGraw-Hill, 2019</p></div>
           <span class="role role-required">Required</span>
         </div>
         <div class="textbook">
-          <div><p class="title">Fundamentals of Database Systems (7th ed.)</p><p class="authors">Elmasri and Navathe &middot; Pearson, 2015</p></div>
+          <div><p class="title">Fundamentals of Database Systems (7th ed.)</p><p class="authors">Ramez Elmasri, Shamkant Navathe &middot; Pearson, 2015</p></div>
           <span class="role role-reference">Reference</span>
         </div>
         <div class="textbook">
@@ -293,24 +285,8 @@
           <span class="role role-reference">Reference</span>
         </div>
         <div class="policy" style="border-top:1px solid #f5f5f5;padding-top:14px;margin-top:14px;">
-          <p class="label">Materials Repository</p>
-          <p class="text">All lecture slides, SQL scripts, and course documents are version-controlled and public: <a href="https://github.com/inyalala/iitmz-teaching-site" target="_blank" rel="noopener" style="color:var(--gold-dark);font-weight:600;">github.com/inyalala/iitmz-teaching-site</a>.</p>
-        </div>
-        <div class="policy">
-          <p class="label">SQL Practice</p>
-          <p class="text">
-            <a href="https://sqlzoo.net/" target="_blank" rel="noopener" style="color:var(--gold-dark);">SQLZoo</a> &mdash; interactive SQL exercises graded in-browser.<br/>
-            <a href="https://leetcode.com/problemset/database/" target="_blank" rel="noopener" style="color:var(--gold-dark);">LeetCode Database</a> &mdash; SQL puzzle problems from easy to hard.<br/>
-            <a href="https://pgexercises.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);">PostgreSQL Exercises</a> &mdash; PostgreSQL-specific practice for the second half of the course.
-          </p>
-        </div>
-        <div class="policy">
-          <p class="label">Tools</p>
-          <p class="text">
-            <a href="https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms" target="_blank" rel="noopener" style="color:var(--gold-dark);">SQL Server Management Studio (SSMS)</a> &mdash; primary GUI for SQL Server.<br/>
-            <a href="https://www.pgadmin.org/" target="_blank" rel="noopener" style="color:var(--gold-dark);">pgAdmin 4</a> &mdash; GUI for PostgreSQL in the second half.<br/>
-            <a href="https://dbdiagram.io/" target="_blank" rel="noopener" style="color:var(--gold-dark);">dbdiagram.io</a> &mdash; browser-based ER diagram tool for assignments and the project.
-          </p>
+          <p class="label">Database Software</p>
+          <p class="text">Primary: SQL Server 2022 (Windows) or Azure SQL Edge (Docker). Secondary: PostgreSQL 16. Both are free for students.</p>
         </div>
       </div>
     </section>
@@ -318,15 +294,14 @@
     <section id="policies">
       <h2>Policies</h2>
       <div class="card">
-        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance is expected at all lectures and tutorials. SQL practice is a core part of the learning — sessions cannot be replicated by reading alone.</p></div>
         <div class="policy"><p class="label">Late work</p><p class="text">Late work is not accepted. Deadlines are fixed and announced in advance; submit what you have by the deadline. No extensions.</p></div>
-        <div class="policy"><p class="label">Academic integrity</p><p class="text">Discussing ideas is encouraged; sharing or copying SQL or project code is not. Every query you submit must be one you can explain and rewrite from scratch.</p></div>
-        <div class="policy"><p class="label">Use of AI tools</p><p class="text">AI coding assistants may be used to explain SQL behaviour and debug errors, not to generate solutions you submit. Examinations assume you can write queries independently.</p></div>
+        <div class="policy"><p class="label">Academic integrity</p><p class="text">All SQL you submit must reflect your own understanding. Copying another student's queries or allowing your work to be copied is a violation. Using AI to generate SQL and submitting it without understanding is a violation; if you use AI as a debugging aid, declare it.</p></div>
+        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance at lectures and tutorials is expected. Tutorials include in-class activities that cannot be made up.</p></div>
       </div>
     </section>
   </div>
 
-  <footer style="max-width:820px;margin:0 auto;padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
+  <footer style="padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
     &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#A8813A;">CC BY-NC-SA 4.0</a>.
     Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.
