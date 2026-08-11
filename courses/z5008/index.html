@@ -4,30 +4,351 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="color-scheme" content="light"/>
-<meta name="description" content="Z5008 Big Data Lab — IIT Madras Zanzibar. Course materials."/>
+<meta name="description" content="Z5008 Big Data Lab (MTech) — IIT Madras Zanzibar. Instructor, schedule, resources, grading, and lab materials."/>
 <title>Z5008 Big Data Lab | Dr. Innocent Nyalala</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-  :root{--navy:#0a1628;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;}
+  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;}
+  *{box-sizing:border-box;}
   html{background:#fff;}
-  body{font-family:'Inter',sans-serif;max-width:720px;margin:0 auto;padding:50px 20px;color:var(--ink);background:#fff;}
-  a.back{color:var(--muted);font-size:.85rem;text-decoration:none;}
-  a.back:hover{color:var(--gold-dark);}
-  h1{font-family:'Playfair Display',serif;color:var(--navy);border-bottom:3px solid var(--gold);padding-bottom:.3em;margin-top:20px;}
-  p.lede{color:var(--muted);font-size:1rem;line-height:1.7;}
-  .notice{background:#f8f6f2;border-left:4px solid var(--gold-dark);padding:1em 1.2em;border-radius:6px;margin-top:2em;font-size:.92rem;color:var(--ink);}
-  .notice strong{color:var(--navy);}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+  #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  #sidebar .badge{width:34px;height:34px;border-radius:50%;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+  #sidebar .brand-text p{margin:0;line-height:1.25;}
+  #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
+  #sidebar a.back:hover{color:var(--gold);}
+  #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+  #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
+  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.85rem;padding:7px 10px;border-radius:6px;transition:background .15s,color .15s;}
+  #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+  #sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
+  #sidebar .switch{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);}
+  #sidebar .switch p{font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;margin:0 0 8px;}
+  #sidebar .switch a{display:block;color:#94a3b8;font-size:.8rem;text-decoration:none;padding:5px 0;}
+  #sidebar .switch a:hover{color:var(--gold);}
+  #main{flex:1;min-width:0;}
+  .topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
+  .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
+  .topbar a:hover{color:var(--gold-dark);}
+  .content{max-width:820px;margin:0 auto;padding:40px 40px 90px;}
+  .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
+  .content > p.lede{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:36px;}
+  section{margin-bottom:42px;scroll-margin-top:24px;}
+  section h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.2rem;border-bottom:2px solid var(--gold);padding-bottom:.4em;margin-bottom:18px;}
+  .card{background:#fff;border:1px solid #eee;border-radius:10px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.03);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){.grid2{grid-template-columns:1fr;}#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}}
+  .person{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
+  .person:last-child{margin-bottom:0;}
+  .person .avatar{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
+  .person p.name{margin:0;font-weight:700;color:var(--navy);font-size:.95rem;}
+  .person p.role{margin:0;color:var(--muted);font-size:.8rem;}
+  .person a{color:var(--gold-dark);font-size:.82rem;text-decoration:none;}
+  .person a:hover{text-decoration:underline;}
+  .meta-row{font-size:.85rem;color:var(--ink);margin-top:12px;padding-top:12px;border-top:1px solid #f1f1f1;}
+  table.sched{width:100%;border-collapse:collapse;font-size:.88rem;}
+  table.sched th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
+  table.sched td{padding:9px 10px;border-bottom:1px solid #f5f5f5;}
+  ol.outcomes{margin:0;padding-left:0;list-style:none;}
+  ol.outcomes li{display:flex;gap:12px;margin-bottom:12px;font-size:.92rem;line-height:1.55;}
+  ol.outcomes .num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(197,160,89,.15);color:var(--gold-dark);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .grade-bar{margin-bottom:14px;}
+  .grade-bar .row{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:5px;}
+  .grade-bar .row strong{color:var(--navy);}
+  .grade-bar .row .pct{color:var(--gold-dark);font-weight:700;}
+  .grade-bar .track{height:6px;background:#f1f1f1;border-radius:99px;overflow:hidden;}
+  .grade-bar .fill{height:100%;background:var(--gold);border-radius:99px;}
+  .grade-bar p.note{margin:6px 0 0;color:var(--muted);font-size:.78rem;}
+  .textbook{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f5f5f5;}
+  .textbook:last-child{border-bottom:none;}
+  .textbook p.title{margin:0;font-weight:700;color:var(--navy);font-size:.92rem;}
+  .textbook p.authors{margin:2px 0 0;color:var(--muted);font-size:.82rem;}
+  .textbook span.role{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:auto;flex-shrink:0;height:fit-content;}
+  .role-required{background:rgba(197,160,89,.15);color:var(--gold-dark);}
+  .role-reference{background:#f1f5f9;color:#64748b;}
+  .policy{padding:14px 0;border-bottom:1px solid #f5f5f5;}
+  .policy:last-child{border-bottom:none;}
+  .policy p.label{margin:0 0 4px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight:700;}
+  .policy p.text{margin:0;font-size:.88rem;line-height:1.6;color:var(--ink);}
+  table.materials{width:100%;border-collapse:collapse;font-size:.88rem;}
+  table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
+  table.materials td{padding:10px;border-bottom:1px solid #f5f5f5;vertical-align:top;}
+  table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
+  table.materials td.phase{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding:10px 8px;}
+  table.materials td.topic{color:var(--ink);}
+  table.materials td.tools{color:var(--muted);font-size:.82rem;}
+  .phase-found{color:#800000;background:rgba(128,0,0,.06);}
+  .phase-stream{color:#0064B4;background:rgba(0,100,180,.06);}
+  .phase-ml{color:#008C46;background:rgba(0,140,70,.06);}
+  table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
+  table.materials td.link a:hover{text-decoration:underline;}
+  .pending{color:var(--muted);font-style:italic;}
 </style>
 </head>
 <body>
-<p><a class="back" href="../../index.html">&larr; All courses</a></p>
-<h1>Z5008 &middot; Big Data Lab</h1>
-<p class="lede">Hands-on distributed data processing with Hadoop and Spark, covering
-distributed storage, batch and streaming pipelines, and cluster performance tuning.</p>
-<div class="notice">
-  <strong>Materials not yet published.</strong> Lab exercises, notebooks, and
-  reference materials for this course will be added here as they are prepared,
-  following the same format as the Programming and Data Structures materials.
+
+<aside id="sidebar">
+  <div class="brand">
+    <div class="badge">IIT</div>
+    <div class="brand-text">
+      <p class="school">IIT Madras</p>
+      <p class="campus">Zanzibar Campus</p>
+    </div>
+  </div>
+  <a class="back" href="../../index.html">&larr; All courses</a>
+  <nav>
+    <p class="group">Z5008 &middot; MTech</p>
+    <a href="#overview" class="active">Overview</a>
+    <a href="#instructor">Instructor</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#outcomes">Learning Outcomes</a>
+    <a href="#materials">Materials</a>
+    <a href="#grading">Grading</a>
+    <a href="#resources">Resources</a>
+    <a href="#policies">Policies</a>
+  </nav>
+</aside>
+
+<div id="main">
+  <div class="topbar">
+    <div class="codes"><strong style="color:var(--navy)">Z5008</strong><span>MTech</span></div>
+    <div>
+      <a href="https://inyalala.github.io/">Main site</a>
+      <a href="https://inyalala.github.io/courses/index.html">All courses</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <section id="overview">
+      <h1>Big Data Lab</h1>
+      <p class="lede">A hands-on laboratory course covering the full modern big data engineering stack. Students build end-to-end pipelines using Apache Spark, Delta Lake, Apache Iceberg, Kafka, and MLflow, progressing from lakehouse foundations through real-time streaming to distributed machine learning and MLOps. Every session is a two-hour-forty-minute lab with working code as the deliverable. Even Semester 2026.</p>
+      <div class="grid2">
+        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Term</p><p style="margin:0;font-weight:600;color:var(--navy)">Even Semester, March 2026 &ndash; July 2026</p></div>
+        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Credits</p><p style="margin:0;font-weight:600;color:var(--navy)">MTech Core &middot; Monday 2:00&ndash;4:40 PM</p></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <p style="margin:0 0 6px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Three Phases</p>
+        <p style="margin:0;font-size:.88rem;color:var(--ink)">
+          <strong style="color:#800000;">Foundations</strong> (W1&ndash;7) &mdash; Docker, PySpark 3.5, Delta Lake, Apache Iceberg, Airflow, performance tuning.&ensp;
+          <strong style="color:#0064B4;">Streaming</strong> (W9&ndash;10) &mdash; Kafka, Redpanda, Spark Structured Streaming, stateful processing.&ensp;
+          <strong style="color:#008C46;">ML &amp; MLOps</strong> (W11&ndash;15) &mdash; Grafana, Streamlit, Spark MLlib, Ray, MLflow, BentoML, Prometheus.
+        </p>
+      </div>
+    </section>
+
+    <section id="instructor">
+      <h2>Instructor</h2>
+      <div class="card">
+        <div class="person">
+          <div class="avatar">IN</div>
+          <div>
+            <p class="name">Dr. Innocent Nyalala</p>
+            <p class="role">Assistant Professor of Data Science and AI &middot; Head, SAAIL Lab</p>
+            <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a>
+          </div>
+        </div>
+        <div class="meta-row">Office: Door 105, Room F1, Engineering Building</div>
+        <div class="meta-row">Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <div class="card">
+        <table class="sched">
+          <tr><th>Session</th><th>Day &amp; Time</th><th>Duration</th></tr>
+          <tr><td>Lab</td><td>Monday, 2:00 PM &ndash; 4:40 PM</td><td>2 hr 40 min &middot; 15 sessions</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="outcomes">
+      <h2>Learning Outcomes</h2>
+      <p style="color:var(--muted);font-size:.88rem;margin-top:-8px;margin-bottom:16px;">On successful completion, a student will be able to:</p>
+      <ol class="outcomes">
+        <li><span class="num">1</span> Deploy a Docker-based big data environment and run end-to-end PySpark jobs, explaining the Spark execution model, DAG stages, and Spark UI metrics.</li>
+        <li><span class="num">2</span> Build and manage Delta Lake and Apache Iceberg tables with ACID transactions, time travel, schema evolution, and partition evolution.</li>
+        <li><span class="num">3</span> Write complex PySpark SQL queries and window functions over large datasets, and profile and fix performance bottlenecks using Adaptive Query Execution.</li>
+        <li><span class="num">4</span> Orchestrate batch Spark workloads using Apache Airflow DAGs and Dagster pipelines with dependency management and scheduling.</li>
+        <li><span class="num">5</span> Build real-time streaming pipelines with Apache Kafka and Spark Structured Streaming, implementing watermarks, window aggregations, and exactly-once semantics.</li>
+        <li><span class="num">6</span> Create live observability dashboards with Grafana and Prometheus, and deploy interactive data applications with Streamlit.</li>
+        <li><span class="num">7</span> Train and tune distributed ML models with Spark MLlib and Ray, tracking experiments and registering models with MLflow.</li>
+        <li><span class="num">8</span> Package and deploy ML models as production REST APIs using BentoML and Docker, with Prometheus monitoring and OpenLineage data lineage.</li>
+      </ol>
+    </section>
+
+    <section id="materials">
+      <h2>Materials</h2>
+      <div class="card">
+        <table class="materials">
+          <tr><th>Lab</th><th>Phase</th><th>Topic</th><th>Key Tools</th></tr>
+          <tr>
+            <td class="wk">1</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Course Orientation &amp; Big Data Landscape 2026 &mdash; environment setup, first PySpark job, Delta Lake write, Spark UI exploration</td>
+            <td class="tools">Docker, PySpark 3.5, Delta Lake, MinIO</td>
+          </tr>
+          <tr>
+            <td class="wk">2</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Lakehouse Architecture &amp; Delta Lake Foundations &mdash; Delta tables, ACID operations, time travel, MERGE/UPSERT patterns</td>
+            <td class="tools">Delta Lake, MinIO, PySpark</td>
+          </tr>
+          <tr>
+            <td class="wk">3</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Apache Iceberg &amp; Data Governance &mdash; Iceberg table creation, schema evolution, partition evolution, catalog operations</td>
+            <td class="tools">Apache Iceberg, PySpark, Nessie Catalog</td>
+          </tr>
+          <tr>
+            <td class="wk">4</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Apache Spark 3.5+ Foundations &amp; DataFrame API &mdash; DataFrame operations, reading CSV/JSON/Parquet, transformations and actions</td>
+            <td class="tools">PySpark, Spark SQL, Spark UI</td>
+          </tr>
+          <tr>
+            <td class="wk">5</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Spark SQL, Joins &amp; Window Functions &mdash; complex SQL queries, all join types, window functions on time-series data</td>
+            <td class="tools">PySpark SQL, JupyterLab</td>
+          </tr>
+          <tr>
+            <td class="wk">6</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Spark Performance Tuning &amp; Adaptive Query Execution &mdash; profile slow queries, fix data skew, tune partitioning, benchmark AQE</td>
+            <td class="tools">Spark UI, AQE, PySpark</td>
+          </tr>
+          <tr>
+            <td class="wk">7</td>
+            <td class="phase phase-found">Foundations</td>
+            <td class="topic">Data Orchestration: Apache Airflow &amp; Dagster &mdash; build Airflow DAGs, schedule batch Spark jobs, build a Dagster pipeline</td>
+            <td class="tools">Airflow 2.9, Dagster, Python</td>
+          </tr>
+          <tr>
+            <td class="wk">9</td>
+            <td class="phase phase-stream">Streaming</td>
+            <td class="topic">Real-Time Streaming: Apache Kafka &amp; Redpanda &mdash; produce/consume messages, create topics, stream data into Delta Lake</td>
+            <td class="tools">Kafka 3.7, kafka-python, PySpark</td>
+          </tr>
+          <tr>
+            <td class="wk">10</td>
+            <td class="phase phase-stream">Streaming</td>
+            <td class="topic">Spark Structured Streaming &amp; Stateful Processing &mdash; streaming pipeline, watermarks, window aggregations, exactly-once semantics</td>
+            <td class="tools">PySpark Structured Streaming, Kafka</td>
+          </tr>
+          <tr>
+            <td class="wk">11</td>
+            <td class="phase phase-ml">ML &amp; MLOps</td>
+            <td class="topic">Big Data Visualisation: Grafana, Streamlit &amp; Superset &mdash; live Grafana dashboard, Streamlit data app, real-time metrics</td>
+            <td class="tools">Grafana, Streamlit, Prometheus</td>
+          </tr>
+          <tr>
+            <td class="wk">13</td>
+            <td class="phase phase-ml">ML &amp; MLOps</td>
+            <td class="topic">Distributed ML: Spark MLlib &amp; Ray &mdash; train classification model with MLlib, distributed hyperparameter tuning with Ray</td>
+            <td class="tools">Spark MLlib, Ray, PySpark</td>
+          </tr>
+          <tr>
+            <td class="wk">14</td>
+            <td class="phase phase-ml">ML &amp; MLOps</td>
+            <td class="topic">MLOps: MLflow Tracking &amp; Model Registry &mdash; log experiments, compare runs, register models, promote to staging/production</td>
+            <td class="tools">MLflow, PySpark, Python</td>
+          </tr>
+          <tr>
+            <td class="wk">15</td>
+            <td class="phase phase-ml">ML &amp; MLOps</td>
+            <td class="topic">Model Deployment: BentoML &amp; Docker APIs &mdash; package MLflow model, build REST API, test with curl/Postman</td>
+            <td class="tools">BentoML, Docker, FastAPI</td>
+          </tr>
+          <tr>
+            <td class="wk">15</td>
+            <td class="phase phase-ml">ML &amp; MLOps</td>
+            <td class="topic">Monitoring, Scaling &amp; Data Governance &mdash; Prometheus alerts, Grafana dashboards, data lineage with OpenLineage</td>
+            <td class="tools">Prometheus, Grafana, OpenLineage</td>
+          </tr>
+        </table>
+      </div>
+      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Lab handouts, notebooks, and slide PDFs are released the morning of each session via the course repository.</p>
+    </section>
+
+    <section id="grading">
+      <h2>Grading</h2>
+      <div class="card">
+        <div class="grade-bar">
+          <div class="row"><strong>Lab assignments (A1&ndash;A13)</strong><span class="pct">TBA%</span></div>
+          <div class="track"><div class="fill" style="width:30%"></div></div>
+          <p class="note">One per session; submitted at the end of each lab. Graded on working code and written reflections.</p>
+        </div>
+        <div class="grade-bar">
+          <div class="row"><strong>Quiz 1</strong><span class="pct">15%</span></div>
+          <div class="track"><div class="fill" style="width:15%"></div></div>
+          <p class="note">16 Apr 2026 &middot; Written theory quiz (90 min) &middot; Covers Foundations phase (W1&ndash;6).</p>
+        </div>
+        <div class="grade-bar">
+          <div class="row"><strong>Course project</strong><span class="pct">TBA%</span></div>
+          <div class="track"><div class="fill" style="width:30%"></div></div>
+          <p class="note">End-to-end big data pipeline using tools from all three phases &middot; Milestones: Mar&ndash;Jun &middot; Code freeze W15.</p>
+        </div>
+        <div class="grade-bar">
+          <div class="row"><strong>End-semester examination</strong><span class="pct">TBA%</span></div>
+          <div class="track"><div class="fill" style="width:25%"></div></div>
+          <p class="note">Jun&ndash;Jul 2026 &middot; Theory and practical components.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <div class="card">
+        <div class="textbook">
+          <div><p class="title">Learning Spark (2nd ed.)</p><p class="authors">Jules Damji, Brooke Wenig, Tathagata Das, Denny Lee &middot; O'Reilly, 2020</p></div>
+          <span class="role role-required">Required</span>
+        </div>
+        <div class="textbook">
+          <div><p class="title">Delta Lake: The Definitive Guide</p><p class="authors">Denny Lee, Tristen Wentling, Scott Haines, Prashanth Babu &middot; O'Reilly, 2024</p></div>
+          <span class="role role-reference">Reference</span>
+        </div>
+        <div class="textbook">
+          <div><p class="title">Machine Learning Engineering with MLflow</p><p class="authors">Natu Lauchande &middot; Packt, 2021</p></div>
+          <span class="role role-reference">Reference</span>
+        </div>
+        <div class="policy" style="border-top:1px solid #f5f5f5;padding-top:14px;margin-top:14px;">
+          <p class="label">Materials Repository</p>
+          <p class="text">All lab handouts, notebooks, and slides are version-controlled and public: <a href="https://github.com/inyalala/iitmz-teaching-site" target="_blank" rel="noopener" style="color:var(--gold-dark);font-weight:600;">github.com/inyalala/iitmz-teaching-site</a>.</p>
+        </div>
+        <div class="policy">
+          <p class="label">Infrastructure</p>
+          <p class="text">
+            All labs run on a Docker-Compose environment provided at the start of the course. Students run everything locally or on the lab machines &mdash; no cloud account required.<br/>
+            <a href="https://spark.apache.org/docs/latest/" target="_blank" rel="noopener" style="color:var(--gold-dark);">Apache Spark Documentation</a> &middot;
+            <a href="https://docs.delta.io/latest/index.html" target="_blank" rel="noopener" style="color:var(--gold-dark);">Delta Lake Docs</a> &middot;
+            <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener" style="color:var(--gold-dark);">MLflow Docs</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="policies">
+      <h2>Policies</h2>
+      <div class="card">
+        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance is mandatory at all lab sessions. Lab work is submitted before the session ends; you cannot replicate the hands-on practice outside the structured session.</p></div>
+        <div class="policy"><p class="label">Late work</p><p class="text">Late work is not accepted. Deadlines are fixed and announced in advance; submit what you have by the deadline. No extensions.</p></div>
+        <div class="policy"><p class="label">Academic integrity</p><p class="text">Discussing approaches is encouraged; submitting another student's code is not. Every notebook you submit must reflect your own work, which you can explain and extend.</p></div>
+        <div class="policy"><p class="label">Use of AI tools</p><p class="text">AI assistants may be used to explain API behaviour and debug errors. Solutions generated by AI and submitted without understanding are a violation of academic integrity. Declare any material AI contribution in a notebook header cell.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <footer style="max-width:820px;margin:0 auto;padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
+    &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#A8813A;">CC BY-NC-SA 4.0</a>.
+    Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.
+  </footer>
 </div>
+
 </body>
 </html>
