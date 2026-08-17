@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>Question Bank — Z2004 Database Management Systems | Dr. Innocent Nyalala</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;
+        --easy:#15803d;--easy-bg:#f0fdf4;--inter:#b45309;--inter-bg:#fffbeb;--hard:#b91c1c;--hard-bg:#fef2f2;}
+  *{box-sizing:border-box;}
+  html{background:#fff;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+  #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  #sidebar .badge{width:34px;height:34px;border-radius:50%;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+  #sidebar .brand-text p{margin:0;line-height:1.25;}
+  #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
+  #sidebar a.back:hover{color:var(--gold);}
+  #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+  #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
+  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s;}
+  #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+  #sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
+  #main{flex:1;min-width:0;}
+  .topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
+  .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
+  .topbar a:hover{color:var(--gold-dark);}
+  .content{padding:40px 40px 90px;}
+  .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
+  .content > p.lede{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:32px;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;background:#f8fafc;border-radius:8px;border:1px solid #eee;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:.82rem;}
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot-e{background:var(--easy);}
+  .dot-m{background:var(--inter);}
+  .dot-h{background:var(--hard);}
+  .weight-guide{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px;}
+  .wg-card{border-radius:8px;padding:12px 14px;border:1px solid #e5e7eb;}
+  .wg-card p.wg-label{margin:0 0 4px;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#94a3b8;}
+  .wg-card p.wg-name{margin:0 0 6px;font-weight:700;font-size:.9rem;color:var(--navy);}
+  .wg-card .wg-tiers{font-size:.78rem;color:var(--muted);line-height:1.6;}
+  .week-block{margin-bottom:48px;scroll-margin-top:24px;}
+  .week-header{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;}
+  .week-header h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.15rem;margin:0;}
+  .week-header .wnum{font-size:.7rem;font-weight:700;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .week-divider{border:none;border-top:2px solid var(--gold);margin:6px 0 0;}
+  .tier-tabs{display:flex;gap:0;overflow:hidden;border:1px solid #e5e7eb;border-top:none;border-bottom:none;}
+  .tier-tab{padding:8px 0;font-size:.8rem;font-weight:600;cursor:pointer;border:none;border-bottom:2px solid #e5e7eb;background:#f8fafc;color:#64748b;transition:background .15s,color .15s,border-color .15s;flex:1;text-align:center;}
+  .tier-tab.active-e{background:var(--easy-bg);color:var(--easy);border-bottom-color:var(--easy);}
+  .tier-tab.active-m{background:var(--inter-bg);color:var(--inter);border-bottom-color:var(--inter);}
+  .tier-tab.active-h{background:var(--hard-bg);color:var(--hard);border-bottom-color:var(--hard);}
+  .qs-panel{display:none;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;}
+  .qs-panel.shown{display:block;}
+  .q-item{padding:16px 20px;border-bottom:1px solid #f1f1f1;}
+  .q-item:last-child{border-bottom:none;}
+  .q-meta{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .q-num{font-size:.7rem;font-weight:700;color:#94a3b8;min-width:24px;}
+  .q-tag{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;}
+  .tag-e{background:var(--easy-bg);color:var(--easy);}
+  .tag-m{background:var(--inter-bg);color:var(--inter);}
+  .tag-h{background:var(--hard-bg);color:var(--hard);}
+  .q-weight{font-size:.7rem;color:#94a3b8;margin-left:auto;}
+  .q-text{font-size:.9rem;line-height:1.6;color:var(--ink);margin:0 0 6px;}
+  .q-hint{font-size:.78rem;color:var(--muted);font-style:italic;margin:0;}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:3px;font-family:'Courier New',monospace;font-size:.85em;}
+  @media(max-width:640px){#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}.weight-guide{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="brand">
+    <div class="badge">IIT</div>
+    <div class="brand-text">
+      <p class="school">IIT Madras</p>
+      <p class="campus">Zanzibar Campus</p>
+    </div>
+  </div>
+  <a class="back" href="../index.html">&larr; Z2004 Overview</a>
+  <nav>
+    <p class="group">Modules</p>
+    <a href="#m1">M1 &mdash; ER Model &amp; Foundations</a>
+    <a href="#m2">M2 &mdash; Relational Model</a>
+    <a href="#m3">M3 &mdash; Relational Algebra</a>
+    <a href="#m4">M4 &mdash; SQL Foundations</a>
+    <a href="#m5">M5 &mdash; SQL Intermediate</a>
+    <a href="#m6">M6 &mdash; SQL Advanced</a>
+    <a href="#m7">M7 &mdash; Normalization</a>
+    <a href="#m8">M8 &mdash; Storage &amp; Indexing</a>
+    <a href="#m9">M9 &mdash; Transactions</a>
+    <a href="#m10">M10 &mdash; Modern Data Systems</a>
+  </nav>
+</aside>
+
+<div id="main">
+  <div class="topbar">
+    <div class="codes"><strong style="color:var(--navy)">Z2004</strong><span>BS</span><span style="background:#f1f5f9;color:#64748b;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-left:6px;">Question Bank</span></div>
+    <div>
+      <a href="https://inyalala.github.io/">Main site</a>
+      <a href="https://inyalala.github.io/iitmz-teaching-site/">All courses</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Question Bank</h1>
+    <p class="lede">Organised by module and difficulty. Use this bank to prepare for Quiz 1, Quiz 2, and the end-semester examination. Questions are not a substitute for lab exercises and the semester project.</p>
+
+    <div class="legend">
+      <div class="legend-item"><div class="dot dot-e"></div><strong>Easy</strong>&nbsp;&mdash; recall and direct application</div>
+      <div class="legend-item"><div class="dot dot-m"></div><strong>Intermediate</strong>&nbsp;&mdash; multi-step reasoning</div>
+      <div class="legend-item"><div class="dot dot-h"></div><strong>Advanced</strong>&nbsp;&mdash; design, proof, or open-ended</div>
+    </div>
+
+    <div class="weight-guide">
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Assignments ICA (10%)</p><div class="wg-tiers">Easy + some Intermediate<br/>Short-answer or SQL tasks</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Quizzes (30%)</p><div class="wg-tiers">Quiz 1 (15%) + Quiz 2 (15%)<br/>Intermediate difficulty</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Semester Project (20%)</p><div class="wg-tiers">Advanced design tasks<br/>Database-backed application</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">End-Sem Exam (40%)</p><div class="wg-tiers">All levels, written + SQL<br/>Full syllabus coverage</div></div>
+    </div>
+
+    <!-- M1 -->
+    <div class="week-block" id="m1">
+      <div class="week-header"><span class="wnum">Module 01</span><h2>ER Model &amp; Foundations</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m1','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m1','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m1','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m1-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between a strong entity and a weak entity in an ER diagram? Give one example of each.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">List the three types of attributes in an ER model and give an example of each.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">What is the purpose of a DBMS? Name two advantages of using a DBMS over flat-file storage.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define cardinality ratio in an ER relationship. What are the four possible cardinality ratios?</p></div>
+      </div>
+      <div class="qs-panel" id="m1-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Draw an ER diagram for a university database with entities Student, Course, and Instructor. Include appropriate attributes, primary keys, and relationships with cardinality constraints.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">A library system has Books, Members, and Loans. A member can borrow many books; a book can be borrowed many times by different members. Model this with an ER diagram including participation constraints and the Loan as an associative entity with date attributes.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the difference between total and partial participation. In your university ER diagram, which relationships have total participation? Justify each choice.</p></div>
+      </div>
+      <div class="qs-panel" id="m1-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a complete ER diagram for a hospital management system supporting patients, doctors, wards, appointments, prescriptions, and billing. Discuss every design decision including specialisation/generalisation hierarchies, weak entities, and cardinality constraints. Identify any design ambiguities and how you resolved them.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Convert the Extended ER (EER) concept of specialisation into a relational schema. Discuss the three conversion strategies (single table, table per subclass, table per concrete class) and analyse when each is appropriate in terms of query performance and data integrity.</p></div>
+      </div>
+    </div>
+
+    <!-- M2 -->
+    <div class="week-block" id="m2">
+      <div class="week-header"><span class="wnum">Module 02</span><h2>Relational Model</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m2','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m2','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m2','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m2-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define: relation, tuple, attribute, domain, degree, and cardinality. Use a concrete example for each.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">What is the difference between a primary key, a candidate key, and a foreign key? Give an example of each in a Student-Enrollment schema.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">State the entity integrity constraint and the referential integrity constraint. What happens if either is violated?</p></div>
+      </div>
+      <div class="qs-panel" id="m2-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Convert the following ER diagram components into a relational schema: a many-to-many relationship between Employee(EmpID, Name) and Project(ProjID, Title) with a WorksOn relationship carrying a Hours attribute.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">A weak entity <code>OrderItem</code> depends on <code>Order</code>. How do you represent this in a relational schema? What is the primary key of OrderItem?</p></div>
+      </div>
+      <div class="qs-panel" id="m2-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Discuss the three referential integrity violation response options: RESTRICT, CASCADE, and SET NULL. For each, give a real-world scenario where it is the most appropriate choice. What are the risks if the wrong option is chosen?</p></div>
+      </div>
+    </div>
+
+    <!-- M3 -->
+    <div class="week-block" id="m3">
+      <div class="week-header"><span class="wnum">Module 03</span><h2>Relational Algebra</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m3','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m3','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m3','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m3-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Name the six fundamental relational algebra operations and briefly describe what each does.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Given relation <code>Student(ID, Name, GPA, DeptID)</code>, write a relational algebra expression to retrieve the names of all students with GPA &gt; 3.5.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between a natural join and an equi-join? Give an example where the result differs.</p></div>
+      </div>
+      <div class="qs-panel" id="m3-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Given <code>Employee(EmpID, Name, DeptID, Salary)</code> and <code>Department(DeptID, DeptName, ManagerID)</code>, write relational algebra expressions for: (a) names of employees in the "CS" department, (b) names of managers, (c) departments with no employees.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the division operator in relational algebra. Use it to find students who have enrolled in ALL courses offered by the CS department.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Show that the intersection operation (&cap;) is not a fundamental operation — express it using only union and set difference.</p></div>
+      </div>
+      <div class="qs-panel" id="m3-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Relational algebra expressions are not unique for a given query. Write three different relational algebra expressions for "find names of employees who earn more than their manager." Then explain how a query optimizer uses equivalence rules to transform one expression into a more efficient one.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Extended relational algebra includes outer joins and aggregation. Express the following using extended RA: "For each department, list the department name and the average salary of its employees. Include departments with no employees, showing NULL for their average."</p></div>
+      </div>
+    </div>
+
+    <!-- M4 -->
+    <div class="week-block" id="m4">
+      <div class="week-header"><span class="wnum">Module 04</span><h2>SQL Foundations</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m4','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m4','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m4','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m4-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Write SQL to create a table <code>Product(ProductID INT PRIMARY KEY, Name VARCHAR(100), Price DECIMAL(10,2), Stock INT NOT NULL)</code>. Then insert three rows and retrieve all rows where Price &gt; 50.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between <code>WHERE</code> and <code>HAVING</code>? When must you use each?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the difference between <code>DELETE</code>, <code>TRUNCATE</code>, and <code>DROP</code>. Which is reversible and which is not?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q4</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Write SQL to retrieve all students whose names start with "A" and sort them alphabetically. Use the <code>Student(ID, Name, GPA)</code> schema.</p></div>
+      </div>
+      <div class="qs-panel" id="m4-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Write SQL for all four join types (INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER) on <code>Employee(EmpID, Name, DeptID)</code> and <code>Department(DeptID, DeptName)</code>. Describe what rows appear in each result that would not appear in the others.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Use the <code>NULL</code> semantics of SQL to explain: why does <code>NULL = NULL</code> evaluate to UNKNOWN? How does this affect a <code>WHERE</code> clause that filters on a nullable column?</p></div>
+      </div>
+      <div class="qs-panel" id="m4-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A query returns unexpected NULL values after an outer join. Walk through the three-valued logic (TRUE, FALSE, UNKNOWN) to explain why a <code>WHERE dept = 'CS'</code> clause silently drops outer-join NULLs. Rewrite the query to correctly preserve them.</p></div>
+      </div>
+    </div>
+
+    <!-- M5 -->
+    <div class="week-block" id="m5">
+      <div class="week-header"><span class="wnum">Module 05</span><h2>SQL Intermediate</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m5','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m5','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m5','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m5-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Given <code>Orders(OrderID, CustomerID, Amount, OrderDate)</code>, write SQL to find the total amount ordered per customer, showing only customers whose total exceeds 1000.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does a correlated subquery do? Give a simple example and explain why it can be slower than a join.</p></div>
+      </div>
+      <div class="qs-panel" id="m5-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Write SQL using <code>EXISTS</code> to find all customers who have placed at least one order in the last 30 days. Then rewrite the same query using a JOIN. Which form does the query optimizer prefer and why?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Using <code>Employee(EmpID, Name, Salary, DeptID)</code>, write SQL to find the second-highest salary in each department. Solve it two ways: once with a subquery and once with <code>DENSE_RANK()</code>.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Explain the difference between <code>IN</code>, <code>EXISTS</code>, and <code>ANY/ALL</code> in SQL subqueries. For each, write an example query and state when it is preferred over the others.</p></div>
+      </div>
+      <div class="qs-panel" id="m5-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A manager asks: "Find all employees who earn more than the average salary of their own department." Write this as (a) a correlated subquery, (b) a derived table, and (c) a window function. Compare the readability and likely query plan cost of each approach.</p></div>
+      </div>
+    </div>
+
+    <!-- M6 -->
+    <div class="week-block" id="m6">
+      <div class="week-header"><span class="wnum">Module 06</span><h2>SQL Advanced</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m6','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m6','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m6','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m6-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">What is a Common Table Expression (CTE)? Write a CTE that computes total sales per region and then selects only regions with total sales above the average.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">What is the difference between a stored procedure and a trigger in SQL? Give a real-world example where each is appropriate.</p></div>
+      </div>
+      <div class="qs-panel" id="m6-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Using <code>SalesTransaction(TxnID, SaleDate, Amount, SalespersonID)</code>, write SQL with window functions to compute: (a) running total of Amount per salesperson ordered by date, (b) each transaction's rank within its month, (c) the 3-transaction moving average for each salesperson.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Write a recursive CTE to list all ancestors of a given employee in an <code>Employee(EmpID, Name, ManagerID)</code> hierarchy table.</p></div>
+      </div>
+      <div class="qs-panel" id="m6-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Design a trigger-based audit system for a banking <code>Account(AccountID, Balance)</code> table. The trigger must log every UPDATE to a separate <code>AuditLog</code> table capturing the old and new balance, the timestamp, and the database user. Discuss the performance implications of row-level versus statement-level triggers for high-throughput systems.</p></div>
+      </div>
+    </div>
+
+    <!-- M7 -->
+    <div class="week-block" id="m7">
+      <div class="week-header"><span class="wnum">Module 07</span><h2>Normalization</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m7','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m7','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m7','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m7-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Define functional dependency. Give two examples from a university database and identify which is trivial and which is non-trivial.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">What anomalies (insertion, update, deletion) can occur in an unnormalized relation? Give a concrete example of each using a <code>StudentCourse(StudentID, StudentName, CourseID, CourseName, Grade)</code> table.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">State the conditions for 1NF, 2NF, 3NF, and BCNF. For each, give a relation that satisfies it but violates the next higher normal form.</p></div>
+      </div>
+      <div class="qs-panel" id="m7-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Given <code>R(A, B, C, D, E)</code> with FDs: <code>A &rarr; B, BC &rarr; D, D &rarr; E</code>. (a) Find all candidate keys. (b) Determine the normal form of R. (c) Decompose R into BCNF and verify the decomposition is lossless.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Using Armstrong's axioms (reflexivity, augmentation, transitivity), derive all FDs implied by the set <code>{A &rarr; B, B &rarr; C, C &rarr; D}</code>. Compute the closure of {A}.</p></div>
+      </div>
+      <div class="qs-panel" id="m7-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">BCNF decomposition is always lossless but may not be dependency-preserving. Construct an example where achieving BCNF loses a functional dependency. Show how 3NF decomposition preserves it. Discuss the trade-off a database designer must make.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">A denormalized table is sometimes preferred in data warehouses. Explain the concept of a "star schema" and argue why 3NF normalization would harm rather than help query performance in an OLAP setting.</p></div>
+      </div>
+    </div>
+
+    <!-- M8 -->
+    <div class="week-block" id="m8">
+      <div class="week-header"><span class="wnum">Module 08</span><h2>Storage &amp; Indexing</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m8','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m8','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m8','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m8-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">What is a B+ tree index? How does it differ from a B-tree? Why do database systems prefer B+ trees?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the difference between a clustered index and a non-clustered index. Can a table have more than one clustered index? Why or why not?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">What is the role of the buffer pool in a DBMS? What happens when a page is "dirty" in the buffer pool?</p></div>
+      </div>
+      <div class="qs-panel" id="m8-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">A B+ tree of order 4 has 10,000 records. Estimate the height of the tree and the number of disk accesses needed for (a) a point query, (b) a range query returning 200 records. Compare this to a heap file scan.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Explain static hashing and dynamic (extendible) hashing. When does static hashing perform poorly and how does dynamic hashing address it?</p></div>
+      </div>
+      <div class="qs-panel" id="m8-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A high-traffic e-commerce site runs queries like: "find all orders by CustomerID placed between two dates sorted by Amount." Design an indexing strategy (which columns, which index type, clustered or not). Justify your choices considering the trade-off between query speed and write overhead.</p></div>
+      </div>
+    </div>
+
+    <!-- M9 -->
+    <div class="week-block" id="m9">
+      <div class="week-header"><span class="wnum">Module 09</span><h2>Query Processing &amp; Transactions</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m9','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m9','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m9','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m9-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">State the four ACID properties of a database transaction. Give a banking example that shows what goes wrong if each property is violated.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">What is a schedule in the context of concurrency control? What is the difference between a serial schedule and a serializable schedule?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Name three types of read anomalies that can occur without proper isolation. Define each and give an example.</p></div>
+      </div>
+      <div class="qs-panel" id="m9-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Two transactions T1 and T2 both read then update the same account balance. Draw a schedule that results in a lost update. Then show how Two-Phase Locking (2PL) prevents this and what deadlock scenario might arise as a side effect.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the four SQL isolation levels: READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE. For each level, state which anomalies it allows and give a use case where that level is appropriate.</p></div>
+      </div>
+      <div class="qs-panel" id="m9-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain the ARIES recovery algorithm (Analysis, Redo, Undo phases). Given a log with COMMIT for T1 but no COMMIT for T2 at crash time, walk through each phase. Why does ARIES use a "no-force, steal" buffer management policy and what does it imply for the log?</p></div>
+      </div>
+    </div>
+
+    <!-- M10 -->
+    <div class="week-block" id="m10">
+      <div class="week-header"><span class="wnum">Module 10</span><h2>Modern &amp; AI Data Systems</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'m10','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'m10','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'m10','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="m10-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Exam</span></div><p class="q-text">What is the CAP theorem? For a distributed database, what does it mean to choose CP versus AP? Give a real-world example of each choice.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the difference between a document store (e.g., MongoDB), a key-value store (e.g., Redis), and a column-family store (e.g., Cassandra). Give a use case suited to each.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Exam</span></div><p class="q-text">What is a vector database? How does it differ from a relational database in terms of data representation and query type? Name one commercial vector database.</p></div>
+      </div>
+      <div class="qs-panel" id="m10-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain how a RAG (Retrieval Augmented Generation) pipeline works. What role does the vector database play? What are the three failure modes — retrieval miss, hallucination, and context overflow — and how can each be mitigated?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Project</span></div><p class="q-text">Design a schema for storing document embeddings in a vector database for a university knowledge base. What chunking strategy would you use? What metadata would you store alongside each vector? How would you handle document updates?</p></div>
+      </div>
+      <div class="qs-panel" id="m10-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">A fintech startup needs to store transaction records (strong consistency required), user preference profiles (flexible schema, fast reads), and a semantic search feature over support tickets. Design a polyglot persistence architecture using three different database systems. Justify each choice and explain how you would maintain consistency across them.</p></div>
+      </div>
+    </div>
+
+  </div>
+<footer style="padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#A8813A;">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.
+</footer>
+</div>
+
+<script>
+function showTier(btn, mod, tier) {
+  const tabs = btn.parentElement.querySelectorAll('.tier-tab');
+  tabs.forEach(t => { t.className = 'tier-tab'; });
+  btn.classList.add(tier === 'e' ? 'active-e' : tier === 'm' ? 'active-m' : 'active-h');
+  ['e','m','h'].forEach(t => {
+    const p = document.getElementById(mod + '-' + t);
+    if (p) p.classList.remove('shown');
+  });
+  const target = document.getElementById(mod + '-' + tier);
+  if (target) target.classList.add('shown');
+}
+</script>
+</body>
+</html>

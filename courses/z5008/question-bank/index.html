@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>Question Bank — Z5008 Big Data Lab | Dr. Innocent Nyalala</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;
+        --easy:#15803d;--easy-bg:#f0fdf4;--inter:#b45309;--inter-bg:#fffbeb;--hard:#b91c1c;--hard-bg:#fef2f2;}
+  *{box-sizing:border-box;}
+  html{background:#fff;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+  #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
+  #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  #sidebar .badge{width:34px;height:34px;border-radius:50%;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+  #sidebar .brand-text p{margin:0;line-height:1.25;}
+  #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
+  #sidebar a.back:hover{color:var(--gold);}
+  #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+  #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
+  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s;}
+  #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+  #sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
+  #main{flex:1;min-width:0;}
+  .topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
+  .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
+  .topbar a:hover{color:var(--gold-dark);}
+  .content{padding:40px 40px 90px;}
+  .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
+  .content > p.lede{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:32px;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;background:#f8fafc;border-radius:8px;border:1px solid #eee;}
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:.82rem;}
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot-e{background:var(--easy);}
+  .dot-m{background:var(--inter);}
+  .dot-h{background:var(--hard);}
+  .weight-guide{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px;}
+  .wg-card{border-radius:8px;padding:12px 14px;border:1px solid #e5e7eb;}
+  .wg-card p.wg-label{margin:0 0 4px;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#94a3b8;}
+  .wg-card p.wg-name{margin:0 0 6px;font-weight:700;font-size:.9rem;color:var(--navy);}
+  .wg-card .wg-tiers{font-size:.78rem;color:var(--muted);line-height:1.6;}
+  .week-block{margin-bottom:48px;scroll-margin-top:24px;}
+  .week-header{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;}
+  .week-header h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.15rem;margin:0;}
+  .week-header .wnum{font-size:.7rem;font-weight:700;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .week-divider{border:none;border-top:2px solid var(--gold);margin:6px 0 0;}
+  .tier-tabs{display:flex;gap:0;overflow:hidden;border:1px solid #e5e7eb;border-top:none;border-bottom:none;}
+  .tier-tab{padding:8px 0;font-size:.8rem;font-weight:600;cursor:pointer;border:none;border-bottom:2px solid #e5e7eb;background:#f8fafc;color:#64748b;transition:background .15s,color .15s,border-color .15s;flex:1;text-align:center;}
+  .tier-tab.active-e{background:var(--easy-bg);color:var(--easy);border-bottom-color:var(--easy);}
+  .tier-tab.active-m{background:var(--inter-bg);color:var(--inter);border-bottom-color:var(--inter);}
+  .tier-tab.active-h{background:var(--hard-bg);color:var(--hard);border-bottom-color:var(--hard);}
+  .qs-panel{display:none;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;}
+  .qs-panel.shown{display:block;}
+  .q-item{padding:16px 20px;border-bottom:1px solid #f1f1f1;}
+  .q-item:last-child{border-bottom:none;}
+  .q-meta{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .q-num{font-size:.7rem;font-weight:700;color:#94a3b8;min-width:24px;}
+  .q-tag{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;}
+  .tag-e{background:var(--easy-bg);color:var(--easy);}
+  .tag-m{background:var(--inter-bg);color:var(--inter);}
+  .tag-h{background:var(--hard-bg);color:var(--hard);}
+  .q-weight{font-size:.7rem;color:#94a3b8;margin-left:auto;}
+  .q-text{font-size:.9rem;line-height:1.6;color:var(--ink);margin:0 0 6px;}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:3px;font-family:'Courier New',monospace;font-size:.85em;}
+  @media(max-width:640px){#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}.weight-guide{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="brand">
+    <div class="badge">IIT</div>
+    <div class="brand-text">
+      <p class="school">IIT Madras</p>
+      <p class="campus">Zanzibar Campus</p>
+    </div>
+  </div>
+  <a class="back" href="../index.html">&larr; Z5008 Overview</a>
+  <nav>
+    <p class="group">Labs</p>
+    <a href="#l1">Lab 1 &mdash; Big Data Landscape</a>
+    <a href="#l2">Lab 2 &mdash; Delta Lake</a>
+    <a href="#l3">Lab 3 &mdash; Iceberg &amp; Governance</a>
+    <a href="#l4">Lab 4 &mdash; Spark Foundations</a>
+    <a href="#l5">Lab 5 &mdash; Spark SQL &amp; Joins</a>
+    <a href="#l6">Lab 6 &mdash; Performance Tuning</a>
+    <a href="#l7">Lab 7 &mdash; Orchestration</a>
+    <a href="#l9">Lab 9 &mdash; Kafka &amp; Streaming</a>
+    <a href="#l10">Lab 10 &mdash; Structured Streaming</a>
+    <a href="#l11">Lab 11 &mdash; Visualisation</a>
+    <a href="#l13">Lab 13 &mdash; Spark MLlib &amp; Ray</a>
+    <a href="#l14">Lab 14 &mdash; MLOps with MLflow</a>
+    <a href="#l15">Lab 15 &mdash; Deployment</a>
+  </nav>
+</aside>
+
+<div id="main">
+  <div class="topbar">
+    <div class="codes"><strong style="color:var(--navy)">Z5008</strong><span>MTech</span><span style="background:#f1f5f9;color:#64748b;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-left:6px;">Question Bank</span></div>
+    <div>
+      <a href="https://inyalala.github.io/">Main site</a>
+      <a href="https://inyalala.github.io/iitmz-teaching-site/">All courses</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Question Bank</h1>
+    <p class="lede">Organised by lab and difficulty. Use this bank to prepare for Quiz 1, the course project, and the end-semester examination. Questions test both conceptual understanding and practical implementation knowledge.</p>
+
+    <div class="legend">
+      <div class="legend-item"><div class="dot dot-e"></div><strong>Easy</strong>&nbsp;&mdash; recall and direct application</div>
+      <div class="legend-item"><div class="dot dot-m"></div><strong>Intermediate</strong>&nbsp;&mdash; multi-step reasoning or implementation</div>
+      <div class="legend-item"><div class="dot dot-h"></div><strong>Advanced</strong>&nbsp;&mdash; system design, performance analysis, or optimisation</div>
+    </div>
+
+    <div class="weight-guide">
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Lab Assignments (30%)</p><div class="wg-tiers">Easy + Intermediate<br/>Practical PySpark tasks</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Quiz 1 (15%)</p><div class="wg-tiers">Labs 1&ndash;6 coverage<br/>Written theory, 90 min</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">Course Project (25%)</p><div class="wg-tiers">Advanced system design<br/>End-to-end pipeline</div></div>
+      <div class="wg-card"><p class="wg-label">Weightage</p><p class="wg-name">End-Sem Exam (30%)</p><div class="wg-tiers">All labs, all levels<br/>Written + design</div></div>
+    </div>
+
+    <!-- L1 -->
+    <div class="week-block" id="l1">
+      <div class="week-header"><span class="wnum">Lab 1</span><h2>Big Data Landscape &amp; Setup</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l1','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l1','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l1','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l1-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define the three Vs of Big Data (Volume, Velocity, Variety). Give a concrete example of a dataset that scores high on all three.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is the difference between a data lake, a data warehouse, and a lakehouse? In what scenario would you choose each?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What does the Spark UI show you? Name three pieces of information you can extract from a Spark job's DAG visualisation.</p></div>
+      </div>
+      <div class="qs-panel" id="l1-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the difference between Spark's driver and executor roles. What happens when an executor fails? How does Spark's fault tolerance model handle this?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a PySpark job that reads a CSV file, filters rows where <code>sales &gt; 1000</code>, groups by <code>region</code>, computes the total and average sales per region, and writes the result to a Delta Lake table.</p></div>
+      </div>
+      <div class="qs-panel" id="l1-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Compare the Hadoop MapReduce and Apache Spark execution models. Why is Spark typically 10–100× faster for iterative workloads? Under what conditions does MapReduce outperform Spark?</p></div>
+      </div>
+    </div>
+
+    <!-- L2 -->
+    <div class="week-block" id="l2">
+      <div class="week-header"><span class="wnum">Lab 2</span><h2>Lakehouse &amp; Delta Lake</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l2','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l2','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l2','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l2-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What ACID properties does Delta Lake provide on top of a plain Parquet data lake? How does it achieve atomicity for multi-file writes?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is Delta Lake's time travel feature? Write a PySpark snippet to read a Delta table as it existed 3 versions ago.</p></div>
+      </div>
+      <div class="qs-panel" id="l2-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the Delta Lake MERGE (UPSERT) operation. Write a PySpark MERGE statement that inserts new customer records and updates the email address for existing customers based on <code>customer_id</code>.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">What is Delta Lake's transaction log (<code>_delta_log</code>)? How does it differ from a traditional write-ahead log? What information does each JSON file in the log contain?</p></div>
+      </div>
+      <div class="qs-panel" id="l2-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A Delta Lake table receives 10,000 small file writes per hour. Explain the "small files problem" and its performance impact. What Delta Lake operations (OPTIMIZE, Z-ORDER, VACUUM) would you schedule and at what frequency to maintain query performance?</p></div>
+      </div>
+    </div>
+
+    <!-- L3 -->
+    <div class="week-block" id="l3">
+      <div class="week-header"><span class="wnum">Lab 3</span><h2>Apache Iceberg &amp; Data Governance</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l3','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l3','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l3','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l3-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Apache Iceberg? Name two features that distinguish it from a plain Parquet-based data lake.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is partition evolution in Iceberg? Why is it important for long-lived production tables?</p></div>
+      </div>
+      <div class="qs-panel" id="l3-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain schema evolution in Iceberg. What operations (add column, rename column, drop column) are supported without rewriting data? What is the role of field IDs in making this safe?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Compare Delta Lake and Apache Iceberg across: ACID support, schema evolution, partition evolution, engine support, and catalog integration. For a multi-engine lakehouse (Spark + Flink + Trino), which would you choose and why?</p></div>
+      </div>
+      <div class="qs-panel" id="l3-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Design a data governance framework for a lakehouse serving both a regulatory reporting team (needs lineage, audit, immutability) and a data science team (needs fast iteration, schema flexibility). How do you balance these competing needs using Iceberg, Nessie Catalog, and OpenLineage?</p></div>
+      </div>
+    </div>
+
+    <!-- L4 -->
+    <div class="week-block" id="l4">
+      <div class="week-header"><span class="wnum">Lab 4</span><h2>Spark Foundations &amp; DataFrame API</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l4','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l4','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l4','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l4-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between a Spark transformation and an action? Give two examples of each. Why does Spark use lazy evaluation?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is a Spark partition? How does the number of partitions affect parallelism and performance? What is the recommended partition size in MB?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the difference between <code>cache()</code> and <code>persist()</code> in Spark. When should you cache a DataFrame?</p></div>
+      </div>
+      <div class="qs-panel" id="l4-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write PySpark code to: read a JSON dataset of e-commerce orders, explode a nested <code>items</code> array, compute total revenue per product category, and write the output as a partitioned Parquet file partitioned by <code>category</code>.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">What is the difference between <code>map()</code> on an RDD and <code>select()</code> on a DataFrame? When would you prefer the RDD API over the DataFrame API?</p></div>
+      </div>
+      <div class="qs-panel" id="l4-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">A Spark job reads a 500 GB Parquet file and runs a groupBy aggregation. The job has 200 tasks in stage 1 and 200 tasks in stage 2, but stage 2 takes 10× longer with a few tasks running much longer than others. Diagnose this problem and propose three specific remedies.</p></div>
+      </div>
+    </div>
+
+    <!-- L5 -->
+    <div class="week-block" id="l5">
+      <div class="week-header"><span class="wnum">Lab 5</span><h2>Spark SQL, Joins &amp; Window Functions</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l5','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l5','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l5','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l5-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What are the two physical join strategies Spark uses? When does Spark automatically choose a broadcast join?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a Spark SQL window function query to compute each employee's salary rank within their department, using <code>RANK()</code>. How does <code>RANK()</code> differ from <code>DENSE_RANK()</code>?</p></div>
+      </div>
+      <div class="qs-panel" id="l5-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain what a shuffle join is in Spark. Why is it expensive? How does a sort-merge join differ from a hash join, and when does Spark prefer each?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Using a <code>transactions</code> table with columns <code>(txn_id, user_id, amount, txn_date)</code>, write Spark SQL to compute: (a) 7-day rolling average amount per user, (b) cumulative total amount per user ordered by date, (c) each transaction's percentage contribution to the user's monthly total.</p></div>
+      </div>
+      <div class="qs-panel" id="l5-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">You are joining a 500 GB fact table with a 200 MB dimension table. Explain two strategies: (a) broadcast join, (b) bucketed join. For each, describe how to implement it in PySpark, its memory requirements, and when it is preferable. What happens if you try to broadcast a 5 GB table?</p></div>
+      </div>
+    </div>
+
+    <!-- L6 -->
+    <div class="week-block" id="l6">
+      <div class="week-header"><span class="wnum">Lab 6</span><h2>Spark Performance Tuning &amp; AQE</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l6','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l6','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l6','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l6-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is data skew in Spark? How can you detect it in the Spark UI? Name two techniques to fix it.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Adaptive Query Execution (AQE) in Spark 3? Name three optimisations it can apply at runtime that the static query planner cannot.</p></div>
+      </div>
+      <div class="qs-panel" id="l6-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">A Spark job joining two large tables runs for 4 hours. You observe in the Spark UI that 5 of 200 tasks take 90% of the time, and the join key is <code>country_code</code> with 70% of rows having <code>country_code = 'TZ'</code>. Propose and implement a salting strategy to fix this skew.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Explain the impact of the following Spark configuration parameters: <code>spark.executor.memory</code>, <code>spark.executor.cores</code>, <code>spark.sql.shuffle.partitions</code>. What values would you start with for a cluster with 10 nodes, 16 cores each, and 64 GB RAM per node?</p></div>
+      </div>
+      <div class="qs-panel" id="l6-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Profile a Spark job end-to-end: describe the metrics you would examine in the Spark UI (stages, tasks, GC time, shuffle read/write, spill) to identify whether the bottleneck is CPU-bound, memory-bound, I/O-bound, or network-bound. For each bottleneck type, prescribe specific configuration changes and code changes.</p></div>
+      </div>
+    </div>
+
+    <!-- L7 -->
+    <div class="week-block" id="l7">
+      <div class="week-header"><span class="wnum">Lab 7</span><h2>Data Orchestration</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l7','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l7','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l7','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l7-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is an Airflow DAG? What do nodes and edges represent? What happens if an Airflow DAG has a cycle?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is the difference between Airflow and Dagster in terms of their data model? How does Dagster's asset-based approach differ from Airflow's task-based approach?</p></div>
+      </div>
+      <div class="qs-panel" id="l7-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write an Airflow DAG (in Python) that: (1) extracts data from an API daily at 06:00 UTC, (2) runs a Spark job to transform it, (3) loads the result to a Delta Lake table, (4) sends a Slack alert if any task fails. Include retry logic and timeouts.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain Airflow's XCom mechanism. What are its limitations for large data? What alternative patterns exist for passing data between tasks in a production pipeline?</p></div>
+      </div>
+      <div class="qs-panel" id="l7-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Design a production data pipeline orchestration strategy for a financial reporting system that must: process 50 GB of daily transaction data, complete within a 4-hour SLA, handle partial failures gracefully with idempotent reruns, and maintain a full audit log. Compare Airflow vs Dagster for this use case.</p></div>
+      </div>
+    </div>
+
+    <!-- L9 -->
+    <div class="week-block" id="l9">
+      <div class="week-header"><span class="wnum">Lab 9</span><h2>Kafka &amp; Real-Time Streaming</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l9','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l9','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l9','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l9-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">Define: Kafka topic, partition, offset, producer, consumer group. Explain how consumer groups enable both load balancing and message broadcasting.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What guarantees does Kafka provide regarding message ordering? Are messages ordered globally across all partitions or only within a partition?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Redpanda? How does it differ from Apache Kafka architecturally (no ZooKeeper/KRaft dependency)?</p></div>
+      </div>
+      <div class="qs-panel" id="l9-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a Python Kafka producer that publishes JSON sensor readings (temperature, humidity, device_id, timestamp) to a topic at 100 messages/second. Write a consumer that reads from the topic and writes batches of 1000 messages to a Delta Lake table.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain the three delivery semantics in Kafka: at-most-once, at-least-once, and exactly-once. What producer and consumer configuration settings control each? What is the trade-off between exactly-once and throughput?</p></div>
+      </div>
+      <div class="qs-panel" id="l9-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Design a Kafka-based architecture for a real-time fraud detection system that processes 500,000 payment events per second. Specify: number of partitions and why, replication factor, retention policy, consumer group topology, and how you would handle a downstream consumer that is 10 minutes behind.</p></div>
+      </div>
+    </div>
+
+    <!-- L10 -->
+    <div class="week-block" id="l10">
+      <div class="week-header"><span class="wnum">Lab 10</span><h2>Spark Structured Streaming</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l10','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l10','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l10','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l10-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a watermark in Spark Structured Streaming? Why is it needed for window aggregations on event-time data?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What are the three output modes in Spark Structured Streaming (Complete, Append, Update)? Which modes are compatible with aggregations and which with watermarks?</p></div>
+      </div>
+      <div class="qs-panel" id="l10-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a Spark Structured Streaming job that reads from a Kafka topic of clickstream events (user_id, page_id, event_time), applies a 5-minute tumbling window with a 2-minute watermark, counts clicks per page per window, and writes results to a Delta Lake table.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain exactly-once semantics in Spark Structured Streaming. What role do checkpoints play? What happens to the stream state if the checkpoint directory is deleted?</p></div>
+      </div>
+      <div class="qs-panel" id="l10-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Design a stateful streaming pipeline that detects user sessions from a clickstream (a session ends after 30 minutes of inactivity). Discuss how to implement this using Spark's <code>flatMapGroupsWithState</code> or <code>mapGroupsWithState</code>. What are the memory implications of storing state for 10 million concurrent sessions?</p></div>
+      </div>
+    </div>
+
+    <!-- L11 -->
+    <div class="week-block" id="l11">
+      <div class="week-header"><span class="wnum">Lab 11</span><h2>Big Data Visualisation</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l11','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l11','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l11','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l11-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is the difference between Grafana and Superset? Which is better suited for infrastructure/metrics monitoring and which for business intelligence dashboards?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is Streamlit? How does it differ from a traditional web framework like Flask? When is it appropriate for a data engineer to use Streamlit?</p></div>
+      </div>
+      <div class="qs-panel" id="l11-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Design a Grafana dashboard for monitoring a Spark Structured Streaming job. List five metrics you would display (include latency, throughput, lag, state size) and explain what alert thresholds you would set for each.</p></div>
+      </div>
+      <div class="qs-panel" id="l11-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Build a real-time executive dashboard specification for a ride-hailing company. The dashboard must update every 30 seconds and show: active rides, revenue per hour, driver availability by region, and surge pricing zones. Specify the data flow from Kafka through Spark Streaming to the visualisation layer, including where to cache hot data.</p></div>
+      </div>
+    </div>
+
+    <!-- L13 -->
+    <div class="week-block" id="l13">
+      <div class="week-header"><span class="wnum">Lab 13</span><h2>Distributed ML with Spark MLlib &amp; Ray</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l13','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l13','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l13','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l13-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is the MLlib Pipeline API? What are Transformers and Estimators? Give one example of each.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is Ray? How does it differ from Spark for distributed computing? What is Ray Tune used for?</p></div>
+      </div>
+      <div class="qs-panel" id="l13-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write a Spark MLlib pipeline to train a classification model on a 10 GB customer churn dataset: include StringIndexer, VectorAssembler, and a RandomForestClassifier. Evaluate with cross-validation. How would you scale this to 1 TB?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain distributed hyperparameter tuning with Ray Tune. What is the ASHA (Asynchronous Successive Halving Algorithm) scheduler? How does it reduce compute cost compared to grid search?</p></div>
+      </div>
+      <div class="qs-panel" id="l13-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">You need to train a gradient boosting model on 500 GB of tabular data. Compare three approaches: (a) Spark MLlib GBT, (b) XGBoost on Ray, (c) LightGBM on a single large machine. Discuss training time, memory requirements, prediction latency, and operational complexity for each.</p></div>
+      </div>
+    </div>
+
+    <!-- L14 -->
+    <div class="week-block" id="l14">
+      <div class="week-header"><span class="wnum">Lab 14</span><h2>MLOps with MLflow</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l14','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l14','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l14','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l14-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What are the four main components of MLflow (Tracking, Projects, Models, Registry)? Briefly describe what each does.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is a model registry? What lifecycle stages does MLflow's Model Registry support (Staging, Production, Archived)? Who should approve a model promotion to Production?</p></div>
+      </div>
+      <div class="qs-panel" id="l14-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Write Python code using the MLflow API to: log a training run (parameters, metrics, artifacts), register the resulting model, compare two model versions using logged metrics, and programmatically promote the better model to Production.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain model versioning in an MLOps workflow. What metadata should be captured with every model version to ensure reproducibility? How do you roll back to a previous model version if the new one degrades in production?</p></div>
+      </div>
+      <div class="qs-panel" id="l14-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">Design a complete MLOps pipeline for a credit scoring model. Cover: data versioning with Delta Lake, experiment tracking with MLflow, CI/CD model validation gates, A/B deployment with canary rollout, and real-time performance monitoring with automatic rollback triggers. What metrics would you monitor post-deployment?</p></div>
+      </div>
+    </div>
+
+    <!-- L15 -->
+    <div class="week-block" id="l15">
+      <div class="week-header"><span class="wnum">Lab 15</span><h2>Model Deployment, Monitoring &amp; Governance</h2></div>
+      <hr class="week-divider"/>
+      <div class="tier-tabs">
+        <button class="tier-tab active-e" onclick="showTier(this,'l15','e')">Easy</button>
+        <button class="tier-tab" onclick="showTier(this,'l15','m')">Intermediate</button>
+        <button class="tier-tab" onclick="showTier(this,'l15','h')">Advanced</button>
+      </div>
+      <div class="qs-panel shown" id="l15-e">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is BentoML? What does "packaging a model" mean in the context of BentoML? What is a Bento?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz</span></div><p class="q-text">What is OpenLineage? What is data lineage and why is it important for regulated industries (healthcare, finance)?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Assignment</span></div><p class="q-text">What is a Prometheus metric? Describe the four metric types (Counter, Gauge, Histogram, Summary) and give a Big Data example for each.</p></div>
+      </div>
+      <div class="qs-panel" id="l15-m">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Assignment</span></div><p class="q-text">Package an MLflow model as a BentoML REST API service: write the service definition, define input/output schemas, add Prometheus metrics instrumentation, and write a Dockerfile to containerise it. What endpoints does BentoML expose by default?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain model drift vs. data drift. How would you detect each in production? Describe a monitoring pipeline using Prometheus and Grafana to alert when prediction distribution shifts by more than 10%.</p></div>
+      </div>
+      <div class="qs-panel" id="l15-h">
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Project</span></div><p class="q-text">A production ML system serves 10,000 requests per second. Design a scalable serving architecture using BentoML with auto-scaling on Kubernetes. Include: load balancing, request batching for GPU efficiency, circuit breakers, canary deployment for new model versions, and an alerting strategy for latency SLA violations (p99 &lt; 50 ms).</p></div>
+      </div>
+    </div>
+
+  </div>
+<footer style="padding:20px 40px 40px;border-top:1px solid #e5e7eb;font-size:.78rem;color:#94a3b8;line-height:1.7;">
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:#A8813A;">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.
+</footer>
+</div>
+
+<script>
+function showTier(btn, lab, tier) {
+  const tabs = btn.parentElement.querySelectorAll('.tier-tab');
+  tabs.forEach(t => { t.className = 'tier-tab'; });
+  btn.classList.add(tier === 'e' ? 'active-e' : tier === 'm' ? 'active-m' : 'active-h');
+  ['e','m','h'].forEach(t => {
+    const p = document.getElementById(lab + '-' + t);
+    if (p) p.classList.remove('shown');
+  });
+  const target = document.getElementById(lab + '-' + tier);
+  if (target) target.classList.add('shown');
+}
+</script>
+</body>
+</html>
