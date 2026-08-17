@@ -1,9 +1,5 @@
 # Course Materials — IIT Madras Zanzibar
 
-> **Students: go to the website, not this page.**
-> **[https://inyalala.github.io/iitmz-teaching-site/](https://inyalala.github.io/iitmz-teaching-site/)**
-> This page shows the source code. The course pages, schedules, and materials are at the link above.
-
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Maintained by Dr. Innocent Nyalala](https://img.shields.io/badge/maintained%20by-Dr.%20Innocent%20Nyalala-A8813A)](https://inyalala.github.io/)
 [![Deployed via GitHub Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-222)](https://inyalala.github.io/iitmz-teaching-site/)
@@ -35,8 +31,8 @@ structures, sorting, trees, hashing, dynamic programming, greedy algorithms,
 graphs, and parallel/randomized algorithms, offered to both BS (Z2005) and
 MTech (Z5007) students.
 
-- [Course home (Z2005, BS)](courses/z2005/index.html)
-- [Course home (Z5007, MTech)](courses/z5007/index.html)
+- [Course home (Z2005, BS)](https://inyalala.github.io/iitmz-teaching-site/courses/z2005/)
+- [Course home (Z5007, MTech)](https://inyalala.github.io/iitmz-teaching-site/courses/z5007/)
 
 Materials are organized by week and are complete through Week 15 (project
 presentations and course review).
@@ -46,7 +42,7 @@ presentations and course review).
 Relational data modeling, SQL, normalization, transactions, indexing, and
 query processing, taught alongside a semester-long applied database project.
 
-- [Course home (Z2004, BS)](courses/z2004/index.html)
+- [Course home (Z2004, BS)](https://inyalala.github.io/iitmz-teaching-site/courses/z2004/)
 
 Materials for this course have not yet been published.
 
@@ -56,7 +52,7 @@ Hands-on distributed data processing with Hadoop and Spark, covering
 distributed storage, batch and streaming pipelines, and cluster performance
 tuning.
 
-- [Course home (Z5008, MTech)](courses/z5008/index.html)
+- [Course home (Z5008, MTech)](https://inyalala.github.io/iitmz-teaching-site/courses/z5008/)
 
 Materials for this course have not yet been published.
 
