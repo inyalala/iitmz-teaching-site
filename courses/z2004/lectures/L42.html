@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L42 — NoSQL Databases | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);max-width:820px;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom:3px solid var(--gold);padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;}
+  h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#0a1628;color:#e2e8f0;border-radius:8px;padding:14px 18px;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  .figure{text-align:center;margin:28px 0;}
+  .figure img{max-width:100%;border-radius:8px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .figure figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;}
+  .nosql-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+  .nosql-card{border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+  .nosql-card h4{margin:0 0 6px;color:var(--navy);font-size:.92rem;}
+  .nosql-card p{margin:0;font-size:.87rem;line-height:1.6;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top:1px solid var(--border);}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+  @media(max-width:600px){.nosql-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L42
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 10 &mdash; Modern &amp; AI Data Systems</span>
+    <span class="badge b-lec">Lecture 42</span>
+    <span class="badge b-lec">Week 15</span>
+  </div>
+  <h1>NoSQL Databases</h1>
+  <p class="subtitle">Document, key-value, wide-column, and graph stores — when and why to go beyond relational</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>State the four major NoSQL data models and name a representative system for each</li>
+    <li>Explain the CAP theorem and identify the trade-offs made by CP vs. AP systems</li>
+    <li>Describe the BASE consistency model and contrast it with ACID</li>
+    <li>Choose the appropriate data store for a given application requirement</li>
+  </ul>
+</div>
+
+<div class="figure">
+  <img src="doc.png" alt="Document database model"/>
+  <figcaption>Figure 42.1 — Document databases store self-describing JSON/BSON documents; embedded sub-documents eliminate the need for joins in many read patterns</figcaption>
+</div>
+
+<h2>1. Why NoSQL?</h2>
+
+<p>Relational databases excel when data is highly structured, relationships are complex, and ACID guarantees are required. NoSQL systems emerged to address workloads where these assumptions break down:</p>
+<ul>
+  <li><strong>Scale</strong>: web-scale systems (billions of users, petabytes of data) demand horizontal sharding across hundreds of commodity servers — hard to achieve with a single RDBMS</li>
+  <li><strong>Schema flexibility</strong>: social network profiles, IoT sensor readings, and user-generated content have highly variable structure</li>
+  <li><strong>Access pattern optimization</strong>: some applications need O(1) key lookups, others need graph traversals — no single relational schema serves all equally well</li>
+  <li><strong>Developer productivity</strong>: matching the programming model (e.g., storing JavaScript objects directly as JSON) reduces impedance mismatch</li>
+</ul>
+
+<div class="concept">
+  <h4>NoSQL ≠ No SQL, No Transactions, No Relations</h4>
+  <p>The term "NoSQL" is misleading. Many NoSQL systems now support SQL-like query languages (e.g., CQL in Cassandra, N1QL in Couchbase). Several support multi-document transactions (MongoDB since 4.0, DynamoDB with transactions). "NoSQL" is best read as "Not Only SQL" — these are complementary tools, not replacements.</p>
+</div>
+
+<h2>2. The Four NoSQL Data Models</h2>
+
+<div class="nosql-grid">
+  <div class="nosql-card">
+    <h4>Key-Value Stores</h4>
+    <p>The simplest model: store and retrieve opaque values by a unique key. O(1) get/put/delete. Examples: Redis, DynamoDB, Riak. Best for: caching, session storage, feature flags, leaderboards.</p>
+  </div>
+  <div class="nosql-card">
+    <h4>Document Stores</h4>
+    <p>Extend key-value by storing structured, self-describing documents (JSON/BSON). Rich query languages, secondary indexes, aggregation pipelines. Examples: MongoDB, Couchbase, Firestore. Best for: catalogs, user profiles, CMS, event logs.</p>
+  </div>
+  <div class="nosql-card">
+    <h4>Wide-Column Stores</h4>
+    <p>Rows have a primary key; each row may have a different set of columns. Optimized for write-heavy analytical workloads. Examples: Apache Cassandra, HBase, Google Bigtable. Best for: time-series, IoT, recommendations.</p>
+  </div>
+  <div class="nosql-card">
+    <h4>Graph Databases</h4>
+    <p>Nodes and edges with properties; traversal queries are native (no expensive joins). Examples: Neo4j, Amazon Neptune, ArangoDB. Best for: social networks, fraud detection, knowledge graphs, recommendation engines.</p>
+  </div>
+</div>
+
+<h2>3. Key-Value Stores in Detail</h2>
+
+<div class="figure">
+  <img src="kv.png" alt="Key-value store diagram"/>
+  <figcaption>Figure 42.2 — A key-value store maps arbitrary keys to opaque byte values; the store has no knowledge of the value's internal structure</figcaption>
+</div>
+
+<h3>3.1 Redis</h3>
+<p>Redis is an in-memory key-value store that supports rich value types: strings, lists, sets, sorted sets, hashes, bitmaps, and streams. Because it operates in RAM, reads and writes complete in microseconds. Data is optionally persisted via RDB snapshots or AOF (append-only file) logging.</p>
+
+<div class="formula">
+Redis data types:
+SET user:1001:name  "Alice"          → String
+LPUSH user:1001:cart  "item_42"      → List
+ZADD leaderboard 9820 "alice"        → Sorted Set (score=9820)
+HSET user:1001  name "Alice" age 25  → Hash
+EXPIRE user:1001:session 3600        → TTL = 1 hour
+</div>
+
+<h3>3.2 DynamoDB</h3>
+<p>AWS DynamoDB is a fully managed key-value and document store. Each table has a primary key (partition key, optionally with a sort key). Horizontal sharding is automatic. Provides single-digit millisecond latency at any scale. Pricing is per read/write unit; provisioned or on-demand modes.</p>
+
+<h2>4. Document Databases in Detail</h2>
+
+<h3>4.1 MongoDB</h3>
+<p>MongoDB stores documents as BSON (Binary JSON). A document can embed sub-documents and arrays, allowing complex structures to be retrieved in a single operation (no joins required for common access patterns).</p>
+
+<div class="formula">
+MongoDB document — student:
+{
+  "_id": ObjectId("64f3a1b2c9e4d"),
+  "name": "Alice Kiprotich",
+  "student_id": "IIT2024001",
+  "courses": [
+    { "code": "Z2004", "grade": "A" },
+    { "code": "Z2005", "grade": "B+" }
+  ],
+  "contact": { "email": "alice@iitmz.ac.in", "phone": "+255-..." }
+}
+
+Query: db.students.find({ "courses.code": "Z2004", "courses.grade": "A" })
+</div>
+
+<h3>4.2 Embedding vs. Referencing</h3>
+<table>
+  <thead><tr><th></th><th>Embed (sub-document)</th><th>Reference (foreign key)</th></tr></thead>
+  <tbody>
+    <tr><td>Use when</td><td>Data is accessed together; 1:few relationship; child rarely changes independently</td><td>Many-to-many; data is large; child updated frequently; shared across documents</td></tr>
+    <tr><td>Read cost</td><td>1 query, 1 document fetch</td><td>2 queries (lookup reference, then fetch)</td></tr>
+    <tr><td>Write cost</td><td>Update the whole document</td><td>Update child independently</td></tr>
+    <tr><td>Duplication</td><td>Data may be duplicated if shared</td><td>No duplication; authoritative source</td></tr>
+  </tbody>
+</table>
+
+<h2>5. Wide-Column Stores: Apache Cassandra</h2>
+
+<p>Cassandra uses a <strong>partition key</strong> to hash data across nodes and a <strong>clustering key</strong> to sort rows within a partition. This design makes writes extremely fast (log-structured merge-tree storage), but schema design must be driven by query patterns.</p>
+
+<div class="formula">
+CQL — Cassandra Query Language:
+CREATE TABLE temperature_readings (
+  sensor_id  UUID,
+  reading_time TIMESTAMP,
+  celsius    FLOAT,
+  PRIMARY KEY (sensor_id, reading_time)  -- sensor_id is partition key
+) WITH CLUSTERING ORDER BY (reading_time DESC);
+
+INSERT INTO temperature_readings (sensor_id, reading_time, celsius)
+VALUES (uuid(), toTimestamp(now()), 36.7);
+
+-- Efficient: query by partition key
+SELECT * FROM temperature_readings WHERE sensor_id = ? ORDER BY reading_time DESC LIMIT 100;
+</div>
+
+<h2>6. CAP Theorem</h2>
+
+<div class="concept">
+  <h4>CAP Theorem (Brewer 2000, proved 2002)</h4>
+  <p>In a distributed system, you can guarantee at most <strong>two</strong> of three properties simultaneously:<br/>
+  <strong>C</strong>onsistency — every read receives the most recent write (or an error)<br/>
+  <strong>A</strong>vailability — every request receives a (non-error) response, even if it may be stale<br/>
+  <strong>P</strong>artition tolerance — the system continues operating despite network partitions<br/><br/>
+  Since network partitions cannot be avoided in practice, the real trade-off is between C and A.</p>
+</div>
+
+<table>
+  <thead><tr><th>System Type</th><th>Trade-off</th><th>Examples</th><th>Best For</th></tr></thead>
+  <tbody>
+    <tr><td>CP (Consistent + Partition-tolerant)</td><td>May reject requests during partitions to stay consistent</td><td>HBase, MongoDB (with majority write concern), Zookeeper</td><td>Financial data, inventory, config management</td></tr>
+    <tr><td>AP (Available + Partition-tolerant)</td><td>Always responds, but response may be stale</td><td>Cassandra, CouchDB, DynamoDB (eventual consistency)</td><td>Social feeds, shopping carts, DNS, CDN</td></tr>
+  </tbody>
+</table>
+
+<h2>7. BASE vs. ACID</h2>
+
+<table>
+  <thead><tr><th></th><th>ACID (RDBMS)</th><th>BASE (NoSQL)</th></tr></thead>
+  <tbody>
+    <tr><td>Acronym</td><td>Atomic, Consistent, Isolated, Durable</td><td><strong>B</strong>asically <strong>A</strong>vailable, <strong>S</strong>oft state, <strong>E</strong>ventually consistent</td></tr>
+    <tr><td>Consistency</td><td>Strong (immediately consistent after commit)</td><td>Eventual (replicas converge over time)</td></tr>
+    <tr><td>Availability</td><td>May reject operations during failures</td><td>Always responds (even if stale)</td></tr>
+    <tr><td>Suitable for</td><td>Banking, e-commerce, healthcare records</td><td>Social media, analytics, IoT, caching</td></tr>
+  </tbody>
+</table>
+
+<h2>8. Choosing the Right Database</h2>
+
+<table>
+  <thead><tr><th>If you need…</th><th>Consider</th></tr></thead>
+  <tbody>
+    <tr><td>Complex joins, strong ACID, mature tooling</td><td>PostgreSQL, SQL Server, MySQL</td></tr>
+    <tr><td>Flexible schema, hierarchical documents, fast aggregations</td><td>MongoDB, Couchbase</td></tr>
+    <tr><td>Millisecond key lookups, caching, pub/sub</td><td>Redis, Memcached</td></tr>
+    <tr><td>Massive write throughput, time-series, multi-region</td><td>Cassandra, HBase</td></tr>
+    <tr><td>Graph traversal, relationship queries</td><td>Neo4j, Amazon Neptune</td></tr>
+    <tr><td>Semantic search, vector similarity</td><td>Pinecone, Weaviate, pgvector (see L43)</td></tr>
+  </tbody>
+</table>
+
+<h2>9. Summary</h2>
+<ul>
+  <li>NoSQL systems trade relational features (joins, strong ACID) for scale, flexibility, or performance</li>
+  <li>Four models: key-value (Redis, DynamoDB), document (MongoDB), wide-column (Cassandra), graph (Neo4j)</li>
+  <li>CAP theorem: distributed systems choose between consistency and availability when a partition occurs</li>
+  <li>BASE (eventual consistency) allows AP systems to remain available at the cost of immediate consistency</li>
+  <li>The right data store depends on the access patterns, consistency requirements, and scale of the application</li>
+</ul>
+
+<div class="nav-bar">
+  <a href="L41.html">&larr; L41: Transactions, ACID &amp; Recovery</a>
+  <a href="L43.html">L43: Vector Databases &amp; Embeddings &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+</body>
+</html>

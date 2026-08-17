@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L44 — RAG Pipelines &amp; LLM Integration | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#0a1628;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);max-width:820px;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom:3px solid var(--gold);padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;}
+  h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#0a1628;color:#e2e8f0;border-radius:8px;padding:14px 18px;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  .warn{background:#fef2f2;border-left:4px solid #b91c1c;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;}
+  .warn h4{margin:0 0 6px;color:#b91c1c;font-size:.88rem;}
+  .warn p{margin:0;font-size:.9rem;color:#7f1d1d;}
+  .figure{text-align:center;margin:28px 0;}
+  .figure img{max-width:100%;border-radius:8px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .figure figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  .pipeline{display:flex;align-items:center;gap:0;margin:24px 0;overflow-x:auto;padding-bottom:4px;}
+  .pipe-step{background:var(--navy);color:#fff;padding:10px 16px;font-size:.8rem;font-weight:600;text-align:center;min-width:90px;flex-shrink:0;border-radius:4px;}
+  .pipe-arrow{color:var(--gold);font-size:1.3rem;padding:0 4px;flex-shrink:0;}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top:1px solid var(--border);}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+</style>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L44
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 10 &mdash; Modern &amp; AI Data Systems</span>
+    <span class="badge b-lec">Lecture 44</span>
+    <span class="badge b-lec">Week 15</span>
+  </div>
+  <h1>RAG Pipelines &amp; LLM Integration</h1>
+  <p class="subtitle">Retrieval-Augmented Generation: databases as the knowledge backbone for language models</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Explain the hallucination problem in LLMs and why retrieval-augmented generation addresses it</li>
+    <li>Describe the two-phase RAG pipeline: offline indexing and online retrieval-generation</li>
+    <li>Design a chunking strategy for a given document corpus</li>
+    <li>Implement a minimal RAG pipeline using pgvector and the OpenAI API</li>
+  </ul>
+</div>
+
+<div class="figure">
+  <img src="rag.png" alt="RAG pipeline diagram"/>
+  <figcaption>Figure 44.1 — The RAG pipeline: documents are chunked, embedded, and stored in a vector database (offline); at query time, relevant chunks are retrieved and injected into the LLM prompt (online)</figcaption>
+</div>
+
+<h2>1. The Hallucination Problem</h2>
+
+<p>Large Language Models (LLMs) generate plausible-sounding text by predicting the next token given their training data. They are excellent at reasoning, summarization, and language tasks. However, they have a critical weakness: <strong>hallucination</strong> — generating confident but factually incorrect statements, especially for:</p>
+<ul>
+  <li>Events after the training cutoff date (knowledge staleness)</li>
+  <li>Proprietary or domain-specific documents the model was not trained on</li>
+  <li>Precise quantitative facts (statistics, dates, citations)</li>
+  <li>Documents specific to a user's organization (internal reports, product manuals)</li>
+</ul>
+
+<div class="concept">
+  <h4>Retrieval-Augmented Generation (RAG)</h4>
+  <p>RAG solves hallucination by grounding the LLM in retrieved facts. Instead of asking the model to recall from memory, we:<br/>
+  (1) <strong>Retrieve</strong> the relevant passages from a database at query time<br/>
+  (2) <strong>Inject</strong> those passages into the LLM prompt as context<br/>
+  (3) <strong>Generate</strong> an answer that is grounded in — and citable from — retrieved documents<br/><br/>
+  The database acts as the model's external, up-to-date, domain-specific knowledge store.</p>
+</div>
+
+<h2>2. The RAG Pipeline</h2>
+
+<div class="pipeline">
+  <div class="pipe-step">Raw Documents</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Chunking</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Embedding Model</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Vector Store</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">ANN Index</div>
+</div>
+
+<p style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:-12px;margin-bottom:24px;"><em>Offline (indexing phase — run once or on document update)</em></p>
+
+<div class="pipeline">
+  <div class="pipe-step">User Query</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Embed Query</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">ANN Search</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Top-k Chunks</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">LLM Prompt</div>
+  <div class="pipe-arrow">→</div>
+  <div class="pipe-step">Answer</div>
+</div>
+
+<p style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:-12px;"><em>Online (inference phase — runs per query)</em></p>
+
+<h2>3. Offline Phase: Indexing</h2>
+
+<h3>3.1 Chunking</h3>
+<p>Documents must be split into chunks before embedding. Chunk size is a critical design decision — it trades precision against context:</p>
+
+<table>
+  <thead><tr><th>Chunk Strategy</th><th>Size</th><th>Pros</th><th>Cons</th></tr></thead>
+  <tbody>
+    <tr><td>Fixed-size (char)</td><td>200–500 chars</td><td>Simple; uniform size</td><td>May cut sentences mid-thought; context lost at boundary</td></tr>
+    <tr><td>Fixed-size (token)</td><td>128–512 tokens</td><td>Matches embedding model input</td><td>Splits at arbitrary points</td></tr>
+    <tr><td>Sentence-based</td><td>1–5 sentences</td><td>Semantically coherent units</td><td>Variable size; may be too short</td></tr>
+    <tr><td>Paragraph-based</td><td>1 paragraph</td><td>Natural document unit</td><td>Paragraphs vary widely in length</td></tr>
+    <tr><td>Semantic chunking</td><td>Variable</td><td>Groups semantically similar sentences</td><td>Requires embedding pass on all sentences; expensive</td></tr>
+    <tr><td>Recursive character</td><td>Variable</td><td>Splits on paragraphs, then sentences, then words</td><td>Complex to implement</td></tr>
+  </tbody>
+</table>
+
+<div class="concept">
+  <h4>Overlap to Preserve Context</h4>
+  <p>When chunking by fixed size, add an <strong>overlap</strong> of 10–20% between consecutive chunks. A sentence split across two chunks is present in both, so neither loses the context of the boundary sentence. Common choice: chunk_size=512 tokens, overlap=64 tokens.</p>
+</div>
+
+<h3>3.2 Embedding and Storage</h3>
+<div class="formula">
+Offline indexing (Python pseudocode):
+from openai import OpenAI
+import psycopg2
+
+client = OpenAI()
+
+# For each chunk in the document corpus:
+for chunk_text in all_chunks:
+    # 1. Generate embedding
+    response = client.embeddings.create(
+        input=chunk_text,
+        model="text-embedding-3-small"   # 1536 dims
+    )
+    embedding = response.data[0].embedding  # list of 1536 floats
+
+    # 2. Store chunk + embedding in PostgreSQL (with pgvector)
+    cur.execute(
+        "INSERT INTO chunks (doc_id, text, embedding) VALUES (%s, %s, %s)",
+        (doc_id, chunk_text, embedding)
+    )
+conn.commit()
+</div>
+
+<h2>4. Online Phase: Retrieval and Generation</h2>
+
+<h3>4.1 Query Embedding and Retrieval</h3>
+<div class="formula">
+def retrieve(query: str, k: int = 5) -> list[str]:
+    # Embed the query using the same model
+    q_emb = client.embeddings.create(input=query, model="text-embedding-3-small")
+                             .data[0].embedding
+
+    # Vector similarity search (cosine distance via pgvector)
+    cur.execute("""
+        SELECT text FROM chunks
+        ORDER BY embedding <=> %s::vector
+        LIMIT %s
+    """, (q_emb, k))
+
+    return [row[0] for row in cur.fetchall()]
+</div>
+
+<h3>4.2 Prompt Construction</h3>
+<div class="formula">
+def build_prompt(query: str, contexts: list[str]) -> str:
+    context_block = "\n\n---\n\n".join(contexts)
+    return f"""You are a helpful database assistant. Answer the question using ONLY the context below.
+If the answer is not in the context, say "I don't know."
+
+CONTEXT:
+{context_block}
+
+QUESTION: {query}
+
+ANSWER:"""
+</div>
+
+<h3>4.3 Generation</h3>
+<div class="formula">
+def rag_query(query: str) -> str:
+    contexts = retrieve(query, k=5)
+    prompt   = build_prompt(query, contexts)
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2    # low temperature → more factual
+    )
+    return response.choices[0].message.content
+
+# Usage
+answer = rag_query("What is the fan-out of a B+ tree of order 4?")
+</div>
+
+<h2>5. Advanced RAG Techniques</h2>
+
+<h3>5.1 Hybrid Search</h3>
+<p>Pure vector search can miss keyword-specific queries (e.g., searching for "ARIES" retrieves semantically related documents but may miss the exact algorithm name). <strong>Hybrid search</strong> combines:</p>
+<ul>
+  <li><strong>Dense retrieval</strong>: vector similarity (semantic match)</li>
+  <li><strong>Sparse retrieval</strong>: BM25 / TF-IDF (keyword match)</li>
+</ul>
+<p>Scores are fused using <strong>Reciprocal Rank Fusion (RRF)</strong>: rank each result set separately, then sum 1/(k+rank) across both rankers. Documents that appear high in both lists get the highest combined score.</p>
+
+<h3>5.2 Re-Ranking</h3>
+<p>After retrieving top-k candidates, apply a <strong>cross-encoder re-ranker</strong> (a model that jointly encodes query+passage to produce a relevance score). Cross-encoders are more accurate than bi-encoders (used for initial retrieval) but too slow to run over all documents. Apply only to the top 20–50 retrieved candidates.</p>
+
+<h3>5.3 Metadata Filtering</h3>
+<div class="formula">
+-- Retrieve only chunks from documents tagged as "module_8"
+SELECT text FROM chunks
+WHERE metadata->>'module' = 'module_8'
+ORDER BY embedding <=> %s::vector
+LIMIT 5;
+</div>
+
+<h3>5.4 Parent-Child Chunking</h3>
+<p>Store small child chunks (for precise retrieval) but return their parent chunk (larger context window) to the LLM. The child chunk's high specificity improves recall; the parent's broader context improves generation quality.</p>
+
+<h2>6. RAG vs. Fine-Tuning</h2>
+
+<table>
+  <thead><tr><th></th><th>RAG</th><th>Fine-Tuning</th></tr></thead>
+  <tbody>
+    <tr><td>Knowledge update</td><td>Add documents to vector store — instant</td><td>Retrain model — expensive (hours/days)</td></tr>
+    <tr><td>Cost</td><td>Low — vector store + embedding API</td><td>High — GPU training time + compute</td></tr>
+    <tr><td>Hallucination</td><td>Grounded in retrieved documents</td><td>Model may still hallucinate</td></tr>
+    <tr><td>Reasoning style</td><td>Keeps base model reasoning; grounded answers</td><td>Model adopts new style/behavior</td></tr>
+    <tr><td>Best for</td><td>Private documents, frequently changing knowledge</td><td>Domain-specific language, tone, formatting</td></tr>
+  </tbody>
+</table>
+
+<div class="warn">
+  <h4>RAG Failure Modes</h4>
+  <p>
+  <strong>Bad chunks</strong>: chunks too small lose context; chunks too large dilute relevance signals.<br/>
+  <strong>Retrieval miss</strong>: the relevant passage is not retrieved (poor recall) — increase k or use hybrid search.<br/>
+  <strong>Faithfulness failure</strong>: the LLM ignores the retrieved context and hallucinates anyway — lower temperature, use strict prompting, check with a faithfulness evaluator.<br/>
+  <strong>Irrelevant context</strong>: retrieved passages confuse rather than help — improve retrieval quality, add metadata filters, use a re-ranker.
+  </p>
+</div>
+
+<h2>7. The Database Engineer's Role in AI Systems</h2>
+
+<p>RAG makes database skills more important, not less, in the age of AI:</p>
+<ul>
+  <li><strong>Schema design</strong>: modeling documents, metadata, and vector columns correctly</li>
+  <li><strong>Index tuning</strong>: choosing HNSW vs. IVF, setting M and ef for the recall-latency trade-off</li>
+  <li><strong>Hybrid retrieval</strong>: combining vector and full-text indexes for best recall</li>
+  <li><strong>Data pipelines</strong>: building reliable ingestion pipelines that chunk, embed, and upsert documents at scale</li>
+  <li><strong>Observability</strong>: tracking retrieval latency, recall metrics, and generation quality in production</li>
+</ul>
+
+<h2>8. Summary</h2>
+<ul>
+  <li>LLMs hallucinate on private/recent knowledge — RAG grounds generation in retrieved facts</li>
+  <li>Offline phase: chunk documents → embed → store in vector database with ANN index</li>
+  <li>Online phase: embed query → ANN search → top-k chunks → inject into LLM prompt</li>
+  <li>Chunking strategy (size, overlap) and retrieval quality (k, hybrid search) are the primary RAG quality levers</li>
+  <li>pgvector + PostgreSQL enables RAG without a dedicated vector database for moderate scale</li>
+  <li>Advanced techniques: hybrid search, cross-encoder re-ranking, parent-child chunking, metadata filtering</li>
+</ul>
+
+<div class="nav-bar">
+  <a href="L43.html">&larr; L43: Vector Databases &amp; Embeddings</a>
+  <a href="L45.html">L45: Cloud Databases &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+</body>
+</html>
