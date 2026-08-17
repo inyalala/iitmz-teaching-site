@@ -1,5 +1,9 @@
 # Course Materials — IIT Madras Zanzibar
 
+> **Students: go to the website, not this page.**
+> **[https://inyalala.github.io/iitmz-teaching-site/](https://inyalala.github.io/iitmz-teaching-site/)**
+> This page shows the source code. The course pages, schedules, and materials are at the link above.
+
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Maintained by Dr. Innocent Nyalala](https://img.shields.io/badge/maintained%20by-Dr.%20Innocent%20Nyalala-A8813A)](https://inyalala.github.io/)
 [![Deployed via GitHub Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-222)](https://inyalala.github.io/iitmz-teaching-site/)
