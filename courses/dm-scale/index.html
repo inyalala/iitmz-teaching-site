@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>Data Mining — Scaling to Large Data | IIT Madras Zanzibar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+:root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--surface:#f8fafc;}
+*{box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;margin:0;color:#1f2937;background:#fff;display:flex;min-height:100vh;flex-direction:column;}
+
+.sidebar{width:260px;min-height:100vh;background:var(--navy);position:fixed;top:0;left:0;padding:0;display:flex;flex-direction:column;}
+.sidebar-brand{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08);}
+.sidebar-brand a{color:#fff;text-decoration:none;font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.3;display:block;}
+.sidebar-brand .inst{color:var(--gold);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:4px;}
+nav{padding:20px 0;flex:1;}
+nav a{display:flex;align-items:center;gap:10px;padding:10px 24px;color:#9aa5b8;font-size:.82rem;text-decoration:none;transition:background .15s,color .15s;}
+nav a i{width:16px;text-align:center;font-size:.85rem;}
+nav a:hover,nav a.active{background:rgba(197,160,89,.12);color:var(--gold);}
+nav .nav-section{padding:16px 24px 6px;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4b5563;}
+.sidebar-footer{padding:18px 24px;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;color:#4b5563;}
+.sidebar-footer a{color:var(--gold-dark);text-decoration:none;}
+
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;}
+header{background:var(--navy);background-image:radial-gradient(circle at 2px 2px,rgba(197,160,89,.08) 1px,transparent 0);background-size:28px 28px;padding:48px 48px 40px;}
+header .breadcrumb{color:#9aa5b8;font-size:.78rem;margin-bottom:12px;}
+header .breadcrumb a{color:var(--gold);text-decoration:none;}
+header .tag{display:inline-block;background:rgba(197,160,89,.2);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 12px;border-radius:99px;margin-bottom:12px;}
+header h1{font-family:'Playfair Display',serif;color:#fff;margin:0 0 8px;font-size:1.9rem;line-height:1.2;}
+header .meta{color:#9aa5b8;font-size:.88rem;display:flex;flex-wrap:wrap;gap:18px;margin-top:10px;}
+header .meta span i{margin-right:5px;color:var(--gold);}
+
+content{padding:40px 48px;max-width:860px;}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.info-card{background:var(--surface);border:1px solid #e5e7eb;border-radius:10px;padding:18px 20px;}
+.info-card h4{margin:0 0 8px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gold-dark);}
+.info-card p{margin:0;font-size:.88rem;color:#374151;line-height:1.5;}
+
+.hook{background:#fff;border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:12px;font-size:.87rem;color:#374151;line-height:1.55;}
+.hook strong{color:var(--navy);display:block;margin-bottom:3px;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;}
+
+h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.2rem;border-bottom:2px solid var(--gold);padding-bottom:.35em;margin:36px 0 18px;}
+
+table{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:28px;}
+thead th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:.78rem;letter-spacing:.03em;}
+tbody tr:nth-child(even){background:var(--surface);}
+tbody td{padding:11px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.45;}
+tbody tr:hover{background:#f0f4ff;}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.04em;}
+.badge-week{background:rgba(10,22,40,.1);color:var(--navy);}
+.badge-mmds{background:rgba(197,160,89,.18);color:var(--gold-dark);}
+
+.outcome-list{list-style:none;margin:0 0 24px;padding:0;}
+.outcome-list li{padding:9px 0 9px 28px;border-bottom:1px solid #f0f0f0;font-size:.88rem;color:#374151;position:relative;line-height:1.45;}
+.outcome-list li::before{content:'\f058';font-family:'Font Awesome 6 Free';font-weight:900;color:var(--gold);position:absolute;left:0;top:10px;font-size:.8rem;}
+
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+.res-card{background:var(--surface);border:1px solid #e5e7eb;border-radius:10px;padding:16px 18px;}
+.res-card .label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gold-dark);margin-bottom:5px;}
+.res-card a{color:var(--navy);text-decoration:none;font-weight:600;font-size:.88rem;line-height:1.4;display:block;}
+.res-card a:hover{color:var(--gold-dark);}
+.res-card p{margin:4px 0 0;font-size:.78rem;color:#6b7280;}
+
+.assess-table td:first-child{font-weight:600;color:var(--navy);}
+.pct{display:inline-block;background:rgba(197,160,89,.15);color:var(--gold-dark);font-weight:700;padding:1px 8px;border-radius:4px;font-size:.8rem;margin-right:6px;}
+
+.alert{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:14px 18px;font-size:.85rem;color:#92400e;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;}
+.alert i{color:#f59e0b;margin-top:2px;flex-shrink:0;}
+
+footer{text-align:center;color:#9ca3af;font-size:.78rem;padding:30px 20px 40px;margin-left:260px;}
+footer a{color:var(--gold-dark);text-decoration:none;}
+
+@media(max-width:768px){.sidebar{display:none;}.main{margin-left:0;}header{padding:28px 20px;}content{padding:24px 20px;}.info-grid,.res-grid{grid-template-columns:1fr;}footer{margin-left:0;}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <a href="../../index.html">Course Materials<br/><span class="inst">Dr. Innocent Nyalala</span></a>
+  </div>
+  <nav>
+    <a href="#overview" class="active"><i class="fas fa-home"></i> Overview</a>
+    <a href="#schedule"><i class="fas fa-calendar-alt"></i> 6-Week Schedule</a>
+    <a href="#outcomes"><i class="fas fa-bullseye"></i> Learning Outcomes</a>
+    <a href="#labs"><i class="fas fa-flask"></i> Lab Notebooks</a>
+    <a href="#resources"><i class="fas fa-book-open"></i> Resources</a>
+    <a href="#assessment"><i class="fas fa-chart-bar"></i> Assessment</a>
+    <div class="nav-section">BS Courses</div>
+    <a href="../z2005/index.html"><i class="fas fa-code"></i> Z2005 Prog &amp; DS</a>
+    <a href="../z2004/index.html"><i class="fas fa-database"></i> Z2004 DBMS</a>
+    <div class="nav-section">MTech Courses</div>
+    <a href="../z5007/index.html"><i class="fas fa-code"></i> Z5007 Prog &amp; DS</a>
+    <a href="../z5008/index.html"><i class="fas fa-server"></i> Z5008 Big Data Lab</a>
+  </nav>
+  <div class="sidebar-footer">&copy; 2026 Dr. Innocent Nyalala<br/><a href="https://inyalala.github.io/">inyalala.github.io</a></div>
+</aside>
+
+<div class="main">
+<header>
+  <div class="breadcrumb"><a href="../../index.html">All Courses</a> / Data Mining — Scaling to Large Data</div>
+  <div class="tag">Z3003 &middot; BS &middot; Odd Semester 2026</div>
+  <h1>Data Mining —<br/>Scaling to Large Data</h1>
+  <div class="meta">
+    <span><i class="fas fa-user"></i> Dr. Innocent Nyalala (Weeks 1–6)</span>
+    <span><i class="fas fa-calendar"></i> Sept 14 – Oct 30, 2026</span>
+    <span><i class="fas fa-clock"></i> 6 Weeks &middot; 3 hrs/week</span>
+    <span><i class="fas fa-graduation-cap"></i> BS Programme</span>
+  </div>
+</header>
+
+<content>
+
+<div class="alert">
+  <i class="fas fa-info-circle"></i>
+  <div>This course runs for 15 weeks total. Dr. Nyalala teaches <strong>Weeks 1–6</strong> (foundations). A second instructor covers Weeks 7–15. This page covers Weeks 1–6 only.</div>
+</div>
+
+<h2 id="overview">Course Overview</h2>
+<div class="info-grid">
+  <div class="info-card">
+    <h4>What This Course Is About</h4>
+    <p>How do you mine data when it is too large to fit in memory — or on a single machine? This course covers the algorithmic ideas behind Google, Amazon, Netflix, and Shazam: MapReduce, locality-sensitive hashing, stream mining, PageRank, frequent itemsets, and recommendation at scale.</p>
+  </div>
+  <div class="info-card">
+    <h4>Core Textbook</h4>
+    <p><strong>Mining of Massive Datasets</strong><br/>Leskovec, Rajaraman &amp; Ullman<br/>Cambridge University Press<br/><a href="http://www.mmds.org" target="_blank" style="color:var(--gold-dark);">Free PDF — mmds.org ↗</a></p>
+  </div>
+  <div class="info-card">
+    <h4>Prerequisites</h4>
+    <p>Basic probability and linear algebra. Familiarity with Python. Some exposure to algorithms or databases is helpful but not required.</p>
+  </div>
+  <div class="info-card">
+    <h4>Lab Environment</h4>
+    <p>All labs run in <strong>Google Colab</strong> (free). PySpark is used from Week 1 onward. You only need a Google account — no local installation.</p>
+  </div>
+</div>
+
+<h2 id="schedule">6-Week Schedule</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width:80px;">Week</th>
+      <th style="width:110px;">Date</th>
+      <th>Topic</th>
+      <th style="width:90px;">MMDS Ch.</th>
+      <th style="width:85px;">CS246</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge badge-week">Week 1</span></td>
+      <td>Sept 14</td>
+      <td><strong>The Scale Problem &amp; MapReduce</strong><br/><span style="color:#6b7280;font-size:.8rem;">Why single machines fail. MapReduce paradigm. Spark basics. Word count → real log analysis.</span></td>
+      <td><span class="badge badge-mmds">Ch. 1–2</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/01-intro.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-week">Week 2</span></td>
+      <td>Sept 21</td>
+      <td><strong>Finding Similar Items at Scale (LSH)</strong><br/><span style="color:#6b7280;font-size:.8rem;">Shingling, Jaccard similarity, MinHash, Locality-Sensitive Hashing. Near-duplicate detection.</span></td>
+      <td><span class="badge badge-mmds">Ch. 3</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/03-lsh.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-week">Week 3</span></td>
+      <td>Sept 28</td>
+      <td><strong>Mining Data Streams</strong><br/><span style="color:#6b7280;font-size:.8rem;">One-pass algorithms, sliding windows, Bloom filters, Flajolet-Martin, DGIM, reservoir sampling.</span></td>
+      <td><span class="badge badge-mmds">Ch. 4</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/04-streams.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-week">Week 4</span></td>
+      <td>Oct 5</td>
+      <td><strong>Link Analysis &amp; PageRank at Scale</strong><br/><span style="color:#6b7280;font-size:.8rem;">Web as a graph, PageRank, power iteration, topic-sensitive PageRank, SimRank, spam detection.</span></td>
+      <td><span class="badge badge-mmds">Ch. 5</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/05-pagerank.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-week">Week 5</span></td>
+      <td>Oct 12</td>
+      <td><strong>Frequent Itemsets &amp; Clustering at Scale</strong><br/><span style="color:#6b7280;font-size:.8rem;">A-Priori, PCY, SON for distributed mining, k-means at scale (BFR, CURE). Instacart dataset lab.</span></td>
+      <td><span class="badge badge-mmds">Ch. 6–7</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/06-fp.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-week">Week 6</span></td>
+      <td>Oct 19</td>
+      <td><strong>Recommendation Systems &amp; Dimensionality Reduction</strong><br/><span style="color:#6b7280;font-size:.8rem;">Collaborative filtering, matrix factorization, SVD at scale, CUR decomposition. MovieLens lab. Mini-project presentations.</span></td>
+      <td><span class="badge badge-mmds">Ch. 9, 11</span></td>
+      <td><a href="https://snap.stanford.edu/class/cs246-2024/slides/09-recsys.pdf" target="_blank" style="color:var(--gold-dark);font-size:.8rem;">Slides ↗</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>What Makes Each Week Interesting</h2>
+<div class="hook"><strong>Week 1 — MapReduce</strong>Google had 10 billion web pages and one deadline. They invented a new way to compute. Demo live: same word count, for-loop vs Spark — watch the time collapse.</div>
+<div class="hook"><strong>Week 2 — LSH</strong>Shazam identifies a song from a 5-second noisy clip. Same math as Google's near-duplicate web page detector. Students find near-duplicates in a real news dataset.</div>
+<div class="hook"><strong>Week 3 — Streams</strong>Your fraud detection system sees 10,000 transactions per second. You cannot store them all. You must decide in milliseconds. How? One-pass algorithms.</div>
+<div class="hook"><strong>Week 4 — PageRank</strong>Assign the original 1998 Google paper (9 pages, free). Students compute PageRank by hand on a 5-node graph, then run power iteration on a real SNAP network.</div>
+<div class="hook"><strong>Week 5 — Frequent Itemsets</strong>Amazon's "customers who bought X also bought Y" runs across billions of transactions. Students mine real association rules from the Instacart grocery dataset (3M orders, free on Kaggle).</div>
+<div class="hook"><strong>Week 6 — Recommenders</strong>Netflix offered $1,000,000 to anyone who could beat their algorithm by 10%. Students build a collaborative filter on MovieLens and see exactly why it is hard.</div>
+
+<h2 id="outcomes">Learning Outcomes</h2>
+<ul class="outcome-list">
+  <li>Explain why standard algorithms fail at large scale and describe the MapReduce/Spark computation model.</li>
+  <li>Apply shingling, MinHash, and Locality-Sensitive Hashing to find approximate nearest neighbours in large datasets.</li>
+  <li>Implement one-pass streaming algorithms (Bloom filter, Flajolet-Martin, DGIM) for data that cannot be stored in full.</li>
+  <li>Compute PageRank using power iteration and explain how it is adapted for spam resistance and topic sensitivity.</li>
+  <li>Use A-Priori and SON algorithms to mine frequent itemsets from distributed transaction databases.</li>
+  <li>Build a collaborative-filtering recommender and apply SVD / CUR decomposition for dimensionality reduction at scale.</li>
+</ul>
+
+<h2 id="labs">Lab Notebooks (Google Colab)</h2>
+<p style="font-size:.87rem;color:#6b7280;margin-bottom:16px;">All labs are in Python with PySpark on Google Colab — no local setup required. Notebooks released each week.</p>
+<table>
+  <thead><tr><th>Week</th><th>Lab Title</th><th>Dataset</th><th>Notebook</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>MapReduce with PySpark — Log File Analysis</td><td>NASA HTTP log (free)</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Sept 14</span></td></tr>
+    <tr><td>2</td><td>MinHash &amp; LSH — Near-Duplicate News Detection</td><td>All the News (Kaggle)</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Sept 21</span></td></tr>
+    <tr><td>3</td><td>Stream Mining — Trending Topic Simulation</td><td>Synthetic Twitter stream</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Sept 28</span></td></tr>
+    <tr><td>4</td><td>PageRank — SNAP Social Network</td><td>Stanford SNAP ego-Facebook</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Oct 5</span></td></tr>
+    <tr><td>5</td><td>A-Priori — Market Basket Analysis</td><td>Instacart (Kaggle, 3M orders)</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Oct 12</span></td></tr>
+    <tr><td>6</td><td>Collaborative Filtering — Movie Recommender</td><td>MovieLens 1M</td><td><span style="color:#9ca3af;font-size:.8rem;">Coming Oct 19</span></td></tr>
+  </tbody>
+</table>
+
+<h2 id="resources">Course Resources</h2>
+<div class="res-grid">
+  <div class="res-card">
+    <div class="label">Primary Textbook (Free)</div>
+    <a href="http://www.mmds.org" target="_blank">Mining of Massive Datasets ↗</a>
+    <p>Leskovec, Rajaraman &amp; Ullman. Full PDF free at mmds.org by publisher agreement. Used at Stanford, MIT, CMU.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Lecture Slides (Free)</div>
+    <a href="https://snap.stanford.edu/class/cs246-2024/" target="_blank">Stanford CS246 — 2024 ↗</a>
+    <p>Full slide set from Stanford's offering of this exact course. Aligned chapter-by-chapter with MMDS.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Video Lectures (Free Audit)</div>
+    <a href="https://www.edx.org/course/mining-massive-datasets" target="_blank">Mining Massive Datasets — edX ↗</a>
+    <p>Stanford's online version of CS246. Free to audit. Covers all 6 weeks of this course.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Original Google Paper</div>
+    <a href="https://dl.acm.org/doi/10.1145/1060745.1060752" target="_blank">The PageRank Citation Ranking (1998) ↗</a>
+    <p>Page, Brin, Motwani &amp; Winograd. 9 pages. Assigned reading for Week 4.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Lab Dataset — Week 5</div>
+    <a href="https://www.kaggle.com/c/instacart-market-basket-analysis/data" target="_blank">Instacart Market Basket — Kaggle ↗</a>
+    <p>3 million grocery orders from 200,000 users. A-Priori and association rule mining.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Lab Dataset — Week 6</div>
+    <a href="https://grouplens.org/datasets/movielens/" target="_blank">MovieLens Dataset ↗</a>
+    <p>1M–25M movie ratings. Benchmark for collaborative filtering and recommender systems.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">Lab Dataset — Week 4</div>
+    <a href="https://snap.stanford.edu/data/" target="_blank">Stanford SNAP Graph Datasets ↗</a>
+    <p>Social networks, web graphs, citation networks. Use ego-Facebook for PageRank labs.</p>
+  </div>
+  <div class="res-card">
+    <div class="label">PySpark Reference</div>
+    <a href="https://spark.apache.org/docs/latest/api/python/" target="_blank">PySpark API Docs ↗</a>
+    <p>Official PySpark documentation. Bookmark from Week 1 — used in every lab.</p>
+  </div>
+</div>
+
+<h2 id="assessment">Assessment (Weeks 1–6)</h2>
+<table class="assess-table">
+  <thead><tr><th>Component</th><th>Weight</th><th>Details</th></tr></thead>
+  <tbody>
+    <tr><td>Weekly Lab Notebooks</td><td><span class="pct">40%</span></td><td>One Colab notebook per week. Submit before the next class. Graded on correctness and code clarity.</td></tr>
+    <tr><td>Weekly Quizzes</td><td><span class="pct">20%</span></td><td>15-minute quiz at the start of each class (except Week 1). Covers the previous week's lecture and reading.</td></tr>
+    <tr><td>Mini-Project</td><td><span class="pct">30%</span></td><td>Groups of 2–3 pick a large public dataset in Week 1 and apply each week's technique to it. Written report due Week 6.</td></tr>
+    <tr><td>Presentation</td><td><span class="pct">10%</span></td><td>5-minute group presentation of mini-project findings in Week 6.</td></tr>
+  </tbody>
+</table>
+
+<div style="background:var(--surface);border-radius:10px;padding:18px 22px;font-size:.85rem;color:#374151;margin-bottom:40px;border:1px solid #e5e7eb;">
+  <strong style="color:var(--navy);">Mini-Project thread:</strong> Pick any large public dataset in Week 1. Each week, apply that week's technique to it. By Week 6 you have a complete pipeline — parallel ingestion (W1) → similarity search (W2) → stream simulation (W3) → graph analysis (W4) → pattern mining (W5) → recommendations (W6). This becomes a portfolio piece.
+</div>
+
+</content>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala &middot; IIT Madras Zanzibar &middot; <a href="../../index.html">All Courses</a>
+</footer>
+</body>
+</html>
