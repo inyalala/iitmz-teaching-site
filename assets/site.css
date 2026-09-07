@@ -1,0 +1,284 @@
+/* ─────────────────────────────────────────────────────────
+   IITMZ Teaching Site — shared design overrides
+   ───────────────────────────────────────────────────────── */
+
+/* Font loaded via <link> in each page head — no @import here (3G performance) */
+
+:root {
+  --bg:    #F7F5F1;
+  --bg2:   #EDEAE4;
+  --ink:   #0C0A08;
+  --ink2:  #3A3530;
+  --ink3:  #6B6560;
+  --gold:  #8F4E10;
+  --gold2: #6A3A09;
+  --faint: #D4CFCA;
+  --navy:  #1C1209;
+  --navy2: #2A1B0D;
+  --gold-dark: #6A3A09;
+  --muted: #6B6560;
+}
+
+html { background: var(--bg); }
+body {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ── INDEX PAGE (root) ── */
+header {
+  background: var(--navy) !important;
+}
+header h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  font-size: 2.8rem !important;
+}
+header p.kicker { color: var(--gold) !important; }
+header a.back:not(.header-back) { color: #9aa5b8 !important; }
+header a.back:not(.header-back):hover { color: var(--gold) !important; }
+
+main { background: var(--bg); }
+
+/* Headings — Cormorant Garamond, NO border-bottom anywhere */
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400 !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}
+h2 {
+  color: var(--ink) !important;
+  font-size: 1.55rem !important;
+  letter-spacing: 0.01em !important;
+}
+section h2 {
+  font-size: 1.35rem !important;
+  margin-bottom: 1.2rem !important;
+}
+.content h1 {
+  font-size: 2.4rem !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--ink) !important;
+}
+.content > p.lede { color: var(--ink2) !important; font-family: 'Source Serif 4', serif !important; }
+
+/* ── COURSE INDEX CARDS ── */
+.course-card {
+  background: #fff !important;
+  border: 1px solid var(--faint) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: border-color .15s !important;
+}
+.course-card:hover {
+  border-color: var(--gold) !important;
+  box-shadow: none !important;
+}
+.course-card .code {
+  background: transparent !important;
+  color: var(--gold2) !important;
+  border-radius: 0 !important;
+  font-family: 'Source Serif 4', serif !important;
+  font-weight: 600 !important;
+}
+.course-card h3 {
+  color: var(--ink) !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 400 !important;
+  border: none !important;
+}
+.course-card p { color: var(--ink3) !important; }
+.week-list a { color: var(--gold) !important; }
+footer { color: var(--ink3) !important; }
+footer a { color: var(--gold) !important; }
+
+/* ── COURSE DETAIL PAGES (sidebar layout) ── */
+#sidebar {
+  background: var(--navy) !important;
+  color: #cbd5e1 !important;
+}
+#sidebar .badge {
+  background: rgba(143,78,16,.18) !important;
+  border-color: rgba(143,78,16,.4) !important;
+  color: #C5A059 !important;
+  border-radius: 0 !important;
+}
+#sidebar .brand-text .school,
+#sidebar .brand-text .campus { color: #94a3b8 !important; }
+#sidebar a.back { color: #94a3b8 !important; }
+#sidebar a.back:hover { color: #C5A059 !important; }
+#sidebar nav a { color: #cbd5e1 !important; }
+#sidebar nav a:hover { background: rgba(255,255,255,.06) !important; color: #fff !important; }
+#sidebar nav a.active { background: rgba(143,78,16,.15) !important; color: #EDE8E0 !important; font-weight: 500 !important; }
+#sidebar nav p.group { color: #64748b !important; }
+#sidebar .switch p { color: #64748b !important; }
+#sidebar .switch a { color: #94a3b8 !important; }
+#sidebar .switch a:hover { color: #C5A059 !important; }
+
+#main { background: var(--bg) !important; }
+
+/* Topbar — no border */
+.topbar {
+  background: var(--bg) !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}
+.topbar .codes span {
+  background: rgba(143,78,16,.1) !important;
+  color: var(--gold2) !important;
+  border-radius: 0 !important;
+}
+.topbar a { color: var(--ink3) !important; }
+.topbar a:hover { color: var(--gold) !important; }
+
+/* Cards — no rounded corners, no shadow */
+.card {
+  background: #fff !important;
+  border: 1px solid var(--faint) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* avatars — square */
+.person .avatar,
+.avatar,
+.member-initials,
+.badge { border-radius: 0 !important; }
+.person .avatar { background: var(--navy) !important; color: #C5A059 !important; }
+
+/* grade bars — flat */
+.grade-bar .fill { background: var(--gold) !important; border-radius: 0 !important; }
+.grade-bar .track { border-radius: 0 !important; }
+.grade-bar .pct { color: var(--gold) !important; }
+.grade-bar .row strong { color: var(--ink) !important; }
+
+/* textbook role badges */
+.role-required { background: rgba(143,78,16,.12) !important; color: var(--gold2) !important; border-radius: 0 !important; }
+.role-reference { background: var(--bg2) !important; color: var(--ink3) !important; border-radius: 0 !important; }
+span.role { border-radius: 0 !important; }
+
+/* materials table */
+table.materials td.link a { color: var(--gold) !important; }
+
+/* outcome numbers — square */
+.num {
+  background: rgba(143,78,16,.12) !important;
+  color: var(--gold2) !important;
+  border-radius: 0 !important;
+}
+
+/* objectives box — tinted background, no left border */
+.objectives {
+  background: rgba(143,78,16,.06) !important;
+  border-left: none !important;
+}
+.objectives h3 { color: var(--gold2) !important; border: none !important; }
+
+/* concept boxes */
+.concept { background: var(--bg2) !important; border-color: var(--faint) !important; border-radius: 0 !important; }
+.formula { background: var(--navy) !important; border-radius: 0 !important; }
+
+/* tables */
+th { background: var(--navy) !important; color: #F7F5F1 !important; }
+
+/* note box — tinted, no left border rule */
+.note { background: var(--bg2) !important; border-radius: 0 !important; }
+
+/* lecture pages */
+nav.crumb a { color: var(--gold) !important; }
+.lec-header { border-bottom: none !important; border-top: none !important; }
+.b-module { background: rgba(143,78,16,.12) !important; color: var(--gold2) !important; border-radius: 0 !important; }
+.b-lec, .b-week, .badge-week, .badge-topic, .badge { border-radius: 0 !important; }
+
+/* question bank */
+.qbank-card { border-radius: 0 !important; border-color: var(--faint) !important; }
+.difficulty-easy { background: rgba(26,107,74,.12) !important; color: #1a5c3f !important; border-radius: 0 !important; }
+.difficulty-medium { background: rgba(143,78,16,.12) !important; color: var(--gold2) !important; border-radius: 0 !important; }
+.difficulty-hard { background: rgba(180,20,20,.1) !important; color: #8b1a1a !important; border-radius: 0 !important; }
+
+/* general link colours — exclude sidebar */
+main a, footer a, .content a, .topbar a, nav.crumb a,
+.tab-content a, .card a, article a {
+  color: var(--gold) !important;
+}
+main a:hover, footer a:hover, .content a:hover, .topbar a:hover,
+nav.crumb a:hover, .tab-content a:hover, .card a:hover, article a:hover {
+  color: var(--gold2) !important;
+}
+
+/* lab / tutorial pages — tinted strips, no left borders */
+.lab-step { border-left: none !important; background: rgba(143,78,16,.04) !important; }
+.tip { background: rgba(143,78,16,.07) !important; border-left: none !important; }
+.warning { background: rgba(180,20,20,.06) !important; }
+
+/* figure images — no shadow */
+.figure img, figure img { box-shadow: none !important; border-radius: 0 !important; }
+
+/* remove ALL remaining separator borders from layout elements */
+.topbar, .lec-header, .nav-bar, .meta-row,
+.textbook, .policy, .assess-item, .detail-section-h,
+section, main, article, aside, header, footer, nav {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* ── QUESTION BANK PAGES — flatten AI-telltale boxes and traffic-light colours ── */
+
+/* week divider: was a solid gold rule under every week heading — remove, rely on spacing */
+.week-divider { display: none !important; }
+.week-header { margin-bottom: 18px !important; }
+
+/* legend: plain text row, no grey box */
+.legend {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 24px !important;
+  gap: 28px !important;
+}
+.legend-item { color: var(--ink3) !important; }
+.dot, .dot-e, .dot-m, .dot-h, .dot-x { display: none !important; }
+
+/* weightage cards: tinted panel, no border, no grid boxes */
+.weight-guide { gap: 2px !important; background: var(--faint) !important; }
+.wg-card {
+  background: var(--bg) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.wg-card p.wg-name { color: var(--ink) !important; font-family: 'Cormorant Garamond', Georgia, serif !important; font-weight: 500 !important; font-size: 1rem !important; }
+.wg-card p.wg-label { color: var(--ink3) !important; }
+.wg-card .wg-tiers { color: var(--ink3) !important; }
+
+/* tier tabs: one accent colour (gold) instead of green/amber/red/purple traffic lights */
+.tier-tabs { border: none !important; }
+.tier-tab {
+  background: none !important;
+  border-bottom: 2px solid var(--faint) !important;
+  color: var(--ink3) !important;
+}
+.tier-tab.active-e, .tier-tab.active-m, .tier-tab.active-h, .tier-tab.active-x {
+  background: none !important;
+  color: var(--gold) !important;
+  border-bottom-color: var(--gold) !important;
+  font-weight: 700 !important;
+}
+
+/* question panels: no bordered box, no per-row border, zebra tint instead */
+.qs-panel { border: none !important; border-radius: 0 !important; }
+.q-item { border-bottom: none !important; padding: 16px 20px !important; }
+.q-item:nth-child(odd) { background: rgba(143, 78, 16, .03) !important; }
+
+/* difficulty tags: bold gold text label, no coloured pill background */
+.q-tag {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 700 !important;
+}
+.tag-e, .tag-m, .tag-h, .tag-x { color: var(--gold-dark) !important; }

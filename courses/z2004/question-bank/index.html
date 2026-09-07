@@ -4,17 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="color-scheme" content="light"/>
-<title>Question Bank — Z2004 Database Management Systems | Dr. Innocent Nyalala</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Question Bank: Z2004 Database Management Systems | Dr. Innocent Nyalala</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
 <style>
-  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;--ink:#1f2937;--muted:#6b7280;
+  :root{--navy:#1C1209;--navy2:#0f1f38;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;
         --easy:#15803d;--easy-bg:#f0fdf4;--inter:#b45309;--inter-bg:#fffbeb;--hard:#b91c1c;--hard-bg:#fef2f2;}
   *{box-sizing:border-box;}
   html{background:#fff;}
-  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+  body{margin:0;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
   #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
   #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-  #sidebar .badge{width:34px;height:34px;border-radius:50%;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
+  #sidebar .badge{width:34px;height:34px;border-radius:0;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
   #sidebar .brand-text p{margin:0;line-height:1.25;}
   #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
   #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
@@ -22,32 +22,32 @@
   #sidebar a.back:hover{color:var(--gold);}
   #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
   #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
-  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s;}
+  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:0;transition:background .15s,color .15s;}
   #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
   #sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
   #main{flex:1;min-width:0;}
   .topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
-  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:99px;margin-left:6px;}
+  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:0;margin-left:6px;}
   .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
   .topbar a:hover{color:var(--gold-dark);}
   .content{padding:40px 40px 90px;}
-  .content h1{font-family:'Playfair Display',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
+  .content h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
   .content > p.lede{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:32px;}
-  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;background:#f8fafc;border-radius:8px;border:1px solid #eee;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px;padding:14px 18px;background:#f8fafc;border-radius:0;border:1px solid #eee;}
   .legend-item{display:flex;align-items:center;gap:7px;font-size:.82rem;}
-  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot{width:10px;height:10px;border-radius:0;}
   .dot-e{background:var(--easy);}
   .dot-m{background:var(--inter);}
   .dot-h{background:var(--hard);}
   .weight-guide{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px;}
-  .wg-card{border-radius:8px;padding:12px 14px;border:1px solid #e5e7eb;}
+  .wg-card{border-radius:0;padding:12px 14px;border:1px solid #e5e7eb;}
   .wg-card p.wg-label{margin:0 0 4px;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#94a3b8;}
   .wg-card p.wg-name{margin:0 0 6px;font-weight:700;font-size:.9rem;color:var(--navy);}
   .wg-card .wg-tiers{font-size:.78rem;color:var(--muted);line-height:1.6;}
   .week-block{margin-bottom:48px;scroll-margin-top:24px;}
   .week-header{display:flex;align-items:baseline;gap:14px;margin-bottom:4px;}
-  .week-header h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.15rem;margin:0;}
-  .week-header .wnum{font-size:.7rem;font-weight:700;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 9px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;}
+  .week-header h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.15rem;margin:0;}
+  .week-header .wnum{font-size:.7rem;font-weight:700;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 9px;border-radius:0;text-transform:uppercase;letter-spacing:.05em;}
   .week-divider{border:none;border-top:2px solid var(--gold);margin:6px 0 0;}
   .tier-tabs{display:flex;gap:0;overflow:hidden;border:1px solid #e5e7eb;border-top:none;border-bottom:none;}
   .tier-tab{padding:8px 0;font-size:.8rem;font-weight:600;cursor:pointer;border:none;border-bottom:2px solid #e5e7eb;background:#f8fafc;color:#64748b;transition:background .15s,color .15s,border-color .15s;flex:1;text-align:center;}
@@ -60,7 +60,7 @@
   .q-item:last-child{border-bottom:none;}
   .q-meta{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
   .q-num{font-size:.7rem;font-weight:700;color:#94a3b8;min-width:24px;}
-  .q-tag{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;}
+  .q-tag{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:0;text-transform:uppercase;letter-spacing:.04em;}
   .tag-e{background:var(--easy-bg);color:var(--easy);}
   .tag-m{background:var(--inter-bg);color:var(--inter);}
   .tag-h{background:var(--hard-bg);color:var(--hard);}
@@ -70,6 +70,7 @@
   code{background:#f1f5f9;padding:1px 5px;border-radius:3px;font-family:'Courier New',monospace;font-size:.85em;}
   @media(max-width:640px){#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}.weight-guide{grid-template-columns:1fr;}}
 </style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
 </head>
 <body>
 
@@ -84,16 +85,16 @@
   <a class="back" href="../index.html">&larr; Z2004 Overview</a>
   <nav>
     <p class="group">Modules</p>
-    <a href="#m1">M1 &mdash; ER Model &amp; Foundations</a>
-    <a href="#m2">M2 &mdash; Relational Model</a>
-    <a href="#m3">M3 &mdash; Relational Algebra</a>
-    <a href="#m4">M4 &mdash; SQL Foundations</a>
-    <a href="#m5">M5 &mdash; SQL Intermediate</a>
-    <a href="#m6">M6 &mdash; SQL Advanced</a>
-    <a href="#m7">M7 &mdash; Normalization</a>
-    <a href="#m8">M8 &mdash; Storage &amp; Indexing</a>
-    <a href="#m9">M9 &mdash; Transactions</a>
-    <a href="#m10">M10 &mdash; Modern Data Systems</a>
+    <a href="#m1">M1: ER Model &amp; Foundations</a>
+    <a href="#m2">M2: Relational Model</a>
+    <a href="#m3">M3: Relational Algebra</a>
+    <a href="#m4">M4: SQL Foundations</a>
+    <a href="#m5">M5: SQL Intermediate</a>
+    <a href="#m6">M6: SQL Advanced</a>
+    <a href="#m7">M7: Normalization</a>
+    <a href="#m8">M8: Storage &amp; Indexing</a>
+    <a href="#m9">M9: Transactions</a>
+    <a href="#m10">M10: Modern Data Systems</a>
   </nav>
 </aside>
 
@@ -111,9 +112,9 @@
     <p class="lede">Organised by module and difficulty. Use this bank to prepare for Quiz 1, Quiz 2, and the end-semester examination. Questions are not a substitute for lab exercises and the semester project.</p>
 
     <div class="legend">
-      <div class="legend-item"><div class="dot dot-e"></div><strong>Easy</strong>&nbsp;&mdash; recall and direct application</div>
-      <div class="legend-item"><div class="dot dot-m"></div><strong>Intermediate</strong>&nbsp;&mdash; multi-step reasoning</div>
-      <div class="legend-item"><div class="dot dot-h"></div><strong>Advanced</strong>&nbsp;&mdash; design, proof, or open-ended</div>
+      <div class="legend-item"><div class="dot dot-e"></div><strong>Easy</strong>: recall and direct application</div>
+      <div class="legend-item"><div class="dot dot-m"></div><strong>Intermediate</strong>: multi-step reasoning</div>
+      <div class="legend-item"><div class="dot dot-h"></div><strong>Advanced</strong>: design, proof, or open-ended</div>
     </div>
 
     <div class="weight-guide">
@@ -189,7 +190,7 @@
       <div class="qs-panel" id="m3-m">
         <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Given <code>Employee(EmpID, Name, DeptID, Salary)</code> and <code>Department(DeptID, DeptName, ManagerID)</code>, write relational algebra expressions for: (a) names of employees in the "CS" department, (b) names of managers, (c) departments with no employees.</p></div>
         <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA</span></div><p class="q-text">Explain the division operator in relational algebra. Use it to find students who have enrolled in ALL courses offered by the CS department.</p></div>
-        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Show that the intersection operation (&cap;) is not a fundamental operation — express it using only union and set difference.</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz</span></div><p class="q-text">Show that the intersection operation (&cap;) is not a fundamental operation: express it using only union and set difference.</p></div>
       </div>
       <div class="qs-panel" id="m3-h">
         <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Relational algebra expressions are not unique for a given query. Write three different relational algebra expressions for "find names of employees who earn more than their manager." Then explain how a query optimizer uses equivalence rules to transform one expression into a more efficient one.</p></div>
@@ -351,7 +352,7 @@
         <div class="q-item"><div class="q-meta"><span class="q-num">Q3</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Exam</span></div><p class="q-text">What is a vector database? How does it differ from a relational database in terms of data representation and query type? Name one commercial vector database.</p></div>
       </div>
       <div class="qs-panel" id="m10-m">
-        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain how a RAG (Retrieval Augmented Generation) pipeline works. What role does the vector database play? What are the three failure modes — retrieval miss, hallucination, and context overflow — and how can each be mitigated?</p></div>
+        <div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Explain how a RAG (Retrieval Augmented Generation) pipeline works. What role does the vector database play? What are the three failure modes: retrieval miss, hallucination, and context overflow: and how can each be mitigated?</p></div>
         <div class="q-item"><div class="q-meta"><span class="q-num">Q2</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Project</span></div><p class="q-text">Design a schema for storing document embeddings in a vector database for a university knowledge base. What chunking strategy would you use? What metadata would you store alongside each vector? How would you handle document updates?</p></div>
       </div>
       <div class="qs-panel" id="m10-h">
@@ -379,6 +380,27 @@ function showTier(btn, mod, tier) {
   const target = document.getElementById(mod + '-' + tier);
   if (target) target.classList.add('shown');
 }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
 </script>
 </body>
 </html>

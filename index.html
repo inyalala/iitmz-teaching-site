@@ -2,88 +2,433 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="color-scheme" content="light"/>
-<meta name="description" content="Course materials for students — Dr. Innocent Nyalala, IIT Madras Zanzibar."/>
+<meta name="description" content="Course materials: Dr. Innocent Nyalala, IIT Madras Zanzibar."/>
 <title>Course Materials | Dr. Innocent Nyalala</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet"/>
 <style>
-  :root{--navy:#0a1628;--navy2:#0f1f38;--gold:#C5A059;--gold-dark:#A8813A;}
-  *{box-sizing:border-box;}
-  html{background:#fff;}
-  body{font-family:'Inter',sans-serif;margin:0;color:#1f2937;background:#fff;}
-  header{background:var(--navy);background-image:radial-gradient(circle at 2px 2px,rgba(197,160,89,.08) 1px,transparent 0);background-size:28px 28px;padding:56px 20px 44px;text-align:center;}
-  header p.kicker{color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.75rem;margin:0 0 12px;}
-  header h1{font-family:'Playfair Display',serif;color:#fff;margin:0 0 10px;font-size:2rem;}
-  header p.sub{color:#9aa5b8;max-width:560px;margin:0 auto;font-size:.95rem;line-height:1.6;}
-  header a.back{display:inline-flex;align-items:center;gap:6px;color:#9aa5b8;font-size:.8rem;text-decoration:none;margin-bottom:20px;}
-  header a.back:hover{color:var(--gold);}
-  main{max-width:760px;margin:0 auto;padding:44px 20px 70px;}
-  h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.3rem;border-bottom:2px solid var(--gold);padding-bottom:.4em;margin-bottom:20px;}
-  .course-card{background:#fff;border:1px solid #eee;border-radius:12px;padding:22px 24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
-  .course-card .code{display:inline-block;background:rgba(197,160,89,.15);color:var(--gold-dark);font-size:.7rem;font-weight:700;letter-spacing:.05em;padding:3px 10px;border-radius:99px;margin-bottom:10px;}
-  .course-card h3{margin:0 0 6px;font-size:1.1rem;color:var(--navy);}
-  .week-list{list-style:none;margin:14px 0 0;padding:0;}
-  .week-list li{margin-bottom:8px;}
-  .week-list a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.92rem;}
-  .week-list a:hover{text-decoration:underline;}
-  .note{background:#fafaf9;border-left:3px solid var(--gold);border-radius:6px;padding:14px 18px;font-size:.85rem;color:#4b5563;margin-top:30px;}
-  footer{text-align:center;color:#9ca3af;font-size:.8rem;padding:30px 20px 50px;}
-  footer a{color:var(--gold-dark);text-decoration:none;}
+:root{
+  --bg:#F7F5F1;
+  --ink:#0C0A08;
+  --ink2:#3A3530;
+  --ink3:#6B6560;
+  --gold:#8F4E10;
+  --gold2:#6A3A09;
+  --warm:#D4CFCA;
+  --dark:#1C1209;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--dark)}
+body{
+  font-family:'Source Serif 4',Georgia,serif;
+  background:var(--bg);color:var(--ink);
+  line-height:1.65;overflow-x:hidden;
+  /* Lenis sets this */
+}
+
+/* ── HEADER ── */
+.site-header{
+  background:var(--dark);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(56px,9vh,96px) clamp(24px,6vw,96px) clamp(56px,6vw,80px);
+  position:relative;overflow:hidden;
+}
+.header-grain{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+  background-size:250px 250px;
+}
+/* warm horizontal light beam: organic, not AI */
+.header-beam{
+  position:absolute;bottom:0;left:0;right:0;height:40%;
+  background:radial-gradient(ellipse 80% 60% at 30% 120%, rgba(143,78,16,.18) 0%, transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.header-inner{max-width:960px;width:100%;position:relative;z-index:1}
+
+.header-back{
+  display:inline-flex;align-items:center;gap:7px;
+  color:rgba(255,255,255,.28);
+  font-family:'Source Serif 4',serif;font-size:.7rem;
+  letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+  margin-bottom:clamp(48px,8vh,96px);
+  opacity:0;
+  transition:color .2s;
+}
+.header-back:hover{color:rgba(197,160,89,.7)}
+.header-back::before{content:'←'}
+
+.header-eyebrow{
+  color:rgba(197,160,89,.6);
+  font-family:'Source Serif 4',serif;font-size:.66rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:20px;opacity:0;
+}
+.header-name{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:300;line-height:1.0;letter-spacing:-.025em;
+  color:#fff;
+  font-size:clamp(3rem,8vw,6.5rem);
+  overflow:hidden;
+}
+/* each word wraps for GSAP split */
+.word{display:inline-block;overflow:hidden;vertical-align:bottom}
+.word-inner{display:inline-block;transform:translateY(110%)}
+.word em{font-style:italic;font-weight:300}
+
+.header-tagline{
+  color:rgba(255,255,255,.38);
+  font-size:clamp(.82rem,1.3vw,.96rem);
+  line-height:1.8;margin-top:clamp(20px,2.5vw,32px);
+  max-width:500px;opacity:0;
+}
+.scroll-cue{
+  position:absolute;bottom:clamp(28px,4vw,48px);right:clamp(24px,6vw,96px);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,.2);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
+  z-index:1;opacity:0;
+}
+.scroll-line{
+  width:1px;height:40px;background:rgba(255,255,255,.12);
+  transform-origin:top;
+}
+
+/* ── MAIN ── */
+main{
+  max-width:960px;margin:0 auto;
+  padding:clamp(72px,9vw,120px) clamp(24px,6vw,96px) 80px;
+}
+
+/* ── SEMESTER LABEL ── */
+.sem-block{margin-bottom:clamp(36px,5vw,60px);opacity:0}
+.sem-label{
+  font-family:'Source Serif 4',serif;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:clamp(24px,3vw,40px);
+}
+.sem-dot{
+  width:5px;height:5px;border-radius:0;
+  background:var(--gold);flex-shrink:0;
+}
+.sem-dot.past{background:var(--warm)}
+
+/* ── COURSE ROWS: no borders, spacing only ── */
+.course-list{list-style:none}
+.course-row{
+  display:grid;
+  grid-template-columns:1fr clamp(28px,4vw,52px);
+  align-items:start;
+  padding:clamp(22px,3vw,36px) 0;
+  cursor:pointer;position:relative;
+  opacity:0;
+}
+/* micro-line between rows via pseudo: not a layout border */
+.course-row::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:rgba(12,10,8,.07);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+.course-row:last-child::after{display:none}
+
+.course-meta{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.course-code{
+  font-family:'Source Serif 4',serif;font-size:.63rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);
+}
+.course-level{
+  font-family:'Source Serif 4',serif;font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);
+}
+.course-title{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(1.2rem,2.4vw,1.65rem);
+  font-weight:400;line-height:1.18;
+  color:var(--ink);text-decoration:none;display:block;
+  transition:color .2s;
+}
+.course-period{
+  font-size:.75rem;color:var(--ink3);
+  margin-top:7px;font-style:italic;
+}
+.course-desc{
+  font-size:.84rem;color:var(--ink2);
+  line-height:1.7;max-width:540px;margin-top:7px;
+}
+.course-arrow{
+  font-size:1.15rem;color:var(--warm);
+  transition:color .2s,transform .3s cubic-bezier(.16,1,.3,1);
+  padding-top:clamp(24px,3vw,38px);text-align:right;
+}
+
+/* hover cluster */
+.course-row:hover .course-title{color:var(--gold)}
+.course-row:hover .course-arrow{color:var(--gold);transform:translateX(5px)}
+.course-row:hover::after{transform:scaleX(1)}
+.course-row:focus-within .course-title{color:var(--gold)}
+.course-row:focus-within .course-arrow{color:var(--gold)}
+
+/* ── NOTE ── */
+.course-note{
+  margin-top:clamp(52px,7vw,80px);
+  font-size:.82rem;color:var(--ink3);line-height:1.85;
+  max-width:500px;opacity:0;
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:clamp(28px,4vw,48px) clamp(24px,6vw,96px);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+  max-width:960px;margin:0 auto;
+  opacity:0;
+}
+.footer-copy{font-size:.72rem;color:var(--ink3)}
+.footer-back{
+  font-size:.72rem;color:var(--gold);text-decoration:none;
+  letter-spacing:.05em;transition:color .15s;
+}
+.footer-back:hover{color:var(--gold2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:560px){
+  .course-arrow{display:none}
+  .course-row{grid-template-columns:1fr}
+  .header-name{font-size:clamp(2.4rem,10vw,3.5rem)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .word-inner,.header-back,.header-eyebrow,.header-tagline,
+  .scroll-cue,.sem-block,.course-row,.course-note,footer{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
-<header>
-  <a class="back" href="https://inyalala.github.io/"><i class="fas fa-arrow-left"></i> inyalala.github.io</a><br/>
-  <p class="kicker">IIT Madras Zanzibar</p>
-  <h1>Course Materials</h1>
-  <p class="sub">Lecture notes, slides, and notebooks for courses taught by Dr. Innocent Nyalala. Every session lists the full PDF notes, the slides shown in class, and an editable PowerPoint copy.</p>
+
+<header class="site-header">
+  <div class="header-grain"></div>
+  <div class="header-beam"></div>
+  <div class="header-inner">
+    <a class="header-back" href="https://inyalala.github.io/">inyalala.github.io</a>
+    <p class="header-eyebrow">IIT Madras Zanzibar &nbsp;&middot;&nbsp; Course Materials</p>
+    <h1 class="header-name" id="headline">
+      <span class="word"><span class="word-inner">Dr.</span></span>
+      <span class="word"><span class="word-inner">Innocent</span></span>
+      <span class="word"><span class="word-inner"><em>Nyalala</em></span></span>
+    </h1>
+    <p class="header-tagline">Lecture notes, slides, notebooks, labs, and assignments: every session, in full, as the semester unfolds.</p>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line" id="scrollLine"></div>
+  </div>
 </header>
 
 <main>
-  <section>
-    <h2>BS Courses</h2>
 
-    <div class="course-card">
-      <span class="code">Z2005 &middot; BS</span>
-      <h3><a href="courses/z2005/index.html" style="color:var(--navy);text-decoration:none;">Programming and Data Structures <i class="fas fa-arrow-right" style="font-size:.8rem;color:var(--gold-dark)"></i></a></h3>
-      <p style="margin:0;color:#6b7280;font-size:.85rem;">Instructor, schedule, grading, resources, and weekly materials.</p>
+  <div class="sem-block">
+    <div class="sem-label">
+      <span class="sem-dot"></span>
+      BS Programmes
     </div>
+    <ul class="course-list">
+      <li class="course-row" tabindex="0" role="link" onclick="location.href='courses/z2005/index.html'" onkeydown="if(event.key==='Enter')location.href='courses/z2005/index.html'">
+        <div>
+          <div class="course-meta"><span class="course-code">Z2005</span><span class="course-level">BS</span></div>
+          <a class="course-title" href="courses/z2005/index.html">Programming and Data Structures</a>
+          <p class="course-period">Odd Semester &middot; October 2026 &ndash; January 2027</p>
+          <p class="course-desc">Foundations of programming and classical data structures, taught in Python with emphasis on correctness, testing, and reasoning about cost.</p>
+        </div>
+        <span class="course-arrow" aria-hidden="true">&#x2192;</span>
+      </li>
+      <li class="course-row" tabindex="0" role="link" onclick="location.href='courses/z2004/index.html'" onkeydown="if(event.key==='Enter')location.href='courses/z2004/index.html'">
+        <div>
+          <div class="course-meta"><span class="course-code">Z2004</span><span class="course-level">BS</span></div>
+          <a class="course-title" href="courses/z2004/index.html">Database Management Systems</a>
+          <p class="course-period">Even Semester &middot; March &ndash; July 2026</p>
+          <p class="course-desc">Relational modeling, SQL, normalization, transactions, indexing, and query processing, with a semester-long applied database project.</p>
+        </div>
+        <span class="course-arrow" aria-hidden="true">&#x2192;</span>
+      </li>
+      <li class="course-row" tabindex="0" role="link" onclick="location.href='courses/dm-scale/index.html'" onkeydown="if(event.key==='Enter')location.href='courses/dm-scale/index.html'">
+        <div>
+          <div class="course-meta"><span class="course-code">Z3003</span><span class="course-level">BS</span></div>
+          <a class="course-title" href="courses/dm-scale/index.html">Data Mining: Scaling to Large Data</a>
+          <p class="course-period">Even Semester &middot; March &ndash; July 2026</p>
+          <p class="course-desc">MapReduce, LSH, data streams, PageRank, frequent itemsets, and recommendation systems. Co-taught with Dr. Mahendran V, IIT Tirupati.</p>
+        </div>
+        <span class="course-arrow" aria-hidden="true">&#x2192;</span>
+      </li>
+    </ul>
+  </div>
 
-    <div class="course-card">
-      <span class="code">Z2004 &middot; BS</span>
-      <h3><a href="courses/z2004/index.html" style="color:var(--navy);text-decoration:none;">Database Management Systems <i class="fas fa-arrow-right" style="font-size:.8rem;color:var(--gold-dark)"></i></a></h3>
-      <p style="margin:0;color:#6b7280;font-size:.85rem;">Relational model, SQL, transactions, NoSQL, vector databases, and cloud databases.</p>
+  <div class="sem-block">
+    <div class="sem-label">
+      <span class="sem-dot past"></span>
+      MTech Programmes
     </div>
+    <ul class="course-list">
+      <li class="course-row" tabindex="0" role="link" onclick="location.href='courses/z5007/index.html'" onkeydown="if(event.key==='Enter')location.href='courses/z5007/index.html'">
+        <div>
+          <div class="course-meta"><span class="course-code">Z5007</span><span class="course-level">MTech</span></div>
+          <a class="course-title" href="courses/z5007/index.html">Programming and Data Structures</a>
+          <p class="course-period">Odd Semester &middot; October 2026 &ndash; January 2027</p>
+          <p class="course-desc">Graduate-level treatment of data structures and algorithms, with emphasis on formal analysis, advanced topics, and research-grade implementation.</p>
+        </div>
+        <span class="course-arrow" aria-hidden="true">&#x2192;</span>
+      </li>
+      <li class="course-row" tabindex="0" role="link" onclick="location.href='courses/z5008/index.html'" onkeydown="if(event.key==='Enter')location.href='courses/z5008/index.html'">
+        <div>
+          <div class="course-meta"><span class="course-code">Z5008</span><span class="course-level">MTech</span></div>
+          <a class="course-title" href="courses/z5008/index.html">Big Data Lab</a>
+          <p class="course-period">Even Semester &middot; March &ndash; July 2026</p>
+          <p class="course-desc">Hands-on engineering with large-scale data systems: Hadoop, Spark, streaming pipelines, and cloud-native infrastructure.</p>
+        </div>
+        <span class="course-arrow" aria-hidden="true">&#x2192;</span>
+      </li>
+    </ul>
+  </div>
 
-    <div class="course-card">
-      <span class="code">Z3003 &middot; BS</span>
-      <h3><a href="courses/dm-scale/index.html" style="color:var(--navy);text-decoration:none;">Data Mining — Scaling to Large Data <i class="fas fa-arrow-right" style="font-size:.8rem;color:var(--gold-dark)"></i></a></h3>
-      <p style="margin:0;color:#6b7280;font-size:.85rem;">MapReduce, LSH, data streams, PageRank, frequent itemsets, and recommendation systems. Weeks 1–6 (Dr. Nyalala) + Weeks 7–15 (Dr. Mahendran V, IIT Tirupati).</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>MTech Courses</h2>
-
-    <div class="course-card">
-      <span class="code">Z5007 &middot; MTech</span>
-      <h3><a href="courses/z5007/index.html" style="color:var(--navy);text-decoration:none;">Programming and Data Structures <i class="fas fa-arrow-right" style="font-size:.8rem;color:var(--gold-dark)"></i></a></h3>
-      <p style="margin:0;color:#6b7280;font-size:.85rem;">Instructor, schedule, grading, resources, and weekly materials.</p>
-    </div>
-
-    <div class="course-card">
-      <span class="code">Z5008 &middot; MTech</span>
-      <h3><a href="courses/z5008/index.html" style="color:var(--navy);text-decoration:none;">Big Data Lab <i class="fas fa-arrow-right" style="font-size:.8rem;color:var(--gold-dark)"></i></a></h3>
-      <p style="margin:0;color:#6b7280;font-size:.85rem;">Instructor, schedule, grading, resources, and course materials.</p>
-    </div>
-  </section>
+  <p class="course-note">
+    Slides, notebooks, lab sheets, and code are linked from each course page as the semester progresses. Assignment repositories are distributed through GitHub Classroom: solutions are not published.
+  </p>
 
 </main>
 
 <footer>
-  &copy; 2026 Dr. Innocent Nyalala &middot; <a href="https://inyalala.github.io/">Main site</a>
+  <span class="footer-copy">&copy; 2026 Dr. Innocent Nyalala</span>
+  <a class="footer-back" href="https://inyalala.github.io/">&#x2190;&nbsp; Main site</a>
 </footer>
+
+<!-- Lenis smooth scroll -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<!-- GSAP core + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+// ── Lenis smooth scroll ──────────────────────────────
+var lenis = new Lenis({
+  duration: 1.2,
+  easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+  smooth: true,
+  smoothTouch: false,
+});
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+// connect GSAP ScrollTrigger to Lenis
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+gsap.ticker.lagSmoothing(0);
+
+// ── Header entrance timeline ─────────────────────────
+var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+tl.to('.header-back', { opacity: 1, y: 0, duration: 0.7, delay: 0.2 }, 0)
+  .to('.header-eyebrow', { opacity: 1, y: 0, duration: 0.6 }, 0.35)
+  .to('.word-inner', {
+    y: '0%',
+    duration: 1.1,
+    stagger: 0.08,
+    ease: 'power4.out'
+  }, 0.45)
+  .to('.header-tagline', { opacity: 1, y: 0, duration: 0.7 }, 0.85)
+  .to('.scroll-cue', { opacity: 1, duration: 0.6 }, 1.1);
+
+// scroll-line animation (repeating)
+gsap.fromTo('#scrollLine',
+  { scaleY: 0, transformOrigin: 'top' },
+  { scaleY: 1, transformOrigin: 'top', duration: 0.9, ease: 'power2.inOut',
+    repeat: -1, repeatDelay: 0.4, yoyo: false,
+    delay: 1.5,
+    onRepeat: function(){ gsap.set('#scrollLine', { scaleY: 0 }); }
+  }
+);
+
+// ── Scroll-triggered reveals ─────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+// semester blocks
+gsap.utils.toArray('.sem-block').forEach(function(block, i){
+  gsap.to(block, {
+    opacity: 1,
+    y: 0,
+    duration: 0.7,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: block,
+      start: 'top 85%',
+      once: true,
+    },
+    delay: i * 0.1,
+  });
+  gsap.set(block, { y: 20 });
+});
+
+// course rows: staggered per list
+gsap.utils.toArray('.course-list').forEach(function(list){
+  var rows = list.querySelectorAll('.course-row');
+  gsap.to(rows, {
+    opacity: 1,
+    y: 0,
+    duration: 0.65,
+    stagger: 0.09,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: list,
+      start: 'top 82%',
+      once: true,
+    }
+  });
+  gsap.set(rows, { y: 16 });
+});
+
+// note + footer
+gsap.to('.course-note', {
+  opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+  scrollTrigger: { trigger: '.course-note', start: 'top 90%', once: true }
+});
+gsap.set('.course-note', { y: 12 });
+
+gsap.to('footer', {
+  opacity: 1, duration: 0.5, ease: 'none',
+  scrollTrigger: { trigger: 'footer', start: 'top 95%', once: true }
+});
+
+// ── Magnetic cursor effect on arrows ─────────────────
+document.querySelectorAll('.course-row').forEach(function(row){
+  var arrow = row.querySelector('.course-arrow');
+  if(!arrow) return;
+  row.addEventListener('mousemove', function(e){
+    var rect = row.getBoundingClientRect();
+    var arrowRect = arrow.getBoundingClientRect();
+    var cx = arrowRect.left + arrowRect.width / 2;
+    var cy = arrowRect.top + arrowRect.height / 2;
+    var dx = (e.clientX - cx) * 0.25;
+    var dy = (e.clientY - cy) * 0.25;
+    gsap.to(arrow, { x: dx, y: dy, duration: 0.4, ease: 'power2.out' });
+  });
+  row.addEventListener('mouseleave', function(){
+    gsap.to(arrow, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,.5)' });
+  });
+});
+
+// ── Parallax on header ───────────────────────────────
+gsap.to('.header-beam', {
+  y: -60,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '.site-header',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.5,
+  }
+});
+</script>
 </body>
 </html>

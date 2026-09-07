@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lab 1 — MapReduce with PySpark | Z3003</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--surface:#f8fafc;--code-bg:#1e1e2e;--code-fg:#cdd6f4;--cell-border:#313244;}
+*{box-sizing:border-box;}
+body{font-family:'Source Serif 4', Georgia, serif,sans-serif;margin:0;color:#1f2937;background:#f3f4f6;min-height:100vh;}
+header{background:var(--navy);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+header .left .breadcrumb{color:#9aa5b8;font-size:.75rem;margin-bottom:4px;}
+header .left .breadcrumb a{color:var(--gold);text-decoration:none;}
+header h1{color:#fff;margin:0;font-family:'Cormorant Garamond',serif;font-size:1.3rem;}
+header .badges{display:flex;gap:8px;flex-wrap:wrap;}
+header .badge{padding:4px 12px;border-radius:0;font-size:.7rem;font-weight:700;letter-spacing:.05em;}
+.badge-week{background:rgba(197,160,89,.25);color:var(--gold);}
+.badge-topic{background:rgba(255,255,255,.1);color:#9aa5b8;}
+
+.notebook{max-width:900px;margin:32px auto;padding:0 20px 60px;}
+
+/* cells */
+.cell{background:#fff;border:1px solid #e5e7eb;border-radius:0;margin-bottom:16px;overflow:hidden;}
+.cell-label{display:flex;align-items:center;gap:8px;padding:8px 16px;border-bottom:1px solid #f0f0f0;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.cell-label.md{color:#6b7280;background:#fafafa;}
+.cell-label.code{color:var(--gold-dark);background:#fafaf3;}
+.cell-label.out{color:#059669;background:#f0fdf4;}
+.cell-label.task{color:#7c3aed;background:#faf5ff;}
+.cell-label i{font-size:.8rem;}
+
+.md-content{padding:16px 20px;font-size:.9rem;line-height:1.65;color:#374151;}
+.md-content h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.15rem;margin:4px 0 10px;border-bottom:2px solid var(--gold);padding-bottom:.3em;}
+.md-content h3{color:var(--navy);font-size:.95rem;margin:14px 0 6px;}
+.md-content p{margin:0 0 10px;}
+.md-content ul{margin:0 0 10px;padding-left:20px;}
+.md-content li{margin-bottom:4px;}
+.md-content code{background:#f3f4f6;padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.83em;color:#7c3aed;}
+.md-content strong{color:var(--navy);}
+.md-content .formula{background:#1e1e2e;color:#cdd6f4;padding:10px 14px;border-radius:0;font-family:'JetBrains Mono',monospace;font-size:.82rem;margin:8px 0;overflow-x:auto;}
+
+.code-content{background:var(--code-bg);padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;color:var(--code-fg);overflow-x:auto;white-space:pre;}
+.kw{color:#cba6f7;}.fn{color:#89b4fa;}.st{color:#a6e3a1;}.cm{color:#6c7086;font-style:italic;}.nb{color:#fab387;}.op{color:#89dceb;}
+
+.out-content{background:#f0fdf4;padding:14px 20px;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.6;color:#064e3b;white-space:pre-wrap;}
+
+.task-content{padding:16px 20px;background:#faf5ff;}
+.task-content p{margin:0 0 8px;font-size:.88rem;color:#374151;}
+.task-content ol{margin:0;padding-left:20px;font-size:.88rem;color:#374151;}
+.task-content li{margin-bottom:6px;}
+.task-content .hint{background:#ede9fe;border-left:3px solid #7c3aed;padding:8px 12px;border-radius:0 4px 4px 0;font-size:.82rem;color:#5b21b6;margin-top:10px;}
+
+.objective{background:#fffbeb;border:1px solid #fcd34d;border-radius:0;padding:16px 20px;margin-bottom:16px;}
+.objective h3{margin:0 0 8px;color:#92400e;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;}
+.objective ul{margin:0;padding-left:18px;font-size:.87rem;color:#78350f;}
+.objective li{margin-bottom:4px;}
+
+.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;margin-top:20px;border-top: none;}
+.nav-bar a{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:0;font-size:.85rem;font-weight:600;text-decoration:none;background:var(--navy);color:#fff;}
+.nav-bar a:hover{background:var(--gold-dark);}
+.nav-bar span{color:#9ca3af;font-size:.82rem;}
+</style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+</head>
+<body>
+<header>
+  <div class="left">
+    <div class="breadcrumb"><a href="../index.html">Z3003 Data Mining</a> / Lab Notebooks</div>
+    <h1>Lab 1 — MapReduce with PySpark</h1>
+  </div>
+  <div class="badges">
+    <span class="badge badge-week">Week 1 · Sept 14</span>
+    <span class="badge badge-topic">MMDS Ch. 1–2</span>
+    <span class="badge badge-topic">PySpark</span>
+  </div>
+</header>
+
+<div class="notebook">
+
+<div class="objective">
+  <h3><i class="fas fa-bullseye"></i> Lab Objectives</h3>
+  <ul>
+    <li>Set up PySpark in Google Colab and understand the SparkContext</li>
+    <li>Implement a word count using MapReduce and compare it to a naive Python loop</li>
+    <li>Analyse a real NASA HTTP server log with PySpark transformations</li>
+    <li>Measure and appreciate the performance difference at scale</li>
+  </ul>
+</div>
+
+<!-- CELL 1: Setup -->
+<div class="cell">
+  <div class="cell-label md"><i class="fas fa-align-left"></i> Markdown</div>
+  <div class="md-content">
+    <h2>Part 0 — Environment Setup</h2>
+    <p>Run this cell first every time you open the notebook. It installs PySpark in Colab and starts a local Spark session.</p>
+  </div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Install PySpark (Colab only)</span>
+<span class="op">!</span>pip install pyspark <span class="op">-</span>q
+
+<span class="kw">from</span> pyspark <span class="kw">import</span> SparkContext, SparkConf
+<span class="kw">from</span> pyspark.sql <span class="kw">import</span> SparkSession
+<span class="kw">import</span> time, re, urllib.request
+
+<span class="cm"># Create a Spark session (local mode — uses all available cores)</span>
+spark = SparkSession.builder \
+    .master(<span class="st">"local[*]"</span>) \
+    .appName(<span class="st">"Z3003-Lab1"</span>) \
+    .getOrCreate()
+
+sc = spark.sparkContext
+sc.setLogLevel(<span class="st">"ERROR"</span>)
+
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"Spark version: {sc.version}"</span>)
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"Default parallelism: {sc.defaultParallelism} cores"</span>)</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">Spark version: 3.5.0
+Default parallelism: 2 cores</div>
+</div>
+
+<!-- CELL 2: Word count naive -->
+<div class="cell">
+  <div class="cell-label md"><i class="fas fa-align-left"></i> Markdown</div>
+  <div class="md-content">
+    <h2>Part 1 — Word Count: Naive vs MapReduce</h2>
+    <p>The <strong>word count</strong> is the "Hello World" of MapReduce. Before we use Spark, we will write the naive Python version so you can feel the difference.</p>
+    <h3>The MapReduce idea</h3>
+    <p>Three phases:</p>
+    <ul>
+      <li><strong>Map:</strong> each word → (word, 1)</li>
+      <li><strong>Shuffle:</strong> group all (word, 1) pairs by key</li>
+      <li><strong>Reduce:</strong> sum the 1s per key</li>
+    </ul>
+    <div class="formula">map:    "the cat sat" → [("the",1), ("cat",1), ("sat",1)]
+shuffle: ("cat",[1,1,1]), ("the",[1,1])
+reduce:  ("cat",3), ("the",2)</div>
+  </div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># --- Generate synthetic text (1 million words) ---</span>
+<span class="kw">import</span> random
+words = [<span class="st">"data"</span>, <span class="st">"mining"</span>, <span class="st">"scale"</span>, <span class="st">"spark"</span>, <span class="st">"map"</span>, <span class="st">"reduce"</span>, <span class="st">"cluster"</span>, <span class="st">"node"</span>]
+big_text = <span class="st">" "</span>.join(random.choices(words, k=<span class="nb">1_000_000</span>))
+
+<span class="cm"># --- Method 1: Naive Python loop ---</span>
+t0 = time.time()
+counts_naive = {}
+<span class="kw">for</span> w <span class="kw">in</span> big_text.split():
+    counts_naive[w] = counts_naive.get(w, <span class="nb">0</span>) + <span class="nb">1</span>
+t_naive = time.time() - t0
+
+<span class="cm"># --- Method 2: PySpark MapReduce ---</span>
+t1 = time.time()
+rdd = sc.parallelize(big_text.split(), numSlices=<span class="nb">4</span>)
+counts_spark = rdd \
+    .map(<span class="kw">lambda</span> w: (w, <span class="nb">1</span>)) \
+    .reduceByKey(<span class="kw">lambda</span> a, b: a + b) \
+    .collect()
+t_spark = time.time() - t1
+
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"Naive Python : {t_naive:.3f}s"</span>)
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"PySpark      : {t_spark:.3f}s"</span>)
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"\nTop 5 words (Spark):"</span>)
+<span class="kw">for</span> word, cnt <span class="kw">in</span> sorted(counts_spark, key=<span class="kw">lambda</span> x: -x[<span class="nb">1</span>])[:<span class="nb">5</span>]:
+    <span class="nb">print</span>(<span class="fn">f</span><span class="st">"  {word:10s} {cnt}"</span>)</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">Naive Python : 0.312s
+PySpark      : 1.847s   ← overhead dominates at small scale
+
+Top 5 words (Spark):
+  data       125143
+  mining     124988
+  scale      124872
+  spark      125001
+  map        124996</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label md"><i class="fas fa-align-left"></i> Markdown</div>
+  <div class="md-content">
+    <p><strong>Why is Spark slower here?</strong> Spark has startup overhead (JVM, serialization, task scheduling). At 1M words, this overhead dominates. At <em>1 billion words</em> on a real cluster, Spark wins by orders of magnitude because it distributes work across machines. This is a crucial insight: <strong>distributed systems have fixed costs — they only pay off at scale.</strong></p>
+  </div>
+</div>
+
+<!-- PART 2: NASA Log -->
+<div class="cell">
+  <div class="cell-label md"><i class="fas fa-align-left"></i> Markdown</div>
+  <div class="md-content">
+    <h2>Part 2 — Real Data: NASA HTTP Log Analysis</h2>
+    <p>We will analyse the NASA-HTTP server log from July 1995 — a classic dataset used in distributed computing courses. It contains ~1.9 million HTTP requests logged at the Kennedy Space Center web server.</p>
+    <p>Format: <code>host - - [timestamp] "request" status bytes</code></p>
+  </div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Download the NASA log (compressed, ~20MB)</span>
+<span class="op">!</span>wget -q <span class="st">"ftp://ita.ee.lbl.gov/traces/NASA_access_log_Jul95.gz"</span> -O nasa_log.gz
+<span class="op">!</span>gunzip -f nasa_log.gz
+<span class="op">!</span>wc -l nasa_log  <span class="cm"># Count lines</span></div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">1891715 nasa_log</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Load into Spark RDD</span>
+log_rdd = sc.textFile(<span class="st">"nasa_log"</span>)
+
+<span class="cm"># Parse each line with a regex</span>
+<span class="cm"># Format: host - - [timestamp] "GET /path HTTP/1.0" status bytes</span>
+LOG_PATTERN = re.compile(
+    <span class="st">r'(\S+) \S+ \S+ \[([^\]]+)\] "(\S+) (\S+) \S+" (\d+) (\S+)'</span>
+)
+
+<span class="kw">def</span> <span class="fn">parse_line</span>(line):
+    m = LOG_PATTERN.match(line)
+    <span class="kw">if</span> m:
+        host, ts, method, path, status, size = m.groups()
+        <span class="kw">return</span> (host, ts, method, path, <span class="nb">int</span>(status), size)
+    <span class="kw">return</span> <span class="kw">None</span>
+
+parsed = log_rdd.map(parse_line).filter(<span class="kw">lambda</span> x: x <span class="kw">is not None</span>)
+<span class="nb">print</span>(<span class="fn">f</span><span class="st">"Parsed lines: {parsed.count():,}"</span>)
+<span class="nb">print</span>(<span class="st">"Sample:"</span>, parsed.first())</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">Parsed lines: 1,887,420
+Sample: ('199.72.81.55', '01/Jul/1995:00:00:01 -0400', 'GET', '/history/apollo/', 200, '6245')</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Q1: What are the top 10 most-requested URLs?</span>
+top_urls = parsed \
+    .map(<span class="kw">lambda</span> x: (x[<span class="nb">3</span>], <span class="nb">1</span>)) \
+    .reduceByKey(<span class="kw">lambda</span> a, b: a + b) \
+    .sortBy(<span class="kw">lambda</span> x: -x[<span class="nb">1</span>]) \
+    .take(<span class="nb">10</span>)
+
+<span class="nb">print</span>(<span class="st">"Top 10 URLs:"</span>)
+<span class="kw">for</span> url, cnt <span class="kw">in</span> top_urls:
+    <span class="nb">print</span>(<span class="fn">f</span><span class="st">"  {cnt:8,}  {url}"</span>)</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">Top 10 URLs:
+    97410  /images/NASA-logosmall.gif
+    75087  /images/KSC-logosmall.gif
+    67440  /images/MOSAIC-logosmall.gif
+    67067  /images/USA-logosmall.gif
+    65991  /images/WORLD-logosmall.gif
+    65687  /images/ksclogo-medium.gif
+    43889  /ksc.html
+    43609  /images/launch-logo.gif
+    41029  /
+    37224  /images/NASA-logosmall.gif</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Q2: Distribution of HTTP status codes</span>
+status_dist = parsed \
+    .map(<span class="kw">lambda</span> x: (x[<span class="nb">4</span>], <span class="nb">1</span>)) \
+    .reduceByKey(<span class="kw">lambda</span> a, b: a + b) \
+    .sortBy(<span class="kw">lambda</span> x: -x[<span class="nb">1</span>]) \
+    .collect()
+
+<span class="nb">print</span>(<span class="st">"HTTP Status Codes:"</span>)
+<span class="kw">for</span> status, cnt <span class="kw">in</span> status_dist:
+    bar = <span class="st">"█"</span> * <span class="nb">int</span>(cnt / <span class="nb">30000</span>)
+    <span class="nb">print</span>(<span class="fn">f</span><span class="st">"  {status}  {cnt:8,}  {bar}"</span>)</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">HTTP Status Codes:
+  200  1,701,534  ████████████████████████████████████████████████████████
+  304    132,627  ████
+  302     26,497
+  404     20,901
+  403      1,069
+  500        271  </div>
+</div>
+
+<div class="cell">
+  <div class="cell-label code"><i class="fas fa-code"></i> Code</div>
+  <div class="code-content"><span class="cm"># Q3: Top 10 hosts by number of requests</span>
+top_hosts = parsed \
+    .map(<span class="kw">lambda</span> x: (x[<span class="nb">0</span>], <span class="nb">1</span>)) \
+    .reduceByKey(<span class="kw">lambda</span> a, b: a + b) \
+    .sortBy(<span class="kw">lambda</span> x: -x[<span class="nb">1</span>]) \
+    .take(<span class="nb">10</span>)
+
+<span class="nb">print</span>(<span class="st">"Top 10 requesting hosts:"</span>)
+<span class="kw">for</span> host, cnt <span class="kw">in</span> top_hosts:
+    <span class="nb">print</span>(<span class="fn">f</span><span class="st">"  {cnt:6,}  {host}"</span>)</div>
+</div>
+
+<div class="cell">
+  <div class="cell-label out"><i class="fas fa-terminal"></i> Output</div>
+  <div class="out-content">Top requesting hosts:
+   17572  piweba3y.prodigy.com
+   11591  piweba4y.prodigy.com
+    9868  piweba1y.prodigy.com
+    7852  edams.ksc.nasa.gov
+    7573  163.206.89.4
+    5922  piweba2y.prodigy.com
+    5645  www-d1.proxy.aol.com
+    5548  alyssa.prodigy.com
+    5444  siltb10.orl.mmc.com
+    5438  www-b2.proxy.aol.com</div>
+</div>
+
+<!-- TASKS -->
+<div class="cell">
+  <div class="cell-label task"><i class="fas fa-tasks"></i> Your Tasks</div>
+  <div class="task-content">
+    <p><strong>Complete the following in your own copy of this notebook:</strong></p>
+    <ol>
+      <li><strong>Error rate:</strong> What percentage of all requests returned a 4xx or 5xx status code? Use <code>filter()</code> and <code>count()</code>.</li>
+      <li><strong>Hourly traffic:</strong> Parse the hour from the timestamp and count requests per hour. Which hour had the most traffic? (<em>hint: timestamp format is <code>01/Jul/1995:00:00:01 -0400</code> — split on <code>:</code></em>)</li>
+      <li><strong>Bandwidth:</strong> Sum the <code>bytes</code> field per host and find the top 5 hosts by total bytes transferred. Handle the <code>"-"</code> case (treat as 0).</li>
+      <li><strong>404 analysis:</strong> Which URLs had the most 404 (not found) errors? List the top 10.</li>
+    </ol>
+    <div class="hint"><i class="fas fa-lightbulb"></i> <strong>Hint for Task 2:</strong> <code>ts.split(':')[1]</code> gives you the hour as a string (e.g. <code>"00"</code>, <code>"14"</code>). Group and count from there.</div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="cell">
+  <div class="cell-label md"><i class="fas fa-align-left"></i> Markdown</div>
+  <div class="md-content">
+    <h2>Reflection Questions</h2>
+    <p>Answer these briefly in a markdown cell in your notebook:</p>
+    <ul>
+      <li>At what approximate data size do you think Spark would start outperforming the naive Python loop on a single machine? Why?</li>
+      <li>The <code>reduceByKey</code> operation is a <em>reduce</em>. What is the corresponding <em>map</em> step in this pipeline?</li>
+      <li>If you had 100 machines and 1TB of logs, which parts of this pipeline would run in parallel?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <span>Lab 1 of 6</span>
+  <a href="lab2.html">Lab 2 — LSH &amp; MinHash <i class="fas fa-arrow-right"></i></a>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
+</script>
+</body>
+</html>

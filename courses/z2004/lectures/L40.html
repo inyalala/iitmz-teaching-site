@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L40 — Query Optimization &amp; Join Ordering | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:var(--bg);max-width:820px;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom: none;padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:0;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;}
+  h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:0;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#1C1209;color:#e2e8f0;border-radius:0;padding:14px 18px;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  .warn{background:#fef2f2;border-left:4px solid #b91c1c;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;}
+  .warn h4{margin:0 0 6px;color:#b91c1c;font-size:.88rem;}
+  .warn p{margin:0;font-size:.9rem;color:#7f1d1d;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  code{background:#f1f5f9;padding:1px 5px;border-radius:3px;font-family:'Courier New',monospace;font-size:.85em;}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top: none;}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  footer{margin-top:48px;padding-top:20px;border-top: none;font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+</style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L40
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 9 &mdash; Query Processing &amp; Transactions</span>
+    <span class="badge b-lec">Lecture 40</span>
+    <span class="badge b-lec">Week 14</span>
+  </div>
+  <h1>Query Optimization &amp; Join Ordering</h1>
+  <p class="subtitle">How the optimizer chooses join order, uses EXPLAIN PLAN, and how you can guide it with hints and indexes</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Explain why join order matters and how the number of possible orderings grows with the number of tables</li>
+    <li>Describe the System R dynamic programming approach to finding optimal left-deep join trees</li>
+    <li>Interpret an EXPLAIN / execution plan output from SQL Server or PostgreSQL</li>
+    <li>Apply practical query tuning techniques: index creation, predicate rewriting, join hints</li>
+  </ul>
+</div>
+
+<h2>1. Why Join Order Matters</h2>
+
+<p>The most impactful decision the query optimizer makes is <strong>join order</strong>. Because join is commutative (R ⋈ S = S ⋈ R) and associative ((R ⋈ S) ⋈ T = R ⋈ (S ⋈ T)), there are many equivalent orderings. The number of left-deep join trees for n relations is:</p>
+
+<div class="formula">
+n tables → n! orderings (ignoring Cartesian products)
+
+n=2:    2       plans
+n=3:    6       plans
+n=5:    120     plans
+n=10:   3,628,800 plans
+n=15:   > 1 trillion plans
+</div>
+
+<p>The cost difference between the best and worst join order can be <strong>orders of magnitude</strong>. Getting join order right is one of the most critical jobs of the optimizer.</p>
+
+<h2>2. The System R Optimizer (Dynamic Programming)</h2>
+
+<p>The IBM System R query optimizer (1979) remains the conceptual basis for most modern optimizers. It uses dynamic programming to avoid re-computing costs for overlapping subproblems.</p>
+
+<h3>2.1 Left-Deep vs. Bushy Join Trees</h3>
+
+<div class="formula">
+Left-deep tree (preferred):       Bushy tree:
+        ⋈                                ⋈
+       / \                              / \
+      ⋈   D                           ⋈   ⋈
+     / \                             / \ / \
+    ⋈   C                           A  B C  D
+   / \
+  A   B
+
+Left-deep: one input is always a base table → pipelining works
+Bushy: requires materializing intermediate results; rarely used
+</div>
+
+<h3>2.2 Dynamic Programming Algorithm</h3>
+
+<ol>
+  <li>Enumerate all single-table access paths (heap scan, index scans)</li>
+  <li>For each pair of tables, compute the optimal join of those two tables using the best access paths</li>
+  <li>For each triple of tables, compute optimal join using already-computed pairwise costs</li>
+  <li>Continue until all n tables are joined — return the plan with minimum total cost</li>
+</ol>
+
+<p>At each step, the optimizer uses cardinality estimates and cost formulas. The key insight is: <strong>an optimal plan for n tables must use optimal plans for subsets of those tables</strong> (optimal substructure → dynamic programming applies).</p>
+
+<h3>2.3 Interesting Orders</h3>
+
+<p>The optimizer may choose a slightly more expensive join at an early step if the output is sorted in an "interesting order" (e.g., sorted on a future join key or on an ORDER BY attribute). This avoids a sort step later, making the overall plan cheaper.</p>
+
+<h2>3. Reading EXPLAIN Plans</h2>
+
+<p>Both PostgreSQL and SQL Server expose the optimizer's chosen plan with <code>EXPLAIN</code> / <code>EXPLAIN ANALYZE</code>.</p>
+
+<h3>3.1 PostgreSQL EXPLAIN ANALYZE</h3>
+
+<div class="formula">
+EXPLAIN ANALYZE
+SELECT e.name, d.dept_name
+FROM employees e JOIN departments d ON e.dept_id = d.dept_id
+WHERE e.salary > 80000;
+
+Output:
+Hash Join  (cost=120.45..580.32 rows=1200 width=48) (actual time=2.1..18.3 ms)
+  Hash Cond: (e.dept_id = d.dept_id)
+  ->  Seq Scan on employees  (cost=0..310.00 rows=1400 width=36)
+        Filter: (salary > 80000)
+        Rows Removed by Filter: 8600
+  ->  Hash  (cost=80.00..80.00 rows=3236 width=20)
+        ->  Seq Scan on departments  (cost=0..80.00 rows=3236 width=20)
+Planning Time: 0.8 ms
+Execution Time: 18.9 ms
+</div>
+
+<h3>3.2 Key Fields to Read</h3>
+
+<table>
+  <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>cost=X..Y</td><td>Estimated startup cost X and total cost Y in abstract units (page reads)</td></tr>
+    <tr><td>rows=N</td><td>Estimated output cardinality (rows)</td></tr>
+    <tr><td>actual time=A..B ms</td><td>Real elapsed time (requires ANALYZE keyword)</td></tr>
+    <tr><td>Rows Removed by Filter</td><td>How many rows did the predicate filter out — high = good selectivity</td></tr>
+    <tr><td>Seq Scan</td><td>Full table scan; check if an index scan would be cheaper</td></tr>
+    <tr><td>Index Scan</td><td>B+ tree or hash index used; cheaper for selective predicates</td></tr>
+    <tr><td>Hash Join / Merge Join / Nested Loop</td><td>Join algorithm chosen; check if appropriate for the table sizes</td></tr>
+  </tbody>
+</table>
+
+<h3>3.3 SQL Server EXPLAIN (Execution Plan)</h3>
+<div class="formula">
+-- SQL Server: graphical plan in SSMS, or text plan:
+SET STATISTICS IO ON;
+SET STATISTICS TIME ON;
+SELECT ...;
+
+-- Or: EXPLAIN via:
+SET SHOWPLAN_ALL ON;
+SELECT ...;
+</div>
+
+<h2>4. Practical Query Tuning</h2>
+
+<h3>4.1 Create Indexes on Predicates and Join Keys</h3>
+<div class="formula">
+-- Slow: salary > 80000 on 1M row table, no index
+SELECT * FROM employees WHERE salary > 80000;  -- Seq Scan: 10,000 I/Os
+
+-- Fix: create a B+ tree index
+CREATE INDEX idx_salary ON employees(salary);
+-- Now: Index Range Scan: ~200 I/Os for 2% selectivity
+</div>
+
+<h3>4.2 Rewrite Predicates to Be Sargable</h3>
+<p>A predicate is <strong>SARGable</strong> (Search ARGument-able) if the optimizer can use an index for it. Non-sargable predicates force a full scan.</p>
+
+<table>
+  <thead><tr><th>Non-Sargable (slow)</th><th>Sargable Rewrite</th></tr></thead>
+  <tbody>
+    <tr><td><code>WHERE YEAR(hire_date) = 2020</code></td><td><code>WHERE hire_date BETWEEN '2020-01-01' AND '2020-12-31'</code></td></tr>
+    <tr><td><code>WHERE salary * 1.1 > 88000</code></td><td><code>WHERE salary > 80000</code></td></tr>
+    <tr><td><code>WHERE UPPER(name) = 'ALICE'</code></td><td><code>WHERE name = 'Alice'</code> (with case-insensitive collation)</td></tr>
+    <tr><td><code>WHERE name LIKE '%alice%'</code></td><td><code>WHERE name LIKE 'alice%'</code> (leading wildcard prevents index use)</td></tr>
+  </tbody>
+</table>
+
+<h3>4.3 Avoid SELECT *</h3>
+<p>Selecting only needed columns reduces I/O (especially in columnar stores), enables index-only scans, and reduces network transfer.</p>
+
+<h3>4.4 Composite Index Column Order</h3>
+<div class="formula">
+CREATE INDEX idx_dept_salary ON employees(dept_id, salary);
+
+-- Index used: WHERE dept_id = 5 AND salary > 80000  ✓  (leftmost column matched)
+-- Index used: WHERE dept_id = 5                       ✓  (prefix of index)
+-- Index NOT used: WHERE salary > 80000               ✗  (dept_id not in predicate)
+</div>
+
+<p>Always place the most selective column, or the equality column, first in a composite index. Range columns go last.</p>
+
+<h3>4.5 Covering Indexes (Index-Only Scans)</h3>
+
+<div class="concept">
+  <h4>Covering Index</h4>
+  <p>An index <em>covers</em> a query if all columns referenced in the query (SELECT list + WHERE + JOIN ON) are present in the index. The executor can answer the query entirely from the index without accessing the heap file. Cost = O(log_d n + output pages in index) — no heap I/Os.</p>
+</div>
+
+<div class="formula">
+CREATE INDEX idx_covering ON employees(dept_id, salary, name);
+
+SELECT name, salary FROM employees WHERE dept_id = 5;
+-- All three columns (dept_id for filter, salary and name for output) are in index
+-- → Index-Only Scan; no heap page reads needed
+</div>
+
+<h2>5. Statistics and ANALYZE / UPDATE STATISTICS</h2>
+
+<p>The optimizer's cost estimates are only as good as its statistics. If table statistics are stale (after a large batch load, for example), the optimizer may make poor plan choices. Run:</p>
+
+<div class="formula">
+-- PostgreSQL: refresh statistics
+ANALYZE employees;
+
+-- SQL Server: update statistics
+UPDATE STATISTICS employees;
+
+-- SQL Server: auto-statistics update (on by default, but may lag on large tables)
+ALTER DATABASE MyDB SET AUTO_UPDATE_STATISTICS ON;
+</div>
+
+<div class="warn">
+  <h4>Stale Statistics — A Common Performance Trap</h4>
+  <p>After bulk loading 10 million rows into a table that previously had 10,000 rows, the optimizer may still believe the table is small and choose a nested-loop join instead of a hash join. Always run ANALYZE / UPDATE STATISTICS after significant data changes.</p>
+</div>
+
+<h2>6. Summary</h2>
+<ul>
+  <li>Join order affects query cost by orders of magnitude; n tables have n! orderings</li>
+  <li>The System R dynamic programming optimizer finds the optimal left-deep join tree in O(2^n) time using interesting orders</li>
+  <li>EXPLAIN / EXPLAIN ANALYZE shows the physical plan; look for unexpected seq scans, bad cardinality estimates, and wrong join algorithms</li>
+  <li>Key tuning: create indexes on filter/join columns, write sargable predicates, use composite and covering indexes</li>
+  <li>Keep statistics current with ANALYZE; stale stats cause plan regressions</li>
+</ul>
+
+<div class="nav-bar">
+  <a href="L39.html">&larr; L39: Query Processing Pipeline</a>
+  <a href="L41.html">L41: Transactions, ACID &amp; Recovery &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
+</script>
+</body>
+</html>

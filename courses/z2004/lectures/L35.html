@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L35 — File Organization &amp; Heap Files | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:var(--bg);max-width:820px;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb a:hover{text-decoration:underline;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom: none;padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:0;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;}
+  h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:0;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#1C1209;color:#e2e8f0;border-radius:0;padding:14px 18px;font-family:'Courier New',monospace;font-size:.88rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  .key-eq{background:#fef9ee;border:1px solid #f3d78a;border-radius:0;padding:10px 16px;margin:14px 0;font-family:'Courier New',monospace;font-size:.9rem;}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top: none;}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  .nav-bar a:hover{text-decoration:underline;}
+  footer{margin-top:48px;padding-top:20px;border-top: none;font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+</style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L35
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 8 &mdash; Storage &amp; Indexing</span>
+    <span class="badge b-lec">Lecture 35</span>
+    <span class="badge b-lec">Week 13</span>
+  </div>
+  <h1>File Organization &amp; Heap Files</h1>
+  <p class="subtitle">How relations are stored on disk; heap, sorted, and clustered files; the cost of insert, delete, and scan</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Describe the three main file organizations: heap, sorted, and clustered</li>
+    <li>Analyze I/O costs for insert, delete, search, and sequential scan under each organization</li>
+    <li>Explain the free space directory and why it matters for heap file management</li>
+    <li>Explain why sorted files are rarely used as the primary organization and what replaces them</li>
+  </ul>
+</div>
+
+<h2>1. What Is a File Organization?</h2>
+
+<p>A <strong>file organization</strong> determines how records (tuples) are laid out across the pages of a relation's physical storage file. The choice of file organization dramatically affects the cost of different operations. There is no single best organization; the right choice depends on the workload (reads vs. writes, point lookups vs. range scans).</p>
+
+<p>The three fundamental organizations are:</p>
+<ol>
+  <li><strong>Heap File</strong> — records in no particular order; new records appended to any page with free space</li>
+  <li><strong>Sorted File</strong> — records ordered by one or more key attributes</li>
+  <li><strong>Clustered File</strong> — records ordered according to an index key; used by clustered B+ tree indexes</li>
+</ol>
+
+<h2>2. Heap Files</h2>
+
+<p>A <strong>heap file</strong> stores records in an arbitrary order — wherever there is free space. It is the simplest and most common base organization for RDBMS tables.</p>
+
+<h3>2.1 Free Space Management</h3>
+
+<p>The heap file manager must track which pages have free space to accommodate new inserts. Two approaches:</p>
+
+<div class="concept">
+  <h4>Linked List of Free Pages</h4>
+  <p>Maintain two linked lists: one for pages with free space, one for full pages. Simple but slow: to find a page with enough space for a large record, you may traverse many nodes.</p>
+</div>
+
+<div class="concept">
+  <h4>Page Directory (Preferred)</h4>
+  <p>A header page (or set of directory pages) stores one entry per data page: (pageId, freeByteCount). To insert a record, scan the directory to find a page with enough space. Directories are small and fit in the buffer pool, making this very efficient. Most production DBMSs use this approach.</p>
+</div>
+
+<div class="formula">
+Directory (header pages):
+┌──────────┬───────────┐
+│ Page ID  │ Free bytes│
+├──────────┼───────────┤
+│   001    │   3400    │
+│   002    │      0    │   ← full
+│   003    │   1200    │
+│   004    │   6800    │
+└──────────┴───────────┘
+</div>
+
+<h3>2.2 Heap File Operations and I/O Cost</h3>
+
+<table>
+  <thead><tr><th>Operation</th><th>I/O Cost</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Sequential scan (all tuples)</td><td>B</td><td>Read all B pages; always full pass</td></tr>
+    <tr><td>Search (equality on non-key)</td><td>B/2 (avg), B (worst)</td><td>Must scan all pages; stop at first match if key</td></tr>
+    <tr><td>Insert</td><td>2 (read + write one page)</td><td>Find page with space via directory; write record; update directory</td></tr>
+    <tr><td>Delete by RID</td><td>2 (read + write one page)</td><td>Mark slot as empty; may trigger page compaction</td></tr>
+    <tr><td>Delete by value (non-key)</td><td>B + matching writes</td><td>Full scan to find all matching records, then delete each</td></tr>
+  </tbody>
+</table>
+
+<p>Where <strong>B</strong> = number of pages in the relation. The insert cost is O(1) because the directory tells us immediately where free space is; the full-scan search cost is O(B) because there is no ordering to exploit.</p>
+
+<h3>2.3 Record Deletion Strategies</h3>
+
+<p>When a record is deleted from a heap file, the space in the page must be reclaimed. Two strategies:</p>
+<ul>
+  <li><strong>Immediate compaction</strong>: on deletion, shift remaining records in the page to close the gap. Simple but causes record addresses (RIDs) to change, which invalidates index entries pointing to those records.</li>
+  <li><strong>Tombstone / mark deleted</strong>: mark the slot as deleted but do not move records. RIDs remain valid. Periodically run a VACUUM/REPACK operation to reclaim space. PostgreSQL uses this approach (called dead tuples).</li>
+</ul>
+
+<h2>3. Sorted Files</h2>
+
+<p>A <strong>sorted file</strong> keeps all pages in order of a specific sort key (e.g., student_id). This enables binary search for point queries and efficient range scans.</p>
+
+<h3>3.1 Sorted File Operations and I/O Cost</h3>
+
+<table>
+  <thead><tr><th>Operation</th><th>I/O Cost</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Sequential scan (all tuples)</td><td>B</td><td>Same as heap; all pages must be read</td></tr>
+    <tr><td>Search by sort key (equality)</td><td>log₂(B)</td><td>Binary search on pages</td></tr>
+    <tr><td>Range scan on sort key</td><td>log₂(B) + pages_in_range</td><td>Find first page, then sequential read</td></tr>
+    <tr><td>Insert</td><td>B (worst case)</td><td>Must maintain sort order; shifting pages is expensive</td></tr>
+    <tr><td>Delete</td><td>B/2 (avg) + shift cost</td><td>Find record (cheap) but shifting remaining records is expensive</td></tr>
+  </tbody>
+</table>
+
+<div class="concept">
+  <h4>Why Sorted Files Are Rarely Used Directly</h4>
+  <p>While sorted files offer O(log B) search, inserts and deletes are O(B) in the worst case because maintaining sort order requires shifting pages. For a large table, this is prohibitively expensive. The solution is to use a <strong>B+ tree index</strong> which provides O(log B) search AND O(log B) inserts/deletes by organizing pages into a balanced tree. We study B+ trees in L36–L37.</p>
+</div>
+
+<h2>4. Clustered vs. Unclustered Files</h2>
+
+<p>A file is <strong>clustered</strong> with respect to an index if the physical order of the pages on disk roughly matches the order of the index. A file is <strong>unclustered</strong> if the physical order is independent of the index order.</p>
+
+<div class="concept">
+  <h4>Why Clustering Matters for Range Scans</h4>
+  <p>If a relation is clustered on (department_id), then a query like <code>WHERE department_id = 5</code> can read a contiguous run of pages from disk — one seek, then sequential transfer. If unclustered, the same query may require one disk seek per matching record, potentially visiting many different pages scattered across the disk. For large tables, clustering can reduce range-scan I/O by orders of magnitude.</p>
+</div>
+
+<h3>4.1 Clustering Constraint</h3>
+<p>A relation can only be physically clustered on <strong>one</strong> index at a time, because there is only one physical ordering of pages on disk. In SQL Server this is the <strong>clustered index</strong>; in PostgreSQL it is controlled with the <code>CLUSTER</code> command; in MySQL InnoDB, the primary key always defines the clustered organization.</p>
+
+<h2>5. Comparing File Organizations</h2>
+
+<table>
+  <thead><tr><th>Organization</th><th>Sequential Scan</th><th>Equality Search</th><th>Range Scan</th><th>Insert</th><th>Delete</th></tr></thead>
+  <tbody>
+    <tr><td>Heap</td><td>B</td><td>B/2</td><td>B</td><td>2</td><td>B/2 + 1</td></tr>
+    <tr><td>Sorted</td><td>B</td><td>log₂B</td><td>log₂B + pages</td><td>B</td><td>B</td></tr>
+    <tr><td>Clustered B+ tree</td><td>B</td><td>log_d(B)</td><td>log_d(B) + pages</td><td>log_d(B)</td><td>log_d(B)</td></tr>
+  </tbody>
+</table>
+
+<p>The clustered B+ tree is clearly superior for mixed workloads. It matches sorted file performance for scans and equality searches while drastically reducing insert/delete cost from O(B) to O(log B).</p>
+
+<h2>6. Column-Oriented Storage (Brief Introduction)</h2>
+
+<p>Traditional row-oriented (N-ary) storage stores all attributes of a tuple together in one page. <strong>Column-oriented</strong> (columnar) storage stores each attribute in a separate file/column stripe. This layout is highly efficient for analytical queries that read only a few columns from millions of rows:</p>
+
+<ul>
+  <li><strong>Row-store advantage</strong>: point queries, updates, inserts (entire tuple in one place)</li>
+  <li><strong>Column-store advantage</strong>: aggregations, projections on few columns, better compression (homogeneous data in a column compresses well)</li>
+</ul>
+
+<p>Modern systems like Snowflake, BigQuery, and PostgreSQL's cstore extension use columnar storage for analytical (OLAP) workloads. We revisit this in L45.</p>
+
+<h2>7. Summary</h2>
+<ul>
+  <li>Heap files store records in any order; insert is O(1) with a page directory, but search is O(B)</li>
+  <li>Sorted files enable O(log B) search but O(B) insert; B+ trees solve this tradeoff</li>
+  <li>Clustered files match physical page order to index order, enabling efficient range scans with minimal seeks</li>
+  <li>A relation can be clustered on at most one index; secondary indexes are unclustered</li>
+</ul>
+
+<div class="nav-bar">
+  <a href="L34.html">&larr; L34: Disk Storage &amp; Buffer Pool</a>
+  <a href="L36.html">L36: B+ Tree Structure &amp; Search &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
+</script>
+</body>
+</html>

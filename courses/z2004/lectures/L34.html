@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L34 — Disk Storage, Pages &amp; the Buffer Pool | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:var(--bg);max-width:820px;margin:0 auto;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb a:hover{text-decoration:underline;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom: none;padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:0;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;color:var(--ink);}
+  h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:0;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#1C1209;color:#e2e8f0;border-radius:0;padding:14px 18px;font-family:'Courier New',monospace;font-size:.88rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  .figure{text-align:center;margin:28px 0;}
+  .figure figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  .key-eq{background:#fef9ee;border:1px solid #f3d78a;border-radius:0;padding:10px 16px;margin:14px 0;font-family:'Courier New',monospace;font-size:.9rem;}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top: none;}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  .nav-bar a:hover{text-decoration:underline;}
+  footer{margin-top:48px;padding-top:20px;border-top: none;font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+</style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L34
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 8 &mdash; Storage &amp; Indexing</span>
+    <span class="badge b-lec">Lecture 34</span>
+    <span class="badge b-lec">Week 13</span>
+  </div>
+  <h1>Disk Storage, Pages &amp; the Buffer Pool</h1>
+  <p class="subtitle">How databases physically read and write data; why the disk hierarchy defines everything</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Explain the disk storage hierarchy and latency characteristics of HDD and SSD</li>
+    <li>Define a database page and describe how a DBMS reads and writes pages</li>
+    <li>Describe the buffer pool and explain LRU, MRU, and Clock replacement policies</li>
+    <li>Calculate the I/O cost of reading a relation using the page count model</li>
+  </ul>
+</div>
+
+<div class="figure">
+  <img src="hdd.png" alt="Disk storage structure"/>
+  <figcaption>Figure 34.1 — A hard disk drive: platters, tracks, sectors, and the read/write head assembly</figcaption>
+</div>
+
+<h2>1. Why Physical Storage Matters</h2>
+
+<p>Every abstraction in a DBMS — relations, SQL queries, transactions — ultimately bottoms out in reads and writes to physical storage. The performance of almost every database operation is dominated by I/O cost, not CPU cost. This means that anyone who designs a database, writes queries, or tunes a system must understand how data is stored on disk.</p>
+
+<p>The central tension in database storage is simple: <strong>processors operate at nanosecond scale; disks operate at millisecond scale.</strong> That is a six-order-of-magnitude gap. The buffer pool manager is the critical layer that bridges this gap by keeping frequently accessed pages in RAM.</p>
+
+<h2>2. The Storage Hierarchy</h2>
+
+<table>
+  <thead><tr><th>Level</th><th>Typical Size</th><th>Latency</th><th>Bandwidth</th><th>Volatile?</th></tr></thead>
+  <tbody>
+    <tr><td>L1 Cache</td><td>32–512 KB</td><td>~1 ns</td><td>&gt;100 GB/s</td><td>Yes</td></tr>
+    <tr><td>L3 Cache</td><td>8–64 MB</td><td>~10 ns</td><td>~50 GB/s</td><td>Yes</td></tr>
+    <tr><td>DRAM (RAM)</td><td>4–512 GB</td><td>~100 ns</td><td>~10–50 GB/s</td><td>Yes</td></tr>
+    <tr><td>NVMe SSD</td><td>256 GB–8 TB</td><td>~100 µs</td><td>3–7 GB/s</td><td>No</td></tr>
+    <tr><td>SATA SSD</td><td>256 GB–4 TB</td><td>~200–500 µs</td><td>~500 MB/s</td><td>No</td></tr>
+    <tr><td>HDD</td><td>1–20 TB</td><td>5–15 ms</td><td>100–200 MB/s</td><td>No</td></tr>
+  </tbody>
+</table>
+
+<div class="concept">
+  <h4>The 10,000× Rule</h4>
+  <p>A random HDD read (~10 ms) takes roughly 10,000× longer than a DRAM read (~100 ns). Even on modern NVMe SSDs, random reads are 1,000× slower than DRAM. This means that reducing the number of page I/Os is the most powerful optimization available to a DBMS.</p>
+</div>
+
+<h3>2.1 HDD Internals</h3>
+<p>A spinning disk consists of one or more <strong>platters</strong> coated in a magnetic material. Each platter surface is divided into concentric <strong>tracks</strong>, and each track is divided into <strong>sectors</strong> (typically 512 bytes or 4 KB). The OS and DBMS read/write in units called <strong>blocks</strong> or <strong>pages</strong>, which are multiples of the sector size.</p>
+
+<p>The time to read a random block on HDD has three components:</p>
+<div class="key-eq">
+T_total = T_seek + T_rotational_latency + T_transfer
+        ≈ 5 ms    +       4 ms          +   0.1 ms
+        ≈ 9–10 ms (typical random HDD access)
+</div>
+
+<p>Sequential reads are much faster because seek time is paid only once for a long stream of contiguous blocks.</p>
+
+<h3>2.2 SSD Characteristics</h3>
+<p>SSDs have no moving parts. Random reads are dramatically faster (~100–500 µs vs 10 ms on HDD). However, SSDs have asymmetric read/write performance: reads are fast, writes involve erasing an entire flash block (often 128–512 KB) before writing, making random writes slower. This asymmetry influences B+ tree and log-structured storage designs.</p>
+
+<h2>3. Pages: The Unit of I/O</h2>
+
+<p>A DBMS <strong>never reads or writes individual tuples directly from disk.</strong> It always reads and writes <strong>pages</strong> (also called blocks). A page is the unit of transfer between disk and the buffer pool.</p>
+
+<div class="concept">
+  <h4>Page Size</h4>
+  <p>Typical page sizes are <strong>4 KB, 8 KB, or 16 KB</strong>. PostgreSQL uses 8 KB by default; SQL Server uses 8 KB; MySQL InnoDB uses 16 KB. Larger pages mean fewer I/Os for sequential scans but more wasted I/O if you only need a few tuples from a page.</p>
+</div>
+
+<h3>3.1 Page Layout</h3>
+<p>Each page contains a <strong>page header</strong> (page ID, free space pointer, number of records, checksum) and the actual record data. Records within a page are typically stored using a <strong>slotted page</strong> structure:</p>
+
+<div class="formula">
+┌────────────────────────────────────────────┐
+│ Header: pageId, numSlots, freeSpacePtr, ... │
+├────────────────────────────────────────────┤
+│ Slot 1 → offset, length                    │
+│ Slot 2 → offset, length                    │
+│ ...                                         │
+│         (free space)                        │
+│ ...                     Record 2            │
+│ ...                     Record 1            │
+└────────────────────────────────────────────┘
+</div>
+
+<p>Slots grow from the top of the page; records are packed from the bottom. This allows records to be moved within the page (for compaction) without changing their record ID (RID = pageId + slotNum).</p>
+
+<h3>3.2 Record IDs (RIDs)</h3>
+<p>A record is uniquely identified by its <strong>RID = (pageId, slotNum)</strong>. Index entries in B+ trees and hash indexes store RIDs to point to actual tuples. When a record moves between pages (e.g., due to an UPDATE that grows the record), the RID must be updated or a forwarding pointer left behind.</p>
+
+<h2>4. The Buffer Pool</h2>
+
+<p>The <strong>buffer pool</strong> is a region of DRAM managed by the DBMS that caches recently accessed pages. It is divided into fixed-size <strong>frames</strong>, each the same size as a disk page. The buffer pool manager is responsible for:</p>
+<ul>
+  <li>Bringing pages from disk into a free frame on a cache miss</li>
+  <li>Tracking which pages are currently in memory (the <strong>page table</strong>)</li>
+  <li>Deciding which page to evict when all frames are full (<strong>replacement policy</strong>)</li>
+  <li>Writing dirty pages back to disk before evicting them</li>
+</ul>
+
+<div class="figure">
+  <img src="pages.png" alt="Buffer pool diagram"/>
+  <figcaption>Figure 34.2 — The buffer pool in memory holds frames; the disk holds pages. The page table maps pageId → frameId.</figcaption>
+</div>
+
+<h3>4.1 The Pin Count and Dirty Bit</h3>
+<p>Each frame in the buffer pool has two metadata fields:</p>
+<ul>
+  <li><strong>Pin count</strong>: the number of active transactions currently using this page. A frame with pin count &gt; 0 cannot be evicted.</li>
+  <li><strong>Dirty bit</strong>: set to 1 if the page has been modified since it was read from disk. A dirty page must be written to disk before its frame is reused.</li>
+</ul>
+
+<h3>4.2 Replacement Policies</h3>
+
+<table>
+  <thead><tr><th>Policy</th><th>Evict</th><th>Good For</th><th>Bad For</th></tr></thead>
+  <tbody>
+    <tr><td><strong>LRU</strong></td><td>Least Recently Used frame</td><td>General workloads, hot pages</td><td>Sequential scans (pollutes cache)</td></tr>
+    <tr><td><strong>MRU</strong></td><td>Most Recently Used frame</td><td>Repeated sequential scans</td><td>Random access patterns</td></tr>
+    <tr><td><strong>Clock</strong></td><td>Approximate LRU, uses a reference bit</td><td>Low overhead LRU approximation</td><td>Slightly less optimal than LRU</td></tr>
+    <tr><td><strong>LRU-K</strong></td><td>Page whose Kth most recent access is oldest</td><td>Mix of sequential and random access</td><td>Higher bookkeeping overhead</td></tr>
+  </tbody>
+</table>
+
+<div class="concept">
+  <h4>Sequential Flooding Problem</h4>
+  <p>LRU performs poorly for full table scans. A sequential scan reads every page once; LRU will evict previously cached hot pages to make room for scan pages that will never be needed again. Many systems use "MRU for sequential scans" or ring-buffer techniques to avoid this: scan pages are marked as "use once" and evicted immediately after use, preserving the hot working set.</p>
+</div>
+
+<h3>4.3 The Clock Algorithm</h3>
+<p>The Clock algorithm approximates LRU without maintaining a full access-time list. Each frame has a <strong>reference bit</strong>. When a page is accessed, its reference bit is set to 1. The "clock hand" sweeps around frames:</p>
+<ol>
+  <li>If reference bit = 1 → set it to 0, advance hand (give the page a second chance)</li>
+  <li>If reference bit = 0 → evict this frame (it hasn't been accessed since the last sweep)</li>
+</ol>
+
+<h2>5. I/O Cost Model</h2>
+
+<p>We estimate query cost in units of <strong>page I/Os</strong> (ignoring CPU). The key parameters are:</p>
+
+<div class="key-eq">
+B  = number of pages in a relation
+P  = number of buffer frames available
+</div>
+
+<table>
+  <thead><tr><th>Operation</th><th>I/O Cost</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Full table scan (heap)</td><td>B</td><td>Sequential, one pass</td></tr>
+    <tr><td>Index lookup (B+ tree)</td><td>log_d(B) + 1</td><td>d = fill factor, log depth + leaf</td></tr>
+    <tr><td>Sort (external merge sort)</td><td>2B · ⌈log_{B-1}(B/P)⌉ + B</td><td>Multiple passes over data</td></tr>
+    <tr><td>Simple nested loop join</td><td>B_R + B_R · B_S</td><td>Worst case, no index</td></tr>
+  </tbody>
+</table>
+
+<h2>6. Pre-fetching and Write-Ahead</h2>
+
+<p><strong>Pre-fetching</strong>: When the DBMS detects a sequential scan, it issues prefetch I/Os — reading the next N pages before they are requested. This hides disk latency by overlapping I/O with processing.</p>
+
+<p><strong>Write-ahead logging (WAL)</strong>: Before a dirty page can be written back to disk, its log record must be written to the log on disk first. This ensures that crashes during a write can be recovered. We cover WAL in detail in L41.</p>
+
+<h2>7. Summary</h2>
+
+<ul>
+  <li>Database I/O is the dominant cost driver; the storage hierarchy spans many orders of magnitude in latency</li>
+  <li>The DBMS reads/writes data in fixed-size <strong>pages</strong>; records within pages use slotted page layout with RIDs</li>
+  <li>The <strong>buffer pool</strong> caches pages in DRAM frames; the buffer pool manager tracks pin counts and dirty bits</li>
+  <li>Replacement policies (LRU, Clock, MRU) decide which pages to evict; LRU suffers from sequential flooding</li>
+  <li>I/O cost is measured in page reads/writes; reducing I/Os is the primary goal of storage and index design</li>
+</ul>
+
+<div class="nav-bar">
+  <span></span>
+  <a href="L35.html">L35: File Organization &amp; Heap Files &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
+</script>
+</body>
+</html>

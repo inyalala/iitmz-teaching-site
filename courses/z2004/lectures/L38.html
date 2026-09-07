@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="color-scheme" content="light"/>
+<title>L38 — Hash Indexes | Z2004 DBMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;--bg:#fff;--surface:#f8fafc;--border:#e5e7eb;}
+  *{box-sizing:border-box;}
+  body{margin:0 auto;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:var(--bg);max-width:820px;padding:32px 24px 80px;}
+  nav.crumb{font-size:.82rem;color:var(--muted);margin-bottom:28px;}
+  nav.crumb a{color:var(--gold-dark);text-decoration:none;font-weight:600;}
+  nav.crumb span{margin:0 6px;color:#cbd5e1;}
+  .lec-header{border-bottom: none;padding-bottom:16px;margin-bottom:32px;}
+  .lec-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:0;text-transform:uppercase;letter-spacing:.05em;}
+  .b-module{background:rgba(197,160,89,.14);color:var(--gold-dark);}
+  .b-lec{background:#f1f5f9;color:#475569;}
+  h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.9rem;margin:4px 0 6px;}
+  .subtitle{color:var(--muted);font-size:.95rem;margin:0;}
+  .objectives{background:var(--surface);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;}
+  .objectives h3{margin:0 0 10px;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-dark);}
+  .objectives ul{margin:0;padding-left:18px;line-height:1.9;}
+  .objectives li{font-size:.92rem;}
+  h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.3em;margin-top:40px;}
+  h3{color:var(--navy);font-size:1rem;margin-top:24px;}
+  p{line-height:1.75;font-size:.95rem;}
+  .concept{background:var(--surface);border:1px solid var(--border);border-radius:0;padding:16px 20px;margin:20px 0;}
+  .concept h4{margin:0 0 8px;font-size:.88rem;font-weight:700;color:var(--navy);}
+  .concept p{margin:0;font-size:.9rem;line-height:1.65;}
+  .formula{background:#1C1209;color:#e2e8f0;border-radius:0;padding:14px 18px;font-family:'Courier New',monospace;font-size:.85rem;line-height:1.7;margin:16px 0;overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin:20px 0;}
+  th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);}
+  tr:nth-child(even) td{background:var(--surface);}
+  .nav-bar{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding-top:20px;border-top: none;}
+  .nav-bar a{color:var(--gold-dark);text-decoration:none;font-weight:600;font-size:.88rem;}
+  footer{margin-top:48px;padding-top:20px;border-top: none;font-size:.78rem;color:#94a3b8;line-height:1.7;}
+  footer a{color:var(--gold-dark);}
+  ul,ol{line-height:1.85;font-size:.93rem;}
+</style>
+  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+</head>
+<body>
+
+<nav class="crumb">
+  <a href="../index.html">Z2004 DBMS</a><span>/</span>
+  <a href="../index.html#materials">Materials</a><span>/</span>
+  L38
+</nav>
+
+<div class="lec-header">
+  <div class="lec-meta">
+    <span class="badge b-module">Module 8 &mdash; Storage &amp; Indexing</span>
+    <span class="badge b-lec">Lecture 38</span>
+    <span class="badge b-lec">Week 13</span>
+  </div>
+  <h1>Hash Indexes</h1>
+  <p class="subtitle">Static hashing, extendible hashing, linear hashing — O(1) equality lookups and their limitations</p>
+</div>
+
+<div class="objectives">
+  <h3>Learning Objectives</h3>
+  <ul>
+    <li>Describe static hashing: the bucket array, overflow chains, and their limitations</li>
+    <li>Explain extendible hashing: the directory, global and local depth, splitting a bucket</li>
+    <li>Compare hash indexes with B+ tree indexes across equality, range, and maintenance cost</li>
+    <li>Identify when a hash index is preferable to a B+ tree</li>
+  </ul>
+</div>
+
+<h2>1. Static Hashing</h2>
+
+<p>A <strong>hash index</strong> applies a hash function h(k) to a search key k and maps the result to one of N <strong>buckets</strong>. Each bucket is a disk page (or a chain of pages) containing all records (or RIDs) whose search key hashes to that bucket.</p>
+
+<div class="formula">
+Static hash index (N = 4 buckets):
+
+h(k) = k mod 4
+
+Key=10 → bucket 2 → page at disk[2]
+Key=17 → bucket 1 → page at disk[1]
+Key=22 → bucket 2 → page at disk[2]  (collision with Key=10)
+</div>
+
+<h3>1.1 Overflow Chains</h3>
+
+<p>When a bucket fills up, additional <strong>overflow pages</strong> are chained to it. This keeps insertion simple but degrades lookup performance: a heavily loaded bucket may require following many overflow pointers. The cost of a lookup becomes O(1 + overflow_length) rather than O(1).</p>
+
+<div class="concept">
+  <h4>Load Factor</h4>
+  <p>The load factor α = n / (N · B) where n = number of records, N = number of buckets, B = records per bucket. Static hashing performs well when α ≤ 0.7. Above this threshold, overflow chains grow rapidly. Static hash indexes must be rebuilt periodically as the table grows.</p>
+</div>
+
+<h3>1.2 Limitations of Static Hashing</h3>
+<ul>
+  <li>Number of buckets N is fixed at creation time</li>
+  <li>If the table grows significantly, overflow chains degrade performance to O(n/N)</li>
+  <li>Rebuilding requires full table scan and re-insertion: O(n) I/Os</li>
+  <li>No support for range queries — hash functions destroy order</li>
+</ul>
+
+<h2>2. Extendible Hashing</h2>
+
+<p>Extendible hashing solves the static-hashing growth problem by allowing the number of buckets to double without rebuilding all existing entries.</p>
+
+<h3>2.1 Key Concepts</h3>
+
+<ul>
+  <li><strong>Directory</strong>: an array of pointers to buckets; its size is a power of 2</li>
+  <li><strong>Global depth (GD)</strong>: number of bits of h(k) used to index into the directory; directory has 2^GD entries</li>
+  <li><strong>Local depth (LD)</strong>: number of bits used by a specific bucket; LD ≤ GD; multiple directory entries may point to the same bucket (LD &lt; GD)</li>
+</ul>
+
+<div class="formula">
+Directory (GD=2, 4 entries):
+┌───┬────────┐
+│ 00│ → B0   │  B0 (LD=2): contains h(k) starting with 00
+│ 01│ → B1   │  B1 (LD=2): contains h(k) starting with 01
+│ 10│ → B2   │  B2 (LD=1): contains h(k) starting with 1 (both 10 and 11 point here)
+│ 11│ → B2   │
+└───┴────────┘
+</div>
+
+<h3>2.2 Lookup</h3>
+<div class="formula">
+To find key k:
+1. Compute h(k)
+2. Take the first GD bits
+3. Index into directory → get bucket pointer
+4. Search bucket (and overflow if any)
+Cost: 1 directory page read + 1 bucket page read = 2 I/Os (typically)
+</div>
+
+<h3>2.3 Insertion and Bucket Split</h3>
+
+<p>To insert (k, RID):</p>
+<ol>
+  <li>Hash to the target bucket</li>
+  <li>If bucket has space, insert</li>
+  <li>If bucket is full → <strong>split the bucket</strong></li>
+</ol>
+
+<p><strong>Bucket split (LD &lt; GD)</strong>: increment the bucket's LD; create a new bucket; redistribute entries; update the directory entries that pointed to the old bucket to now split between old and new.</p>
+
+<p><strong>Bucket split (LD = GD)</strong>: must first <strong>double the directory</strong> (increment GD, clone each directory entry), then split the bucket. Doubling the directory is cheap: only the directory pointer array doubles, not the actual data pages. The directory is typically small enough to stay in the buffer pool.</p>
+
+<div class="formula">
+Split when LD = GD = 2, bucket B0 is full:
+
+Double directory: GD becomes 3, directory grows to 8 entries
+Old entry 00X → now two entries: 000, 001  (both initially → old B0)
+Split B0 into B0' (h(k) starting 000) and Bnew (h(k) starting 001)
+Redistribute B0's entries accordingly
+</div>
+
+<h3>2.4 Deletion</h3>
+
+<p>To delete a key, locate the bucket and remove the entry. If the bucket becomes empty and its sibling bucket (same parent) also has low occupancy, buckets can be <strong>merged</strong> and the directory may be halved (GD decremented). In practice, many systems skip the merge for simplicity (empty pages are reused on the next insert).</p>
+
+<h2>3. Linear Hashing</h2>
+
+<p>Linear hashing avoids the directory structure entirely, instead growing buckets one at a time triggered by load factor. A <strong>split pointer</strong> tracks which bucket is next to split. It is simpler to implement but less widely used in production DBMSs than extendible hashing.</p>
+
+<h2>4. Comparison: Hash Index vs. B+ Tree</h2>
+
+<table>
+  <thead><tr><th>Property</th><th>Hash Index</th><th>B+ Tree</th></tr></thead>
+  <tbody>
+    <tr><td>Equality search</td><td>O(1) (ideal)</td><td>O(log_d n)</td></tr>
+    <tr><td>Range search</td><td>Not supported</td><td>O(log_d n + pages)</td></tr>
+    <tr><td>Insert / Delete</td><td>O(1) amortized</td><td>O(log_d n)</td></tr>
+    <tr><td>Overflow handling</td><td>Overflow chains (extendible) or splits</td><td>Node splits (clean)</td></tr>
+    <tr><td>Order-based operations</td><td>Impossible</td><td>ORDER BY, MIN, MAX, GROUP BY</td></tr>
+    <tr><td>Typical use</td><td>Hash joins, equality-only lookups</td><td>General purpose; default index</td></tr>
+  </tbody>
+</table>
+
+<div class="concept">
+  <h4>When to Use a Hash Index</h4>
+  <p>Hash indexes are the right choice when: (a) queries are always equality lookups on the hash key; (b) no range scans or order-based queries are required; (c) the join algorithm is a hash join (the optimizer can exploit the existing hash index on the build relation).<br/>
+  PostgreSQL, MySQL, and SQL Server all support hash indexes but make B+ trees (or their variants) the default because most workloads include a mix of equality and range queries.</p>
+</div>
+
+<h2>5. Hash Index in SQL Server and PostgreSQL</h2>
+
+<div class="formula">
+-- PostgreSQL: create a hash index
+CREATE INDEX idx_student_hash ON students USING HASH (student_id);
+
+-- SQL Server: only supports B-tree explicitly;
+-- hash indexes available in memory-optimized (In-Memory OLTP) tables:
+CREATE TABLE t (..., INDEX idx_hash HASH (col) WITH (BUCKET_COUNT=1000000));
+</div>
+
+<h2>6. Module 8 Summary</h2>
+
+<p>We have now covered the complete storage and indexing stack:</p>
+<ul>
+  <li><strong>L34</strong>: Disk architecture, pages, and the buffer pool — the physical foundation</li>
+  <li><strong>L35</strong>: File organizations — heap (O(1) insert), sorted (O(log B) search), clustered</li>
+  <li><strong>L36</strong>: B+ tree structure, search, and fan-out — O(log_d n) for all operations</li>
+  <li><strong>L37</strong>: B+ tree splits and merges — maintaining balance during insert/delete</li>
+  <li><strong>L38</strong>: Hash indexes — O(1) equality lookups; extendible hashing for dynamic growth</li>
+</ul>
+<p>The choice among these structures is a fundamental database design decision driven by the query workload, the required operations (equality vs. range), and the write-to-read ratio.</p>
+
+<div class="nav-bar">
+  <a href="L37.html">&larr; L37: B+ Tree Insertions &amp; Deletions</a>
+  <a href="L39.html">L39: Query Processing Pipeline &rarr;</a>
+</div>
+
+<footer>
+  &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.
+  Attribution required. Commercial use prohibited.
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
+  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
+  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
+  requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000);});
+  gsap.ticker.lagSmoothing(0);
+  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
+  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
+    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+    });
+  });
+})();
+</script>
+</body>
+</html>
