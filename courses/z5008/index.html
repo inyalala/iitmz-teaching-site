@@ -15,16 +15,14 @@
   #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
   #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
   #sidebar .badge{width:34px;height:34px;border-radius:0;background:rgba(143,78,16,.18);border:1px solid rgba(143,78,16,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
-  #sidebar .brand-text p{margin:0;line-height:1.25;}
-  #sidebar .brand-text .school{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
-  #sidebar .brand-text .campus{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
+  #sidebar .brand-text p{margin:0;line-height:1.25;font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
   #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
   #sidebar a.back:hover{color:var(--gold);}
   #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
   #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
   #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.85rem;padding:7px 10px;border-radius:0;transition:background .15s,color .15s;}
   #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
-  #sidebar nav a.active{background:rgba(143,78,16,.15);color:#EDE8E0;font-weight:600;}
+  #sidebar nav a.active{background:rgba(143,78,16,.15);color:var(--gold);font-weight:600;}
   #sidebar .switch{margin-top:20px;padding-top:16px;}
   #sidebar .switch p{font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:700;margin:0 0 8px;}
   #sidebar .switch a{display:block;color:#94a3b8;font-size:.8rem;text-decoration:none;padding:5px 0;}
@@ -51,8 +49,9 @@
   .person a:hover{text-decoration:underline;}
   .meta-row{font-size:.85rem;color:var(--ink);margin-top:12px;padding-top:12px;}
   table.sched{width:100%;border-collapse:collapse;font-size:.88rem;}
-  table.sched th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
-  table.sched td{padding:9px 10px;border-bottom:1px solid #f5f5f5;}
+  table.sched th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;}
+  table.sched td{padding:9px 10px;}
+  table.sched tr:nth-child(even){background:#fafafa;}
   ol.outcomes{margin:0;padding-left:0;list-style:none;}
   ol.outcomes li{display:flex;gap:12px;margin-bottom:12px;font-size:.92rem;line-height:1.55;}
   ol.outcomes .num{flex-shrink:0;width:24px;height:24px;border-radius:0;background:rgba(143,78,16,.15);color:var(--gold-dark);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;margin-top:1px;}
@@ -73,8 +72,9 @@
   .policy p.label{margin:0 0 4px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight:700;}
   .policy p.text{margin:0;font-size:.88rem;line-height:1.6;color:var(--ink);}
   table.materials{width:100%;border-collapse:collapse;font-size:.88rem;}
-  table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;border-bottom:1px solid #eee;}
-  table.materials td{padding:10px;border-bottom:1px solid #f5f5f5;vertical-align:top;}
+  table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;}
+  table.materials td{padding:10px;vertical-align:top;}
+  table.materials tr:nth-child(even){background:#fafafa;}
   table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
   table.materials td.topic{color:var(--ink);}
   table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
@@ -87,10 +87,10 @@
 
 <aside id="sidebar">
   <div class="brand">
-    <div class="badge">IIT</div>
+    <div class="badge">IN</div>
     <div class="brand-text">
-      <p class="school">IIT Madras</p>
-      <p class="campus">Zanzibar Campus</p>
+      <p>Course Materials</p>
+      <p>Dr. Innocent Nyalala</p>
     </div>
   </div>
   <a class="back" href="../../index.html">&larr; All courses</a>
@@ -104,8 +104,13 @@
     <a href="#grading">Grading</a>
     <a href="#resources">Resources</a>
     <a href="#policies">Policies</a>
-    <p class="group">Tools</p>
-    <a href="question-bank/">Question Bank</a>
+    <a href="question-bank/index.html" style="color:var(--gold);font-weight:600;">Question Bank &rarr;</a>
+    <p class="group">BS Courses</p>
+    <a href="../z2005/index.html">Z2005 Prog &amp; DS</a>
+    <a href="../z2004/index.html">Z2004 DBMS</a>
+    <a href="../dm-scale/index.html">Z3003 Data Mining</a>
+    <p class="group">MTech Courses</p>
+    <a href="../z5007/index.html">Z5007 Prog &amp; DS</a>
   </nav>
 </aside>
 

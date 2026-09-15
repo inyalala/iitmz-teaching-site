@@ -73,8 +73,8 @@ footer a{color:var(--gold-dark);text-decoration:none;}
     <a href="t5.html">T5 — MinHash &amp; LSH</a>
     <a href="t6.html">T6 — Apriori &amp; Bloom Filters</a>
     <p class="group">BS Courses</p>
-    <a href="../../z2005/index.html"><i class="fas fa-code"></i> Z2005 Prog &amp; DS</a>
-    <a href="../../z2004/index.html"><i class="fas fa-database"></i> Z2004 DBMS</a>
+    <a href="../../z2005/index.html">Z2005 Prog &amp; DS</a>
+    <a href="../../z2004/index.html">Z2004 DBMS</a>
   </nav>
 </aside>
 <div class="main">
@@ -90,16 +90,16 @@ footer a{color:var(--gold-dark);text-decoration:none;}
 <p style="color:#6b7280;font-size:.88rem;margin:4px 0 24px;">pyspark · SparkContext · RDDs &nbsp;·&nbsp; Submit as <code style="color:#7c3aed;font-family:monospace;">dm04t[RR].py</code></p>
 
 <div class="warn-box">
-  <strong><i class="fas fa-exclamation-triangle"></i> New library: PySpark.</strong> This is your first tutorial using PySpark. You need to install it before you start: <code>pip install pyspark</code>. PySpark requires Java (JDK 8 or 11). If you run into setup problems, come to office hours before the deadline.
+  <strong>New library: PySpark.</strong> This is your first tutorial using PySpark. You need to install it before you start: <code>pip install pyspark</code>. PySpark requires Java (JDK 8 or 11). If you run into setup problems, come to office hours before the deadline.
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-file-code" style="color:var(--gold-dark);margin-right:6px;"></i>Submission</h3>
+  <h3>Submission</h3>
   <p>Name your file <code>dm04t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-info-circle" style="color:var(--gold-dark);margin-right:6px;"></i>Background</h3>
+  <h3>Background</h3>
   <p><strong>MapReduce</strong> is a programming model for processing large datasets in parallel. The <em>Map</em> step applies a function to each input record, emitting (key, value) pairs. The <em>Reduce</em> step groups by key and aggregates. <strong>PySpark</strong> is Apache Spark's Python API — it implements MapReduce-style processing through <em>Resilient Distributed Datasets (RDDs)</em>, a fault-tolerant distributed collection. In this tutorial you will run Spark locally (one machine, multiple cores) and experience the RDD API before we scale to clusters.</p>
   <p>We work with a small text dataset so you can trace every step by hand and verify the output.</p>
 </div>
@@ -120,7 +120,7 @@ sc = SparkContext(conf=conf)</div>
     </ol>
     <div class="expected">Spark version: 3.x.x
 Default parallelism: [number of CPU cores on your machine]</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> <code>"local[*]"</code> tells Spark to use all available CPU cores on your machine. In production, you replace this with the cluster master URL.</div>
+    <div class="hint"><code>"local[*]"</code> tells Spark to use all available CPU cores on your machine. In production, you replace this with the cluster master URL.</div>
   </div>
 </div>
 
@@ -162,7 +162,7 @@ All: ['data mining scales to large data', 'large data needs distributed processi
     </ol>
     <div class="expected">Pair count: 37
 First 10: [('data', 1), ('mining', 1), ('scales', 1), ('to', 1), ('large', 1), ('data', 1), ('needs', 1), ('distributed', 1), ('processing', 1), ('mapreduce', 1)]</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> <code>flatMap</code> vs <code>map</code>: <code>map</code> returns one item per input item; <code>flatMap</code> returns zero or more — it flattens lists from each call into one RDD.</div>
+    <div class="hint"><code>flatMap</code> vs <code>map</code>: <code>map</code> returns one item per input item; <code>flatMap</code> returns zero or more — it flattens lists from each call into one RDD.</div>
   </div>
 </div>
 
@@ -185,7 +185,7 @@ First 10: [('data', 1), ('mining', 1), ('scales', 1), ('to', 1), ('large', 1), (
   needs        : 1
   distributed  : 1
   splits       : 1</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> <code>reduceByKey</code> is the Reduce step — Spark automatically groups all (key, value) pairs with the same key and applies your function to combine values.</div>
+    <div class="hint"><code>reduceByKey</code> is the Reduce step — Spark automatically groups all (key, value) pairs with the same key and applies your function to combine values.</div>
   </div>
 </div>
 
@@ -208,14 +208,14 @@ First 10: [('data', 1), ('mining', 1), ('scales', 1), ('to', 1), ('large', 1), (
   <div class="task-header"><div class="task-num">6</div><h3>Extension — MapReduce Pipeline on Numerical Data</h3></div>
   <div class="task-body">
     <p>Create a list of 1000 random integers between 0 and 99 using <code>import random; nums = [random.randint(0, 99) for _ in range(1000)]</code>. Parallelise into an RDD. Use <code>map</code> to label each number as "even" or "odd". Use <code>countByKey()</code> to count how many are even vs odd. Print the result. Then stop the SparkContext: <code>sc.stop()</code>.</p>
-    <div class="hint"><i class="fas fa-lightbulb"></i> Don't forget <code>sc.stop()</code> at the very end of your script — leaving the SparkContext running keeps a web server alive on your machine.</div>
+    <div class="hint">Don't forget <code>sc.stop()</code> at the very end of your script — leaving the SparkContext running keeps a web server alive on your machine.</div>
   </div>
 </div>
 
 <div class="nav-bar">
-  <a href="t3.html"><i class="fas fa-arrow-left"></i> Tutorial 3</a>
+  <a href="t3.html">Tutorial 3</a>
   <span>Tutorial 4 of 6</span>
-  <a href="t5.html">Tutorial 5 <i class="fas fa-arrow-right"></i></a>
+  <a href="t5.html">Tutorial 5 </a>
 </div>
 </div>
 <footer>&copy; Dr. Innocent Nyalala &middot; <a href="../../index.html">All Courses</a></footer>

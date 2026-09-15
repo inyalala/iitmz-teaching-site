@@ -72,8 +72,8 @@ footer a{color:var(--gold-dark);text-decoration:none;}
     <a href="t5.html">T5 — MinHash &amp; LSH</a>
     <a href="t6.html" class="active">T6 — Apriori &amp; Bloom Filters</a>
     <p class="group">BS Courses</p>
-    <a href="../../z2005/index.html"><i class="fas fa-code"></i> Z2005 Prog &amp; DS</a>
-    <a href="../../z2004/index.html"><i class="fas fa-database"></i> Z2004 DBMS</a>
+    <a href="../../z2005/index.html">Z2005 Prog &amp; DS</a>
+    <a href="../../z2004/index.html">Z2004 DBMS</a>
   </nav>
 </aside>
 <div class="main">
@@ -89,16 +89,16 @@ footer a{color:var(--gold-dark);text-decoration:none;}
 <p style="color:#6b7280;font-size:.88rem;margin:4px 0 24px;">mlxtend · Apriori · hashlib &nbsp;·&nbsp; Submit as <code style="color:#7c3aed;font-family:monospace;">dm06t[RR].py</code></p>
 
 <div class="warn-box">
-  <strong><i class="fas fa-exclamation-triangle"></i> New library: mlxtend.</strong> Install before starting: <code>pip install mlxtend</code>. Also needed for Bloom Filter part: <code>pip install pybloom-live</code> (or use the built-in implementation in Task 4).
+  <strong>New library: mlxtend.</strong> Install before starting: <code>pip install mlxtend</code>. Also needed for Bloom Filter part: <code>pip install pybloom-live</code> (or use the built-in implementation in Task 4).
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-file-code" style="color:var(--gold-dark);margin-right:6px;"></i>Submission</h3>
+  <h3>Submission</h3>
   <p>Name your file <code>dm06t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-info-circle" style="color:var(--gold-dark);margin-right:6px;"></i>Background</h3>
+  <h3>Background</h3>
   <p><strong>Frequent itemsets</strong> are sets of items that appear together in many transactions. The <strong>Apriori algorithm</strong> prunes the search space using the <em>antimonotone property</em>: if a set is infrequent, all its supersets are also infrequent. From frequent itemsets we derive <strong>association rules</strong> like "bread → butter" with measures of confidence and lift. These rules power recommendation engines and market basket analysis.</p>
   <p>A <strong>Bloom filter</strong> is a probabilistic data structure that tests set membership in O(1) time and O(k) space (independent of set size). It can report false positives but never false negatives — extremely useful for large-scale membership checking (e.g., filtering out items known to be infrequent before scanning the database).</p>
 </div>
@@ -143,7 +143,7 @@ footer a{color:var(--gold-dark);text-decoration:none;}
   0.40      (bread, milk, butter)
   0.40      (eggs)
   0.40      (milk, eggs)</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> Notice that (bread, butter, milk) is frequent only because all three of its 2-item subsets are already frequent — this is the antimonotone property Apriori exploits.</div>
+    <div class="hint">Notice that (bread, butter, milk) is frequent only because all three of its 2-item subsets are already frequent — this is the antimonotone property Apriori exploits.</div>
   </div>
 </div>
 
@@ -183,7 +183,7 @@ Highest lift rule: butter → bread  (lift = 1.11)</div>
 bread  → PROBABLY IN SET
 juice  → DEFINITELY NOT IN SET
 sugar  → DEFINITELY NOT IN SET</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> A Bloom filter never has false negatives — if it says "definitely not in set", it's certain. But it can have false positives — it may say "probably in set" for items never added. Try adding 100 random words and querying 100 different words — count the false positives.</div>
+    <div class="hint">A Bloom filter never has false negatives — if it says "definitely not in set", it's certain. But it can have false positives — it may say "probably in set" for items never added. Try adding 100 random words and querying 100 different words — count the false positives.</div>
   </div>
 </div>
 
@@ -191,14 +191,14 @@ sugar  → DEFINITELY NOT IN SET</div>
   <div class="task-header"><div class="task-num">5</div><h3>Extension — False Positive Rate</h3></div>
   <div class="task-body">
     <p>Increase the Bloom filter size to m=64, m=128, m=256. For each size, add 10 known items, then query 100 random strings not in the set. Count and print the false positive rate (fraction of queries returning "probably in set" even though the item was never added). How does increasing m reduce the false positive rate?</p>
-    <div class="hint"><i class="fas fa-lightbulb"></i> The theoretical false positive probability is approximately (1 - e<sup>-kn/m</sup>)<sup>k</sup> where n is the number of items added. You can verify your empirical result against this formula.</div>
+    <div class="hint">The theoretical false positive probability is approximately (1 - e<sup>-kn/m</sup>)<sup>k</sup> where n is the number of items added. You can verify your empirical result against this formula.</div>
   </div>
 </div>
 
 <div class="nav-bar">
-  <a href="t5.html"><i class="fas fa-arrow-left"></i> Tutorial 5</a>
+  <a href="t5.html">Tutorial 5</a>
   <span>Tutorial 6 of 6</span>
-  <a href="../index.html">Course Home <i class="fas fa-arrow-right"></i></a>
+  <a href="../index.html">Course Home </a>
 </div>
 </div>
 <footer>&copy; Dr. Innocent Nyalala &middot; <a href="../../index.html">All Courses</a></footer>

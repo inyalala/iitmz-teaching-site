@@ -72,8 +72,8 @@ footer a{color:var(--gold-dark);text-decoration:none;}
     <a href="t5.html" class="active">T5 — MinHash &amp; LSH</a>
     <a href="t6.html">T6 — Apriori &amp; Bloom Filters</a>
     <p class="group">BS Courses</p>
-    <a href="../../z2005/index.html"><i class="fas fa-code"></i> Z2005 Prog &amp; DS</a>
-    <a href="../../z2004/index.html"><i class="fas fa-database"></i> Z2004 DBMS</a>
+    <a href="../../z2005/index.html">Z2005 Prog &amp; DS</a>
+    <a href="../../z2004/index.html">Z2004 DBMS</a>
   </nav>
 </aside>
 <div class="main">
@@ -89,16 +89,16 @@ footer a{color:var(--gold-dark);text-decoration:none;}
 <p style="color:#6b7280;font-size:.88rem;margin:4px 0 24px;">datasketch · MinHash · MinHashLSH &nbsp;·&nbsp; Submit as <code style="color:#7c3aed;font-family:monospace;">dm05t[RR].py</code></p>
 
 <div class="warn-box">
-  <strong><i class="fas fa-exclamation-triangle"></i> New library: datasketch.</strong> Install before starting: <code>pip install datasketch</code>. No other dependencies required.
+  <strong>New library: datasketch.</strong> Install before starting: <code>pip install datasketch</code>. No other dependencies required.
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-file-code" style="color:var(--gold-dark);margin-right:6px;"></i>Submission</h3>
+  <h3>Submission</h3>
   <p>Name your file <code>dm05t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-info-circle" style="color:var(--gold-dark);margin-right:6px;"></i>Background</h3>
+  <h3>Background</h3>
   <p><strong>Jaccard similarity</strong> between two sets A and B is |A ∩ B| / |A ∪ B|. Finding all near-duplicate documents by comparing every pair is O(n²) — infeasible at scale. <strong>MinHash</strong> creates a compact signature for a set such that the probability that two signatures agree on any one hash equals the Jaccard similarity. <strong>LSH (Locality-Sensitive Hashing)</strong> uses MinHash signatures to bucket similar items together — only items in the same bucket need to be compared, making near-duplicate detection sub-linear.</p>
   <p>This tutorial uses the <code>datasketch</code> library, which implements both efficiently.</p>
 </div>
@@ -137,7 +137,7 @@ Exact Jaccard: 0.5000</div>
     </ol>
     <div class="expected">MinHash estimated Jaccard: ~0.50 (varies slightly with hash functions)
 Absolute error vs exact: ~0.00–0.05</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> MinHash is an approximation. The error decreases as <code>num_perm</code> increases — try 32, 64, 128, 256 and observe the trend.</div>
+    <div class="hint">MinHash is an approximation. The error decreases as <code>num_perm</code> increases — try 32, 64, 128, 256 and observe the trend.</div>
   </div>
 </div>
 
@@ -160,7 +160,7 @@ d3 -> ['d5']
 d4 -> ['d1', 'd2']
 d5 -> ['d3']
 d6 -> []</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> Documents d1, d2, d4 form a near-duplicate cluster. d3 and d5 form another. d6 is unique. LSH found these without comparing all 15 pairs.</div>
+    <div class="hint">Documents d1, d2, d4 form a near-duplicate cluster. d3 and d5 form another. d6 is unique. LSH found these without comparing all 15 pairs.</div>
   </div>
 </div>
 
@@ -179,14 +179,14 @@ threshold=0.7: [N] near-duplicate pairs found</div>
   <div class="task-header"><div class="task-num">5</div><h3>Extension — Shingle-Based Similarity</h3></div>
   <div class="task-body">
     <p>Instead of word-level tokens, use character 3-shingles (consecutive character trigrams) for documents d1 and d2. Recompute the exact Jaccard and the MinHash-estimated Jaccard. Is character shingle similarity higher or lower than word similarity for these two documents? Write your observation as a comment.</p>
-    <div class="hint"><i class="fas fa-lightbulb"></i> A character 3-shingle of "cat" includes: "cat", "at ", "t s", etc. Use a set comprehension: <code>{doc[i:i+3] for i in range(len(doc)-2)}</code>.</div>
+    <div class="hint">A character 3-shingle of "cat" includes: "cat", "at ", "t s", etc. Use a set comprehension: <code>{doc[i:i+3] for i in range(len(doc)-2)}</code>.</div>
   </div>
 </div>
 
 <div class="nav-bar">
-  <a href="t4.html"><i class="fas fa-arrow-left"></i> Tutorial 4</a>
+  <a href="t4.html">Tutorial 4</a>
   <span>Tutorial 5 of 6</span>
-  <a href="t6.html">Tutorial 6 <i class="fas fa-arrow-right"></i></a>
+  <a href="t6.html">Tutorial 6 </a>
 </div>
 </div>
 <footer>&copy; Dr. Innocent Nyalala &middot; <a href="../../index.html">All Courses</a></footer>

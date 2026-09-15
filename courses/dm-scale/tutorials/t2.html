@@ -70,8 +70,8 @@ footer a{color:var(--gold-dark);text-decoration:none;}
     <a href="t5.html">T5 — MinHash &amp; LSH</a>
     <a href="t6.html">T6 — Apriori &amp; Bloom Filters</a>
     <p class="group">BS Courses</p>
-    <a href="../../z2005/index.html"><i class="fas fa-code"></i> Z2005 Prog &amp; DS</a>
-    <a href="../../z2004/index.html"><i class="fas fa-database"></i> Z2004 DBMS</a>
+    <a href="../../z2005/index.html">Z2005 Prog &amp; DS</a>
+    <a href="../../z2004/index.html">Z2004 DBMS</a>
   </nav>
 </aside>
 <div class="main">
@@ -87,12 +87,12 @@ footer a{color:var(--gold-dark);text-decoration:none;}
 <p style="color:#6b7280;font-size:.88rem;margin:4px 0 24px;">numpy · sklearn · matplotlib &nbsp;·&nbsp; Submit as <code style="color:#7c3aed;font-family:monospace;">dm02t[RR].py</code></p>
 
 <div class="info-box">
-  <h3><i class="fas fa-file-code" style="color:var(--gold-dark);margin-right:6px;"></i>Submission</h3>
+  <h3>Submission</h3>
   <p>Name your file <code>dm02t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
 </div>
 
 <div class="info-box">
-  <h3><i class="fas fa-info-circle" style="color:var(--gold-dark);margin-right:6px;"></i>Background</h3>
+  <h3>Background</h3>
   <p>Real datasets often have many features, most of which add noise rather than signal. <strong>Feature selection</strong> identifies which features are most informative for a classification task. <strong>PCA</strong> goes further — it constructs new axes (principal components) that capture maximum variance using fewer dimensions. Both are critical preprocessing steps before any large-scale mining pipeline.</p>
   <p>We use the <strong>Iris dataset</strong> (4 features, 3 classes, 150 samples) — small enough to understand fully.</p>
 </div>
@@ -125,7 +125,7 @@ Stds:  [0.828 0.436 1.765 0.762]</div>
       <li>Print the mean and std of each column of <code>X_scaled</code> to verify (means ≈ 0, stds ≈ 1)</li>
     </ol>
     <div class="expected">After scaling — Means: [~0, ~0, ~0, ~0]   Stds: [~1, ~1, ~1, ~1]</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> Without standardisation, features measured in large units would dominate PCA simply because of their scale.</div>
+    <div class="hint">Without standardisation, features measured in large units would dominate PCA simply because of their scale.</div>
   </div>
 </div>
 
@@ -161,7 +161,7 @@ Stds:  [0.828 0.436 1.765 0.762]</div>
     <div class="expected">X_pca shape: (150, 2)
 Explained variance ratio: [0.7296 0.2285]
 Total variance retained: 95.81%</div>
-    <div class="hint"><i class="fas fa-lightbulb"></i> 4 features reduced to 2, yet 95.8% of information is kept. This is the power of dimensionality reduction.</div>
+    <div class="hint">4 features reduced to 2, yet 95.8% of information is kept. This is the power of dimensionality reduction.</div>
   </div>
 </div>
 
@@ -188,14 +188,14 @@ Total variance retained: 95.81%</div>
   <div class="task-header"><div class="task-num">6</div><h3>Extension — How Many Components Do You Need?</h3></div>
   <div class="task-body">
     <p>Apply PCA with all 4 components. Print the cumulative explained variance. At what number of components do you reach 99% variance retained? Write your answer as a comment.</p>
-    <div class="hint"><i class="fas fa-lightbulb"></i> Use <code>np.cumsum(pca.explained_variance_ratio_)</code> on a PCA fitted with all components.</div>
+    <div class="hint">Use <code>np.cumsum(pca.explained_variance_ratio_)</code> on a PCA fitted with all components.</div>
   </div>
 </div>
 
 <div class="nav-bar">
-  <a href="t1.html"><i class="fas fa-arrow-left"></i> Tutorial 1</a>
+  <a href="t1.html">Tutorial 1</a>
   <span>Tutorial 2 of 6</span>
-  <a href="t3.html">Tutorial 3 <i class="fas fa-arrow-right"></i></a>
+  <a href="t3.html">Tutorial 3 </a>
 </div>
 </div>
 <footer>&copy; Dr. Innocent Nyalala &middot; <a href="../../index.html">All Courses</a></footer>
