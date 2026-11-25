@@ -1,216 +1,155 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="light"/>
-<title>Tutorial 5 — MinHash & LSH | Z3003</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
-<style>
-:root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--surface:#f8fafc;}
-*{box-sizing:border-box;}
-body{margin:0;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:#1f2937;background:#fff;display:flex;min-height:100vh;}
-.sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
-.sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.sidebar .badge{width:34px;height:34px;border-radius:0;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
-.sidebar .brand-text p{margin:0;line-height:1.25;font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
-.sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
-.sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
-.sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.85rem;padding:7px 10px;border-radius:0;transition:background .15s,color .15s;display:flex;align-items:center;gap:8px;}
-.sidebar nav a i{width:14px;text-align:center;font-size:.8rem;}
-.sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
-.sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
-.main{flex:1;min-width:0;}
-.topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
-.topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:0;margin-left:6px;}
-.topbar a{color:#6b7280;font-size:.85rem;text-decoration:none;margin-left:18px;}
-.topbar a:hover{color:var(--gold-dark);}
-.content{padding:40px 40px 90px;}
-.content h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.8rem;margin:0 0 6px;}
-.info-box{background:var(--surface);border:1px solid #e5e7eb;border-radius:10px;padding:18px 22px;margin-bottom:20px;}
-.info-box h3{margin:0 0 8px;font-size:.85rem;color:var(--navy);font-weight:700;}
-.info-box p{margin:0 0 6px;font-size:.87rem;color:#374151;line-height:1.6;}
-.info-box code{background:#fff;border:1px solid #e5e7eb;padding:2px 7px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.82em;color:#7c3aed;}
-.warn-box{background:#fef3c7;border:1px solid #f59e0b;border-radius:10px;padding:14px 18px;margin-bottom:20px;font-size:.85rem;color:#92400e;}
-.warn-box strong{color:#78350f;}
-h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.1rem;border-bottom:2px solid var(--gold);padding-bottom:.3em;margin:32px 0 16px;}
-.task-block{background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;}
-.task-header{background:var(--navy);padding:11px 20px;display:flex;align-items:center;gap:12px;}
-.task-num{background:var(--gold);color:var(--navy);font-weight:700;font-size:.78rem;width:26px;height:26px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-header h3{margin:0;color:#fff;font-size:.92rem;font-weight:600;}
-.task-body{padding:16px 20px;}
-.task-body p{margin:0 0 10px;font-size:.87rem;color:#374151;line-height:1.6;}
-.task-body ol{margin:0 0 10px;padding-left:20px;font-size:.87rem;color:#374151;}
-.task-body li{margin-bottom:6px;line-height:1.55;}
-.task-body code{background:#f3f4f6;padding:2px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.82em;color:#7c3aed;}
-.expected{background:var(--surface);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:10px 14px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:.79rem;color:#374151;white-space:pre-wrap;}
-.hint{background:#ede9fe;border-left:3px solid #7c3aed;border-radius:0 6px 6px 0;padding:8px 14px;margin-top:10px;font-size:.82rem;color:#5b21b6;}
-.hint i{margin-right:5px;}
-.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:24px 0 8px;margin-top:16px;border-top: none;}
-.nav-bar a{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:0;font-size:.84rem;font-weight:600;text-decoration:none;background:var(--navy);color:#fff;}
-.nav-bar a:hover{background:var(--gold-dark);}
-.nav-bar span{color:#9ca3af;font-size:.82rem;}
-footer{text-align:center;color:#9ca3af;font-size:.78rem;padding:24px 20px 40px;}
-footer a{color:var(--gold-dark);text-decoration:none;}
-@media(max-width:768px){.sidebar{display:none;}.content{padding:24px 20px;}.topbar{padding:14px 20px;}}
-</style>
-  <link rel="stylesheet" href="../../../assets/site.css?v=2"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+
+
+
+<noscript></noscript>
+
+<title>Tutorial 5 | MinHash &amp; LSH | Z3003</title>
+
+
+<link crossorigin="" href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/></noscript>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=5" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Tutorial 5 | MinHash &amp; LSH | Z3003" property="og:title"/>
+<meta content="Tutorial 5: MinHash &amp; LSH for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html#resource", "name": "Tutorial 5: MinHash &amp; LSH", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html", "description": "Tutorial 5: MinHash &amp; LSH for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003 Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, "author": {"@type": "Person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003 Data Mining", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Tutorial 5: MinHash &amp; LSH", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/tutorials/t5.html"}]}]}</script>
+<!-- /portal-seo -->
 </head>
-<body>
-<aside class="sidebar">
-  <div class="brand">
-    <div class="badge">IN</div>
-    <div class="brand-text"><p>Course Materials</p><p>Dr. Innocent Nyalala</p></div>
-  </div>
-  <a style="display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;" href="../index.html">← Z3003 Course Home</a>
-  <nav>
-    <p class="group">Z3003 Tutorials</p>
-    <a href="t1.html">T1 — Random Variables</a>
-    <a href="t2.html">T2 — Feature Selection &amp; PCA</a>
-    <a href="t3.html">T3 — Ensemble Methods</a>
-    <a href="t4.html">T4 — MapReduce &amp; PySpark</a>
-    <a href="t5.html" class="active">T5 — MinHash &amp; LSH</a>
-    <a href="t6.html">T6 — Apriori &amp; Bloom Filters</a>
-    <p class="group">BS Courses</p>
-    <a href="../../z2005/index.html">Z2005 Prog &amp; DS</a>
-    <a href="../../z2004/index.html">Z2004 DBMS</a>
-  </nav>
-</aside>
-<div class="main">
-<div class="topbar">
-  <div class="codes"><strong>Z3003</strong><span>BS</span></div>
-  <div>
-    <a href="https://inyalala.github.io/">Main site</a>
-    <a href="https://inyalala.github.io/iitmz-teaching-site/">All courses</a>
-  </div>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a href="../../../courses/z5007/index.html">Z5007</a>
+<a class="is-current" href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a href="../../../courses/z2004/index.html">Z2004</a>
+<a href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
 </div>
-<div class="content">
-<h1>Tutorial 5 — MinHash &amp; LSH</h1>
-<p style="color:#6b7280;font-size:.88rem;margin:4px 0 24px;">datasketch · MinHash · MinHashLSH &nbsp;·&nbsp; Submit as <code style="color:#7c3aed;font-family:monospace;">dm05t[RR].py</code></p>
-
+</header>
+<main class="portal-container narrow" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Z3003 Data Mining</a></p>
+<h1>Tutorial 5: MinHash &amp; LSH</h1>
+<p class="eyebrow">datasketch · MinHash · MinHashLSH  ·  Submit as <code>dm05t[RR].py</code></p>
 <div class="warn-box">
-  <strong>New library: datasketch.</strong> Install before starting: <code>pip install datasketch</code>. No other dependencies required.
+<strong>New library: datasketch.</strong> Install before starting: <code>pip install datasketch</code>. No other dependencies required.
 </div>
-
-<div class="info-box">
-  <h3>Submission</h3>
-  <p>Name your file <code>dm05t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
+<div class="quiet-note">
+<h2 style="margin:0 0 8px;font-size:1.05rem;">Submission</h2>
+<p>Name your file <code>dm05t[RR].py</code> where <code>RR</code> = last two digits of your roll number. All tasks in one file with <code># Task N</code> comments. Submit by the deadline announced in class.</p>
 </div>
-
-<div class="info-box">
-  <h3>Background</h3>
-  <p><strong>Jaccard similarity</strong> between two sets A and B is |A ∩ B| / |A ∪ B|. Finding all near-duplicate documents by comparing every pair is O(n²) — infeasible at scale. <strong>MinHash</strong> creates a compact signature for a set such that the probability that two signatures agree on any one hash equals the Jaccard similarity. <strong>LSH (Locality-Sensitive Hashing)</strong> uses MinHash signatures to bucket similar items together — only items in the same bucket need to be compared, making near-duplicate detection sub-linear.</p>
-  <p>This tutorial uses the <code>datasketch</code> library, which implements both efficiently.</p>
+<div class="quiet-note">
+<h2 style="margin:0 0 8px;font-size:1.05rem;">Background</h2>
+<p><strong>Jaccard similarity</strong> between two sets A and B is |A ∩ B| / |A ∪ B|. Finding all near-duplicate documents by comparing every pair is O(n²): infeasible at scale. <strong>MinHash</strong> creates a compact signature for a set such that the probability that two signatures agree on any one hash equals the Jaccard similarity. <strong>LSH (Locality-Sensitive Hashing)</strong> uses MinHash signatures to bucket similar items together: only items in the same bucket need to be compared, making near-duplicate detection sub-linear.</p>
+<p>This tutorial uses the <code>datasketch</code> library, which implements both efficiently.</p>
 </div>
-
 <h2>Tasks</h2>
-
-<div class="task-block">
-  <div class="task-header"><div class="task-num">1</div><h3>Compute Jaccard Similarity by Hand</h3></div>
-  <div class="task-body">
-    <p>Before using MinHash, compute the exact Jaccard similarity so you have a reference to compare the approximation against.</p>
-    <ol>
-      <li>Define two sets of words (shingles):
+<section class="lab-task"><h3><span class="task-num-tag">Task 1</span> Compute Jaccard Similarity by Hand</h3>
+<p>Before using MinHash, compute the exact Jaccard similarity so you have a reference to compare the approximation against.</p>
+<ol>
+<li>Define two sets of words (shingles):
         <br/><code>A = set("data mining is about finding patterns in large datasets".split())</code>
-        <br/><code>B = set("data science is about finding insights in large data sets".split())</code></li>
-      <li>Print set A, set B, their intersection, and their union</li>
-      <li>Compute and print the exact Jaccard similarity: <code>len(A &amp; B) / len(A | B)</code></li>
-    </ol>
-    <div class="expected">Set A: {'about', 'data', 'datasets', 'finding', 'in', 'is', 'large', 'mining', 'patterns'}
+<br/><code>B = set("data science is about finding insights in large data sets".split())</code></li>
+<li>Print set A, set B, their intersection, and their union</li>
+<li>Compute and print the exact Jaccard similarity: <code>len(A &amp; B) / len(A | B)</code></li>
+</ol>
+<div class="expected">Set A: {'about', 'data', 'datasets', 'finding', 'in', 'is', 'large', 'mining', 'patterns'}
 Set B: {'about', 'data', 'finding', 'in', 'insights', 'is', 'large', 'science', 'sets'}
 Intersection: {'about', 'data', 'finding', 'in', 'is', 'large'}
 Union: 12 elements
 Exact Jaccard: 0.5000</div>
-  </div>
-</div>
-
-<div class="task-block">
-  <div class="task-header"><div class="task-num">2</div><h3>Create MinHash Signatures</h3></div>
-  <div class="task-body">
-    <ol>
-      <li>Import: <code>from datasketch import MinHash</code></li>
-      <li>Create two MinHash objects with <code>num_perm=128</code> (128 hash functions):
+</section>
+<section class="lab-task"><h3><span class="task-num-tag">Task 2</span> Create MinHash Signatures</h3>
+<ol>
+<li>Import: <code>from datasketch import MinHash</code></li>
+<li>Create two MinHash objects with <code>num_perm=128</code> (128 hash functions):
         <br/><code>m1 = MinHash(num_perm=128)</code>, <code>m2 = MinHash(num_perm=128)</code></li>
-      <li>Update each with the elements of set A and set B respectively. Elements must be encoded: <code>m1.update(word.encode('utf8'))</code></li>
-      <li>Compute and print the MinHash-estimated Jaccard similarity: <code>m1.jaccard(m2)</code></li>
-      <li>Compute the absolute error between the exact and estimated Jaccard values</li>
-    </ol>
-    <div class="expected">MinHash estimated Jaccard: ~0.50 (varies slightly with hash functions)
+<li>Update each with the elements of set A and set B respectively. Elements must be encoded: <code>m1.update(word.encode('utf8'))</code></li>
+<li>Compute and print the MinHash-estimated Jaccard similarity: <code>m1.jaccard(m2)</code></li>
+<li>Compute the absolute error between the exact and estimated Jaccard values</li>
+</ol>
+<div class="expected">MinHash estimated Jaccard: ~0.50 (varies slightly with hash functions)
 Absolute error vs exact: ~0.00–0.05</div>
-    <div class="hint">MinHash is an approximation. The error decreases as <code>num_perm</code> increases — try 32, 64, 128, 256 and observe the trend.</div>
-  </div>
-</div>
-
-<div class="task-block">
-  <div class="task-header"><div class="task-num">3</div><h3>Build a Corpus and Detect Near-Duplicates with LSH</h3></div>
-  <div class="task-body">
-    <ol>
-      <li>Import: <code>from datasketch import MinHashLSH</code></li>
-      <li>Define a corpus of 6 short documents:
+<div class="hint">MinHash is an approximation. The error decreases as <code>num_perm</code> increases: try 32, 64, 128, 256 and observe the trend.</div>
+</section>
+<section class="lab-task"><h3><span class="task-num-tag">Task 3</span> Build a Corpus and Detect Near-Duplicates with LSH</h3>
+<ol>
+<li>Import: <code>from datasketch import MinHashLSH</code></li>
+<li>Define a corpus of 6 short documents:
         <br/><code>docs = {"d1": "cat sat on the mat", "d2": "cat sat on the hat", "d3": "dog ran in the park", "d4": "cat sat on a hat", "d5": "dog ran through the park", "d6": "fish swam in the sea"}</code></li>
-      <li>Create a MinHashLSH with <code>threshold=0.5, num_perm=64</code>:
+<li>Create a MinHashLSH with <code>threshold=0.5, num_perm=64</code>:
         <br/><code>lsh = MinHashLSH(threshold=0.5, num_perm=64)</code></li>
-      <li>For each document, create a MinHash and insert it into the LSH index: <code>lsh.insert(key, minhash)</code></li>
-      <li>For each document, query the LSH for its neighbours: <code>result = lsh.query(minhash)</code>. Print the document and its neighbours (excluding itself)</li>
-    </ol>
-    <div class="expected">Near-duplicates (threshold >= 0.5):
-d1 -> ['d2', 'd4']
-d2 -> ['d1', 'd4']
-d3 -> ['d5']
-d4 -> ['d1', 'd2']
-d5 -> ['d3']
-d6 -> []</div>
-    <div class="hint">Documents d1, d2, d4 form a near-duplicate cluster. d3 and d5 form another. d6 is unique. LSH found these without comparing all 15 pairs.</div>
-  </div>
-</div>
-
-<div class="task-block">
-  <div class="task-header"><div class="task-num">4</div><h3>Effect of Threshold on LSH Results</h3></div>
-  <div class="task-body">
-    <p>Rebuild the LSH index three times with thresholds 0.3, 0.5, and 0.7. For each threshold, print how many near-duplicate pairs are found across all queries.</p>
-    <div class="expected">threshold=0.3: [N] near-duplicate pairs found
+<li>For each document, create a MinHash and insert it into the LSH index: <code>lsh.insert(key, minhash)</code></li>
+<li>For each document, query the LSH for its neighbours: <code>result = lsh.query(minhash)</code>. Print the document and its neighbours (excluding itself)</li>
+</ol>
+<div class="expected">Near-duplicates (threshold &gt;= 0.5):
+d1 -&gt; ['d2', 'd4']
+d2 -&gt; ['d1', 'd4']
+d3 -&gt; ['d5']
+d4 -&gt; ['d1', 'd2']
+d5 -&gt; ['d3']
+d6 -&gt; []</div>
+<div class="hint">Documents d1, d2, d4 form a near-duplicate cluster. d3 and d5 form another. d6 is unique. LSH found these without comparing all 15 pairs.</div>
+</section>
+<section class="lab-task"><h3><span class="task-num-tag">Task 4</span> Effect of Threshold on LSH Results</h3>
+<p>Rebuild the LSH index three times with thresholds 0.3, 0.5, and 0.7. For each threshold, print how many near-duplicate pairs are found across all queries.</p>
+<div class="expected">threshold=0.3: [N] near-duplicate pairs found
 threshold=0.5: [N] near-duplicate pairs found
 threshold=0.7: [N] near-duplicate pairs found</div>
-    <p style="margin-top:10px;">Write a comment explaining why lowering the threshold increases the number of pairs.</p>
-  </div>
-</div>
-
-<div class="task-block">
-  <div class="task-header"><div class="task-num">5</div><h3>Extension — Shingle-Based Similarity</h3></div>
-  <div class="task-body">
-    <p>Instead of word-level tokens, use character 3-shingles (consecutive character trigrams) for documents d1 and d2. Recompute the exact Jaccard and the MinHash-estimated Jaccard. Is character shingle similarity higher or lower than word similarity for these two documents? Write your observation as a comment.</p>
-    <div class="hint">A character 3-shingle of "cat" includes: "cat", "at ", "t s", etc. Use a set comprehension: <code>{doc[i:i+3] for i in range(len(doc)-2)}</code>.</div>
-  </div>
-</div>
-
+<p style="margin-top:10px;">Write a comment explaining why lowering the threshold increases the number of pairs.</p>
+</section>
+<section class="lab-task"><h3><span class="task-num-tag">Task 5</span> Extension: Shingle-Based Similarity</h3>
+<p>Instead of word-level tokens, use character 3-shingles (consecutive character trigrams) for documents d1 and d2. Recompute the exact Jaccard and the MinHash-estimated Jaccard. Is character shingle similarity higher or lower than word similarity for these two documents? Write your observation as a comment.</p>
+<div class="hint">A character 3-shingle of "cat" includes: "cat", "at ", "t s", etc. Use a set comprehension: <code>{doc[i:i+3] for i in range(len(doc)-2)}</code>.</div>
+</section>
 <div class="nav-bar">
-  <a href="t4.html">Tutorial 4</a>
-  <span>Tutorial 5 of 6</span>
-  <a href="t6.html">Tutorial 6 </a>
+<a class="nav-btn" href="t4.html">Tutorial 4</a>
+<span>Tutorial 5 of 6</span>
+<a class="nav-btn" href="t6.html">Tutorial 6 </a>
 </div>
-</div>
-<footer>&copy; Dr. Innocent Nyalala &middot; <a href="../../index.html">All Courses</a></footer>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</main>
+<footer class="portal-footer narrow">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Z3003 Overview</a></span>
+</footer>
 <script>
 (function(){
-  if(typeof Lenis==='undefined'||typeof gsap==='undefined') return;
-  var lenis=new Lenis({duration:1.1,easing:function(t){return 1-Math.pow(1-t,3);},smoothTouch:false});
-  function raf(t){lenis.raf(t);requestAnimationFrame(raf);}
-  requestAnimationFrame(raf);
-  gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll',ScrollTrigger.update);
-  gsap.ticker.add(function(t){lenis.raf(t*1000);});
-  gsap.ticker.lagSmoothing(0);
-  gsap.from('h1,h2,.lec-header,.crumb',{opacity:0,y:12,duration:0.6,stagger:0.08,ease:'power2.out',clearProps:'all'});
-  gsap.utils.toArray('.card,.note,.tip,.concept,.lab-step,.qbank-card').forEach(function(el,i){
-    gsap.from(el,{opacity:0,y:10,duration:0.5,ease:'power2.out',
-      scrollTrigger:{trigger:el,start:'top 90%',once:true}
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
     });
   });
+  sync();
 })();
-</script>
-</body>
+</script></body>
 </html>

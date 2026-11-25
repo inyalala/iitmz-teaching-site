@@ -1,345 +1,204 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="light"/>
-<meta name="description" content="Z5007 Programming and Data Structures (MTech): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials."/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<meta content="Z5007 Programming and Data Structures (MTech): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials." name="description"/>
 <title>Z5007 Programming and Data Structures | Dr. Innocent Nyalala</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
-<style>
-  :root{--navy:#1C1209;--navy2:#2a1e0e;--gold:#8F4E10;--gold-dark:#6A3A09;--ink:#1f2937;--muted:#6b7280;}
-  *{box-sizing:border-box;}
-  html{background:#fff;}
-  body{margin:0;font-family:'Source Serif 4',Georgia,serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
-  #sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
-  #sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-  #sidebar .badge{width:34px;height:34px;border-radius:0;background:rgba(143,78,16,.18);border:1px solid rgba(143,78,16,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
-  #sidebar .brand-text p{margin:0;line-height:1.25;font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
-  #sidebar a.back{display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;}
-  #sidebar a.back:hover{color:var(--gold);}
-  #sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
-  #sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
-  #sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.85rem;padding:7px 10px;border-radius:0;transition:background .15s,color .15s;}
-  #sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
-  #sidebar nav a.active{background:rgba(143,78,16,.15);color:var(--gold);font-weight:600;}
-  #main{flex:1;min-width:0;}
-  .topbar{padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
-  .topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(143,78,16,.12);padding:3px 10px;border-radius:0;margin-left:6px;}
-  .topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
-  .topbar a:hover{color:var(--gold-dark);}
-  .content{padding:40px 40px 90px;}
-  .content h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
-  .content > p.lede{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:36px;}
-  section{margin-bottom:42px;scroll-margin-top:24px;}
-  section h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.2rem;border-bottom:2px solid var(--gold);padding-bottom:.4em;margin-bottom:18px;}
-  .card{background:#fff;border:1px solid #eee;border-radius:0;padding:18px 20px;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  @media (max-width:640px){.grid2{grid-template-columns:1fr;}#sidebar{display:none;}.content{padding:28px 20px 70px;}.topbar{padding:14px 20px;}}
-  .person{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
-  .person:last-child{margin-bottom:0;}
-  .person .avatar{width:44px;height:44px;border-radius:0;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;}
-  .person p.name{margin:0;font-weight:700;color:var(--navy);font-size:.95rem;}
-  .person p.role{margin:0;color:var(--muted);font-size:.8rem;}
-  .person a{color:var(--gold-dark);font-size:.82rem;text-decoration:none;}
-  .person a:hover{text-decoration:underline;}
-  .meta-row{font-size:.85rem;color:var(--ink);margin-top:12px;padding-top:12px;}
-  table.sched{width:100%;border-collapse:collapse;font-size:.88rem;}
-  table.sched th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;}
-  table.sched td{padding:9px 10px;}
-  table.sched tr:nth-child(even){background:#fafafa;}
-  ol.outcomes{margin:0;padding-left:0;list-style:none;}
-  ol.outcomes li{display:flex;gap:12px;margin-bottom:12px;font-size:.92rem;line-height:1.55;}
-  ol.outcomes .num{flex-shrink:0;width:24px;height:24px;border-radius:0;background:rgba(143,78,16,.15);color:var(--gold-dark);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;margin-top:1px;}
-  .grade-bar{margin-bottom:14px;}
-  .grade-bar .row{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:5px;}
-  .grade-bar .row strong{color:var(--navy);}
-  .grade-bar .row .pct{color:var(--gold-dark);font-weight:700;}
-  .grade-bar .track{height:6px;background:#f1f1f1;border-radius:0;overflow:hidden;}
-  .grade-bar .fill{height:100%;background:var(--gold);border-radius:0;}
-  .grade-bar p.note{margin:6px 0 0;color:var(--muted);font-size:.78rem;}
-  .textbook{display:flex;gap:12px;padding:14px 0;}
-  .textbook p.title{margin:0;font-weight:700;color:var(--navy);font-size:.92rem;}
-  .textbook p.authors{margin:2px 0 0;color:var(--muted);font-size:.82rem;}
-  .textbook span.role{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:0;margin-left:auto;flex-shrink:0;height:fit-content;}
-  .role-required{background:rgba(143,78,16,.15);color:var(--gold-dark);}
-  .role-reference{background:#f1f5f9;color:#64748b;}
-  .policy{padding:14px 0;}
-  .policy p.label{margin:0 0 4px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight:700;}
-  .policy p.text{margin:0;font-size:.88rem;line-height:1.6;color:var(--ink);}
-  table.materials{width:100%;border-collapse:collapse;font-size:.88rem;}
-  table.materials th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;padding:8px 10px;}
-  table.materials td{padding:10px;vertical-align:top;}
-  table.materials tr:nth-child(even){background:#fafafa;}
-  table.materials td.wk{font-weight:700;color:var(--navy);white-space:nowrap;}
-  table.materials td.topic{color:var(--ink);}
-  table.materials td.link a{color:var(--gold-dark);text-decoration:none;font-weight:600;white-space:nowrap;}
-  table.materials td.link a:hover{text-decoration:underline;}
-  .pending{color:var(--muted);font-style:italic;}
-</style>
+
+
+
+<noscript></noscript>
+
+
+
+<link crossorigin="" href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/></noscript>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../assets/site.css?v=5" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Z5007 Programming and Data Structures | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Z5007 Programming and Data Structures (MTech): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Course", "name": "Z5007: Programming and Data Structures", "courseCode": "Z5007", "description": "Z5007 Programming and Data Structures (MTech): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials.", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html", "provider": {"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Madras Zanzibar", "url": "https://www.iitmz.ac.in/"}, "instructor": {"@type": "Person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "onsite", "location": {"@type": "Place", "name": "Indian Institute of Technology Madras Zanzibar"}}}</script>
+<!-- /portal-seo -->
 </head>
-<body>
-
-<aside id="sidebar">
-  <div class="brand">
-    <div class="badge">IN</div>
-    <div class="brand-text">
-      <p>Course Materials</p>
-      <p>Dr. Innocent Nyalala</p>
-    </div>
-  </div>
-  <a class="back" href="../../index.html">&larr; All courses</a>
-  <nav>
-    <p class="group">Z5007 &middot; MTech</p>
-    <a href="#overview" class="active">Overview</a>
-    <a href="#instructor">Instructor</a>
-    <a href="#schedule">Schedule</a>
-    <a href="#outcomes">Learning Outcomes</a>
-    <a href="#materials">Materials</a>
-    <a href="#grading">Grading</a>
-    <a href="#resources">Resources</a>
-    <a href="#policies">Policies</a>
-    <a href="question-bank/index.html" style="color:var(--gold);font-weight:600;">Question Bank &rarr;</a>
-    <p class="group">BS Courses</p>
-    <a href="../z2005/index.html">Z2005 Prog &amp; DS</a>
-    <a href="../z2004/index.html">Z2004 DBMS</a>
-    <a href="../dm-scale/index.html">Z3003 Data Mining</a>
-    <p class="group">MTech Courses</p>
-    <a href="../z5008/index.html">Z5008 Big Data Lab</a>
-  </nav>
-</aside>
-
-<div id="main">
-  <div class="topbar">
-    <div class="codes"><strong style="color:var(--navy)">Z5007</strong><span>MTECH</span></div>
-    <div>
-      <a href="https://inyalala.github.io/">Main site</a>
-      <a href="https://inyalala.github.io/iitmz-teaching-site/">All courses</a>
-    </div>
-  </div>
-
-  <div class="content">
-    <section id="overview">
-      <h1>Programming and Data Structures</h1>
-      <p class="lede">An introduction to algorithms and data structures in Python, moving from basic structures such as stacks, linked lists, and queues through sorting, trees, hash tables, and heaps, to dynamic programming, greedy algorithms, and graph algorithms, closing with an introduction to parallel and randomized algorithms. This is the BS section: for the MTech section (Z5007), <a href="../z5007/index.html" style="color:var(--gold-dark)">see here</a>.</p>
-      <div class="grid2">
-        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Term</p><p style="margin:0;font-weight:600;color:var(--navy)">Odd Semester, October 2026 &ndash; January 2027</p></div>
-        <div class="card"><p style="margin:0 0 4px;font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;font-weight:700">Credits</p><p style="margin:0;font-weight:600;color:var(--navy)">15 (Core)</p></div>
-      </div>
-    </section>
-
-    <section id="instructor">
-      <h2>Instructor</h2>
-      <div class="card">
-        <div class="person">
-          <div class="avatar">IN</div>
-          <div>
-            <p class="name">Dr. Innocent Nyalala</p>
-            <p class="role">Assistant Professor of Data Science and AI &middot; Head, SAAIL Lab</p>
-            <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a>
-          </div>
-        </div>
-        <div class="meta-row">Office: Door 105, Room F1</div>
-        <div class="meta-row">Office Hours: Wednesday, 2:00 PM &ndash; 4:00 PM</div>
-      </div>
-    </section>
-
-    <section id="schedule">
-      <h2>Schedule</h2>
-      <div class="card">
-        <table class="sched">
-          <tr><th>Session</th><th>Frequency</th><th>Time / Room</th></tr>
-          <tr><td>Lecture</td><td>4 per week</td><td>TBA</td></tr>
-          <tr><td>Lab</td><td>2 per week</td><td>TBA</td></tr>
-        </table>
-      </div>
-    </section>
-
-    <section id="outcomes">
-      <h2>Learning Outcomes</h2>
-      <p style="color:var(--muted);font-size:.88rem;margin-top:-8px;margin-bottom:16px;">On successful completion, a student will be able to:</p>
-      <ol class="outcomes">
-        <li><span class="num">1</span> Design and implement Python classes using encapsulation, inheritance, and polymorphism, and justify a composition-versus-inheritance choice.</li>
-        <li><span class="num">2</span> Implement stacks, queues, linked lists, binary trees, hash tables, and heaps from first principles, and extend them to balanced and amortized variants.</li>
-        <li><span class="num">3</span> Analyze running time using big-O notation, including amortized and average-case analysis, and justify a structure choice in writing.</li>
-        <li><span class="num">4</span> Implement and compare sorting algorithms, and prove the correctness of one.</li>
-        <li><span class="num">5</span> Apply dynamic programming and greedy strategies, with a written argument for why the greedy choice is correct where applicable.</li>
-        <li><span class="num">6</span> Apply BFS, DFS, A*, and minimum spanning tree algorithms to reachability, shortest-path, and network design problems.</li>
-        <li><span class="num">7</span> Benchmark an implementation against a realistic workload and report the result the way a systems engineer would.</li>
-      </ol>
-    </section>
-
-    <section id="materials">
-      <h2>Materials</h2>
-      <div class="card">
-        <table class="materials">
-          <tr><th>Week</th><th>Topic</th><th>Materials</th></tr>
-          <tr>
-            <td class="wk">1</td>
-            <td class="topic">Object-Oriented Programming, then Algorithms</td>
-            <td class="link"><a href="00-oop-then-algorithms/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">2</td>
-            <td class="topic">Arrays and Dynamic Arrays</td>
-            <td class="link"><a href="01-arrays-dynamic-arrays/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">3</td>
-            <td class="topic">Stacks and Queues</td>
-            <td class="link"><a href="02-stacks-queues/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">4</td>
-            <td class="topic">Linked Lists</td>
-            <td class="link"><a href="03-linked-lists/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">5</td>
-            <td class="topic">Simple Sorting</td>
-            <td class="link"><a href="04-simple-sorting/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">6</td>
-            <td class="topic">Advanced Sorting Algorithms</td>
-            <td class="link"><a href="05-advanced-sorting/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">7</td>
-            <td class="topic">Binary Trees</td>
-            <td class="link"><a href="06-binary-trees/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">8</td>
-            <td class="topic">Hash Tables and Heaps</td>
-            <td class="link"><a href="07-hash-tables-heaps/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">9</td>
-            <td class="topic">Dynamic Programming</td>
-            <td class="link"><a href="08-dynamic-programming/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">10</td>
-            <td class="topic">Greedy Algorithms</td>
-            <td class="link"><a href="09-greedy-algorithms/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">11</td>
-            <td class="topic">Introduction to Graphs</td>
-            <td class="link"><a href="10-intro-graphs/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">12</td>
-            <td class="topic">Graph Algorithms: Dijkstra and A*</td>
-            <td class="link"><a href="11-graph-algorithms/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">13</td>
-            <td class="topic">Graph Algorithms: Bellman-Ford and Prim's</td>
-            <td class="link"><a href="11-graph-algorithms/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">14</td>
-            <td class="topic">Parallel and Randomized Algorithms</td>
-            <td class="link"><a href="12-parallel-randomized/index.html">Lectures, lab, notebook</a></td>
-          </tr>
-          <tr>
-            <td class="wk">15</td>
-            <td class="topic">Project Presentations and Review</td>
-            <td class="link"><a href="13-project-review/index.html">Course review, rubric, exam prep</a></td>
-          </tr>
-        </table>
-      </div>
-      <p style="color:var(--muted);font-size:.82rem;margin-top:14px;">Each week's materials go live as they are completed; this table is updated in step.</p>
-    </section>
-
-    <section id="grading">
-      <h2>Grading</h2>
-      <div class="card">
-        <div class="grade-bar">
-          <div class="row"><strong>In-class assignments</strong><span class="pct">10%</span></div>
-          <div class="track"><div class="fill" style="width:10%"></div></div>
-          <p class="note">Seven assignments, done in lab, one every 2 weeks (weeks 2, 4, 6, 8, 10, 12, 14). <a href="assignments/index.html" style="color:var(--gold-dark);">View assignments &rarr;</a></p>
-        </div>
-        <div class="grade-bar">
-          <div class="row"><strong>Quizzes</strong><span class="pct">30%</span></div>
-          <div class="track"><div class="fill" style="width:30%"></div></div>
-          <p class="note">Short in-class quizzes through the semester.</p>
-        </div>
-        <div class="grade-bar">
-          <div class="row"><strong>Course project</strong><span class="pct">20%</span></div>
-          <div class="track"><div class="fill" style="width:20%"></div></div>
-          <p class="note">Custom ML algorithm from scratch, or a recommendation system.</p>
-        </div>
-        <div class="grade-bar">
-          <div class="row"><strong>End semester examination</strong><span class="pct">40%</span></div>
-          <div class="track"><div class="fill" style="width:40%"></div></div>
-          <p class="note">Practical and theory, in lab.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="resources">
-      <h2>Resources</h2>
-      <div class="card">
-        <div class="textbook">
-          <div><p class="title">Data Structures and Algorithms in Python</p><p class="authors">Robert Lafore, Ami Broder, and Jeremy Canning &middot; Addison Wesley, 2022</p></div>
-          <span class="role role-required">Required</span>
-        </div>
-        <div class="textbook">
-          <div><p class="title">The Algorithm Design Manual</p><p class="authors">Steven S. Skiena &middot; Springer, 2008</p></div>
-          <span class="role role-reference">Reference</span>
-        </div>
-        <div class="policy" style="border-top:1px solid #f5f5f5;padding-top:14px;margin-top:14px;">
-          <p class="label">Materials Repository</p>
-          <p class="text">All lecture slides, lab sheets, and notebooks for this course are version-controlled and public: <a href="https://github.com/inyalala/iitmz-teaching-site" target="_blank" rel="noopener" style="color:var(--gold-dark);font-weight:600;">github.com/inyalala/iitmz-teaching-site</a>.</p>
-        </div>
-        <div class="policy">
-          <p class="label">Algorithm Visualizers</p>
-          <p class="text">
-            <a href="https://visualgo.net/en" target="_blank" rel="noopener" style="color:var(--gold-dark);">VisuAlgo</a>: animated visualizations for most structures and algorithms in this course (arrays, trees, heaps, hashing, graphs, sorting).<br/>
-            <a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener" style="color:var(--gold-dark);">USFCA Data Structure Visualizations</a>: step-through visualizations, especially strong for trees and hashing.<br/>
-            <a href="https://pythontutor.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);">Python Tutor</a>: visualize your own Python code executing line by line, including recursion and pointers/references.
-          </p>
-        </div>
-        <div class="policy">
-          <p class="label">Video Lectures</p>
-          <p class="text">
-            <a href="https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O" target="_blank" rel="noopener" style="color:var(--gold-dark);">Abdul Bari: Algorithms</a>: clear, worked explanations of sorting, DP, and graph algorithms.<br/>
-            <a href="https://www.youtube.com/playlist?list=PLBZBJbE_rGRV8D7XZ08LK6z-4zPoWzu5H" target="_blank" rel="noopener" style="color:var(--gold-dark);">MIT 6.006: Introduction to Algorithms (OCW)</a>: university-level rigor for the theory behind each topic.<br/>
-            <a href="https://www.freecodecamp.org/news/data-structures-and-algorithms-in-python-video-course/" target="_blank" rel="noopener" style="color:var(--gold-dark);">freeCodeCamp: Data Structures and Algorithms in Python</a>: full-course video walkthrough in Python specifically.
-          </p>
-        </div>
-        <div class="policy">
-          <p class="label">Practice Problems</p>
-          <p class="text">
-            <a href="https://leetcode.com/" target="_blank" rel="noopener" style="color:var(--gold-dark);">LeetCode</a> &middot;
-            <a href="https://www.hackerrank.com/domains/data-structures" target="_blank" rel="noopener" style="color:var(--gold-dark);">HackerRank: Data Structures</a> &middot;
-            <a href="https://www.geeksforgeeks.org/data-structures/" target="_blank" rel="noopener" style="color:var(--gold-dark);">GeeksforGeeks: Data Structures</a>
-           : for extra practice beyond the graded assignments. Not required, not graded.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="policies">
-      <h2>Policies</h2>
-      <div class="card">
-        <div class="policy"><p class="label">Attendance</p><p class="text">Attendance is expected at all lectures and labs. Lab work is done during the lab session and submitted before it ends.</p></div>
-        <div class="policy"><p class="label">Late work</p><p class="text">Late work is not accepted. Deadlines are fixed and announced in advance; submit what you have by the deadline. This applies uniformly: there are no extensions or day-based penalty scales.</p></div>
-        <div class="policy"><p class="label">Academic integrity</p><p class="text">Discussing ideas is encouraged; sharing or copying code is not. Every line you submit must be one you can explain.</p></div>
-        <div class="policy"><p class="label">Use of AI tools</p><p class="text">AI coding assistants may be used to explain concepts and read error messages, not to generate solutions you then submit. The examinations assume you can write these structures yourself.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <footer style="padding:20px 40px 40px;font-size:.78rem;color:#94a3b8;line-height:1.7;">
-    &copy; 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar. Course materials licensed under
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" style="color:var(--gold-dark);">CC BY-NC-SA 4.0</a>.
-    Attribution required. Commercial use prohibited. Reproduction without permission is not allowed.
-  </footer>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../index.html">All Courses</a>
+<a class="is-current" href="../../courses/z5007/index.html">Z5007</a>
+<a href="../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../courses/z2005/index.html">Z2005</a>
+<a href="../../courses/z2004/index.html">Z2004</a>
+<a href="../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
 </div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../../index.html">← All Courses</a></p>
+<p class="eyebrow">Z5007 · MTECH</p>
+<h1>Programming and Data Structures</h1>
+<p class="lede">Graduate course in Python data structures and algorithms, covering amortized analysis, loop invariants, balanced search trees, hashing, dynamic programming, greedy proofs, and graph algorithms. For the BS section (Z2005), <a href="../z2005/index.html">see the reference course</a>.</p>
+<dl class="meta-dl">
+<div><dt>Term</dt><dd>Odd Semester, October 2026 – January 2027</dd></div>
+<div><dt>Credits</dt><dd>15 (Core)</dd></div>
+<div><dt>Instructor</dt><dd>Dr. Innocent Nyalala · Office: Door 105, Room F1 · Office Hours: Wednesday, 2:00 PM – 4:00 PM · <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a></dd></div>
+<div><dt>Course Links</dt><dd><a href="../z2005/index.html">BS Section (Z2005)</a> · <a href="https://inyalala.github.io/courses/z5007/">Faculty Course Page</a></dd></div>
+</dl>
+<nav aria-label="Course sections" class="section-jumps"><a href="#schedule">Schedule</a> <a href="#materials">Materials</a> <a href="#grading">Grading</a> <a href="#outcomes">Outcomes</a> <a href="#resources">Resources</a> <a href="#policies">Policies</a></nav>
+<section id="schedule">
+<h2>Schedule</h2>
 
-</body>
+<div class="table-wrap"><table class="sched">
+<tr><th>Session</th><th>Frequency</th><th>Time / Room</th></tr>
+<tr><td>Lecture</td><td>4 per week</td><td>Monday, Wednesday, Thursday, and Friday</td></tr>
+<tr><td>Lab</td><td>2 per week</td><td>TBA</td></tr>
+</table></div>
+
+</section><section id="materials">
+<h2>Materials</h2>
+
+<div class="table-wrap"><table class="materials">
+<tr><th>Week</th><th>Topic</th><th>Materials</th></tr>
+<tr>
+<td class="wk">1</td>
+<td class="topic">Object-Oriented Programming, then Algorithms</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">2</td>
+<td class="topic">Arrays and Dynamic Arrays</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">3</td>
+<td class="topic">Stacks and Queues</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">4</td>
+<td class="topic">Linked Lists</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">5</td>
+<td class="topic">Simple Sorting</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">6</td>
+<td class="topic">Advanced Sorting Algorithms</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">7</td>
+<td class="topic">Binary Trees</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">8</td>
+<td class="topic">Hash Tables and Heaps</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">9</td>
+<td class="topic">Dynamic Programming</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">10</td>
+<td class="topic">Greedy Algorithms</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">11</td>
+<td class="topic">Introduction to Graphs</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">12</td>
+<td class="topic">Graph Algorithms: Dijkstra and A*</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">13</td>
+<td class="topic">Graph Algorithms: Bellman-Ford and Prim's</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">14</td>
+<td class="topic">Parallel and Randomized Algorithms</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 slides &amp; notes</span></td>
+</tr>
+<tr>
+<td class="wk">15</td>
+<td class="topic">Project Presentations and Review</td>
+<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified 2026-27 rubric &amp; review</span></td>
+</tr>
+</table></div>
+
+<p>Verified 2026-27 slide PDFs, LaTeX lecture notes and worksheets (PDF), optional Office Web Viewer PPTX previews, and Thursday laboratory notebooks are being published module by module directly from the official course archive.</p>
+</section><section id="grading"><h2>Grading</h2><div class="table-wrap"><table><tr><th>Component</th><th>Weight</th><th>Details</th></tr><tr><td><strong>In-class assignments</strong></td><td class="wk">10%</td><td>Seven assignments, done in lab, one every 2 weeks (weeks 2, 4, 6, 8, 10, 12, 14).</td></tr><tr><td><strong>Quizzes</strong></td><td class="wk">30%</td><td>Short in-class quizzes through the semester.</td></tr><tr><td><strong>Course project</strong></td><td class="wk">20%</td><td>Custom ML algorithm from scratch, or a recommendation system.</td></tr><tr><td><strong>End semester examination</strong></td><td class="wk">40%</td><td>Practical and theory, in lab.</td></tr></table></div></section><section id="outcomes">
+<h2>Learning Outcomes</h2>
+
+<ol class="plain-outcomes">
+<li> Design and implement Python classes using encapsulation, inheritance, and polymorphism, and justify a composition-versus-inheritance choice.</li>
+<li> Implement stacks, queues, linked lists, binary trees, hash tables, and heaps from first principles, and extend them to balanced and amortized variants.</li>
+<li> Analyze running time using big-O notation, including amortized and average-case analysis, and justify a structure choice in writing.</li>
+<li> Implement and compare sorting algorithms, and prove the correctness of one.</li>
+<li> Apply dynamic programming and greedy strategies, with a written argument for why the greedy choice is correct where applicable.</li>
+<li> Apply BFS, DFS, A*, and minimum spanning tree algorithms to reachability, shortest-path, and network design problems.</li>
+<li> Benchmark an implementation against a realistic workload and report the result the way a systems engineer would.</li>
+</ol>
+</section><section id="resources"><h2>Resources</h2><div class="clean-list"><div class="clean-row"><div class="clean-row-label">Required Textbook</div><div class="clean-row-body"><strong>Data Structures and Algorithms in Python</strong> · Robert Lafore, Ami Broder, and Jeremy Canning · Addison Wesley, 2022</div></div><div class="clean-row"><div class="clean-row-label">Reference Textbook</div><div class="clean-row-body"><strong>The Algorithm Design Manual</strong> · Steven S. Skiena · Springer, 2008</div></div><div class="clean-row"><div class="clean-row-label">Materials Repository</div><div class="clean-row-body">All lecture slides, lab sheets, and notebooks for this course are version-controlled and public: <a href="https://github.com/inyalala/iitmz-teaching-site" rel="noopener" target="_blank">github.com/inyalala/iitmz-teaching-site</a>.</div></div><div class="clean-row"><div class="clean-row-label">Algorithm Visualizers</div><div class="clean-row-body">
+<a href="https://visualgo.net/en" rel="noopener" target="_blank">VisuAlgo</a>: animated visualizations for most structures and algorithms in this course (arrays, trees, heaps, hashing, graphs, sorting).<br/>
+<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" rel="noopener" target="_blank">USFCA Data Structure Visualizations</a>: step-through visualizations, especially strong for trees and hashing.<br/>
+<a href="https://pythontutor.com/" rel="noopener" target="_blank">Python Tutor</a>: visualize your own Python code executing line by line, including recursion and pointers/references.
+          </div></div><div class="clean-row"><div class="clean-row-label">Video Lectures</div><div class="clean-row-body">
+<a href="https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O" rel="noopener" target="_blank">Abdul Bari: Algorithms</a>: clear, worked explanations of sorting, DP, and graph algorithms.<br/>
+<a href="https://www.youtube.com/playlist?list=PLBZBJbE_rGRV8D7XZ08LK6z-4zPoWzu5H" rel="noopener" target="_blank">MIT 6.006: Introduction to Algorithms (OCW)</a>: university-level rigor for the theory behind each topic.<br/>
+<a href="https://www.freecodecamp.org/news/data-structures-and-algorithms-in-python-video-course/" rel="noopener" target="_blank">freeCodeCamp: Data Structures and Algorithms in Python</a>: full-course video walkthrough in Python specifically.
+          </div></div><div class="clean-row"><div class="clean-row-label">Practice Problems</div><div class="clean-row-body">
+<a href="https://leetcode.com/" rel="noopener" target="_blank">LeetCode</a> ·
+            <a href="https://www.hackerrank.com/domains/data-structures" rel="noopener" target="_blank">HackerRank: Data Structures</a> ·
+            <a href="https://www.geeksforgeeks.org/data-structures/" rel="noopener" target="_blank">GeeksforGeeks: Data Structures</a>: optional extra practice beyond graded assignments (ungraded).
+          </div></div></div></section><section id="policies"><h2>Policies</h2><div class="clean-list"><div class="clean-row"><div class="clean-row-label">Attendance</div><div class="clean-row-body">Attendance is expected at all lectures and labs. Lab work is done during the lab session and submitted before it ends.</div></div><div class="clean-row"><div class="clean-row-label">Late work</div><div class="clean-row-body">Late work is not accepted. Deadlines are fixed and announced in advance; submit what you have by the deadline. This applies uniformly: there are no extensions or day-based penalty scales.</div></div><div class="clean-row"><div class="clean-row-label">Academic integrity</div><div class="clean-row-body">Discussing ideas is encouraged; sharing or copying code is not. Every line you submit must be one you can explain.</div></div><div class="clean-row"><div class="clean-row-label">Use of AI tools</div><div class="clean-row-body">AI coding assistants may be used to explain concepts and read error messages, not to generate solutions you then submit. The examinations assume you can write these structures yourself.</div></div></div></section></main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="https://inyalala.github.io/courses/">Faculty Courses</a> · <a href="../../index.html">All Courses</a></span>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script></body>
 </html>

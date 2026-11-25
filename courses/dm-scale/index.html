@@ -1,386 +1,266 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="color-scheme" content="light"/>
-<title>Data Mining: Scaling to Large Data | Z3003</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet"/>
-<style>
-:root{--navy:#1C1209;--gold:#8F4E10;--gold-dark:#6A3A09;--surface:#f8fafc;--ink:#1f2937;--muted:#6b7280;}
-*{box-sizing:border-box;}
-body{margin:0;font-family:'Source Serif 4', Georgia, serif,sans-serif;color:var(--ink);background:#fff;display:flex;min-height:100vh;}
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<meta content="Z3003 Data Mining: Scaling to Large Data (BS): IIT Madras Zanzibar. Schedule, PySpark MapReduce lab, and weekly tutorials." name="description"/>
+<title>Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala</title>
 
-/* SIDEBAR: matches z2004 exactly */
-.sidebar{width:250px;flex-shrink:0;background:var(--navy);color:#cbd5e1;padding:26px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;}
-.sidebar .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.sidebar .badge{width:34px;height:34px;border-radius:0;background:rgba(197,160,89,.18);border:1px solid rgba(197,160,89,.4);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--gold);flex-shrink:0;}
-.sidebar .brand-text p{margin:0;line-height:1.25;font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;}
-.sidebar nav{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
-.sidebar nav p.group{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:700;margin:18px 0 6px;}
-.sidebar nav a{color:#cbd5e1;text-decoration:none;font-size:.85rem;padding:7px 10px;border-radius:0;transition:background .15s,color .15s;display:flex;align-items:center;gap:8px;}
-.sidebar nav a i{width:14px;text-align:center;font-size:.8rem;}
-.sidebar nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
-.sidebar nav a.active{background:rgba(197,160,89,.15);color:var(--gold);font-weight:600;}
 
-/* MAIN: matches z2004 exactly */
-.main{flex:1;min-width:0;}
-.topbar{border-bottom:1px solid #eee;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;}
-.topbar .codes span{font-size:.7rem;font-weight:700;letter-spacing:.05em;color:var(--gold-dark);background:rgba(197,160,89,.12);padding:3px 10px;border-radius:0;margin-left:6px;}
-.topbar a{color:var(--muted);font-size:.85rem;text-decoration:none;margin-left:18px;}
-.topbar a:hover{color:var(--gold-dark);}
-.content{padding:40px 40px 90px;}
-.content h1{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:2.1rem;margin:0 0 6px;}
 
-/* removed old header CSS */
-/* INFO GRID */
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
-.info-card{background:var(--surface);border:1px solid #e5e7eb;border-radius:0;padding:20px 22px;}
-.info-card h4{margin:0 0 8px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dark);}
-.info-card p{margin:0;font-size:.88rem;color:#374151;line-height:1.6;}
-.info-card a{color:var(--gold-dark);text-decoration:none;}
-.info-card code{background:#f3f4f6;padding:1px 6px;border-radius:3px;font-size:.82em;font-family:monospace;color:#7c3aed;}
+<noscript></noscript>
 
-/* HEADINGS */
-h2{font-family:'Cormorant Garamond',serif;color:var(--navy);font-size:1.2rem;border-bottom:2px solid var(--gold);padding-bottom:.35em;margin:40px 0 18px;}
 
-/* TABLES */
-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:28px;}
-thead th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:.78rem;letter-spacing:.03em;}
-tbody tr:nth-child(even){background:var(--surface);}
-tbody td{padding:11px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.5;}
-.badge{display:inline-block;padding:2px 9px;border-radius:0;font-size:.68rem;font-weight:700;}
-.badge-w{background:rgba(10,22,40,.1);color:var(--navy);}
-.badge-ch{background:rgba(197,160,89,.18);color:var(--gold-dark);}
 
-/* OUTCOMES */
-.outcome-list{list-style:none;margin:0 0 24px;padding:0;}
-.outcome-list li{padding:9px 0 9px 28px;border-bottom:1px solid #f0f0f0;font-size:.88rem;color:#374151;position:relative;line-height:1.5;}
-.outcome-list li::before{content:'\f058';font-family:'Font Awesome 6 Free';font-weight:900;color:var(--gold);position:absolute;left:0;top:10px;font-size:.8rem;}
-
-/* TUTORIAL CARDS */
-.tut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
-.tut-card{background:var(--surface);border:1px solid #e5e7eb;border-radius:0;padding:16px 18px;text-decoration:none;display:block;transition:box-shadow .15s,border-color .15s;}
-.tut-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);border-color:var(--gold);}
-.tut-card .num{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gold-dark);margin-bottom:6px;}
-.tut-card .title{font-size:.88rem;font-weight:600;color:var(--navy);line-height:1.4;display:block;margin-bottom:5px;}
-.tut-card .lib{font-size:.75rem;color:#6b7280;}
-
-/* RESOURCE CARDS */
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
-.res-card{background:var(--surface);border:1px solid #e5e7eb;border-radius:0;padding:16px 18px;}
-.res-card .label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--gold-dark);margin-bottom:5px;}
-.res-card a{color:var(--navy);text-decoration:none;font-weight:600;font-size:.88rem;display:block;line-height:1.4;margin-bottom:4px;}
-.res-card a:hover{color:var(--gold-dark);}
-.res-card p{margin:0;font-size:.78rem;color:#6b7280;line-height:1.5;}
-
-/* SOFTWARE */
-.sw-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
-.sw{background:#f3f4f6;border:1px solid #e5e7eb;border-radius:0;padding:4px 12px;font-size:.78rem;font-family:monospace;color:var(--navy);}
-
-/* ASSESSMENT */
-.pct{display:inline-block;background:rgba(197,160,89,.15);color:var(--gold-dark);font-weight:700;padding:1px 8px;border-radius:0;font-size:.8rem;margin-right:6px;}
-
-/* NOTICE */
-.notice{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:14px 18px;font-size:.85rem;color:#92400e;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;line-height:1.55;}
-.notice i{color:#f59e0b;flex-shrink:0;margin-top:2px;}
-
-footer{text-align:center;color:#9ca3af;font-size:.78rem;padding:30px 20px 40px;}
-footer a{color:var(--gold-dark);text-decoration:none;}
-
-@media(max-width:768px){.sidebar{display:none;}.content{padding:24px 20px;}.info-grid,.res-grid,.tut-grid{grid-template-columns:1fr;}.topbar{padding:14px 20px;}}
-</style>
-<link rel="stylesheet" href="../../assets/site.css?v=2"/>
+<link crossorigin="" href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet"/></noscript>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../assets/site.css?v=5" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Z3003 Data Mining: Scaling to Large Data (BS): IIT Madras Zanzibar. Schedule, PySpark MapReduce lab, and weekly tutorials." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Course", "name": "Z3003: Data Mining: Scaling to Large Data", "courseCode": "Z3003", "description": "Z3003 Data Mining: Scaling to Large Data (BS): IIT Madras Zanzibar. Schedule, PySpark MapReduce lab, and weekly tutorials.", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html", "provider": {"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Madras Zanzibar", "url": "https://www.iitmz.ac.in/"}, "instructor": {"@type": "Person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "onsite", "location": {"@type": "Place", "name": "Indian Institute of Technology Madras Zanzibar"}}}</script>
+<!-- /portal-seo -->
 </head>
-<body>
-
-<aside class="sidebar">
-  <div class="brand">
-    <div class="badge">IN</div>
-    <div class="brand-text">
-      <p>Course Materials</p>
-      <p>Dr. Innocent Nyalala</p>
-    </div>
-  </div>
-  <a style="display:inline-flex;align-items:center;gap:6px;color:#94a3b8;font-size:.75rem;text-decoration:none;margin:16px 0 22px;" href="../../index.html">← All courses</a>
-  <nav>
-    <p class="group">Z3003 · BS</p>
-    <a href="#overview" class="active">Overview</a>
-    <a href="#syllabus">Syllabus</a>
-    <a href="#schedule">Weekly Schedule</a>
-    <a href="#tutorials">Tutorials</a>
-    <a href="#outcomes">Learning Outcomes</a>
-    <a href="#resources">Resources</a>
-    <a href="#assessment">Assessment</a>
-    <p class="group">BS Courses</p>
-    <a href="../z2005/index.html">Z2005 Prog &amp; DS</a>
-    <a href="../z2004/index.html">Z2004 DBMS</a>
-    <p class="group">MTech Courses</p>
-    <a href="../z5007/index.html">Z5007 Prog &amp; DS</a>
-    <a href="../z5008/index.html">Z5008 Big Data Lab</a>
-  </nav>
-</aside>
-
-<div class="main">
-<div class="topbar">
-  <div class="codes"><strong>Z3003</strong><span>BS</span></div>
-  <div>
-    <a href="https://inyalala.github.io/">Main site</a>
-    <a href="https://inyalala.github.io/iitmz-teaching-site/">All courses</a>
-  </div>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../index.html">All Courses</a>
+<a href="../../courses/z5007/index.html">Z5007</a>
+<a class="is-current" href="../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../courses/z2005/index.html">Z2005</a>
+<a href="../../courses/z2004/index.html">Z2004</a>
+<a href="../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
 </div>
-
-<div class="content">
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../../index.html">← All Courses</a></p>
+<p class="eyebrow">Z3003 · BS Core · Odd Semester 2026-27</p>
 <h1>Data Mining: Scaling to Large Data</h1>
-<p style="color:var(--muted);font-size:.9rem;margin:4px 0 28px;">Dr. Nyalala (Weeks 1–6) &nbsp;·&nbsp; Dr. Mahendran V (Weeks 7–15) &nbsp;·&nbsp; 3 Lectures + 1 Tutorial per week &nbsp;·&nbsp; BS Programme</p>
-
-<div class="notice">
-  <span>This is a 15-week course. <strong>Dr. Nyalala teaches Weeks 1–6</strong> (ML basics, feature selection, ensembles, MapReduce, LSH, frequent patterns). Dr. Mahendran V teaches Weeks 7–15. This page covers Weeks 1–6 and all six tutorials.</span>
-</div>
-
-<!-- OVERVIEW -->
-<h2 id="overview">Course Overview</h2>
-<div class="info-grid">
-  <div class="info-card">
-    <h4>Objective</h4>
-    <p>Introduce students to techniques for mining large datasets. The course covers common data mining tasks and then approaches to scaling each of them to data that cannot fit in memory or on a single machine.</p>
-  </div>
-  <div class="info-card">
-    <h4>Primary Textbook</h4>
-    <p><strong>Mining of Massive Datasets</strong><br/>Rajaraman, Ullman &amp; Leskovec<br/>Cambridge University Press<br/><a href="http://www.mmds.org" target="_blank">Free PDF: mmds.org ↗</a></p>
-  </div>
-  <div class="info-card">
-    <h4>What You Already Know</h4>
-    <p>Python, numpy, pandas, scikit-learn, basic probability and statistics, introductory machine learning, SQL and relational databases (DBMS). You do <strong>not</strong> need to know PySpark: introduced in Week 4.</p>
-  </div>
-  <div class="info-card">
-    <h4>Session Structure</h4>
-    <p><strong>3 lectures</strong> per week (typically Mon / Wed / Fri or as timetabled) plus <strong>1 tutorial</strong> session per week. Tutorials are graded Python assignments submitted as <code>.py</code> files.</p>
-  </div>
-</div>
-
-<!-- FULL SYLLABUS -->
-<h2 id="syllabus">Full Course Syllabus</h2>
+<p class="lede">Methods for scaling machine learning and mining algorithms to large datasets, covering Weeks 1 to 6 under Dr. Nyalala (Bayesian classification, feature selection, ensembles, MapReduce, PySpark, LSH, and frequent patterns) alongside Weeks 7 to 15 taught by Dr. Mahendran V (IIT Tirupati).</p>
+<dl class="meta-dl">
+<div><dt>Term &amp; Instructors</dt><dd>Odd Semester 2026-27 (Oct 2026 – Jan 2027) · Dr. Innocent Nyalala (Weeks 1–6) &amp; Dr. Mahendran V (Weeks 7–15)</dd></div>
+<div><dt>Schedule &amp; Primary Text</dt><dd>3 Lectures + 1 Tutorial weekly · <a href="http://www.mmds.org" rel="noopener" target="_blank">Mining of Massive Datasets (MMDS) ↗</a></dd></div>
+<div><dt>Prerequisites</dt><dd>Python, NumPy, pandas, scikit-learn, probability, and SQL. PySpark is introduced from scratch in Week 4.</dd></div>
+<div><dt>Course Links</dt><dd><a href="labs/lab1.html">PySpark Lab 1</a> · <a href="#tutorials">Tutorials T1–T6</a> · <a href="https://inyalala.github.io/courses/z3003/">Faculty Course Page ↗</a></dd></div>
+</dl>
+<nav aria-label="Course sections" class="section-jumps">
+<a href="#syllabus">Syllabus</a>
+<a href="#schedule">Weeks 1–6 Schedule</a>
+<a href="#tutorials">Tutorials</a>
+<a href="#labs">PySpark Lab</a>
+<a href="#outcomes">Outcomes</a>
+<a href="#resources">Resources</a>
+<a href="#assessment">Assessment</a>
+</nav>
+<section id="syllabus">
+<h2>Full Course Syllabus</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Topic Area</th><th>Key Concepts</th><th>Weeks</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>ML Basics</strong></td>
+<td>Bayesian Decision Theory; Maximum Likelihood Estimation (MLE); Feature Selection: Information Gain; Derived features: PCA &amp; LDA; Aggregation/Coding; Handling Missing Values</td>
+<td>1–2</td>
+</tr>
+<tr>
+<td><strong>Class Imbalance &amp; Ensemble Methods</strong></td>
+<td>Differential loss functions; Differential slack; Sampling-based approaches; Boosting: AdaBoost, LogitBoost, Gradient Boosting; Bagging: Random Forest, Subsampling; Stacking; Decision Fusion</td>
+<td>3</td>
+</tr>
+<tr>
+<td><strong>Scaling Up</strong></td>
+<td>Map-Reduce model; PySpark; Locality-Sensitive Hashing; Large-scale optimisation; PageRank on large graphs</td>
+<td>4–5</td>
+</tr>
+<tr>
+<td><strong>Frequent Patterns &amp; Stream Mining</strong></td>
+<td>Apriori Algorithm; Large datasets; Limited-pass algorithms; Frequent sub-sequence mining; Stream data model; Sampling in a stream; Filtering Streams; Bloom Filter; Counting in streams</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>Clustering</strong></td>
+<td>Hierarchical Clustering; k-means; CURE; DBSCAN; Non-Euclidean spaces; Spectral clustering</td>
+<td>7–9</td>
+</tr>
+<tr>
+<td><strong>Advanced Stream Mining</strong></td>
+<td>Sliding windows; DGIM; Reservoir sampling; Approximate counting at scale</td>
+<td>10–11</td>
+</tr>
+<tr>
+<td><strong>Advanced Topics</strong></td>
+<td>Recommender systems; Matrix factorisation; Dimensionality reduction; Graph mining</td>
+<td>12–15</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="schedule">
+<h2>Weekly Schedule: Weeks 1–6 (Dr. Nyalala)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>Week</th><th>Lecture Topics</th><th>MMDS</th><th>Tutorial</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Week 1</td>
+<td>
+<strong>Introduction &amp; Bayesian ML Review</strong><br/>
+<span>Why large-scale mining is hard. Data types and challenges. Bayesian Decision Theory. Maximum Likelihood Estimation. numpy and scipy.stats review.</span>
+</td>
+<td>Ch. 1</td>
+<td><a href="tutorials/t1.html">Tutorial 1 ↗</a></td>
+</tr>
+<tr>
+<td>Week 2</td>
+<td>
+<strong>Feature Selection &amp; Dimensionality Reduction</strong><br/>
+<span>Information Gain, mutual information. PCA: covariance, eigenvectors, explained variance. LDA. Aggregation and coding. Handling missing values.</span>
+</td>
+<td>ESL Ch. 3</td>
+<td><a href="tutorials/t2.html">Tutorial 2 ↗</a></td>
+</tr>
+<tr>
+<td>Week 3</td>
+<td>
+<strong>Class Imbalance &amp; Ensemble Methods</strong><br/>
+<span>Imbalanced data. SMOTE and sampling. AdaBoost and Gradient Boosting. Bagging and Random Forest. Stacking and decision fusion.</span>
+</td>
+<td>ESL Ch. 10</td>
+<td><a href="tutorials/t3.html">Tutorial 3 ↗</a></td>
+</tr>
+<tr>
+<td>Week 4</td>
+<td>
+<strong>MapReduce &amp; Introduction to PySpark</strong><br/>
+<span>Why single machines fail at scale. MapReduce: map, shuffle, reduce. Spark RDDs: transformations and actions. Word count to log analysis in PySpark.</span>
+</td>
+<td>Ch. 2</td>
+<td><a href="tutorials/t4.html">Tutorial 4 ↗</a></td>
+</tr>
+<tr>
+<td>Week 5</td>
+<td>
+<strong>Locality-Sensitive Hashing &amp; PageRank</strong><br/>
+<span>Shingling, Jaccard similarity, MinHash. LSH for approximate nearest neighbours. Web as a graph. PageRank: power iteration and convergence. Spam detection.</span>
+</td>
+<td>Ch. 3, 5</td>
+<td><a href="tutorials/t5.html">Tutorial 5 ↗</a></td>
+</tr>
+<tr>
+<td>Week 6</td>
+<td>
+<strong>Frequent Pattern Mining &amp; Stream Mining Intro</strong><br/>
+<span>Association rules: support and confidence. Apriori algorithm. The stream data model. Bloom Filter for membership. Counting in streams (Flajolet-Martin).</span>
+</td>
+<td>Ch. 4, 6</td>
+<td><a href="tutorials/t6.html">Tutorial 6 ↗</a></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="tutorials">
+<h2>Tutorials</h2>
+<p class="quiet-note">Submit one Python file per week named <code>dm[TT]t[RR].py</code>, where <code>TT</code> is the tutorial number (01–06) and <code>RR</code> is the last two digits of your roll number (for example, <code>dm01t23.py</code>).</p>
+<div class="table-wrap">
 <table>
-  <thead><tr><th>Topic Area</th><th>Key Concepts</th><th>Weeks</th></tr></thead>
-  <tbody>
-    <tr style="background:#fffbeb;">
-      <td><strong>ML Basics</strong></td>
-      <td>Bayesian Decision Theory; Maximum Likelihood Estimation (MLE); Feature Selection: Information Gain; Derived features: PCA &amp; LDA; Aggregation/Coding; Handling Missing Values</td>
-      <td><span class="badge badge-w">1–2</span></td>
-    </tr>
-    <tr style="background:#fffbeb;">
-      <td><strong>Class Imbalance &amp; Ensemble Methods</strong></td>
-      <td>Differential loss functions; Differential slack; Sampling-based approaches; Boosting: AdaBoost, LogitBoost, Gradient Boosting; Bagging: Random Forest, Subsampling; Stacking; Decision Fusion</td>
-      <td><span class="badge badge-w">3</span></td>
-    </tr>
-    <tr style="background:#fffbeb;">
-      <td><strong>Scaling Up</strong></td>
-      <td>Map-Reduce paradigm; PySpark; Locality-Sensitive Hashing; Large-scale optimisation; PageRank on large graphs</td>
-      <td><span class="badge badge-w">4–5</span></td>
-    </tr>
-    <tr style="background:#fffbeb;">
-      <td><strong>Frequent Patterns &amp; Stream Mining</strong></td>
-      <td>Apriori Algorithm; Large datasets; Limited-pass algorithms; Frequent sub-sequence mining; Stream data model; Sampling in a stream; Filtering Streams; Bloom Filter; Counting in streams</td>
-      <td><span class="badge badge-w">6</span></td>
-    </tr>
-    <tr>
-      <td><strong>Clustering</strong></td>
-      <td>Hierarchical Clustering; k-means; CURE; DBSCAN; Non-Euclidean spaces; Spectral clustering</td>
-      <td><span class="badge badge-w">7–9</span></td>
-    </tr>
-    <tr>
-      <td><strong>Advanced Stream Mining</strong></td>
-      <td>Sliding windows; DGIM; Reservoir sampling; Approximate counting at scale</td>
-      <td><span class="badge badge-w">10–11</span></td>
-    </tr>
-    <tr>
-      <td><strong>Advanced Topics</strong></td>
-      <td>Recommender systems; Matrix factorisation; Dimensionality reduction; Graph mining</td>
-      <td><span class="badge badge-w">12–15</span></td>
-    </tr>
-  </tbody>
+<thead><tr><th>Tutorial</th><th>Topic</th><th>Libraries</th></tr></thead>
+<tbody><tr><td class="wk">Tutorial 1</td><td class="topic"><a href="tutorials/t1.html">Simulating Random Variables</a></td><td><code>numpy · scipy.stats</code></td></tr>
+<tr><td class="wk">Tutorial 2</td><td class="topic"><a href="tutorials/t2.html">Feature Selection &amp; PCA</a></td><td><code>sklearn · numpy · matplotlib</code></td></tr>
+<tr><td class="wk">Tutorial 3</td><td class="topic"><a href="tutorials/t3.html">Ensemble Methods</a></td><td><code>sklearn · AdaBoost · RandomForest</code></td></tr>
+<tr><td class="wk">Tutorial 4</td><td class="topic"><a href="tutorials/t4.html">MapReduce with PySpark</a></td><td><code>pyspark · RDD · transformations</code></td></tr>
+<tr><td class="wk">Tutorial 5</td><td class="topic"><a href="tutorials/t5.html">MinHash &amp; LSH</a></td><td><code>datasketch · numpy · sets</code></td></tr>
+<tr><td class="wk">Tutorial 6</td><td class="topic"><a href="tutorials/t6.html">Apriori &amp; Bloom Filters</a></td><td><code>mlxtend · bitarray · numpy</code></td></tr>
+</tbody>
 </table>
-
-<!-- WEEKLY SCHEDULE -->
-<h2 id="schedule">Weekly Schedule: Weeks 1–6 (Dr. Nyalala)</h2>
-<table>
-  <thead>
-    <tr><th style="width:80px;">Week</th><th>Lecture Topics</th><th style="width:90px;">MMDS</th><th style="width:110px;">Tutorial</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><span class="badge badge-w">Week 1</span></td>
-      <td>
-        <strong>Introduction &amp; Bayesian ML Review</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Why large-scale mining is hard. Data types and challenges. Bayesian Decision Theory. Maximum Likelihood Estimation. numpy and scipy.stats review.</span>
-      </td>
-      <td><span class="badge badge-ch">Ch. 1</span></td>
-      <td><a href="tutorials/t1.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 1 ↗</a></td>
-    </tr>
-    <tr>
-      <td><span class="badge badge-w">Week 2</span></td>
-      <td>
-        <strong>Feature Selection &amp; Dimensionality Reduction</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Information Gain, mutual information. PCA: covariance, eigenvectors, explained variance. LDA. Aggregation and coding. Handling missing values.</span>
-      </td>
-      <td><span class="badge badge-ch">ESL Ch. 3</span></td>
-      <td><a href="tutorials/t2.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 2 ↗</a></td>
-    </tr>
-    <tr>
-      <td><span class="badge badge-w">Week 3</span></td>
-      <td>
-        <strong>Class Imbalance &amp; Ensemble Methods</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Imbalanced data. SMOTE and sampling. AdaBoost and Gradient Boosting. Bagging and Random Forest. Stacking and decision fusion.</span>
-      </td>
-      <td><span class="badge badge-ch">ESL Ch. 10</span></td>
-      <td><a href="tutorials/t3.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 3 ↗</a></td>
-    </tr>
-    <tr>
-      <td><span class="badge badge-w">Week 4</span></td>
-      <td>
-        <strong>MapReduce &amp; Introduction to PySpark</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Why single machines fail at scale. MapReduce: map, shuffle, reduce. Spark RDDs: transformations and actions. Word count to log analysis in PySpark.</span>
-      </td>
-      <td><span class="badge badge-ch">Ch. 2</span></td>
-      <td><a href="tutorials/t4.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 4 ↗</a></td>
-    </tr>
-    <tr>
-      <td><span class="badge badge-w">Week 5</span></td>
-      <td>
-        <strong>Locality-Sensitive Hashing &amp; PageRank</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Shingling, Jaccard similarity, MinHash. LSH for approximate nearest neighbours. Web as a graph. PageRank: power iteration and convergence. Spam detection.</span>
-      </td>
-      <td><span class="badge badge-ch">Ch. 3, 5</span></td>
-      <td><a href="tutorials/t5.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 5 ↗</a></td>
-    </tr>
-    <tr>
-      <td><span class="badge badge-w">Week 6</span></td>
-      <td>
-        <strong>Frequent Pattern Mining &amp; Stream Mining Intro</strong><br/>
-        <span style="color:#6b7280;font-size:.8rem;">Association rules: support and confidence. Apriori algorithm. The stream data model. Bloom Filter for membership. Counting in streams (Flajolet-Martin).</span>
-      </td>
-      <td><span class="badge badge-ch">Ch. 4, 6</span></td>
-      <td><a href="tutorials/t6.html" style="color:var(--gold-dark);font-weight:600;font-size:.82rem;">Tutorial 6 ↗</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- TUTORIALS -->
-<h2 id="tutorials">Tutorials</h2>
-<p style="font-size:.87rem;color:#6b7280;margin-bottom:16px;">One tutorial per week. Submit a <code>.py</code> file named <code>dm[TT]t[RR].py</code>: where <code>TT</code> is the tutorial number (01–06) and <code>RR</code> is the last two digits of your roll number. Example: <code>dm01t23.py</code>.</p>
-<div class="tut-grid">
-  <a href="tutorials/t1.html" class="tut-card">
-    <div class="num">Tutorial 1</div>
-    <span class="title">Simulating Random Variables</span>
-    <span class="lib">numpy · scipy.stats</span>
-  </a>
-  <a href="tutorials/t2.html" class="tut-card">
-    <div class="num">Tutorial 2</div>
-    <span class="title">Feature Selection &amp; PCA</span>
-    <span class="lib">sklearn · numpy · matplotlib</span>
-  </a>
-  <a href="tutorials/t3.html" class="tut-card">
-    <div class="num">Tutorial 3</div>
-    <span class="title">Ensemble Methods</span>
-    <span class="lib">sklearn · AdaBoost · RandomForest</span>
-  </a>
-  <a href="tutorials/t4.html" class="tut-card">
-    <div class="num">Tutorial 4</div>
-    <span class="title">MapReduce with PySpark</span>
-    <span class="lib">pyspark · RDD · transformations</span>
-  </a>
-  <a href="tutorials/t5.html" class="tut-card">
-    <div class="num">Tutorial 5</div>
-    <span class="title">MinHash &amp; LSH</span>
-    <span class="lib">datasketch · numpy · sets</span>
-  </a>
-  <a href="tutorials/t6.html" class="tut-card">
-    <div class="num">Tutorial 6</div>
-    <span class="title">Apriori &amp; Bloom Filters</span>
-    <span class="lib">mlxtend · bitarray · numpy</span>
-  </a>
 </div>
-
-<!-- LEARNING OUTCOMES -->
-<h2 id="outcomes">Learning Outcomes</h2>
-<ul class="outcome-list">
-  <li>Apply Bayesian Decision Theory and Maximum Likelihood Estimation to classification problems under uncertainty.</li>
-  <li>Select informative features using Information Gain and reduce dimensionality using PCA and LDA.</li>
-  <li>Handle class imbalance using sampling and loss-function approaches, and build ensemble classifiers (AdaBoost, Gradient Boosting, Random Forest).</li>
-  <li>Explain the MapReduce paradigm and write basic PySpark pipelines using RDD transformations and actions on real datasets.</li>
-  <li>Apply Locality-Sensitive Hashing to find approximate nearest neighbours in large collections, and compute PageRank using power iteration.</li>
-  <li>Implement the Apriori algorithm for frequent itemset mining and use Bloom Filters for approximate membership testing in data streams.</li>
-</ul>
-
-<!-- SOFTWARE -->
+</section>
+<section id="labs">
+<h2>PySpark Hands-On Lab</h2>
+<div class="clean-list">
+<div class="clean-row">
+<div class="clean-row-label">Lab 1 · Week 4</div>
+<div class="clean-row-body"><a href="labs/lab1.html"><strong>MapReduce with PySpark</strong></a> · RDD transformations, aggregations, and server log analysis.</div>
+</div>
+</div>
+</section>
+<section id="outcomes">
+<h2>Learning Outcomes</h2>
+<ol class="plain-outcomes"><li>Apply Bayesian Decision Theory and Maximum Likelihood Estimation to classification problems under uncertainty.</li>
+<li>Select informative features using Information Gain and reduce dimensionality using PCA and LDA.</li>
+<li>Handle class imbalance using sampling and loss-function approaches, and build ensemble classifiers (AdaBoost, Gradient Boosting, Random Forest).</li>
+<li>Explain the MapReduce model and write basic PySpark pipelines using RDD transformations and actions on real datasets.</li>
+<li>Apply Locality-Sensitive Hashing to find approximate nearest neighbours in large collections, and compute PageRank using power iteration.</li>
+<li>Implement the Apriori algorithm for frequent itemset mining and use Bloom Filters for approximate membership testing in data streams.</li>
+</ol>
+</section>
+<section id="software">
 <h2>Required Software</h2>
-<p style="font-size:.87rem;color:#6b7280;margin-bottom:12px;">Install before the first tutorial. All are free and open source. Use Google Colab if you prefer not to install locally: no setup required there.</p>
-<div class="sw-list">
-  <span class="sw">numpy</span><span class="sw">pandas</span><span class="sw">scipy</span>
-  <span class="sw">scikit-learn</span><span class="sw">matplotlib</span><span class="sw">seaborn</span>
-  <span class="sw">pyspark</span><span class="sw">networkx</span><span class="sw">mlxtend</span>
-  <span class="sw">datasketch</span><span class="sw">lshash</span><span class="sw">ipywidgets</span>
-  <span class="sw">ipympl</span><span class="sw">jupyter</span><span class="sw">docker</span><span class="sw">git</span>
+<p class="sw-inline"><code>numpy</code> · <code>pandas</code> · <code>scipy</code> · <code>scikit-learn</code> · <code>matplotlib</code> · <code>seaborn</code> · <code>pyspark</code> · <code>networkx</code> · <code>mlxtend</code> · <code>datasketch</code> · <code>lshash</code> · <code>ipywidgets</code> · <code>ipympl</code> · <code>jupyter</code> · <code>docker</code> · <code>git</code></p>
+</section>
+<section id="resources">
+<h2>Course Resources</h2>
+<div class="clean-list"><div class="clean-row"><div class="clean-row-label">Primary Textbook: Free PDF</div><div class="clean-row-body"><a href="http://www.mmds.org" rel="noopener" target="_blank"><strong>Mining of Massive Datasets ↗</strong></a> · Rajaraman, Ullman &amp; Leskovec. Cambridge University Press. Free PDF at mmds.org by publisher agreement.</div></div>
+<div class="clean-row"><div class="clean-row-label">Reference 1: Free PDF</div><div class="clean-row-body"><a href="https://web.stanford.edu/~hastie/ElemStatLearn/" rel="noopener" target="_blank"><strong>Elements of Statistical Learning ↗</strong></a> · Hastie, Tibshirani &amp; Friedman. Springer. Free PDF from Stanford. Covers Weeks 1–3 theory in depth.</div></div>
+<div class="clean-row"><div class="clean-row-label">Reference 2</div><div class="clean-row-body"><a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf" rel="noopener" target="_blank"><strong>Pattern Recognition &amp; ML: Bishop ↗</strong></a> · Christopher Bishop. Microsoft Research. Bayesian methods and probabilistic foundations.</div></div>
+<div class="clean-row"><div class="clean-row-label">Reference 3</div><div class="clean-row-body"><a href="https://www.sciencedirect.com/book/9780123814791" rel="noopener" target="_blank"><strong>Data Mining: Han &amp; Kamber (3rd Ed.) ↗</strong></a> · Jiawei Han &amp; Micheline Kamber. Practical focus on mining tasks, algorithms, and tools.</div></div>
+<div class="clean-row"><div class="clean-row-label">Lecture Slides: Free</div><div class="clean-row-body"><a href="https://snap.stanford.edu/class/cs246-2024/" rel="noopener" target="_blank"><strong>Stanford CS246 Slides (2024) ↗</strong></a> · Full slide set matched chapter-by-chapter with MMDS. Covers Weeks 4–6 scaling topics.</div></div>
+<div class="clean-row"><div class="clean-row-label">Video Lectures: Free Audit</div><div class="clean-row-body"><a href="https://www.edx.org/course/mining-massive-datasets" rel="noopener" target="_blank"><strong>Mining Massive Datasets on edX ↗</strong></a> · Stanford's online version of CS246. Free to audit. Watch alongside lectures for deeper understanding.</div></div>
 </div>
-
-<!-- RESOURCES -->
-<h2 id="resources">Course Resources</h2>
-<div class="res-grid">
-  <div class="res-card">
-    <div class="label">Primary Textbook: Free PDF</div>
-    <a href="http://www.mmds.org" target="_blank">Mining of Massive Datasets ↗</a>
-    <p>Rajaraman, Ullman &amp; Leskovec. Cambridge University Press. Free PDF at mmds.org by publisher agreement.</p>
-  </div>
-  <div class="res-card">
-    <div class="label">Reference 1: Free PDF</div>
-    <a href="https://web.stanford.edu/~hastie/ElemStatLearn/" target="_blank">Elements of Statistical Learning ↗</a>
-    <p>Hastie, Tibshirani &amp; Friedman. Springer. Free PDF from Stanford. Covers Weeks 1–3 theory in depth.</p>
-  </div>
-  <div class="res-card">
-    <div class="label">Reference 2</div>
-    <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf" target="_blank">Pattern Recognition &amp; ML: Bishop ↗</a>
-    <p>Christopher Bishop. Microsoft Research. Bayesian methods and probabilistic foundations.</p>
-  </div>
-  <div class="res-card">
-    <div class="label">Reference 3</div>
-    <a href="https://www.sciencedirect.com/book/9780123814791" target="_blank">Data Mining: Han &amp; Kamber (3rd Ed.) ↗</a>
-    <p>Jiawei Han &amp; Micheline Kamber. Practical focus on mining tasks, algorithms, and tools.</p>
-  </div>
-  <div class="res-card">
-    <div class="label">Lecture Slides: Free</div>
-    <a href="https://snap.stanford.edu/class/cs246-2024/" target="_blank">Stanford CS246 Slides (2024) ↗</a>
-    <p>Full slide set aligned chapter-by-chapter with MMDS. Covers Weeks 4–6 scaling topics.</p>
-  </div>
-  <div class="res-card">
-    <div class="label">Video Lectures: Free Audit</div>
-    <a href="https://www.edx.org/course/mining-massive-datasets" target="_blank">Mining Massive Datasets on edX ↗</a>
-    <p>Stanford's online version of CS246. Free to audit. Watch alongside lectures for deeper understanding.</p>
-  </div>
-</div>
-
-<!-- ASSESSMENT -->
-<h2 id="assessment">Assessment</h2>
-<table>
-  <thead><tr><th>Component</th><th>Weight</th><th>Details</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Weekly Tutorials (6)</strong></td><td><span class="pct">30%</span></td><td>One <code>.py</code> submission per week. Auto-graded and manually reviewed. Naming: <code>dm[TT]t[RR].py</code>.</td></tr>
-    <tr><td><strong>Quiz 1</strong></td><td><span class="pct">15%</span></td><td>After Week 3. Covers ML basics, feature selection, class imbalance, and ensemble methods.</td></tr>
-    <tr><td><strong>Quiz 2</strong></td><td><span class="pct">15%</span></td><td>After Week 6. Covers MapReduce, LSH, PageRank, frequent pattern mining, and stream mining intro.</td></tr>
-    <tr><td><strong>Mini-Project</strong></td><td><span class="pct">20%</span></td><td>Apply Weeks 1–6 techniques to a dataset of your choice. Groups of 2–3. Written report + 5-min presentation.</td></tr>
-    <tr><td><strong>End-Semester Exam</strong></td><td><span class="pct">20%</span></td><td>Covers the full 15-week syllabus jointly set by both instructors.</td></tr>
-  </tbody>
-</table>
-
-<p style="background:var(--surface);border:1px solid #e5e7eb;border-radius:0;padding:16px 20px;font-size:.85rem;color:#374151;line-height:1.6;margin-bottom:40px;">
-  <strong style="color:var(--navy);">Mini-Project:</strong> In Week 1, your group picks a large public dataset (Kaggle, UCI ML Repository, or any domain of interest). Each week, apply that week's technique to it: dimensionality reduction (W2) → ensemble classifier (W3) → PySpark pipeline (W4) → LSH similarity search (W5) → frequent pattern mining (W6). By the end of Week 6, you have a complete end-to-end pipeline as a portfolio piece.
-</p>
-
-</div>
-
-<footer>
-  &copy; Dr. Innocent Nyalala &middot; IIT Madras Zanzibar &middot; <a href="../../index.html">All Courses</a>
+</section>
+<section id="assessment">
+<h2>Assessment</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Component</th><th>Weight</th><th>Details</th></tr></thead>
+<tbody>
+<tr><td><strong>Weekly Tutorials (6)</strong></td><td><span class="pct">30%</span></td><td>One <code>.py</code> submission per week. Auto-graded and manually reviewed. Naming: <code>dm[TT]t[RR].py</code>.</td></tr>
+<tr><td><strong>Quiz 1</strong></td><td><span class="pct">15%</span></td><td>After Week 3. Covers ML basics, feature selection, class imbalance, and ensemble methods.</td></tr>
+<tr><td><strong>Quiz 2</strong></td><td><span class="pct">15%</span></td><td>After Week 6. Covers MapReduce, LSH, PageRank, frequent pattern mining, and stream mining intro.</td></tr>
+<tr><td><strong>Mini-Project</strong></td><td><span class="pct">20%</span></td><td>Apply Weeks 1–6 techniques to a dataset of your choice. Groups of 2–3. Written report + 5-min presentation.</td></tr>
+<tr><td><strong>End-Semester Exam</strong></td><td><span class="pct">20%</span></td><td>Covers the full 15-week syllabus jointly set by both instructors.</td></tr>
+</tbody>
+</table></div>
+<p class="quiet-note"><strong>Mini-Project:</strong> In Week 1, each group of 2–3 picks a large public dataset and applies each week's technique progressively from dimensionality reduction and ensembles to PySpark, LSH, and frequent pattern mining.</p>
+</section>
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="https://inyalala.github.io/courses/">Faculty Courses</a> · <a href="../../index.html">All Courses</a></span>
 </footer>
-</div>
-</body>
+<script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script></body>
 </html>
