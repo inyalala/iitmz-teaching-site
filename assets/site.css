@@ -1365,3 +1365,138 @@ footer.site-footer {
   color: var(--accent);
   text-decoration: none;
 }
+
+/* Portal Index Quick Search & Topic Filter Bar (Wave D) */
+.portal-filter-bar {
+  margin: 18px 0 26px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+
+.portal-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.portal-filter-input {
+  flex: 1 1 260px;
+  padding: 7px 11px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+.portal-filter-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.portal-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.portal-filter-pill {
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.portal-filter-pill:hover,
+.portal-filter-pill.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface2);
+  font-weight: 600;
+}
+
+.portal-filter-status {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink3);
+}
+
+.course-entry.is-hidden,
+.term-section.is-hidden {
+  display: none;
+}
+
+/* Question Bank Formula Strip & Worked Solution Toggles (Wave D) */
+.qb-formula-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 14px;
+  margin: 0 0 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-clove);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: var(--ink2);
+}
+
+.qb-formula-bar a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+details.qb-solution {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+details.qb-solution summary {
+  padding: 6px 11px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+details.qb-solution[open] summary {
+  border-bottom: 1px solid var(--border);
+  color: var(--accent-clove);
+}
+
+.qb-solution-body {
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  line-height: 1.58;
+  color: var(--ink2);
+}
+
+.qb-solution-body pre {
+  margin: 8px 0 0;
+  padding: 10px 12px;
+  background: var(--pre-bg);
+  color: var(--pre-ink);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  overflow-x: auto;
+}

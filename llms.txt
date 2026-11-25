@@ -11,14 +11,14 @@
 - **Teaching Portal Root**: https://inyalala.github.io/iitmz-teaching-site/
 - **Teaching Sitemap**: https://inyalala.github.io/iitmz-teaching-site/sitemap.xml
 
-## Courses Hosted (Slide PDFs, LaTeX Summaries, Python/SQL Modules, Colab Notebooks, Question Banks)
+## Courses Hosted (Slide PDFs, LaTeX Summaries, Cheat Sheets, Python/SQL Modules, Colab Notebooks, Question Banks)
 - **Z5007 Programming and Data Structures (MTech Core, Odd Semester 2026-27)**: https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html
-  - Complete Weeks 1-17 roadmap (`#week-01` to `#week-17`), 17 Python reference modules (`week-01/code/`..`week-17/code/`), 17 runnable Colab notebooks (`week-01/labs/`..`week-17/labs/`), 12 LaTeX summary/note PDFs, Classroom slide PDFs, and Quiz 1 Practice40.
+  - Complete Weeks 1-17 roadmap (`#week-01` to `#week-17`), 17 Python reference modules (`week-01/code/`..`week-17/code/`), 17 runnable Colab notebooks (`week-01/labs/`..`week-17/labs/`), 17 LaTeX summary PDFs, Classroom slide PDFs, Quiz 1 Practice40, interactive Question Bank (`question-bank/index.html`, 15 worked problems), and Master Algorithms Cheat Sheet (`resources/Z5007_Algorithms_Master_Cheatsheet.pdf`).
 - **Z3003 Data Mining: Scaling to Large Data (BS Core, Odd Semester 2026-27, co-taught with Dr. Mahendran V)**: https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html
-  - 26 verified Classroom slide PDFs (Weeks 1-9), 9 compiled LaTeX Lecture Summary PDFs (`notes/`), 6 Python reference modules (`code/`), 6 runnable Colab notebooks (`labs/`), PySpark Lab 1 HTML, Tutorials T1-T6, W1-W4 handouts and starter notebooks, and Mini-Project brief/rubric.
+  - 26 verified Classroom slide PDFs (Weeks 1-9), 12 compiled LaTeX Lecture Summary PDFs (`notes/`), 9 Python reference modules (`code/`), 9 runnable Colab notebooks (`labs/`), PySpark Lab 1 HTML, Tutorials T1-T6, W1-W4 handouts and starter notebooks, Mini-Project brief/rubric, interactive Question Bank (`question-bank/index.html`, 15 worked problems), and Formula Cheat Sheet (`resources/Z3003_Data_Mining_Formula_Cheatsheet.pdf`).
 - **Z2004 Database Management Systems (BS Core, Even Semester Archive)**: https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html
-  - Lectures L01-L45 (PDFs and HTML modules), 6 SQLite3/Python labs (`code/` and `labs/`), School DB SQL DDL, 6 compiled LaTeX module summaries (`notes/`), and interactive Question Bank.
+  - Lectures L01-L45 (PDFs and HTML modules), 8 SQLite3/Python labs (`code/` and `labs/`, including query join optimization and NoSQL/Graph parity), School DB SQL DDL, 6 compiled LaTeX module summaries (`notes/`), interactive Question Bank with 66 worked solutions (`question-bank/index.html`), and SQL & Normalization Cheat Sheet (`resources/Z2004_SQL_Normalization_Cheatsheet.pdf`).
 - **Z5008 Big Data Lab (MTech Lab, Even Semester Archive)**: https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html
-  - 15 Lab slide decks (Docker, Delta Lake, Iceberg, Spark SQL, Airflow, Kafka, Structured Streaming, MLlib, MLflow, Prometheus/Grafana), 5 Python/Colab modules (`code/` and `labs/`), 5 LaTeX lab summaries (`notes/`), and interactive Question Bank.
+  - 15 Lab slide decks (Docker, Delta Lake, Iceberg, Spark SQL, Airflow, Kafka, Structured Streaming, MLlib, MLflow, Prometheus/Grafana), 7 Python/Colab modules (`code/` and `labs/`, including Airflow DAG orchestration and MLflow Registry gates), 5 LaTeX lab summaries (`notes/`), interactive Question Bank with 68 worked solutions (`question-bank/index.html`), and Big Data & Lakehouse Cheat Sheet (`resources/Z5008_BigData_Lakehouse_Cheatsheet.pdf`).
 - **Z2005 Programming and Data Structures (BS Reference Archive)**: https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html
-  - Weeks 1-17 BS reference curriculum linked to Z5007 parity Python modules, Colab notebooks, and LaTeX summaries.
+  - Weeks 1-17 BS reference curriculum linked to Z5007 parity Python modules, Colab notebooks, LaTeX summaries, Question Bank, and Master Cheat Sheet.

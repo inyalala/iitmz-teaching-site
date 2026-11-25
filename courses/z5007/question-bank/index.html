@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Question Bank: Z5007 Programming and Data Structures | Dr. Innocent Nyalala</title>
+<link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Question Bank: Z5007 Programming and Data Structures | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Graded practice question bank with worked solutions for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html#resource", "name": "Z5007 Question Bank", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html", "description": "Graded practice question bank with worked solutions for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5007 Programming and Data Structures", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5007", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, {"@type": "ListItem", "position": 3, "name": "Question Bank", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/question-bank/index.html"}]}]}</script>
+<!-- /portal-seo -->
+</head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a class="is-current" href="../../../courses/z5007/index.html">Z5007</a>
+<a href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a href="../../../courses/z2004/index.html">Z2004</a>
+<a href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
+</div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Course Overview</a></p>
+<nav aria-label="Jump to topic" class="qb-week-nav"><a href="#m1">M1: Asymptotic & Recurrences</a> <a href="#m2">M2: Sorts, Stacks & Queues</a> <a href="#m3">M3: BST, AVL & Heaps</a> <a href="#m4">M4: Hashing & Graphs</a> <a href="#m5">M5: DP, Strings & NP</a></nav>
+<h1>Question Bank</h1>
+<p class="lede">Graded conceptual, complexity, tracing, and proof problems organized across Weeks 1–17. Attempt each problem on paper before revealing the worked solution.</p>
+<div class="qb-formula-bar"><span><strong>Reference Sheet:</strong> Pair these problems with the compiled 2-page PDF formula summary before inspecting solutions.</span><span><a href="../resources/Z5007_Algorithms_Master_Cheatsheet.pdf">Algorithms Master Cheat Sheet (PDF)</a> · <a href="../week-06/practice/Z5007_Quiz1_Practice40.pdf">Quiz 1 Practice (40 Qs)</a></span></div>
+<div class="week-block" id="m1">
+<div class="week-header"><span class="wnum">Weeks 1–2</span><h2>Asymptotic Analysis, Recurrences & Dynamic Arrays</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m1','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m1','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m1','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m1-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 1</span></div><p class="q-text">Order the following functions by asymptotic growth rate from slowest to fastest: <code>n log n</code>, <code>2^n</code>, <code>sqrt(n)</code>, <code>n^2</code>, <code>log_2(n)</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">From slowest to fastest: <code>log_2(n) &lt; sqrt(n) &lt; n log n &lt; n^2 &lt; 2^n</code>. For large <code>n</code>, logarithmic terms grow slower than fractional polynomials, which grow slower than linearithmic, quadratic, and exponential functions.</div></details></div>
+</div>
+<div class="qs-panel" id="m1-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 1</span></div><p class="q-text">Solve the recurrence <code>T(n) = 4T(n/2) + n^2</code> using the Master Theorem and state the tight bound.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Here <code>a = 4</code>, <code>b = 2</code>, and <code>f(n) = n^2</code>, so <code>n^(log_2 4) = n^2</code>. Because <code>f(n) = Theta(n^2)</code> matches Case 2, the tight bound is <code>T(n) = Theta(n^2 log n)</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m1-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove using the potential method that appending <code>n</code> elements to an initially empty dynamic array that doubles capacity on overflow and never shrinks runs in <code>O(1)</code> amortized time per append.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Define potential <code>Phi(i) = 2*size_i - cap_i</code> (always non-negative when capacity starts at 1 and doubles). On a non-resizing append, actual cost <code>c_i = 1</code> and <code>Delta Phi = 2</code>, giving amortized cost <code>3</code>. On overflow when <code>size = cap = k</code>, actual cost is <code>k + 1</code> (copying <code>k</code> items plus inserting 1), capacity becomes <code>2k</code>, and <code>Delta Phi = (2(k+1) - 2k) - (2k - k) = 2 - k</code>, so amortized cost is <code>(k + 1) + (2 - k) = 3 = O(1)</code>.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m2">
+<div class="week-header"><span class="wnum">Weeks 3–5</span><h2>Sorting Lower Bounds, Stacks, Queues & Linked Structures</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m2','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m2','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m2','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m2-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">ICA 1</span></div><p class="q-text">Why does Python's <code>list.pop(0)</code> take <code>O(n)</code> time, whereas <code>collections.deque.popleft()</code> takes <code>O(1)</code> time?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Python <code>list</code> is backed by a contiguous pointer array, so removing index 0 shifts all remaining <code>n - 1</code> references left by one slot. By contrast, <code>deque</code> uses a doubly linked list of fixed-size memory blocks, updating only the head block pointer in <code>O(1)</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m2-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 1</span></div><p class="q-text">Trace Insertion Sort on <code>[7, 3, 5, 2]</code> after each outer-loop iteration and explain why it runs in <code>O(n + I)</code> time where <code>I</code> is the number of inversions.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Start: <code>[7, 3, 5, 2]</code>. After inserting 3: <code>[3, 7, 5, 2]</code> (1 shift). After inserting 5: <code>[3, 5, 7, 2]</code> (1 shift). After inserting 2: <code>[2, 3, 5, 7]</code> (3 shifts). Each inner shift removes exactly one inversion, so total work across all <code>n - 1</code> passes is proportional to <code>n + I</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m2-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain the decision-tree proof that every deterministic comparison-based sort requires <code>Omega(n log n)</code> comparisons in the worst case, and explain how Radix Sort bypasses this bound.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">A comparison sort must distinguish among all <code>n!</code> input permutations, so its binary decision tree needs at least <code>n!</code> leaves. A binary tree of height <code>h</code> has at most <code>2^h</code> leaves, giving <code>h &gt;= log_2(n!) = Theta(n log n)</code>. Radix Sort avoids pairwise key comparisons by bucketing digits over a bounded alphabet of size <code>k</code> in <code>O(d(n + k))</code> time.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m3">
+<div class="week-header"><span class="wnum">Weeks 6–8</span><h2>Binary Search Trees, AVL Rotations & Priority Queues</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m3','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m3','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m3','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m3-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">In a 0-indexed array storing a binary max-heap, what are the parent, left-child, and right-child indices of node <code>i</code>?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">For node index <code>i</code>: parent is <code>(i - 1) // 2</code> (for <code>i &gt; 0</code>), left child is <code>2*i + 1</code>, and right child is <code>2*i + 2</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m3-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Lab</span></div><p class="q-text">Insert keys <code>10, 20, 15</code> into an initially empty AVL tree. Identify the imbalance pattern after inserting <code>15</code> and show the resulting balanced tree.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Inserting 10, then 20 (right child), then 15 (left child of 20) creates a <strong>Right-Left (RL)</strong> imbalance at root 10 (balance factor -2, right child 20 has balance factor +1). Perform a right rotation at 20 (producing 10 -&gt; 15 -&gt; 20), then a left rotation at 10. Final AVL tree: root <code>15</code>, left child <code>10</code>, right child <code>20</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m3-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Show why Floyd's bottom-up <code>heapify</code> builds a binary heap of <code>n</code> elements in <code>O(n)</code> time rather than <code>O(n log n)</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">At height <code>h</code> above the leaves, there are at most <code>ceil(n / 2^(h+1))</code> subtrees, each sifting down at most <code>h</code> levels. Summing over all heights gives <code>sum_{h=0}^{log n} (n / 2^(h+1)) * h = (n/2) * sum_{h&gt;=1} h / 2^(h-1)</code>. Because the infinite series converges to <code>2</code>, total sift work is bounded by <code>O(n)</code>.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m4">
+<div class="week-header"><span class="wnum">Weeks 8–11</span><h2>Hash Tables, BFS/DFS, Dijkstra & Minimum Spanning Trees</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m4','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m4','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m4','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m4-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">Why does deleting a key from a linear-probing hash table require placing a tombstone sentinel instead of marking the slot empty?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Clearing a deleted slot to <code>EMPTY</code> breaks the probe chain for keys inserted after a collision past that slot, causing subsequent lookups for those keys to terminate early and return false misses. A tombstone keeps the probe search continuing on lookup and allows reuse on insert.</div></details></div>
+</div>
+<div class="qs-panel" id="m4-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">ICA 3</span></div><p class="q-text">Given a weighted directed graph with edges <code>S-&gt;A (1), S-&gt;B (2), B-&gt;A (-3)</code>, trace Dijkstra's algorithm starting at <code>S</code> and show why it returns an incorrect shortest distance.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Dijkstra initializes <code>dist[S]=0</code>, pops <code>S</code>, sets <code>dist[A]=1</code> and <code>dist[B]=2</code>. Next it pops <code>A</code> with distance <code>1</code> and finalizes it, never relaxing the later path <code>S-&gt;B-&gt;A</code> of total weight <code>2 + (-3) = -1</code>. Thus negative edges violate Dijkstra's greedy finality invariant; use Bellman-Ford.</div></details></div>
+</div>
+<div class="qs-panel" id="m4-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Prove the Cut Property for Minimum Spanning Trees and explain how Kruskal's algorithm uses Union-Find (DSU) to maintain its invariant.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Let <code>(S, V \ S)</code> be any cut and <code>e = (u, v)</code> be a lightest crossing edge. Suppose an MST <code>T</code> omits <code>e</code>; adding <code>e</code> creates a cycle containing at least one other crossing edge <code>e'</code> with <code>w(e') &gt;= w(e)</code>. Replacing <code>e'</code> with <code>e</code> yields another spanning tree <code>T'</code> with weight at most <code>w(T)</code>, proving <code>e</code> belongs to an MST. Kruskal sorts edges by weight and uses DSU <code>find(u) != find(v)</code> to check in <code>O(alpha(V))</code> amortized time whether <code>e</code> crosses between distinct components.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m5">
+<div class="week-header"><span class="wnum">Weeks 12–17</span><h2>Dynamic Programming, KMP Tries & NP-Completeness</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m5','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m5','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m5','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m5-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">In the 1D space-optimized 0/1 Knapsack recurrence <code>dp[w] = max(dp[w], val + dp[w - wt])</code>, why must the inner loop iterate <code>w</code> downwards from <code>W</code> to <code>wt</code>?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Iterating downwards ensures that <code>dp[w - wt]</code> still holds the value from the previous item row <code>i - 1</code>. Iterating upwards would allow the newly updated <code>dp[w - wt]</code> from the current item <code>i</code> to be reused multiple times, solving Unbounded Knapsack instead.</div></details></div>
+</div>
+<div class="qs-panel" id="m5-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Lab</span></div><p class="q-text">Compute the KMP prefix function <code>pi</code> (longest proper prefix-suffix lengths) for the pattern <code>P = "ABABAC"</code> and explain its worst-case search complexity.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Indices <code>0..5</code> of <code>ABABAC</code>: <code>pi = [0, 0, 1, 2, 3, 0]</code> (index 4 <code>ABABA</code> shares proper prefix/suffix <code>ABA</code> of length 3; mismatch at <code>C</code> falls back cleanly). Because the fallback pointer increases at most <code>m</code> times total, building <code>pi</code> takes <code>O(m)</code> and scanning a text of length <code>n</code> takes <code>O(n)</code> without moving the text cursor backwards.</div></details></div>
+</div>
+<div class="qs-panel" id="m5-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Define NP-completeness and prove that <code>Vertex Cover</code> is NP-complete assuming <code>Clique</code> is known to be NP-complete.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">First, <code>Vertex Cover</code> is in <code>NP</code> because given a candidate vertex subset <code>C</code> of size at most <code>k</code>, a verifier checks every edge <code>(u, v)</code> has <code>u in C</code> or <code>v in C</code> in <code>O(V + E)</code> time. Second, reduce <code>Clique &lt;=p Vertex Cover</code>: given <code>(G, k)</code> with <code>|V| = n</code>, build the complement graph <code>G_bar</code> where edges absent from <code>G</code> are present in <code>G_bar</code>. A set <code>S</code> of size <code>k</code> is a clique in <code>G</code> if and only if <code>V \ S</code> of size <code>n - k</code> touches every edge in <code>G_bar</code>, forming a vertex cover. Construction runs in <code>O(V^2)</code> polynomial time.</div></details></div>
+</div>
+</div>
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Course Overview</a></span>
+</footer>
+<script>
+function showTier(btn, sec, tier) {
+  var tabs = btn.parentElement.querySelectorAll('.tier-tab');
+  tabs.forEach(function(t) {
+    t.className = 'tier-tab';
+    t.setAttribute('aria-selected', 'false');
+    t.setAttribute('tabindex', '-1');
+  });
+  btn.classList.add('active-' + tier);
+  btn.setAttribute('aria-selected', 'true');
+  btn.setAttribute('tabindex', '0');
+  ['e', 'm', 'h'].forEach(function(t) {
+    var p = document.getElementById(sec + '-' + t);
+    if (p) {
+      p.classList.remove('shown');
+      p.setAttribute('hidden', 'hidden');
+    }
+  });
+  var target = document.getElementById(sec + '-' + tier);
+  if (target) {
+    target.classList.add('shown');
+    target.removeAttribute('hidden');
+  }
+}
+(function(){
+  document.querySelectorAll('.tier-tabs').forEach(function(bar){
+    bar.setAttribute('role', 'tablist');
+    var wb = bar.closest('.week-block');
+    var h2 = wb && wb.querySelector('.week-header h2');
+    if (h2 && wb) {
+      if (!h2.id) h2.id = wb.id + '-heading';
+      bar.setAttribute('aria-labelledby', h2.id);
+    }
+    var btns = Array.from(bar.querySelectorAll('.tier-tab'));
+    btns.forEach(function(b, idx){
+      b.setAttribute('role', 'tab');
+      b.setAttribute('type', 'button');
+      var m = (b.getAttribute('onclick') || '').match(/showTier\(this,'([^']+)','([^']+)'\)/);
+      var active = b.className.indexOf('active-') !== -1;
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+      b.setAttribute('tabindex', active ? '0' : '-1');
+      if (m) {
+        var pid = m[1] + '-' + m[2];
+        b.id = pid + '-tab';
+        b.setAttribute('aria-controls', pid);
+        var panel = document.getElementById(pid);
+        if (panel) {
+          panel.setAttribute('role', 'tabpanel');
+          panel.setAttribute('aria-labelledby', b.id);
+          if (!panel.classList.contains('shown')) panel.setAttribute('hidden', 'hidden');
+        }
+      }
+      b.addEventListener('keydown', function(e){
+        var nextIdx = idx;
+        if (e.key === 'ArrowRight') nextIdx = (idx + 1) % btns.length;
+        else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + btns.length) % btns.length;
+        else if (e.key === 'Home') nextIdx = 0;
+        else if (e.key === 'End') nextIdx = btns.length - 1;
+        else return;
+        e.preventDefault();
+        btns[nextIdx].click();
+        btns[nextIdx].focus();
+      });
+    });
+  });
+})();
+</script><script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

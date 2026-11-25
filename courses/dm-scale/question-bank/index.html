@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Question Bank: Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala</title>
+<link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Question Bank: Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#resource", "name": "Z3003 Question Bank", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html", "description": "Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003 Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Question Bank", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html"}]}]}</script>
+<!-- /portal-seo -->
+</head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a href="../../../courses/z5007/index.html">Z5007</a>
+<a class="is-current" href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a href="../../../courses/z2004/index.html">Z2004</a>
+<a href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
+</div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Course Overview</a></p>
+<nav aria-label="Jump to topic" class="qb-week-nav"><a href="#m1">M1: Bayes, MLE & PCA/LDA</a> <a href="#m2">M2: Imbalance & Ensembles</a> <a href="#m3">M3: OLAP, PySpark & LSH</a> <a href="#m4">M4: Apriori, Bloom & Clustering</a> <a href="#m5">M5: SVD, PageRank & Streams</a></nav>
+<h1>Question Bank</h1>
+<p class="lede">Graded conceptual, numerical, PySpark, LSH, and streaming-sketch problems spanning Part 1 (Dr. Nyalala) and Part 2 (Dr. Mahendran V). Work through each step before expanding the solution.</p>
+<div class="qb-formula-bar"><span><strong>Reference Sheet:</strong> Pair these problems with the compiled 2-page PDF formula summary before inspecting solutions.</span><span><a href="../resources/Z3003_Data_Mining_Formula_Cheatsheet.pdf">Data Mining Formula Cheat Sheet (PDF)</a> · <a href="../labs/lab1.html">PySpark Lab 1</a></span></div>
+<div class="week-block" id="m1">
+<div class="week-header"><span class="wnum">Weeks 1–2</span><h2>Bayesian Decision Theory, MLE, Feature Selection, PCA & LDA</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m1','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m1','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m1','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m1-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 1</span></div><p class="q-text">Given positive-class prior <code>P(Y=1) = 0.2</code>, false-negative cost <code>10</code>, and false-positive cost <code>1</code>, at what posterior probability <code>P(Y=1 | x)</code> should a Bayes-optimal classifier predict class 1?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Predicting class 1 incurs expected cost <code>1 * (1 - p)</code>, whereas predicting class 0 incurs <code>10 * p</code>. Predict class 1 when <code>1 - p &lt; 10p</code>, which yields threshold <code>p &gt; 1/11 = 0.0909</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m1-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Tutorial 2</span></div><p class="q-text">Contrast Principal Component Analysis (PCA) and Fisher's Linear Discriminant Analysis (LDA) in objective function, supervision requirement, and maximum output dimensions for <code>C</code> classes.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">PCA is unsupervised and maximizes total projected variance via top eigenvectors of the covariance matrix <code>Sigma</code>, producing up to <code>d</code> components. Fisher LDA is supervised and maximizes between-class scatter over within-class scatter <code>J(w) = (w^T S_B w)/(w^T S_W w)</code> via <code>S_W^{-1} S_B</code>, yielding at most <code>C - 1</code> non-zero discriminant axes.</div></details></div>
+</div>
+<div class="qs-panel" id="m1-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain why standardizing features and fitting PCA inside each cross-validation fold prevents data leakage, and write the exact MLE variance bias correction for Gaussian estimation.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Computing global means, variances, or eigenvectors before splitting leaks validation distribution statistics into training features and inflates held-out accuracy. Wrap scalers and PCA inside a fold-scoped <code>Pipeline</code> fit solely on training folds. For Gaussian MLE, <code>sigma_hat^2 = (1/n) * sum (x_i - mu_hat)^2</code> underestimates population variance by factor <code>(n - 1)/n</code>; Bessel's correction divides by <code>n - 1</code>.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m2">
+<div class="week-header"><span class="wnum">Week 3</span><h2>Class Imbalance, SMOTE, Decision Trees & Boosting Ensembles</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m2','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m2','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m2','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m2-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 1</span></div><p class="q-text">In a dataset with <code>99%</code> negative and <code>1%</code> positive examples, why is accuracy misleading and why is Precision-Recall AUC preferred over ROC AUC?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">A trivial all-negative classifier achieves <code>99%</code> accuracy with zero recall. ROC false-positive rate divides by the huge negative count, masking large absolute false-positive volume, whereas Precision-Recall directly measures true positives among predicted positives.</div></details></div>
+</div>
+<div class="qs-panel" id="m2-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Tutorial 3</span></div><p class="q-text">Compute the first AdaBoost learner weight <code>alpha_1</code> when weighted training error is <code>epsilon_1 = 0.20</code>, and explain how sample weights change for misclassified points.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body"><code>alpha_1 = 0.5 * ln((1 - 0.20) / 0.20) = 0.5 * ln(4) = 0.693</code>. Misclassified points have their weights multiplied by <code>exp(+alpha_1) = 2</code> before normalization, focusing the next weak learner on hard boundary examples.</div></details></div>
+</div>
+<div class="qs-panel" id="m2-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Compare Bagging (Random Forests) and Gradient Boosting along bias-variance reduction, tree depth, and parallelizability.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Random Forests average deep, low-bias, high-variance trees trained independently on bootstrap samples and random feature subsets, reducing variance cleanly in parallel. Gradient Boosting grows shallow trees sequentially on pseudo-residuals <code>-dL/dF</code>, cutting bias iteratively while requiring sequential stage updates and shrinkage learning rates to control overfitting.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m3">
+<div class="week-header"><span class="wnum">Weeks 4–5</span><h2>Data Cubes, MapReduce, PySpark RDDs & Locality-Sensitive Hashing</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m3','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m3','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m3','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m3-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 1</span></div><p class="q-text">Why does PySpark's <code>reduceByKey</code> outperform <code>groupByKey</code> followed by <code>mapValues(sum)</code> on skewed datasets?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body"><code>reduceByKey</code> runs map-side combining locally within each partition before shuffling over the network, reducing shuffle bytes to at most one key-value pair per partition. <code>groupByKey</code> ships all unaggregated values across the cluster, risking out-of-memory spills.</div></details></div>
+</div>
+<div class="qs-panel" id="m3-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Tutorial 5</span></div><p class="q-text">An LSH index uses <code>n = 100</code> MinHash rows partitioned into <code>b = 20</code> bands of <code>r = 5</code> rows. Calculate the candidate probability for two documents with Jaccard similarity <code>s = 0.5</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Probability all <code>r = 5</code> rows match in one band is <code>s^r = 0.5^5 = 1/32 = 0.03125</code>. Probability of sharing at least one band across <code>b = 20</code> bands is <code>1 - (1 - 0.03125)^20 = 1 - 0.530 = 0.470</code> (about 47%).</div></details></div>
+</div>
+<div class="qs-panel" id="m3-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Given documents <code>D1 = {a, b, c}</code> and <code>D2 = {b, c, d, e}</code>, compute their exact Jaccard similarity and verify how MinHash random permutations preserve that value in expectation.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Intersection <code>{b, c}</code> has size 2; union <code>{a, b, c, d, e}</code> has size 5, so <code>J(D1, D2) = 2/5 = 0.40</code>. Under a uniformly random permutation of the 5 elements, the first element hitting <code>D1 union D2</code> lies in <code>D1 intersect D2</code> with probability <code>2/5 = 0.40</code>, so <code>Pr[h(D1) = h(D2)] = J(D1, D2)</code>.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m4">
+<div class="week-header"><span class="wnum">Weeks 6–9</span><h2>Frequent Pattern Mining, Bloom Filters & Scalable Clustering</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m4','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m4','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m4','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m4-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Tutorial 6</span></div><p class="q-text">Can a Bloom filter ever produce a false negative, and how do you compute its optimal number of hash functions <code>k*</code> for <code>m</code> bits and <code>n</code> inserted keys?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">No: a Bloom filter never produces false negatives if no deletions occur, because every hash bit of an inserted key is set to 1. Optimal hash count minimizing false-positive probability is <code>k* = (m / n) * ln(2)</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m4-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Quiz 2</span></div><p class="q-text">In 10,000 market baskets, milk appears in 6,000 baskets, coffee in 2,000, and both in 1,800. Compute Support, Confidence, Lift, and Kulczynski for <code>{coffee} -&gt; {milk}</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body"><code>supp = 1800/10000 = 0.18</code>; <code>conf(coffee -&gt; milk) = 1800/2000 = 0.90</code>; <code>Lift = 0.18 / (0.20 * 0.60) = 1.50</code>; <code>Kulczynski = 0.5 * (P(milk|coffee) + P(coffee|milk)) = 0.5 * (0.90 + 0.30) = 0.60</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m4-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain how BIRCH maintains cluster summaries in a single scan using Clustering Feature (CF) tuples and why those tuples allow exact merging without raw data points.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">A CF tuple stores <code>(N, LS, SS)</code> where <code>N</code> is point count, <code>LS</code> is the vector sum, and <code>SS</code> is the sum of squared norms. Because sums are additive, merging two clusters adds their tuples component-wise: <code>CF_1 + CF_2 = (N_1 + N_2, LS_1 + LS_2, SS_1 + SS_2)</code>, yielding exact merged centroid <code>LS/N</code> and radius in <code>O(d)</code> memory.</div></details></div>
+</div>
+</div>
+<div class="week-block" id="m5">
+<div class="week-header"><span class="wnum">Weeks 10–15</span><h2>Recommender Systems, Web Link Analysis & Streaming Sketches</h2></div>
+<hr class="week-divider"/>
+<div class="tier-tabs">
+<button class="tier-tab active-e" onclick="showTier(this,'m5','e')">Easy</button>
+<button class="tier-tab" onclick="showTier(this,'m5','m')">Intermediate</button>
+<button class="tier-tab" onclick="showTier(this,'m5','h')">Advanced</button>
+</div>
+<div class="qs-panel shown" id="m5-e">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-e">Easy</span><span class="q-weight">Quiz 2</span></div><p class="q-text">In PageRank <code>r = beta * M * r + (1 - beta)/N * 1</code>, what two graph pathologies does teleportation factor <code>(1 - beta)</code> resolve?</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Teleportation resolves <strong>dead ends</strong> (nodes with zero out-links that leak total rank mass) and <strong>spider traps</strong> (closed strongly connected subgraphs that absorb all random-walk mass).</div></details></div>
+</div>
+<div class="qs-panel" id="m5-m">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-m">Intermediate</span><span class="q-weight">Exam</span></div><p class="q-text">Using biased matrix factorization <code>r_hat_ui = mu + b_u + b_i + q_i^T p_u</code> with <code>mu = 3.5, b_u = 0.4, b_i = -0.2, p_u = [0.6, 0.2], q_i = [0.5, -0.5]</code>, compute the predicted rating and SGD error against true rating <code>4.2</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">Dot product <code>q_i^T p_u = 0.6*0.5 + 0.2*(-0.5) = 0.30 - 0.10 = 0.20</code>. Predicted rating <code>r_hat = 3.5 + 0.4 - 0.2 + 0.20 = 3.90</code>. Residual error <code>e_ui = 4.2 - 3.90 = +0.30</code>.</div></details></div>
+</div>
+<div class="qs-panel" id="m5-h">
+<div class="q-item"><div class="q-meta"><span class="q-num">Q1</span><span class="q-tag tag-h">Advanced</span><span class="q-weight">Exam</span></div><p class="q-text">Explain how the DGIM algorithm bounds space to <code>O(log^2 N)</code> bits for counting 1s in the last <code>N</code> bits of a stream and guarantees relative error at most <code>50%</code>.</p><details class="qb-solution"><summary>Reveal Worked Solution</summary><div class="qb-solution-body">DGIM groups 1-bits into buckets of power-of-two sizes <code>1, 2, 4, ..., 2^k &lt;= N</code>, keeping at most two buckets of each size and storing each bucket's timestamp in <code>O(log N)</code> bits. With <code>O(log N)</code> distinct bucket sizes, total memory is <code>O(log^2 N)</code> bits. When answering a window query, only the oldest overlapping bucket of size <code>2^j</code> is uncertain; because all newer buckets sum to at least <code>2^j - 1</code>, estimating half of the oldest bucket bounds absolute error below <code>50%</code>.</div></details></div>
+</div>
+</div>
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Course Overview</a></span>
+</footer>
+<script>
+function showTier(btn, sec, tier) {
+  var tabs = btn.parentElement.querySelectorAll('.tier-tab');
+  tabs.forEach(function(t) {
+    t.className = 'tier-tab';
+    t.setAttribute('aria-selected', 'false');
+    t.setAttribute('tabindex', '-1');
+  });
+  btn.classList.add('active-' + tier);
+  btn.setAttribute('aria-selected', 'true');
+  btn.setAttribute('tabindex', '0');
+  ['e', 'm', 'h'].forEach(function(t) {
+    var p = document.getElementById(sec + '-' + t);
+    if (p) {
+      p.classList.remove('shown');
+      p.setAttribute('hidden', 'hidden');
+    }
+  });
+  var target = document.getElementById(sec + '-' + tier);
+  if (target) {
+    target.classList.add('shown');
+    target.removeAttribute('hidden');
+  }
+}
+(function(){
+  document.querySelectorAll('.tier-tabs').forEach(function(bar){
+    bar.setAttribute('role', 'tablist');
+    var wb = bar.closest('.week-block');
+    var h2 = wb && wb.querySelector('.week-header h2');
+    if (h2 && wb) {
+      if (!h2.id) h2.id = wb.id + '-heading';
+      bar.setAttribute('aria-labelledby', h2.id);
+    }
+    var btns = Array.from(bar.querySelectorAll('.tier-tab'));
+    btns.forEach(function(b, idx){
+      b.setAttribute('role', 'tab');
+      b.setAttribute('type', 'button');
+      var m = (b.getAttribute('onclick') || '').match(/showTier\(this,'([^']+)','([^']+)'\)/);
+      var active = b.className.indexOf('active-') !== -1;
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+      b.setAttribute('tabindex', active ? '0' : '-1');
+      if (m) {
+        var pid = m[1] + '-' + m[2];
+        b.id = pid + '-tab';
+        b.setAttribute('aria-controls', pid);
+        var panel = document.getElementById(pid);
+        if (panel) {
+          panel.setAttribute('role', 'tabpanel');
+          panel.setAttribute('aria-labelledby', b.id);
+          if (!panel.classList.contains('shown')) panel.setAttribute('hidden', 'hidden');
+        }
+      }
+      b.addEventListener('keydown', function(e){
+        var nextIdx = idx;
+        if (e.key === 'ArrowRight') nextIdx = (idx + 1) % btns.length;
+        else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + btns.length) % btns.length;
+        else if (e.key === 'Home') nextIdx = 0;
+        else if (e.key === 'End') nextIdx = btns.length - 1;
+        else return;
+        e.preventDefault();
+        btns[nextIdx].click();
+        btns[nextIdx].focus();
+      });
+    });
+  });
+})();
+</script><script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

@@ -46,10 +46,29 @@
 <p class="eyebrow">Indian Institute of Technology Madras Zanzibar · School of Engineering and Science</p>
 <h1>Course Materials</h1>
 <p class="lede">Lecture slides, LaTeX notes, tested Python and SQL reference modules, runnable Colab notebooks, and practice question banks for courses taught by Dr. Innocent Nyalala.</p>
+<div aria-label="Filter courses by code or topic" class="portal-filter-bar" role="search">
+<div class="portal-filter-row">
+<input aria-label="Search courses by code or topic" class="portal-filter-input" id="course-search" placeholder="Search courses by code or topic (e.g., Z5007, Python, SQL, PySpark, Trees, Graphs)..." type="search"/>
+<span aria-live="polite" class="portal-filter-status" id="course-filter-status">Showing 5 of 5 courses</span>
+</div>
+<div aria-label="Quick topic and code filters" class="portal-filter-pills" role="group">
+<button class="portal-filter-pill is-active" data-filter="all" type="button">All</button>
+<button class="portal-filter-pill" data-filter="z5007" type="button">Z5007</button>
+<button class="portal-filter-pill" data-filter="z3003" type="button">Z3003</button>
+<button class="portal-filter-pill" data-filter="z2004" type="button">Z2004</button>
+<button class="portal-filter-pill" data-filter="z5008" type="button">Z5008</button>
+<button class="portal-filter-pill" data-filter="z2005" type="button">&#90;2005</button>
+<button class="portal-filter-pill" data-filter="python" type="button">Python</button>
+<button class="portal-filter-pill" data-filter="sql" type="button">SQL</button>
+<button class="portal-filter-pill" data-filter="pyspark" type="button">PySpark</button>
+<button class="portal-filter-pill" data-filter="trees" type="button">Trees</button>
+<button class="portal-filter-pill" data-filter="graphs" type="button">Graphs</button>
+</div>
+</div>
 <section aria-labelledby="active-term-h" class="term-section">
 <h2 class="term-heading" id="active-term-h">Odd Semester 2026-27 (October 2026 – January 2027)</h2>
 <ul class="course-rows">
-<li class="course-entry">
+<li class="course-entry" data-tags="z5007 mtech python trees graphs heaps hashing dp dynamic programming greedy algorithms data structures">
 <div class="course-code-col"><span class="course-code-tag">Z5007</span><span class="course-level-tag">MTech Core</span></div>
 <div>
 <a class="course-entry-title" href="courses/z5007/index.html">Programming and Data Structures</a>
@@ -58,11 +77,11 @@
 </div>
 <a class="course-entry-go" href="courses/z5007/index.html">Open →</a>
 </li>
-<li class="course-entry">
+<li class="course-entry" data-tags="z3003 dm-scale bs python pyspark trees ensembles mapreduce lsh apriori pagerank graphs streams">
 <div class="course-code-col"><span class="course-code-tag">Z3003</span><span class="course-level-tag">BS Core</span></div>
 <div>
 <a class="course-entry-title" href="courses/dm-scale/index.html">Data Mining: Scaling to Large Data</a>
-<p class="course-entry-period">Co-taught with Dr. Mahendran V (IIT Tirupati) · 26 Verified Slide Decks, 9 LaTeX Summaries &amp; 6 Python/Colab Labs</p>
+<p class="course-entry-period">Co-taught with Dr. Mahendran V (IIT Tirupati) · 26 Verified Slide Decks, 12 LaTeX Summaries &amp; 9 Python/Colab Labs</p>
 <p class="course-entry-desc">Bayesian ML, feature selection, PCA/LDA, class imbalance, ensembles, OLAP cubes, MapReduce, PySpark RDDs, LSH, Apriori/FP-Growth, and scalable clustering.</p>
 </div>
 <a class="course-entry-go" href="courses/dm-scale/index.html">Open →</a>
@@ -72,7 +91,7 @@
 <section aria-labelledby="archive-term-h" class="term-section">
 <h2 class="term-heading" id="archive-term-h">Archive &amp; Reference Offerings</h2>
 <ul class="course-rows">
-<li class="course-entry">
+<li class="course-entry" data-tags="z2005 bs python trees graphs heaps sorting greedy dynamic programming data structures">
 <div class="course-code-col"><span class="course-code-tag">Z2005</span><span class="course-level-tag">BS Reference</span></div>
 <div>
 <a class="course-entry-title" href="courses/z2005/index.html">Programming and Data Structures (Reference Archive)</a>
@@ -81,20 +100,20 @@
 </div>
 <a class="course-entry-go" href="courses/z2005/index.html">Open →</a>
 </li>
-<li class="course-entry">
+<li class="course-entry" data-tags="z2004 bs sql sqlite python trees b+ trees normalization acid nosql graphs">
 <div class="course-code-col"><span class="course-code-tag">Z2004</span><span class="course-level-tag">BS Core</span></div>
 <div>
 <a class="course-entry-title" href="courses/z2004/index.html">Database Management Systems</a>
-<p class="course-entry-period">Even Semester · March – July 2026 · Lectures L01–L45, 6 SQLite/Python Labs &amp; 6 Module Summaries</p>
+<p class="course-entry-period">Even Semester · March – July 2026 · Lectures L01–L45, 8 SQLite/Python Labs &amp; 6 Module Summaries</p>
 <p class="course-entry-desc">Relational modeling, SQL, normalization, disk storage and B+ trees, ACID concurrency control, NoSQL, and vector retrieval systems.</p>
 </div>
 <a class="course-entry-go" href="courses/z2004/index.html">Open →</a>
 </li>
-<li class="course-entry">
+<li class="course-entry" data-tags="z5008 mtech python pyspark sql spark lakehouse delta iceberg airflow kafka mlflow">
 <div class="course-code-col"><span class="course-code-tag">Z5008</span><span class="course-level-tag">MTech Lab</span></div>
 <div>
 <a class="course-entry-title" href="courses/z5008/index.html">Big Data Lab</a>
-<p class="course-entry-period">Even Semester · March – July 2026 · 15 Lab Slides, 5 Spark/Lakehouse Colab Notebooks &amp; 5 Lab Summaries</p>
+<p class="course-entry-period">Even Semester · March – July 2026 · 15 Lab Slides, 7 Spark/Lakehouse/MLflow Colab Notebooks &amp; 5 Lab Summaries</p>
 <p class="course-entry-desc">Hands-on Dockerized lab sessions using Spark, Delta Lake, Iceberg, Airflow, Kafka, Structured Streaming, MLlib, and MLflow.</p>
 </div>
 <a class="course-entry-go" href="courses/z5008/index.html">Open →</a>
@@ -126,6 +145,39 @@
     });
   });
   sync();
+})();
+(function(){
+  var input=document.getElementById('course-search');
+  var pills=Array.from(document.querySelectorAll('.portal-filter-pill'));
+  var entries=Array.from(document.querySelectorAll('.course-entry'));
+  var sections=Array.from(document.querySelectorAll('.term-section'));
+  var status=document.getElementById('course-filter-status');
+  var activeTag='all';
+  function applyFilter(){
+    var q=(input?input.value:'').trim().toLowerCase();
+    var shown=0;
+    entries.forEach(function(li){
+      var hay=(li.textContent+' '+(li.getAttribute('data-tags')||'')).toLowerCase();
+      var okTag=(activeTag==='all')||(hay.indexOf(activeTag)!==-1);
+      var okQ=(!q)||(hay.indexOf(q)!==-1);
+      var vis=okTag&&okQ;
+      li.classList.toggle('is-hidden',!vis);
+      if(vis)shown++;
+    });
+    sections.forEach(function(sec){
+      var anyVis=sec.querySelectorAll('.course-entry:not(.is-hidden)').length>0;
+      sec.classList.toggle('is-hidden',!anyVis);
+    });
+    if(status)status.textContent='Showing '+shown+' of '+entries.length+' courses';
+  }
+  pills.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      activeTag=btn.getAttribute('data-filter')||'all';
+      pills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      applyFilter();
+    });
+  });
+  if(input)input.addEventListener('input',applyFilter);
 })();
 </script></body>
 </html>
