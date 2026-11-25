@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Lab Explorer &amp; Part 2 Code Previews | Z3003 Data Mining | Dr. Innocent Nyalala</title>
+<link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html" rel="canonical"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta content="website" property="og:type"/>
+<meta content="Lab Explorer &amp; Part 2 Code Previews | Z3003 Data Mining" property="og:title"/>
+<meta content="Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#resource", "name": "Z3003 Lab Explorer and Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html", "description": "Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003 Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003 Data Mining", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html"}]}]}</script>
+<!-- /portal-seo -->
+</head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a href="../../../courses/z5007/index.html">Z5007</a>
+<a class="is-current" href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a href="../../../courses/z2004/index.html">Z2004</a>
+<a href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
+</div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Z3003 Data Mining</a></p>
+<nav aria-label="Lab sections" class="qb-week-nav"><a href="lab1.html">Lab 1: PySpark Walkthrough</a><a href="../question-bank/index.html">Question Bank (15 Worked Qs)</a><a href="../resources/Z3003_Data_Mining_Formula_Cheatsheet.pdf">Formula Cheat Sheet</a></nav>
+<h1>Lab Explorer &amp; Part 2 Code Previews</h1>
+<p class="lede">Interactive reference guide to Z3003 executable Python modules, complexity bounds, verified self-test outputs, and one-click Google Colab notebooks spanning Part 1 foundations and Part 2 large-scale algorithms.</p>
+<div class="lab-explorer-grid">
+<article class="lab-explorer-card">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 10–11</span><span class="lab-explorer-meta">SGD per epoch: O(|K| * k) time · O((|U| + |I|) * k) memory</span></div>
+<h2 style="margin:0 0 6px;font-size:1.15rem;">DM07: Recommender Systems & Matrix Factorization (SVD)</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Implements user-based cosine collaborative filtering and biased latent-factor SGD matrix factorization with L2 regularization and RMSE evaluation.</p>
+<pre class="lab-preview-code">def matrix_factorization_sgd(ratings, n_users, n_items, k=4, lr=0.03, reg=0.02, epochs=120):
+    mu = float(np.mean([r for _, _, r in ratings]))
+    bu, bi = np.zeros(n_users), np.zeros(n_items)
+    P = rng.normal(0.0, 0.1, size=(n_users, k))
+    Q = rng.normal(0.0, 0.1, size=(n_items, k))
+    for _ in range(epochs):
+        for u, i, r in ratings:
+            err = r - (mu + bu[u] + bi[i] + float(Q[i] @ P[u]))
+            bu[u] += lr * (err - reg * bu[u])
+            bi[i] += lr * (err - reg * bi[i])
+            P[u], Q[i] = P[u] + lr * (err * Q[i] - reg * P[u]), Q[i] + lr * (err * P[u] - reg * Q[i])
+    return mu, bu, bi, P, Q</pre>
+<div class="out-content" style="margin-bottom:10px;">DM07 self-tests passed (Train RMSE=0.0685; User-CF &amp; Biased SVD verified).</div>
+<div class="mat-pills"><a class="mat-pill" href="../code/dm07_recommenders_svd.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM07_Recommender_Systems_SVD.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM07_Recommender_Systems_SVD.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
+</article>
+<article class="lab-explorer-card">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 12–13</span><span class="lab-explorer-meta">Power iteration: O((V + E) * iters) time · O(V + E) memory</span></div>
+<h2 style="margin:0 0 6px;font-size:1.15rem;">DM08: Web Graph, PageRank Power Iteration & HITS</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Builds column-stochastic transition matrices with dead-end mass redistribution, random teleportation (beta = 0.85), and normalized HITS hub/authority updates.</p>
+<pre class="lab-preview-code">def pagerank(adj, beta=0.85, tol=1e-10, max_iter=200):
+    # Dead ends redistribute uniform mass 1/n across all nodes to prevent rank leak
+    r = np.full(n, 1.0 / n, dtype=float)
+    teleport = (1.0 - beta) / n
+    for iters in range(1, max_iter + 1):
+        r_next = beta * (M @ r) + teleport
+        if float(np.sum(np.abs(r_next - r))) &lt; tol:
+            return {u: float(r_next[idx[u]]) for u in nodes}, iters
+        r = r_next</pre>
+<div class="out-content" style="margin-bottom:10px;">DM08 self-tests passed (PageRank converged cleanly with dead-end handling &amp; HITS verified).</div>
+<div class="mat-pills"><a class="mat-pill" href="../code/dm08_pagerank_link_analysis.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM08_PageRank_Link_Analysis.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM08_PageRank_Link_Analysis.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
+</article>
+<article class="lab-explorer-card">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 14–15</span><span class="lab-explorer-meta">Single pass: O(1) per stream item · O(k * log U) sketch memory</span></div>
+<h2 style="margin:0 0 6px;font-size:1.15rem;">DM09: Data Streams (Flajolet-Martin & AMS Second Moment)</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Estimates distinct element cardinality F0 via trailing-zero bit sketches across independent hashes and tracks frequency second moment F2 using unbiased AMS estimators.</p>
+<pre class="lab-preview-code">def flajolet_martin_estimate(stream, n_hashes=16, groups=4):
+    # Track max trailing zero bit position R per hash; take median of group means
+    max_r = [0] * n_hashes
+    for item in stream:
+        for h_idx in range(n_hashes):
+            max_r[h_idx] = max(max_r[h_idx], _trailing_zeros(hash_val(item, h_idx)))
+    return float(statistics.median(group_means))</pre>
+<div class="out-content" style="margin-bottom:10px;">DM09 self-tests passed (Flajolet-Martin F0 &amp; AMS F2 stream sketches verified).</div>
+<div class="mat-pills"><a class="mat-pill" href="../code/dm09_streams_fm_ams.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM09_Data_Streams_FM_AMS.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM09_Data_Streams_FM_AMS.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
+</article>
+<article class="lab-explorer-card">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Part 1 & Project · Weeks 1–6</span><span class="lab-explorer-meta">Leakage-free pipelines · MinHash LSH · Bloom O(m) bits · RF/KMeans</span></div>
+<h2 style="margin:0 0 6px;font-size:1.15rem;">Part 1 Core Modules (DM01–DM06) & Mini-Project Starter (MP01)</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Complete verified Python modules covering Bayesian MLE, Information Gain / PCA / LDA, SMOTE & Ensembles, MapReduce / PySpark RDDs (plus Lab 1 HTML walkthrough), MinHash LSH, Apriori & Bloom Filters, and the end-to-end Zanzibar crop Mini-Project starter.</p>
+<pre class="lab-preview-code"># Verified end-to-end Mini-Project Starter outputs on W1_zanzibar_crop_sample.csv (500 rows):
+# - Confounder check: price_per_kg vs. revenue_usd r = 0.922 (driven by crop type)
+# - Leakage-free RandomForest held-out accuracy &gt;= 0.92, KMeans best_k = 2</pre>
+<div class="out-content" style="margin-bottom:10px;">All DM01-DM09 and MP01 self-tests passed in automated unittest harness.</div>
+<div class="mat-pills"><a class="mat-pill" href="../code/mp01_project_starter.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="MP01_Mini_Project_Starter.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/MP01_Mini_Project_Starter.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
+</article>
+</div>
+<section style="margin-top:26px;">
+<h2>Complete Part 1 Module Quick-Launch (DM01–DM06)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Module</th><th>Topics</th><th>Files &amp; Colab</th></tr></thead>
+<tbody>
+<tr><td class="wk">DM01</td><td>Bayesian Decision Theory, Bernoulli &amp; Gaussian MLE</td><td><a class="mat-pill" href="../code/dm01_bayesian_mle.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM01_Bayesian_Classification_MLE.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM01_Bayesian_Classification_MLE.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr><td class="wk">DM02</td><td>Information Gain Feature Selection, PCA &amp; Fisher LDA</td><td><a class="mat-pill" href="../code/dm02_feature_selection_pca_lda.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM02_Feature_Selection_PCA_LDA.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM02_Feature_Selection_PCA_LDA.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr><td class="wk">DM03</td><td>Class Imbalance, SMOTE &amp; Ensembles (RF, AdaBoost, GBDT)</td><td><a class="mat-pill" href="../code/dm03_imbalance_ensembles.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM03_Class_Imbalance_Ensembles.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM03_Class_Imbalance_Ensembles.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr><td class="wk">DM04</td><td>MapReduce &amp; PySpark RDD Log / OLAP Pipelines (<a href="lab1.html">HTML Lab 1</a>)</td><td><a class="mat-pill" href="../code/dm04_mapreduce_pyspark.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM04_MapReduce_PySpark_Foundations.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM04_MapReduce_PySpark_Foundations.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr><td class="wk">DM05</td><td>k-Shingling, Jaccard, MinHash Signatures &amp; LSH Banding</td><td><a class="mat-pill" href="../code/dm05_lsh_minhash.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM05_LSH_MinHash_Similarity.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM05_LSH_MinHash_Similarity.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr><td class="wk">DM06</td><td>Apriori Frequent Patterns, Kulczynski/IR &amp; Bloom Filters</td><td><a class="mat-pill" href="../code/dm06_frequent_patterns_streams.py">.py</a> <a class="mat-pill mat-pill-lab" href="DM06_Frequent_Patterns_Apriori_Bloom.ipynb">.ipynb</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM06_Frequent_Patterns_Apriori_Bloom.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+</tbody>
+</table></div>
+</section>
+
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Course Overview</a></span>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script></body>
+</html>

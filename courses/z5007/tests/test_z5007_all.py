@@ -58,6 +58,13 @@ class TestZ5007Weeks01To17(unittest.TestCase):
         self.assertEqual(w14.compute_lps("ABABAC"), [0, 0, 1, 2, 3, 0])
         self.assertEqual(w14.kmp_search("ABABABAC", "ABABAC"), [2])
 
+    def test_project_benchmark_starter_passes(self) -> None:
+        proj = _load_module(COURSE_ROOT / "project/p01_project_benchmark_starter.py")
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            proj.run_tests()
+        self.assertIn("passed", buf.getvalue().lower())
+
 
 if __name__ == "__main__":
     unittest.main()

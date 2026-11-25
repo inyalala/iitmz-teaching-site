@@ -65,6 +65,15 @@
 <button class="portal-filter-pill" data-filter="trees" type="button">Trees</button>
 <button class="portal-filter-pill" data-filter="graphs" type="button">Graphs</button>
 </div>
+<div class="portal-readiness-bar">
+<span id="portal-total-mastery">Practice Readiness: 0 / 164 Question Bank problems mastered</span>
+<div class="portal-readiness-pills">
+<a class="portal-mastery-pill" data-qb-course="z5007" data-qb-total="15" href="courses/z5007/question-bank/index.html">Z5007: 0/15</a>
+<a class="portal-mastery-pill" data-qb-course="dm-scale" data-qb-total="15" href="courses/dm-scale/question-bank/index.html">Z3003: 0/15</a>
+<a class="portal-mastery-pill" data-qb-course="z2004" data-qb-total="66" href="courses/z2004/question-bank/index.html">Z2004: 0/66</a>
+<a class="portal-mastery-pill" data-qb-course="z5008" data-qb-total="68" href="courses/z5008/question-bank/index.html">Z5008: 0/68</a>
+</div>
+</div>
 </div>
 <section aria-labelledby="active-term-h" class="term-section">
 <h2 class="term-heading" id="active-term-h">Odd Semester 2026-27 (October 2026 – January 2027)</h2>
@@ -179,6 +188,30 @@
     });
   });
   if(input)input.addEventListener('input',applyFilter);
+})();
+(function(){
+  var labels={'z5007':'Z5007','dm-scale':'Z3003','z2004':'Z2004','z5008':'Z5008'};
+  var pills=Array.from(document.querySelectorAll('.portal-mastery-pill[data-qb-course]'));
+  var totalEl=document.getElementById('portal-total-mastery');
+  var sumDone=0,sumMax=0;
+  pills.forEach(function(pill){
+    var slug=pill.getAttribute('data-qb-course');
+    var maxN=parseInt(pill.getAttribute('data-qb-total')||'0',10);
+    var done=0;
+    try{
+      var obj=JSON.parse(localStorage.getItem('qb_mastery_'+slug)||'{}')||{};
+      done=Object.keys(obj).length;
+      if(done>maxN)done=maxN;
+    }catch(e){done=0;}
+    sumDone+=done;
+    sumMax+=maxN;
+    pill.textContent=(labels[slug]||slug)+': '+done+'/'+maxN;
+    pill.classList.toggle('has-progress',done>0);
+  });
+  if(totalEl&&sumMax>0){
+    var pct=Math.round((sumDone/sumMax)*100);
+    totalEl.textContent='Practice Readiness: '+sumDone+' / '+sumMax+' Question Bank problems mastered ('+pct+'%)';
+  }
 })();
 </script></body>
 </html>

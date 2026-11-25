@@ -1728,3 +1728,87 @@ details.qb-solution[open] summary {
     color: #000000 !important;
   }
 }
+
+/* Wave I: Landing Portal Mastery Badges & Z3003 Lab Explorer Cards */
+.portal-readiness-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink2);
+}
+
+.portal-readiness-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.portal-mastery-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--ink2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+
+.portal-mastery-pill:hover,
+.portal-mastery-pill.has-progress {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lab-explorer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.lab-explorer-card {
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+
+.lab-explorer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.lab-explorer-meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-clove);
+}
+
+.lab-preview-code {
+  margin: 10px 0 6px;
+  padding: 12px 14px;
+  background: var(--pre-bg);
+  color: var(--pre-ink);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
