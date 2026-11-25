@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://inyalala.github.io/iitmz-teaching-site/sitemap.xml
+Sitemap: https://inyalala.github.io/sitemap.xml
+Sitemap: https://saaillab.github.io/sitemap.xml

@@ -5,14 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="light dark" name="color-scheme"/>
-<meta content="Z2005 Programming and Data Structures (BS): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials." name="description"/>
+<meta content="Z2005 Programming and Data Structures (BS Reference Archive): IIT Madras Zanzibar. Parity syllabus, Python reference modules, runnable Colab notebooks, and LaTeX summaries." name="description"/>
 <title>Z2005 Programming and Data Structures | Dr. Innocent Nyalala</title>
-
-
-
-
-
-
 <link rel="preload" href="../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
@@ -22,14 +16,15 @@
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html"/>
+<link rel="alternate" type="text/plain" href="../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary"/>
 <meta content="website" property="og:type"/>
 <meta content="Z2005 Programming and Data Structures | Dr. Innocent Nyalala" property="og:title"/>
-<meta content="Z2005 Programming and Data Structures (BS): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials." property="og:description"/>
+<meta content="Z2005 Programming and Data Structures (BS Reference Archive): IIT Madras Zanzibar. Parity syllabus, Python reference modules, runnable Colab notebooks, and LaTeX summaries." property="og:description"/>
 <meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html" property="og:url"/>
 <meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Course", "name": "Z2005: Programming and Data Structures", "courseCode": "Z2005", "description": "Z2005 Programming and Data Structures (BS): IIT Madras Zanzibar. Instructor, schedule, resources, grading, and course materials.", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html", "provider": {"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Madras Zanzibar", "url": "https://www.iitmz.ac.in/"}, "instructor": {"@type": "Person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "onsite", "location": {"@type": "Place", "name": "Indian Institute of Technology Madras Zanzibar"}}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Course", "name": "Z2005: Programming and Data Structures", "courseCode": "Z2005", "description": "Z2005 Programming and Data Structures (BS Reference Archive): IIT Madras Zanzibar. Parity syllabus, Python reference modules, runnable Colab notebooks, and LaTeX summaries.", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html", "mainEntityOfPage": "https://inyalala.github.io/iitmz-teaching-site/courses/z2005/index.html", "sameAs": ["https://inyalala.github.io/courses/z2005/"], "provider": {"@type": "CollegeOrUniversity", "name": "Indian Institute of Technology Madras Zanzibar", "url": "https://www.iitmz.ac.in/", "address": {"@type": "PostalAddress", "streetAddress": "Bweleo, P.O. Box 2496", "addressLocality": "Zanzibar", "addressCountry": "TZ"}}, "instructor": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "Onsite", "location": {"@type": "Place", "name": "Indian Institute of Technology Madras Zanzibar", "address": {"@type": "PostalAddress", "streetAddress": "Bweleo, P.O. Box 2496", "addressLocality": "Zanzibar", "addressCountry": "TZ"}}}}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -50,112 +45,54 @@
 </header>
 <main class="portal-container" id="main-content">
 <p class="crumb-line"><a href="../../index.html">← All Courses</a></p>
-<p class="eyebrow">Z2005 · BS</p>
+<p class="eyebrow">Z2005 · BS Reference Archive</p>
 <h1>Programming and Data Structures</h1>
-<p class="lede">Introduction to Python data structures and algorithms from stacks, linked lists, and queues through sorting, trees, hash tables, heaps, dynamic programming, greedy methods, and graph search. For the graduate MTech section (Z5007), <a href="../z5007/index.html">see the MTech course</a>.</p>
-<div class="quiet-note"><span><strong>Reference Archive:</strong> In Odd Semester 2026-27, Dr. Nyalala teaches <strong>Z5007 (MTech Core)</strong> and co-teaches <strong>Z3003 (BS Core)</strong> with Dr. Mahendran V. These Z2005 materials remain archived for reference.</span></div>
+<p class="lede">BS curriculum roadmap in Python data structures and algorithms from stacks, linked lists, and queues through sorting, trees, hash tables, heaps, dynamic programming, greedy methods, and graph search. For the active graduate MTech offering (Z5007), <a href="../z5007/index.html">see Z5007</a>.</p>
+<div class="quiet-note"><span><strong>Term Ownership &amp; Parity Archive:</strong> In Odd Semester 2026-27, Dr. Nyalala actively teaches <strong>Z5007 (MTech Core)</strong> and co-teaches <strong>Z3003 (BS Core)</strong> with Dr. Mahendran V, whereas Z2005 is taught by campus BS faculty. All Python reference modules, runnable Colab notebooks, and LaTeX summaries below link directly to Dr. Nyalala's shared Z5007 parity materials.</span></div>
 <dl class="meta-dl">
-<div><dt>Term</dt><dd>Reference Archive · BS Odd Semester Curriculum (Taught by Campus Faculty in 2026-27)</dd></div>
+<div><dt>Term</dt><dd>Reference Archive · BS Odd Semester Curriculum (Active MTech Parity in Z5007)</dd></div>
 <div><dt>Credits</dt><dd>15 (Core)</dd></div>
-<div><dt>Instructor</dt><dd>Dr. Innocent Nyalala · Room 105 (F1) · Office Hours: Wednesday, 2:00 PM – 4:00 PM · <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a></dd></div>
-<div><dt>Course Links</dt><dd><a href="../z5007/index.html">MTech Section (Z5007)</a> · <a href="https://inyalala.github.io/courses/z2005/">Faculty Course Page</a></dd></div>
+<div><dt>Instructor</dt><dd>Dr. Innocent Nyalala · Room 105 (F1) · Office Hours: Tuesday, 2:00 PM – 4:00 PM · <a href="mailto:innocent@iitmz.ac.in">innocent@iitmz.ac.in</a></dd></div>
+<div><dt>Course Links</dt><dd><a href="../z5007/index.html">Active MTech Offering (Z5007)</a> · <a href="../z5007/syllabus/Z5007_Institute_Syllabus.pdf">Institute Syllabus PDF</a> · <a href="https://inyalala.github.io/courses/z2005/">Faculty Course Page ↗</a></dd></div>
 </dl>
-<nav aria-label="Course sections" class="section-jumps"><a href="#schedule">Schedule</a> <a href="#materials">Materials</a> <a href="#grading">Grading</a> <a href="#outcomes">Outcomes</a> <a href="#resources">Resources</a> <a href="#policies">Policies</a></nav>
+<nav aria-label="Course sections" class="section-jumps"><a href="#schedule">Schedule</a> <a href="#materials">Parity Materials (Weeks 1–17)</a> <a href="#grading">Grading</a> <a href="#outcomes">Outcomes</a> <a href="#resources">Resources</a> <a href="#policies">Policies</a></nav>
+
 <section id="schedule">
 <h2>Schedule</h2>
-
 <div class="table-wrap"><table class="sched">
 <tr><th>Session</th><th>Frequency</th><th>Time / Room</th></tr>
 <tr><td>Lecture</td><td>4 per week</td><td>Monday, Wednesday, Thursday, and Friday (Reference Schedule)</td></tr>
-<tr><td>Lab</td><td>2 per week</td><td>TBA</td></tr>
+<tr><td>Lab</td><td>2 per week</td><td>Reference Lab Parity via Z5007 Notebooks</td></tr>
 </table></div>
+</section>
 
-</section><section id="materials">
-<h2>Materials</h2>
-
+<section id="materials">
+<h2>Materials (Z5007 Parity Reference Archive · Weeks 1–17)</h2>
 <div class="table-wrap"><table class="materials">
-<tr><th>Week</th><th>Topic</th><th>Materials</th></tr>
-<tr>
-<td class="wk">1</td>
-<td class="topic">Object-Oriented Programming, then Algorithms</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">2</td>
-<td class="topic">Arrays and Dynamic Arrays</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">3</td>
-<td class="topic">Stacks and Queues</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">4</td>
-<td class="topic">Linked Lists</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">5</td>
-<td class="topic">Simple Sorting</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">6</td>
-<td class="topic">Advanced Sorting Algorithms</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">7</td>
-<td class="topic">Binary Trees</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">8</td>
-<td class="topic">Hash Tables and Heaps</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">9</td>
-<td class="topic">Dynamic Programming</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">10</td>
-<td class="topic">Greedy Algorithms</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">11</td>
-<td class="topic">Introduction to Graphs</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">12</td>
-<td class="topic">Graph Algorithms: Dijkstra and A*</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">13</td>
-<td class="topic">Graph Algorithms: Bellman-Ford and Prim's</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">14</td>
-<td class="topic">Parallel and Randomized Algorithms</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
-<tr>
-<td class="wk">15</td>
-<td class="topic">Project Presentations and Review</td>
-<td class="link"><span style="color: var(--ink3); font-size: 0.85em;">Publishing verified edition</span></td>
-</tr>
+<tr><th>Week</th><th>Topic</th><th>Reference Code, Colab Notebooks &amp; Summaries</th></tr>
+<tr id="week-01"><td class="wk">1</td><td class="topic">OOP Foundations, Asymptotic Analysis &amp; Big-O</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-01/notes/W01_Asymptotic_Analysis_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-01/code/w01_complexity_benchmark.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-01/labs/W01_Empirical_Complexity_BigO.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-01/labs/W01_Empirical_Complexity_BigO.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-02"><td class="wk">2</td><td class="topic">Arrays, Binary Search &amp; Dynamic Arrays</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-02/notes/W02_Arrays_Dynamic_Arrays_Sorts_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-02/code/w02_arrays_binary_search_sorts.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-02/labs/W02_Reference_Arrays_Sorts.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-02/labs/W02_Reference_Arrays_Sorts.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-03"><td class="wk">3</td><td class="topic">Insertion Sort &amp; Stacks (Array vs. Linked)</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-03/notes/W03_Insertion_Sort_and_Stacks_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-03/code/w03_insertion_sort_stacks.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-03/labs/W03_Reference_Sorts_Stacks.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-03/labs/W03_Reference_Sorts_Stacks.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-04"><td class="wk">4</td><td class="topic">Circular Queues, Linked Lists &amp; LRU Cache</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-04/notes/W04_Queues_Linked_Lists_LRU_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-04/code/w04_queues_linked_lists_lru.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-04/labs/W04_Reference_Queues_Linked_Lists.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-04/labs/W04_Reference_Queues_Linked_Lists.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-05"><td class="wk">5</td><td class="topic">Recursion, Merge Sort, Quicksort &amp; Recurrences</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-05/notes/W05_Recursion_Sorting_Recurrences_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-05/code/w05_recursion_mergesort_quicksort.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-05/labs/W05_Reference_Recursion_Sorting.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-05/labs/W05_Reference_Recursion_Sorting.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-06"><td class="wk">6</td><td class="topic">Binary Trees, Traversals &amp; BST Foundations</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-06/practice/Z5007_Quiz1_Practice40.pdf">Practice PDF</a> <a class="mat-pill" href="../z5007/week-06/code/w06_binary_trees_bst.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-06/labs/W06_Binary_Trees_Traversals_BST.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-06/labs/W06_Binary_Trees_Traversals_BST.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-07"><td class="wk">7</td><td class="topic">Linear-Time Sorts, BSTs &amp; Self-Balancing AVL Trees</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-07/notes/W07_Linear_Sorts_Trees_BST_Notes.pdf">Notes PDF</a> <a class="mat-pill" href="../z5007/week-07/code/w07_avl_trees.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-07/labs/W07_Self_Balancing_AVL_Trees.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-07/labs/W07_Self_Balancing_AVL_Trees.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-08"><td class="wk">8</td><td class="topic">AVL Trees, Heaps, Priority Queues &amp; Hash Tables</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-08/notes/W08_Trees_AVL_Heaps_Hash_Tables_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-08/code/w08_heaps_hash_tables.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-08/labs/W08_Heaps_PriorityQueues_HashTables.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-08/labs/W08_Heaps_PriorityQueues_HashTables.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-09"><td class="wk">9</td><td class="topic">Graph Representations, BFS, DFS &amp; Topological Sort</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-09/notes/W09_Graph_Traversals_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-09/code/w09_graphs_traversals_topo.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-09/labs/W09_Graph_Representations_BFS_DFS.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-09/labs/W09_Graph_Representations_BFS_DFS.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-10"><td class="wk">10</td><td class="topic">Weighted Shortest Paths: Dijkstra &amp; Bellman-Ford</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-10/notes/W10_Shortest_Paths_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-10/code/w10_shortest_paths.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-10/labs/W10_Shortest_Paths_Dijkstra_BellmanFord.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-10/labs/W10_Shortest_Paths_Dijkstra_BellmanFord.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-11"><td class="wk">11</td><td class="topic">Greedy Algorithms &amp; Minimum Spanning Trees (Kruskal &amp; Prim)</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-11/notes/W11_Greedy_and_MST_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-11/code/w11_greedy_mst.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-11/labs/W11_Greedy_and_MST_Kruskal_Prim.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-11/labs/W11_Greedy_and_MST_Kruskal_Prim.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-12"><td class="wk">12</td><td class="topic">Dynamic Programming: 0/1 Knapsack, LCS &amp; Edit Distance</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-12/notes/W12_Dynamic_Programming_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-12/code/w12_dynamic_programming.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-12/labs/W12_Dynamic_Programming.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-12/labs/W12_Dynamic_Programming.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-13"><td class="wk">13</td><td class="topic">Advanced Dynamic Programming (Matrix Chain, LIS, Bitmask TSP)</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-13/notes/W13_Advanced_Dynamic_Programming_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-13/code/w13_advanced_dp.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-13/labs/W13_Advanced_Dynamic_Programming.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-13/labs/W13_Advanced_Dynamic_Programming.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-14"><td class="wk">14</td><td class="topic">String Matching &amp; Prefix Tries (KMP &amp; Rabin-Karp)</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-14/notes/W14_String_Matching_and_Tries_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-14/code/w14_string_matching_tries.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-14/labs/W14_String_Matching_and_Tries.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-14/labs/W14_String_Matching_and_Tries.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-15"><td class="wk">15</td><td class="topic">Union-Find &amp; Amortized Potential Analysis</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-15/notes/W15_Union_Find_Amortized_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-15/code/w15_union_find_amortized.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-15/labs/W15_Union_Find_Amortized_Review.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-15/labs/W15_Union_Find_Amortized_Review.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-16"><td class="wk">16</td><td class="topic">NP-Completeness, Reductions &amp; 2-Approximation</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-16/notes/W16_NP_Completeness_Reductions_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-16/code/w16_np_completeness_approx.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-16/labs/W16_NP_Completeness_Reductions.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-16/labs/W16_NP_Completeness_Reductions.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
+<tr id="week-17"><td class="wk">17</td><td class="topic">Capstone Synthesis, Parallel Scan &amp; Final Exam Prep</td><td class="link"><a class="mat-pill mat-pill-notes" href="../z5007/week-17/notes/W17_Capstone_Exam_Synthesis_Summary.pdf">Summary PDF</a> <a class="mat-pill" href="../z5007/week-17/code/w17_capstone_synthesis.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../z5007/week-17/labs/W17_Final_Capstone_Synthesis.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-17/labs/W17_Final_Capstone_Synthesis.ipynb" rel="noopener" target="_blank">Colab ↗</a></td></tr>
 </table></div>
+</section>
 
-<p>Verified slide PDFs, LaTeX notes and worksheets (PDF), optional PPTX previews, and laboratory notebooks for this reference BS offering are being republished module by module.</p>
-</section><section id="grading"><h2>Grading</h2><div class="table-wrap"><table><tr><th>Component</th><th>Weight</th><th>Details</th></tr><tr><td><strong>In-class assignments</strong></td><td class="wk">10%</td><td>Seven assignments, done in lab, one every 2 weeks (weeks 2, 4, 6, 8, 10, 12, 14).</td></tr><tr><td><strong>Quizzes</strong></td><td class="wk">30%</td><td>Short in-class quizzes through the semester.</td></tr><tr><td><strong>Course project</strong></td><td class="wk">20%</td><td>Custom ML algorithm from scratch, or a recommendation system.</td></tr><tr><td><strong>End semester examination</strong></td><td class="wk">40%</td><td>Practical and theory, in lab.</td></tr></table></div></section><section id="outcomes">
+<section id="grading"><h2>Grading</h2><div class="table-wrap"><table><tr><th>Component</th><th>Weight</th><th>Details</th></tr><tr><td><strong>In-class assignments</strong></td><td class="wk">10%</td><td>Seven assignments, done in lab, one every 2 weeks (weeks 2, 4, 6, 8, 10, 12, 14).</td></tr><tr><td><strong>Quizzes</strong></td><td class="wk">30%</td><td>Short in-class quizzes through the semester.</td></tr><tr><td><strong>Course project</strong></td><td class="wk">20%</td><td>Custom ML algorithm from scratch, or a recommendation system.</td></tr><tr><td><strong>End semester examination</strong></td><td class="wk">40%</td><td>Practical and theory, in lab.</td></tr></table></div></section>
+<section id="outcomes">
 <h2>Learning Outcomes</h2>
-
 <ol class="plain-outcomes">
 <li> Design and implement Python classes using encapsulation, inheritance, and polymorphism, and explain why each data structure in this course is built as a class.</li>
 <li> Write, test, and debug Python programs that use functions and recursion.</li>
