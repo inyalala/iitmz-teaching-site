@@ -1,64 +1,66 @@
-/* IIT Madras Zanzibar Teaching Portal: Quiet University Monograph & Course Archive (v5) */
+/* IIT Madras Zanzibar Teaching Portal: Warm University Monograph & Course Archive (v6) */
 
 :root {
   color-scheme: light;
-  --bg: #ffffff;
-  --surface: #f7f8f7;
-  --surface2: #f1f3f2;
-  --ink: #181b1e;
-  --ink2: #363c42;
-  --ink3: #596068;
-  --muted: #596068;
-  --accent: #1b4332;
-  --accent-hover: #112b20;
-  --link: #1b4332;
-  --border: #e4e7eb;
-  --border-strong: #c8cfd6;
-  --code-bg: #f5f6f7;
-  --pre-bg: #16181a;
-  --pre-ink: #ebedf0;
+  --bg: #f8f5ee;
+  --surface: #fcfbf7;
+  --surface2: #efeae0;
+  --ink: #181a18;
+  --ink2: #343833;
+  --ink3: #565c55;
+  --muted: #565c55;
+  --accent: #1b3b2f;
+  --accent-hover: #10261d;
+  --accent-clove: #7a4b1e;
+  --link: #1b3b2f;
+  --border: #ddd4c4;
+  --border-strong: #b9ae9a;
+  --code-bg: #efeae0;
+  --pre-bg: #181714;
+  --pre-ink: #f2efe9;
   /* Legacy token compatibility for Reveal decks & Quarto embeds */
-  --navy: #1b4332;
-  --navy2: #112b20;
-  --gold: #1b4332;
-  --gold2: #112b20;
-  --gold-dark: #1b4332;
-  --faint: #e4e7eb;
-  --rule-strong: #c8cfd6;
-  --bg-rail: #f7f8f7;
-  --bg2: #f1f3f2;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, Cambria, serif;
-  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --navy: #1b3b2f;
+  --navy2: #10261d;
+  --gold: #7a4b1e;
+  --gold2: #5c3714;
+  --gold-dark: #7a4b1e;
+  --faint: #ddd4c4;
+  --rule-strong: #b9ae9a;
+  --bg-rail: #f1ece1;
+  --bg2: #efeae0;
+  --font-display: 'Cormorant Garamond', Georgia, Cambria, 'Times New Roman', serif;
+  --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 [data-theme='dark'] {
   color-scheme: dark;
-  --bg: #121413;
-  --surface: #1a1d1b;
-  --surface2: #222624;
-  --ink: #e9ebe8;
-  --ink2: #c8cdc9;
-  --ink3: #9ca39e;
-  --muted: #9ca39e;
-  --accent: #8ac5a5;
-  --accent-hover: #add9c1;
-  --link: #8ac5a5;
-  --border: #2a2e2b;
-  --border-strong: #3e4540;
-  --code-bg: #1f2320;
-  --pre-bg: #0f1110;
-  --pre-ink: #e9ebe8;
-  --navy: #8ac5a5;
-  --navy2: #add9c1;
-  --gold: #8ac5a5;
-  --gold2: #add9c1;
-  --gold-dark: #8ac5a5;
-  --faint: #2a2e2b;
-  --rule-strong: #3e4540;
-  --bg-rail: #1a1d1b;
-  --bg2: #222624;
+  --bg: #151412;
+  --surface: #211f1b;
+  --surface2: #1e1c18;
+  --ink: #f2efe9;
+  --ink2: #cec8be;
+  --ink3: #a39c92;
+  --muted: #a39c92;
+  --accent: #8fb89e;
+  --accent-hover: #abd0b9;
+  --accent-clove: #d7b48a;
+  --link: #8fb89e;
+  --border: #2f2c26;
+  --border-strong: #4a453c;
+  --code-bg: #1e1c18;
+  --pre-bg: #0f0e0c;
+  --pre-ink: #f2efe9;
+  --navy: #8fb89e;
+  --navy2: #abd0b9;
+  --gold: #d7b48a;
+  --gold2: #e3c8a6;
+  --gold-dark: #d7b48a;
+  --faint: #2f2c26;
+  --rule-strong: #4a453c;
+  --bg-rail: #1a1815;
+  --bg2: #1e1c18;
 }
 
 *,
@@ -142,8 +144,8 @@ body.prose-doc {
 }
 
 .portal-brand {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
   font-weight: 600;
   color: var(--ink);
   text-decoration: none;
@@ -162,8 +164,8 @@ body.prose-doc {
 }
 
 .portal-nav a {
-  font-family: var(--font-sans);
-  font-size: 0.84rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--ink3);
   text-decoration: none;
@@ -231,35 +233,35 @@ body.prose-doc {
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink3);
+  color: var(--accent-clove);
   margin: 0 0 8px;
 }
 
 h1 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: clamp(1.75rem, 3.2vw, 2.3rem);
-  line-height: 1.18;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.05rem, 3.8vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   color: var(--ink);
   margin: 0 0 12px;
 }
 
 h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.28rem;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-size: 1.62rem;
+  line-height: 1.22;
+  letter-spacing: -0.012em;
   color: var(--ink);
   margin: 40px 0 14px;
 }
 
 h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.04rem;
-  line-height: 1.38;
+  font-size: 1.24rem;
+  line-height: 1.28;
   color: var(--ink);
   margin: 24px 0 8px;
 }
@@ -334,11 +336,75 @@ a:hover {
 
 .course-entry-title {
   display: inline-block;
-  font-size: 1.14rem;
+  font-family: var(--font-display);
+  font-size: 1.38rem;
   font-weight: 600;
   color: var(--ink);
   text-decoration: none;
   margin-bottom: 4px;
+}
+
+/* Week Material Session Lists (Z5007) */
+.mat-session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mat-session-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.mat-session-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.mat-session-name {
+  font-size: 0.9rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.mat-pills {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mat-pill {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  color: var(--link);
+  background: var(--surface);
+  text-decoration: none;
+  margin-right: 0;
+}
+
+.mat-pill:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.mat-pill-notes {
+  border-color: var(--accent-clove);
+  color: var(--accent-clove);
+}
+
+.mat-pill-lab {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .course-entry-title:hover {
