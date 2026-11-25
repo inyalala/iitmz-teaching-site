@@ -53,6 +53,25 @@
 <h1>Question Bank</h1>
 <p class="lede">Organised by module and difficulty. Use this bank to prepare for Quiz 1, Quiz 2, and the end-semester examination. Questions are not a substitute for lab exercises and the semester project.</p>
 <div class="qb-formula-bar"><span><strong>Reference Sheet:</strong> Pair these problems with the compiled 2-page PDF formula summary before inspecting solutions.</span><span><a href="../resources/Z2004_SQL_Normalization_Cheatsheet.pdf">SQL & Normalization Cheat Sheet (PDF)</a></span></div>
+<div aria-label="Filter questions, track mastery, and toggle solutions" class="qb-controls-bar" role="search">
+<input aria-label="Search questions and solutions" class="qb-search-input" id="qb-search" placeholder="Search questions, algorithms, SQL, or formulas..." type="search"/>
+<button class="qb-ctrl-btn" id="qb-expand-all" type="button">Expand All Solutions</button>
+<button class="qb-ctrl-btn" id="qb-collapse-all" type="button">Collapse All</button>
+<span aria-live="polite" class="qb-match-status" id="qb-match-status"></span>
+<div aria-label="Filter by difficulty" class="qb-tier-filters" role="group">
+<span class="qb-match-status">Difficulty:</span>
+<button class="qb-tier-pill is-active" data-tier="all" type="button">All Tiers</button>
+<button class="qb-tier-pill" data-tier="e" type="button">Easy</button>
+<button class="qb-tier-pill" data-tier="m" type="button">Intermediate</button>
+<button class="qb-tier-pill" data-tier="h" type="button">Advanced</button>
+<button class="qb-tier-pill" data-tier="unmastered" type="button">Unmastered Only</button>
+</div>
+<div class="qb-mastery-wrap">
+<span aria-live="polite" class="qb-match-status" id="qb-mastery-text">0 / 0 mastered</span>
+<div aria-hidden="true" class="qb-progress-track"><div class="qb-progress-fill" id="qb-mastery-fill"></div></div>
+<button class="qb-ctrl-btn" id="qb-reset-mastery" type="button">Reset Progress</button>
+</div>
+</div>
 <div aria-label="Filter questions and toggle solutions" class="qb-controls-bar" role="search">
 <input aria-label="Search questions and solutions" class="qb-search-input" id="qb-search" placeholder="Search questions, algorithms, SQL, or formulas..." type="search"/>
 <button class="qb-ctrl-btn" id="qb-expand-all" type="button">Expand All Solutions</button>
@@ -378,16 +397,75 @@ function showTier(btn, sec, tier) {
 })();
 </script><script>
 (function(){
+  var STORAGE_KEY='qb_mastery_z2004';
   var inp=document.getElementById('qb-search');
   var expBtn=document.getElementById('qb-expand-all');
   var colBtn=document.getElementById('qb-collapse-all');
+  var resetBtn=document.getElementById('qb-reset-mastery');
   var status=document.getElementById('qb-match-status');
+  var mText=document.getElementById('qb-mastery-text');
+  var mFill=document.getElementById('qb-mastery-fill');
+  var tierPills=Array.from(document.querySelectorAll('.qb-tier-pill'));
   var blocks=Array.from(document.querySelectorAll('.week-block'));
   var items=Array.from(document.querySelectorAll('.q-item'));
-  if(status)status.textContent=items.length+' questions';
-  function applySearch(){
+  var activeTier='all';
+
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')||{};}catch(e){saved={};}
+
+  function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(saved));}catch(e){}}
+
+  function syncMasteryUI(){
+    var done=0;
+    items.forEach(function(it){
+      var qid=it.getAttribute('data-qid');
+      var isDone=!!saved[qid];
+      it.classList.toggle('is-mastered',isDone);
+      var btn=it.querySelector('.qb-master-btn');
+      if(btn){
+        btn.classList.toggle('is-mastered',isDone);
+        btn.setAttribute('aria-pressed',isDone?'true':'false');
+        btn.textContent=isDone?'Mastered':'Mark Mastered';
+      }
+      if(isDone)done++;
+    });
+    var total=items.length||1;
+    var pct=Math.round((done/total)*100);
+    if(mText)mText.textContent=done+' / '+items.length+' mastered ('+pct+'%)';
+    if(mFill)mFill.style.width=pct+'%';
+  }
+
+  items.forEach(function(it,idx){
+    var panel=it.closest('.qs-panel');
+    var pid=(panel&&panel.id)?panel.id:'q';
+    var qid=pid+'-i'+idx;
+    it.setAttribute('data-qid',qid);
+    var t='e';
+    if(pid.endsWith('-m'))t='m';
+    else if(pid.endsWith('-h'))t='h';
+    it.setAttribute('data-tier',t);
+    var meta=it.querySelector('.q-meta');
+    if(meta&&!meta.querySelector('.qb-master-btn')){
+      var btn=document.createElement('button');
+      btn.type='button';
+      btn.className='qb-master-btn';
+      btn.textContent='Mark Mastered';
+      btn.setAttribute('aria-pressed','false');
+      btn.addEventListener('click',function(){
+        if(saved[qid])delete saved[qid];
+        else saved[qid]=1;
+        saveState();
+        syncMasteryUI();
+        if(activeTier==='unmastered')applyFilters();
+      });
+      meta.appendChild(btn);
+    }
+  });
+
+  function applyFilters(){
     var q=(inp?inp.value:'').trim().toLowerCase();
-    if(!q){
+    var filteredMode=(q!=='')||(activeTier!=='all');
+    if(!filteredMode){
       items.forEach(function(it){it.classList.remove('is-hidden');});
       blocks.forEach(function(b){
         b.classList.remove('is-hidden');
@@ -406,7 +484,11 @@ function showTier(btn, sec, tier) {
       b.querySelectorAll('.qs-panel').forEach(function(p){
         var pHits=0;
         p.querySelectorAll('.q-item').forEach(function(it){
-          var ok=it.textContent.toLowerCase().indexOf(q)!==-1;
+          var textOk=(q==='')||(it.textContent.toLowerCase().indexOf(q)!==-1);
+          var t=it.getAttribute('data-tier');
+          var qid=it.getAttribute('data-qid');
+          var tierOk=(activeTier==='all')||(activeTier==='unmastered'?!saved[qid]:t===activeTier);
+          var ok=textOk&&tierOk;
           it.classList.toggle('is-hidden',!ok);
           if(ok){pHits++;bHits++;hits++;}
         });
@@ -416,15 +498,32 @@ function showTier(btn, sec, tier) {
       });
       b.classList.toggle('is-hidden',bHits===0);
     });
-    if(status)status.textContent=hits+' matching '+ (hits===1?'question':'questions');
+    if(status)status.textContent=hits+' matching '+(hits===1?'question':'questions');
   }
-  if(inp)inp.addEventListener('input',applySearch);
+
+  tierPills.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      activeTier=btn.getAttribute('data-tier')||'all';
+      tierPills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      applyFilters();
+    });
+  });
+  if(inp)inp.addEventListener('input',applyFilters);
   if(expBtn)expBtn.addEventListener('click',function(){
     document.querySelectorAll('.q-item:not(.is-hidden) details.qb-solution').forEach(function(d){d.open=true;});
   });
   if(colBtn)colBtn.addEventListener('click',function(){
     document.querySelectorAll('details.qb-solution').forEach(function(d){d.open=false;});
   });
+  if(resetBtn)resetBtn.addEventListener('click',function(){
+    saved={};
+    saveState();
+    syncMasteryUI();
+    applyFilters();
+  });
+
+  syncMasteryUI();
+  applyFilters();
 })();
 </script></body>
 </html>

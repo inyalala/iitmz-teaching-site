@@ -1561,3 +1561,87 @@ details.qb-solution[open] summary {
 .qs-panel.is-search-match {
   display: block;
 }
+
+/* Wave G: Question Bank Mastery Progress Bar, Tier Filters & Self-Check Toggles */
+.qb-mastery-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.qb-progress-track {
+  flex: 1 1 160px;
+  height: 7px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.qb-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.qb-tier-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.qb-tier-pill {
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.qb-tier-pill:hover,
+.qb-tier-pill.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface2);
+  font-weight: 600;
+}
+
+.qb-master-btn {
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.qb-master-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.qb-master-btn.is-mastered {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.q-item.is-mastered {
+  border-left: 2.5px solid var(--accent);
+  padding-left: 12px;
+}
