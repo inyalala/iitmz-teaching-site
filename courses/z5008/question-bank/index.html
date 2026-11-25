@@ -20,6 +20,8 @@
 <link href="../../../assets/site.css?v=6" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/question-bank/index.html" rel="canonical"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
 <meta content="website" property="og:type"/>
 <meta content="Question Bank: Z5008 Big Data Lab | Dr. Innocent Nyalala" property="og:title"/>
 <meta content="Question Bank for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
@@ -51,6 +53,12 @@
 <h1>Question Bank</h1>
 <p class="lede">Organised by lab and difficulty. Use this bank to prepare for Quiz 1, the course project, and the end-semester examination. Questions test both conceptual understanding and practical implementation knowledge.</p>
 <div class="qb-formula-bar"><span><strong>Reference Sheet:</strong> Pair these problems with the compiled 2-page PDF formula summary before inspecting solutions.</span><span><a href="../resources/Z5008_BigData_Lakehouse_Cheatsheet.pdf">Big Data & Lakehouse Cheat Sheet (PDF)</a></span></div>
+<div aria-label="Filter questions and toggle solutions" class="qb-controls-bar" role="search">
+<input aria-label="Search questions and solutions" class="qb-search-input" id="qb-search" placeholder="Search questions, algorithms, SQL, or formulas..." type="search"/>
+<button class="qb-ctrl-btn" id="qb-expand-all" type="button">Expand All Solutions</button>
+<button class="qb-ctrl-btn" id="qb-collapse-all" type="button">Collapse All</button>
+<span aria-live="polite" class="qb-match-status" id="qb-match-status"></span>
+</div>
 <!-- L1 -->
 <div class="week-block" id="l1">
 <div class="week-header"><span class="wnum">Lab 1</span><h2>Big Data Landscape &amp; Setup</h2></div>
@@ -419,6 +427,56 @@ function showTier(btn, sec, tier) {
     });
   });
   sync();
+})();
+</script><script>
+(function(){
+  var inp=document.getElementById('qb-search');
+  var expBtn=document.getElementById('qb-expand-all');
+  var colBtn=document.getElementById('qb-collapse-all');
+  var status=document.getElementById('qb-match-status');
+  var blocks=Array.from(document.querySelectorAll('.week-block'));
+  var items=Array.from(document.querySelectorAll('.q-item'));
+  if(status)status.textContent=items.length+' questions';
+  function applySearch(){
+    var q=(inp?inp.value:'').trim().toLowerCase();
+    if(!q){
+      items.forEach(function(it){it.classList.remove('is-hidden');});
+      blocks.forEach(function(b){
+        b.classList.remove('is-hidden');
+        b.querySelectorAll('.qs-panel').forEach(function(p){
+          p.classList.remove('is-search-match');
+          if(!p.classList.contains('shown'))p.setAttribute('hidden','hidden');
+          else p.removeAttribute('hidden');
+        });
+      });
+      if(status)status.textContent=items.length+' questions';
+      return;
+    }
+    var hits=0;
+    blocks.forEach(function(b){
+      var bHits=0;
+      b.querySelectorAll('.qs-panel').forEach(function(p){
+        var pHits=0;
+        p.querySelectorAll('.q-item').forEach(function(it){
+          var ok=it.textContent.toLowerCase().indexOf(q)!==-1;
+          it.classList.toggle('is-hidden',!ok);
+          if(ok){pHits++;bHits++;hits++;}
+        });
+        p.classList.toggle('is-search-match',pHits>0);
+        if(pHits>0)p.removeAttribute('hidden');
+        else p.setAttribute('hidden','hidden');
+      });
+      b.classList.toggle('is-hidden',bHits===0);
+    });
+    if(status)status.textContent=hits+' matching '+ (hits===1?'question':'questions');
+  }
+  if(inp)inp.addEventListener('input',applySearch);
+  if(expBtn)expBtn.addEventListener('click',function(){
+    document.querySelectorAll('.q-item:not(.is-hidden) details.qb-solution').forEach(function(d){d.open=true;});
+  });
+  if(colBtn)colBtn.addEventListener('click',function(){
+    document.querySelectorAll('details.qb-solution').forEach(function(d){d.open=false;});
+  });
 })();
 </script></body>
 </html>

@@ -1500,3 +1500,64 @@ details.qb-solution[open] summary {
   font-size: 0.78rem;
   overflow-x: auto;
 }
+
+.qb-controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.qb-search-input {
+  flex: 1 1 220px;
+  padding: 6px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+}
+
+.qb-search-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.qb-ctrl-btn {
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.qb-ctrl-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface2);
+}
+
+.qb-match-status {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink3);
+}
+
+.q-item.is-hidden,
+.week-block.is-hidden {
+  display: none;
+}
+
+.qs-panel.is-search-match {
+  display: block;
+}
