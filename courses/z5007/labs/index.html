@@ -47,13 +47,23 @@
 <p class="lede">Searchable browser preview of all 17 weekly Z5007 Python reference modules and the Course Project benchmark starter, paired with Big-O complexity summaries, Colab links, and LaTeX cheat sheets.</p>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
-<span aria-live="polite" class="qb-match-status" id="lab-count">18 modules</span>
+<span aria-live="polite" class="qb-match-status" id="lab-count"></span>
+<div aria-label="Filter by topic" class="lab-topic-filters" role="group">
+<span class="qb-match-status">Topic:</span>
+<button class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
+<button class="lab-topic-pill" data-topic="asymptotics" type="button">Asymptotics & Sorts</button>
+<button class="lab-topic-pill" data-topic="trees" type="button">Trees & Heaps</button>
+<button class="lab-topic-pill" data-topic="graphs" type="button">Graphs & MST</button>
+<button class="lab-topic-pill" data-topic="dp" type="button">DP & Strings</button>
+<button class="lab-topic-pill" data-topic="project" type="button">Project & Capstone</button>
+</div>
 </div>
 <div class="lab-explorer-grid">
-<article class="lab-explorer-card" data-search="week 01 asymptotic complexity &amp; log-log benchmarking o(1), o(log n), o(n), o(n log n), o(n^2) reference python implementation and self-checks for z5007 week 1.">
+<article class="lab-explorer-card" data-topic="asymptotics" data-search="week 01 asymptotic complexity &amp; log-log benchmarking o(1), o(log n), o(n), o(n log n), o(n^2) reference python implementation and self-checks for z5007 week 1.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 01</span><span class="lab-explorer-meta">O(1), O(log n), O(n), O(n log n), O(n^2)</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Asymptotic Complexity & Log-Log Benchmarking</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 1.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import math
 import random
 import time
@@ -66,10 +76,11 @@ def constant_lookup(arr: list[int], index: int) -&gt; tuple[int, int]:
         raise IndexError(&quot;index out of range&quot;)</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-01/code/w01_complexity_benchmark.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-01/labs/W01_Empirical_Complexity_BigO.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-01/labs/W01_Empirical_Complexity_BigO.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-01/notes/W01_Asymptotic_Analysis_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 02 arrays, binary search &amp; simple sorts o(log n) search · o(n^2) bubble/selection reference python implementation and self-checks for z5007 week 2.">
+<article class="lab-explorer-card" data-topic="asymptotics" data-search="week 02 arrays, binary search &amp; simple sorts o(log n) search · o(n^2) bubble/selection reference python implementation and self-checks for z5007 week 2.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 02</span><span class="lab-explorer-meta">O(log n) search · O(n^2) Bubble/Selection</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Arrays, Binary Search & Simple Sorts</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 2.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import random
 from typing import Any, Optional
 
@@ -82,10 +93,11 @@ class StaticArray:
             raise ValueError(&quot;capacity must be positive&quot;)</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-02/code/w02_arrays_binary_search_sorts.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-02/labs/W02_Reference_Arrays_Sorts.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-02/labs/W02_Reference_Arrays_Sorts.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-lab" href="../week-02/labs/W02_Thu_Oct15_Lab1_Arrays.ipynb">Student Starter (.ipynb)</a> <a class="mat-pill mat-pill-notes" href="../week-02/notes/W02_Arrays_Binary_Search_Sorts_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 03 insertion sort &amp; stacks (lifo) o(n + i) adaptive sort · o(1) push/pop reference python implementation and self-checks for z5007 week 3.">
+<article class="lab-explorer-card" data-topic="asymptotics" data-search="week 03 insertion sort &amp; stacks (lifo) o(n + i) adaptive sort · o(1) push/pop reference python implementation and self-checks for z5007 week 3.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 03</span><span class="lab-explorer-meta">O(n + I) adaptive sort · O(1) push/pop</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Insertion Sort & Stacks (LIFO)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 3.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from typing import Any, Optional
 
 
@@ -98,10 +110,11 @@ def insertion_sort(arr: list[Any]) -&gt; tuple[int, int]:
         while j &gt;= 0:</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-03/code/w03_insertion_sort_stacks.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-03/labs/W03_Reference_Sorts_Stacks.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-03/labs/W03_Reference_Sorts_Stacks.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-lab" href="../week-03/labs/W03_Thu_Oct22_Lab2_Sorts_Stacks.ipynb">Student Starter (.ipynb)</a> <a class="mat-pill mat-pill-notes" href="../week-03/notes/W03_Insertion_Sort_and_Stacks_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 04 circular queues, linked lists &amp; lru cache o(1) deque &amp; lru get/put via dict + dll reference python implementation and self-checks for z5007 week 4.">
+<article class="lab-explorer-card" data-topic="asymptotics" data-search="week 04 circular queues, linked lists &amp; lru cache o(1) deque &amp; lru get/put via dict + dll reference python implementation and self-checks for z5007 week 4.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 04</span><span class="lab-explorer-meta">O(1) deque & LRU get/put via dict + DLL</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Circular Queues, Linked Lists & LRU Cache</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 4.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from typing import Any, Optional
 
 
@@ -114,10 +127,11 @@ class CircularArrayQueue:
         self._size = 0</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-04/code/w04_queues_linked_lists_lru.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-04/labs/W04_Reference_Queues_Linked_Lists.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-04/labs/W04_Reference_Queues_Linked_Lists.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-lab" href="../week-04/labs/W04_Thu_Oct29_Lab3_Queues_Linked_Lists.ipynb">Student Starter (.ipynb)</a> <a class="mat-pill mat-pill-notes" href="../week-04/notes/W04_Queues_Linked_Lists_LRU_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 05 recursion, merge sort &amp; randomized quicksort o(n log n) divide &amp; conquer · o(n) quickselect reference python implementation and self-checks for z5007 week 5.">
+<article class="lab-explorer-card" data-topic="asymptotics" data-search="week 05 recursion, merge sort &amp; randomized quicksort o(n log n) divide &amp; conquer · o(n) quickselect reference python implementation and self-checks for z5007 week 5.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 05</span><span class="lab-explorer-meta">O(n log n) Divide & Conquer · O(n) Quickselect</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Recursion, Merge Sort & Randomized Quicksort</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 5.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import random
 
 
@@ -130,10 +144,11 @@ def merge_sort_and_count(arr: list[int]) -&gt; tuple[list[int], int]:
     right, inv_r = merge_sort_and_count(arr[mid:])</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-05/code/w05_recursion_mergesort_quicksort.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-05/labs/W05_Reference_Recursion_Sorting.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-05/labs/W05_Reference_Recursion_Sorting.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-lab" href="../week-05/labs/W05_Thu_Nov05_Lab4_Recursion_Sorting.ipynb">Student Starter (.ipynb)</a> <a class="mat-pill mat-pill-notes" href="../week-05/notes/W05_Recursion_Sorting_Recurrences_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 06 binary trees, traversals &amp; bst operations o(h) insert/search/delete · pre/in/post/bfs reference python implementation and self-checks for z5007 week 6.">
+<article class="lab-explorer-card" data-topic="trees" data-search="week 06 binary trees, traversals &amp; bst operations o(h) insert/search/delete · pre/in/post/bfs reference python implementation and self-checks for z5007 week 6.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 06</span><span class="lab-explorer-meta">O(h) insert/search/delete · Pre/In/Post/BFS</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Binary Trees, Traversals & BST Operations</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 6.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from collections import deque
 import random
 from typing import Any, Optional
@@ -146,10 +161,11 @@ class TreeNode:
         self.key = key</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-06/code/w06_binary_trees_bst.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-06/labs/W06_Binary_Trees_Traversals_BST.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-06/labs/W06_Binary_Trees_Traversals_BST.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-06/notes/W06_Binary_Trees_and_BST_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 07 self-balancing avl trees (ll, rr, lr, rl) o(log n) worst-case height &lt; 1.44 log2(n+2) reference python implementation and self-checks for z5007 week 7.">
+<article class="lab-explorer-card" data-topic="trees" data-search="week 07 self-balancing avl trees (ll, rr, lr, rl) o(log n) worst-case height &lt; 1.44 log2(n+2) reference python implementation and self-checks for z5007 week 7.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 07</span><span class="lab-explorer-meta">O(log n) worst-case height < 1.44 log2(n+2)</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Self-Balancing AVL Trees (LL, RR, LR, RL)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 7.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import math
 import random
 from typing import Any, Optional
@@ -162,10 +178,11 @@ class AVLNode:
         self.key = key</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-07/code/w07_avl_trees.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-07/labs/W07_Self_Balancing_AVL_Trees.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-07/labs/W07_Self_Balancing_AVL_Trees.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-lab" href="../week-07/labs/W07_Thu_Nov19_Lab5_Sorting_Trees_BST.ipynb">Student Starter (.ipynb)</a> <a class="mat-pill mat-pill-notes" href="../week-07/notes/W07_Linear_Sorts_and_AVL_Prep_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 08 binary max-heaps &amp; hash tables o(n) floyd heapify · chaining vs linear probing reference python implementation and self-checks for z5007 week 8.">
+<article class="lab-explorer-card" data-topic="trees" data-search="week 08 binary max-heaps &amp; hash tables o(n) floyd heapify · chaining vs linear probing reference python implementation and self-checks for z5007 week 8.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 08</span><span class="lab-explorer-meta">O(n) Floyd heapify · Chaining vs Linear Probing</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Binary Max-Heaps & Hash Tables</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 8.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import random
 from typing import Any, Optional
 
@@ -178,10 +195,11 @@ class MaxHeap:
         if len(self._a) &gt; 1:</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-08/code/w08_heaps_hash_tables.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-08/labs/W08_Heaps_PriorityQueues_HashTables.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-08/labs/W08_Heaps_PriorityQueues_HashTables.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-08/notes/W08_Trees_AVL_Heaps_Hash_Tables_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 09 graph traversals: bfs, dfs &amp; topological sort o(v + e) shortest hops, timestamps &amp; kahn dag reference python implementation and self-checks for z5007 week 9.">
+<article class="lab-explorer-card" data-topic="graphs" data-search="week 09 graph traversals: bfs, dfs &amp; topological sort o(v + e) shortest hops, timestamps &amp; kahn dag reference python implementation and self-checks for z5007 week 9.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 09</span><span class="lab-explorer-meta">O(V + E) shortest hops, timestamps & Kahn DAG</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Graph Traversals: BFS, DFS & Topological Sort</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 9.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from collections import deque
 from typing import Hashable
 
@@ -194,10 +212,11 @@ class Graph:
         self.adj: dict[Hashable, list[Hashable]] = {}</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-09/code/w09_graphs_traversals_topo.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-09/labs/W09_Graph_Representations_BFS_DFS.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-09/labs/W09_Graph_Representations_BFS_DFS.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-09/notes/W09_Graph_Traversals_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 10 single-source shortest paths dijkstra o((v+e) log v) · bellman-ford o(ve) reference python implementation and self-checks for z5007 week 10.">
+<article class="lab-explorer-card" data-topic="graphs" data-search="week 10 single-source shortest paths dijkstra o((v+e) log v) · bellman-ford o(ve) reference python implementation and self-checks for z5007 week 10.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 10</span><span class="lab-explorer-meta">Dijkstra O((V+E) log V) · Bellman-Ford O(VE)</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Single-Source Shortest Paths</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 10.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import heapq
 import math
 from typing import Hashable
@@ -210,10 +229,11 @@ def dijkstra(adj: WeightedAdj, source: Hashable) -&gt; tuple[dict[Hashable, floa
     &quot;&quot;&quot;Compute single-source shortest paths for non-negative edge weights in O((V + E) log V).&quot;&quot;&quot;</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-10/code/w10_shortest_paths.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-10/labs/W10_Shortest_Paths_Dijkstra_BellmanFord.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-10/labs/W10_Shortest_Paths_Dijkstra_BellmanFord.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-10/notes/W10_Shortest_Paths_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 11 greedy exchange &amp; minimum spanning trees kruskal &amp; prim o(e log v) · interval scheduling reference python implementation and self-checks for z5007 week 11.">
+<article class="lab-explorer-card" data-topic="graphs" data-search="week 11 greedy exchange &amp; minimum spanning trees kruskal &amp; prim o(e log v) · interval scheduling reference python implementation and self-checks for z5007 week 11.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 11</span><span class="lab-explorer-meta">Kruskal & Prim O(E log V) · Interval Scheduling</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Greedy Exchange & Minimum Spanning Trees</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 11.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import heapq
 import random
 from typing import Hashable
@@ -226,10 +246,11 @@ class DisjointSet:
         self.parent: dict[Hashable, Hashable] = {x: x for x in items}</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-11/code/w11_greedy_mst.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-11/labs/W11_Greedy_and_MST_Kruskal_Prim.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-11/labs/W11_Greedy_and_MST_Kruskal_Prim.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-11/notes/W11_Greedy_and_MST_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 12 dynamic programming foundations 0/1 knapsack o(nw) · lcs &amp; edit distance o(mn) reference python implementation and self-checks for z5007 week 12.">
+<article class="lab-explorer-card" data-topic="dp" data-search="week 12 dynamic programming foundations 0/1 knapsack o(nw) · lcs &amp; edit distance o(mn) reference python implementation and self-checks for z5007 week 12.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 12</span><span class="lab-explorer-meta">0/1 Knapsack O(nW) · LCS & Edit Distance O(mn)</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Dynamic Programming Foundations</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 12.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from functools import lru_cache
 
 
@@ -242,10 +263,11 @@ def fib_memo(n: int) -&gt; int:
             memo[k] = _f(k - 1) + _f(k - 2)</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-12/code/w12_dynamic_programming.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-12/labs/W12_Dynamic_Programming.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-12/labs/W12_Dynamic_Programming.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-12/notes/W12_Dynamic_Programming_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 13 advanced dynamic programming matrix chain o(n^3) · lis o(n log n) · held-karp reference python implementation and self-checks for z5007 week 13.">
+<article class="lab-explorer-card" data-topic="dp" data-search="week 13 advanced dynamic programming matrix chain o(n^3) · lis o(n log n) · held-karp reference python implementation and self-checks for z5007 week 13.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 13</span><span class="lab-explorer-meta">Matrix Chain O(n^3) · LIS O(n log n) · Held-Karp</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Advanced Dynamic Programming</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 13.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import bisect
 import math
 
@@ -258,10 +280,11 @@ def matrix_chain_order(dims: list[int]) -&gt; tuple[int, str]:
     for length in range(2, n + 1):</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-13/code/w13_advanced_dp.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-13/labs/W13_Advanced_Dynamic_Programming.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-13/labs/W13_Advanced_Dynamic_Programming.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-13/notes/W13_Advanced_Dynamic_Programming_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 14 string matching (kmp, rabin-karp) &amp; tries kmp o(n + m) · trie o(l) prefix lookup reference python implementation and self-checks for z5007 week 14.">
+<article class="lab-explorer-card" data-topic="dp" data-search="week 14 string matching (kmp, rabin-karp) &amp; tries kmp o(n + m) · trie o(l) prefix lookup reference python implementation and self-checks for z5007 week 14.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 14</span><span class="lab-explorer-meta">KMP O(n + m) · Trie O(L) prefix lookup</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">String Matching (KMP, Rabin-Karp) & Tries</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 14.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">class TrieNode:
     def __init__(self) -&gt; None:
         self.children: dict[str, TrieNode] = {}
@@ -274,10 +297,11 @@ class PrefixTrie:
     def __init__(self) -&gt; None:</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-14/code/w14_string_matching_tries.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-14/labs/W14_String_Matching_and_Tries.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-14/labs/W14_String_Matching_and_Tries.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-14/notes/W14_String_Matching_and_Tries_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 15 disjoint set union &amp; amortized potential union by rank + path compression o(alpha(n)) reference python implementation and self-checks for z5007 week 15.">
+<article class="lab-explorer-card" data-topic="graphs" data-search="week 15 disjoint set union &amp; amortized potential union by rank + path compression o(alpha(n)) reference python implementation and self-checks for z5007 week 15.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 15</span><span class="lab-explorer-meta">Union by rank + path compression O(alpha(n))</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Disjoint Set Union & Amortized Potential</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 15.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">class DisjointSetUnion:
     &quot;&quot;&quot;Union-Find with path compression and union by size/rank.&quot;&quot;&quot;
 
@@ -290,10 +314,11 @@ class PrefixTrie:
     def find(self, x: int) -&gt; int:</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-15/code/w15_union_find_amortized.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-15/labs/W15_Union_Find_Amortized_Review.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-15/labs/W15_Union_Find_Amortized_Review.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-15/notes/W15_Union_Find_Amortized_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 16 np-completeness, reductions &amp; 2-approx 3-sat -&gt; independent set · vertex cover 2-approx reference python implementation and self-checks for z5007 week 16.">
+<article class="lab-explorer-card" data-topic="dp" data-search="week 16 np-completeness, reductions &amp; 2-approx 3-sat -&gt; independent set · vertex cover 2-approx reference python implementation and self-checks for z5007 week 16.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 16</span><span class="lab-explorer-meta">3-SAT -> Independent Set · Vertex Cover 2-Approx</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">NP-Completeness, Reductions & 2-Approx</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 16.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">from typing import Optional
 
 
@@ -306,10 +331,11 @@ def eval_cnf(clauses: list[tuple[int, ...]], assignment: dict[int, bool]) -&gt; 
 </pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-16/code/w16_np_completeness_approx.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-16/labs/W16_NP_Completeness_Reductions.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-16/labs/W16_NP_Completeness_Reductions.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-16/notes/W16_NP_Completeness_Reductions_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="week 17 capstone synthesis &amp; zanzibar dispatch pipeline monte carlo, prefix sum, heap+dijkstra pipeline reference python implementation and self-checks for z5007 week 17.">
+<article class="lab-explorer-card" data-topic="project" data-search="week 17 capstone synthesis &amp; zanzibar dispatch pipeline monte carlo, prefix sum, heap+dijkstra pipeline reference python implementation and self-checks for z5007 week 17.">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Week 17</span><span class="lab-explorer-meta">Monte Carlo, Prefix Sum, Heap+Dijkstra Pipeline</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">Capstone Synthesis & Zanzibar Dispatch Pipeline</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Reference Python implementation and self-checks for Z5007 Week 17.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import heapq
 import math
 import random
@@ -322,10 +348,11 @@ def monte_carlo_pi(samples: int, seed: int = 5007) -&gt; float:
     for _ in range(samples):</pre>
 <div class="mat-pills"><a class="mat-pill" href="../week-17/code/w17_capstone_synthesis.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="../week-17/labs/W17_Final_Capstone_Synthesis.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5007/week-17/labs/W17_Final_Capstone_Synthesis.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../week-17/notes/W17_Capstone_Exam_Synthesis_Summary.pdf">Summary PDF</a></div>
 </article>
-<article class="lab-explorer-card" data-search="course project from-scratch project benchmark starter (a* heap &amp; inverted index) binaryminheap o(e log v) vs o(v^2) · top-k inverted index starter benchmark suite aligned with z5007 project guidelines and grading rubric (600-node routing + 1,000-item top-k catalog).">
+<article class="lab-explorer-card" data-topic="project" data-search="course project from-scratch project benchmark starter (a* heap &amp; inverted index) binaryminheap o(e log v) vs o(v^2) · top-k inverted index starter benchmark suite aligned with z5007 project guidelines and grading rubric (600-node routing + 1,000-item top-k catalog).">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Course Project</span><span class="lab-explorer-meta">BinaryMinHeap O(E log V) vs O(V^2) · Top-K Inverted Index</span></div>
 <h2 style="margin:0 0 6px;font-size:1.12rem;">From-Scratch Project Benchmark Starter (A* Heap & Inverted Index)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Starter benchmark suite aligned with Z5007 Project Guidelines and Grading Rubric (600-node routing + 1,000-item Top-K catalog).</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">import math
 import random
 import time
@@ -345,24 +372,7 @@ class BinaryMinHeap:
 <span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
 <span><a href="../index.html">Course Overview</a></span>
 </footer>
-<script>
-(function(){
-  var inp=document.getElementById('lab-search');
-  var cnt=document.getElementById('lab-count');
-  var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
-  if(inp)inp.addEventListener('input',function(){
-    var q=inp.value.trim().toLowerCase();
-    var vis=0;
-    cards.forEach(function(c){
-      var hay=(c.getAttribute('data-search')||'')+' '+c.textContent.toLowerCase();
-      var ok=(!q)||(hay.indexOf(q)!==-1);
-      c.style.display=ok?'':'none';
-      if(ok)vis++;
-    });
-    if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
-  });
-})();
-</script>
+
 <script>
 (function(){
   var root=document.documentElement;
@@ -383,5 +393,70 @@ class BinaryMinHeap:
   });
   sync();
 })();
-</script></body>
+</script><script>
+(function(){
+  var inp=document.getElementById('lab-search');
+  var cnt=document.getElementById('lab-count');
+  var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
+  var pills=Array.from(document.querySelectorAll('.lab-topic-pill'));
+  var activeTopic='all';
+
+  function applyFilters(){
+    var q=(inp?inp.value:'').trim().toLowerCase();
+    var vis=0;
+    cards.forEach(function(c){
+      var topic=c.getAttribute('data-topic')||'all';
+      var hay=(c.getAttribute('data-search')||'')+' '+c.textContent.toLowerCase();
+      var okTopic=(activeTopic==='all')||(topic===activeTopic);
+      var okQ=(!q)||(hay.indexOf(q)!==-1);
+      var ok=okTopic&&okQ;
+      c.style.display=ok?'':'none';
+      if(ok)vis++;
+    });
+    if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
+  }
+
+  pills.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      activeTopic=btn.getAttribute('data-topic')||'all';
+      pills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      applyFilters();
+    });
+  });
+  if(inp)inp.addEventListener('input',applyFilters);
+
+  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.lab-explorer-card');
+      var pre=card&&card.querySelector('pre.lab-preview-code');
+      if(!pre)return;
+      var text=pre.textContent||'';
+      function markCopied(){
+        btn.textContent='Copied!';
+        btn.classList.add('is-copied');
+        setTimeout(function(){btn.textContent='Copy Snippet';btn.classList.remove('is-copied');},1600);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(markCopied).catch(function(){fallbackCopy(text,markCopied);});
+      }else{
+        fallbackCopy(text,markCopied);
+      }
+    });
+  });
+
+  function fallbackCopy(text,cb){
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.position='fixed';
+    ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{document.execCommand('copy');cb();}catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  applyFilters();
+})();
+</script>
+</body>
 </html>

@@ -45,11 +45,24 @@
 <nav aria-label="Lab sections" class="qb-week-nav"><a href="lab1.html">Lab 1: PySpark Walkthrough</a><a href="../question-bank/index.html">Question Bank (15 Worked Qs)</a><a href="../resources/Z3003_Data_Mining_Formula_Cheatsheet.pdf">Formula Cheat Sheet</a></nav>
 <h1>Lab Explorer &amp; Part 2 Code Previews</h1>
 <p class="lede">Interactive reference guide to Z3003 executable Python modules, complexity bounds, verified self-test outputs, and one-click Google Colab notebooks spanning Part 1 foundations and Part 2 large-scale algorithms.</p>
+<div aria-label="Filter code modules" class="qb-controls-bar" role="search">
+<input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<span aria-live="polite" class="qb-match-status" id="lab-count"></span>
+<div aria-label="Filter by topic" class="lab-topic-filters" role="group">
+<span class="qb-match-status">Topic:</span>
+<button class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
+<button class="lab-topic-pill" data-topic="recommenders" type="button">Recommenders (SVD)</button>
+<button class="lab-topic-pill" data-topic="graphs" type="button">Graphs & PageRank</button>
+<button class="lab-topic-pill" data-topic="streams" type="button">Streams & Sketches</button>
+<button class="lab-topic-pill" data-topic="project" type="button">Part 1 & Mini-Project</button>
+</div>
+</div>
 <div class="lab-explorer-grid">
-<article class="lab-explorer-card">
+<article class="lab-explorer-card" data-topic="recommenders">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 10–11</span><span class="lab-explorer-meta">SGD per epoch: O(|K| * k) time · O((|U| + |I|) * k) memory</span></div>
 <h2 style="margin:0 0 6px;font-size:1.15rem;">DM07: Recommender Systems & Matrix Factorization (SVD)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Implements user-based cosine collaborative filtering and biased latent-factor SGD matrix factorization with L2 regularization and RMSE evaluation.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">def matrix_factorization_sgd(ratings, n_users, n_items, k=4, lr=0.03, reg=0.02, epochs=120):
     mu = float(np.mean([r for _, _, r in ratings]))
     bu, bi = np.zeros(n_users), np.zeros(n_items)
@@ -65,10 +78,11 @@
 <div class="out-content" style="margin-bottom:10px;">DM07 self-tests passed (Train RMSE=0.0685; User-CF &amp; Biased SVD verified).</div>
 <div class="mat-pills"><a class="mat-pill" href="../code/dm07_recommenders_svd.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM07_Recommender_Systems_SVD.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM07_Recommender_Systems_SVD.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
 </article>
-<article class="lab-explorer-card">
+<article class="lab-explorer-card" data-topic="graphs">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 12–13</span><span class="lab-explorer-meta">Power iteration: O((V + E) * iters) time · O(V + E) memory</span></div>
 <h2 style="margin:0 0 6px;font-size:1.15rem;">DM08: Web Graph, PageRank Power Iteration & HITS</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Builds column-stochastic transition matrices with dead-end mass redistribution, random teleportation (beta = 0.85), and normalized HITS hub/authority updates.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">def pagerank(adj, beta=0.85, tol=1e-10, max_iter=200):
     # Dead ends redistribute uniform mass 1/n across all nodes to prevent rank leak
     r = np.full(n, 1.0 / n, dtype=float)
@@ -81,10 +95,11 @@
 <div class="out-content" style="margin-bottom:10px;">DM08 self-tests passed (PageRank converged cleanly with dead-end handling &amp; HITS verified).</div>
 <div class="mat-pills"><a class="mat-pill" href="../code/dm08_pagerank_link_analysis.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM08_PageRank_Link_Analysis.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM08_PageRank_Link_Analysis.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
 </article>
-<article class="lab-explorer-card">
+<article class="lab-explorer-card" data-topic="streams">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Part 2 · Weeks 14–15</span><span class="lab-explorer-meta">Single pass: O(1) per stream item · O(k * log U) sketch memory</span></div>
 <h2 style="margin:0 0 6px;font-size:1.15rem;">DM09: Data Streams (Flajolet-Martin & AMS Second Moment)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Estimates distinct element cardinality F0 via trailing-zero bit sketches across independent hashes and tracks frequency second moment F2 using unbiased AMS estimators.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code">def flajolet_martin_estimate(stream, n_hashes=16, groups=4):
     # Track max trailing zero bit position R per hash; take median of group means
     max_r = [0] * n_hashes
@@ -95,10 +110,11 @@
 <div class="out-content" style="margin-bottom:10px;">DM09 self-tests passed (Flajolet-Martin F0 &amp; AMS F2 stream sketches verified).</div>
 <div class="mat-pills"><a class="mat-pill" href="../code/dm09_streams_fm_ams.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DM09_Data_Streams_FM_AMS.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/dm-scale/labs/DM09_Data_Streams_FM_AMS.ipynb" rel="noopener" target="_blank">Launch in Colab ↗</a></div>
 </article>
-<article class="lab-explorer-card">
+<article class="lab-explorer-card" data-topic="streams">
 <div class="lab-explorer-head"><span class="lab-explorer-meta">Part 1 & Project · Weeks 1–6</span><span class="lab-explorer-meta">Leakage-free pipelines · MinHash LSH · Bloom O(m) bits · RF/KMeans</span></div>
 <h2 style="margin:0 0 6px;font-size:1.15rem;">Part 1 Core Modules (DM01–DM06) & Mini-Project Starter (MP01)</h2>
 <p style="margin:0 0 8px;color:var(--ink2);font-size:0.93rem;">Complete verified Python modules covering Bayesian MLE, Information Gain / PCA / LDA, SMOTE & Ensembles, MapReduce / PySpark RDDs (plus Lab 1 HTML walkthrough), MinHash LSH, Apriori & Bloom Filters, and the end-to-end Zanzibar crop Mini-Project starter.</p>
+<div class="lab-code-bar"><span>Python Preview</span><button class="lab-copy-btn" type="button">Copy Snippet</button></div>
 <pre class="lab-preview-code"># Verified end-to-end Mini-Project Starter outputs on W1_zanzibar_crop_sample.csv (500 rows):
 # - Confounder check: price_per_kg vs. revenue_usd r = 0.922 (driven by crop type)
 # - Leakage-free RandomForest held-out accuracy &gt;= 0.92, KMeans best_k = 2</pre>
@@ -146,5 +162,70 @@
   });
   sync();
 })();
-</script></body>
+</script><script>
+(function(){
+  var inp=document.getElementById('lab-search');
+  var cnt=document.getElementById('lab-count');
+  var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
+  var pills=Array.from(document.querySelectorAll('.lab-topic-pill'));
+  var activeTopic='all';
+
+  function applyFilters(){
+    var q=(inp?inp.value:'').trim().toLowerCase();
+    var vis=0;
+    cards.forEach(function(c){
+      var topic=c.getAttribute('data-topic')||'all';
+      var hay=(c.getAttribute('data-search')||'')+' '+c.textContent.toLowerCase();
+      var okTopic=(activeTopic==='all')||(topic===activeTopic);
+      var okQ=(!q)||(hay.indexOf(q)!==-1);
+      var ok=okTopic&&okQ;
+      c.style.display=ok?'':'none';
+      if(ok)vis++;
+    });
+    if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
+  }
+
+  pills.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      activeTopic=btn.getAttribute('data-topic')||'all';
+      pills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      applyFilters();
+    });
+  });
+  if(inp)inp.addEventListener('input',applyFilters);
+
+  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.lab-explorer-card');
+      var pre=card&&card.querySelector('pre.lab-preview-code');
+      if(!pre)return;
+      var text=pre.textContent||'';
+      function markCopied(){
+        btn.textContent='Copied!';
+        btn.classList.add('is-copied');
+        setTimeout(function(){btn.textContent='Copy Snippet';btn.classList.remove('is-copied');},1600);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(markCopied).catch(function(){fallbackCopy(text,markCopied);});
+      }else{
+        fallbackCopy(text,markCopied);
+      }
+    });
+  });
+
+  function fallbackCopy(text,cb){
+    var ta=document.createElement('textarea');
+    ta.value=text;
+    ta.style.position='fixed';
+    ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{document.execCommand('copy');cb();}catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  applyFilters();
+})();
+</script>
+</body>
 </html>

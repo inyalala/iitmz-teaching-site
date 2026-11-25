@@ -1801,14 +1801,82 @@ details.qb-solution[open] summary {
 }
 
 .lab-preview-code {
-  margin: 10px 0 6px;
+  margin: 0 0 8px;
   padding: 12px 14px;
   background: var(--pre-bg);
   color: var(--pre-ink);
-  border-radius: 4px;
+  border-radius: 0 0 4px 4px;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.5;
   overflow-x: auto;
   white-space: pre;
+}
+
+/* Wave K: Lab Explorer Copy-Snippet Bar & Topic Filter Pills */
+.lab-code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 5px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink2);
+}
+
+.lab-copy-btn {
+  padding: 2px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.71rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.lab-copy-btn:hover,
+.lab-copy-btn.is-copied {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lab-copy-btn.is-copied {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.lab-topic-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.lab-topic-pill {
+  padding: 3px 9px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.lab-topic-pill:hover,
+.lab-topic-pill.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface2);
+  font-weight: 600;
 }
