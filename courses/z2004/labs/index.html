@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Lab Explorer &amp; SQLite3 Code Previews | Z2004 Database Management Systems | Dr. Innocent Nyalala</title>
+<link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" rel="canonical"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta content="website" property="og:type"/>
+<meta content="Lab Explorer &amp; SQLite3 Code Previews | Z2004 Database Management Systems | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#resource", "name": "Z2004 Lab Explorer &amp; SQLite3 Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html", "description": "Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z2004: Database Management Systems", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z2004", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"}]}]}</script>
+<!-- /portal-seo -->
+</head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a href="../../../courses/z5007/index.html">Z5007</a>
+<a href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a class="is-current" href="../../../courses/z2004/index.html">Z2004</a>
+<a href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
+</div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Z2004 Overview</a></p>
+<nav aria-label="Course quick links" class="qb-week-nav"><a href="../question-bank/index.html">Question Bank (66 Worked Qs)</a><a href="../resources/Z2004_SQL_Normalization_Cheatsheet.pdf">SQL &amp; Normalization Cheat Sheet</a><a href="../resources/Z2004_EndSem_Mock_Exam_and_Solutions.pdf">End-Sem Mock Exam</a><a href="../tests/test_z2004_all.py">Unittest Suite (.py)</a></nav>
+<h1>Lab Explorer &amp; SQLite3 Code Previews</h1>
+<p class="lede">Browser-readable SQL, relational algebra, normalization, indexing, and transaction code previews paired with runnable Colab notebooks and the automated unittest suite.</p>
+<div aria-label="Filter code modules" class="qb-controls-bar" role="search">
+<input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<span aria-live="polite" class="qb-match-status" id="lab-count">9 modules</span>
+</div>
+<div class="lab-explorer-grid">
+<article class="lab-explorer-card" data-search="schema ddl school database relational schema (sql) sqlite3 / postgresql compatible ddl standalone sql schema defining departments, students, courses, and enrollments with check and foreign-key constraints.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Schema DDL</span><span class="lab-explorer-meta">SQLite3 / PostgreSQL compatible DDL</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">School Database Relational Schema (SQL)</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Standalone SQL schema defining Departments, Students, Courses, and Enrollments with CHECK and foreign-key constraints.</p>
+<pre class="lab-preview-code">-- Z2004 Relational Schema &amp; Sample Data (SQLite / Standard SQL)
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS Enrolment;
+DROP TABLE IF EXISTS Course;
+DROP TABLE IF EXISTS Student;
+
+CREATE TABLE Student (
+    SID        INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name       TEXT    NOT NULL,
+    Dept       TEXT    NOT NULL,
+    GPA        REAL    CHECK (GPA IS NULL OR (GPA BETWEEN 0.00 AND 4.00)),</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/z2004_school_schema.sql">SQL DDL (.sql)</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 1 er-to-relational ddl &amp; foreign keys schema ddl · pragma foreign_keys = on builds normalized department/course/enrollment tables with cascade/restrict referential actions.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 1</span><span class="lab-explorer-meta">Schema DDL · PRAGMA foreign_keys = ON</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">ER-to-Relational DDL & Foreign Keys</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Builds normalized Department/Course/Enrollment tables with CASCADE/RESTRICT referential actions.</p>
+<pre class="lab-preview-code">import sqlite3
+from pathlib import Path
+
+
+def build_school_db(conn: sqlite3.Connection) -&gt; None:
+    &quot;&quot;&quot;Create Student, Course, and Enrolment tables with PK, FK, UNIQUE, and CHECK constraints.&quot;&quot;&quot;
+    conn.execute(&quot;PRAGMA foreign_keys = ON;&quot;)
+    conn.executescript(
+        &quot;&quot;&quot;
+        DROP TABLE IF EXISTS Enrolment;
+        DROP TABLE IF EXISTS Course;</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db01_er_ddl_constraints.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB01_ER_DDL_and_Constraints.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB01_ER_DDL_and_Constraints.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M01_ER_and_Relational_Model_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 2 relational algebra engine set algebra · select, project, natural join, division evaluates selection, projection, natural join, and relational division directly over python tuple sets.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 2</span><span class="lab-explorer-meta">Set algebra · Select, Project, Natural Join, Division</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Relational Algebra Engine</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Evaluates selection, projection, natural join, and relational division directly over Python tuple sets.</p>
+<pre class="lab-preview-code">from typing import Callable, Iterable
+
+
+Row = dict[str, object]
+Relation = list[Row]
+
+
+def select(rel: Relation, pred: Callable[[Row], bool]) -&gt; Relation:
+    return [dict(r) for r in rel if pred(r)]
+
+</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db02_relational_algebra.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB02_Relational_Algebra_Engine.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB02_Relational_Algebra_Engine.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M02_Relational_Algebra_and_Calculus_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 3 sql joins, views, ctes &amp; window functions sqlite3 · dense_rank(), moving frames, recursive ctes executes multi-table joins, non-materialized views, ranking windows, and recursive hierarchy walks.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 3</span><span class="lab-explorer-meta">SQLite3 · DENSE_RANK(), moving frames, recursive CTEs</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">SQL Joins, Views, CTEs & Window Functions</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Executes multi-table joins, non-materialized views, ranking windows, and recursive hierarchy walks.</p>
+<pre class="lab-preview-code">import sqlite3
+
+
+def run_tests() -&gt; None:
+    conn = sqlite3.connect(&quot;:memory:&quot;)
+    conn.executescript(
+        &quot;&quot;&quot;
+        CREATE TABLE Students (StudentID TEXT PRIMARY KEY, Name TEXT, Year INT, Hostel TEXT);
+        CREATE TABLE FoodItems (ItemID TEXT PRIMARY KEY, Name TEXT UNIQUE, Category TEXT, Price REAL);
+        CREATE TABLE Orders (OrderID INT PRIMARY KEY, StudentID TEXT, ItemName TEXT, Qty INT);
+</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db03_sql_joins_views_windows.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB03_SQL_Joins_CTEs_Window_Functions.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB03_SQL_Joins_CTEs_Window_Functions.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M03_SQL_Foundations_to_Advanced_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 4 normalization: fd closure &amp; bcnf checker closure o(|f|*|r|) · candidate keys &amp; lossless tests computes attribute closures x+, enumerates candidate keys, and checks bcnf and binary lossless joins.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 4</span><span class="lab-explorer-meta">Closure O(|F|*|R|) · Candidate keys & lossless tests</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Normalization: FD Closure & BCNF Checker</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Computes attribute closures X+, enumerates candidate keys, and checks BCNF and binary lossless joins.</p>
+<pre class="lab-preview-code">from itertools import combinations
+
+
+FD = tuple[frozenset[str], frozenset[str]]
+
+
+def attribute_closure(attrs: frozenset[str], fds: list[FD]) -&gt; frozenset[str]:
+    &quot;&quot;&quot;Compute X+ under Armstrong&#x27;s axioms.&quot;&quot;&quot;
+    closure = set(attrs)
+    changed = True
+    while changed:</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db04_normalization_fd_checker.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB04_Normalization_FD_and_BCNF_Checker.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB04_Normalization_FD_and_BCNF_Checker.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M04_Normalization_and_FD_Theory_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 5 b+ tree range scans &amp; query plans o(log_f n) range scan · explain query plan compares full table scans against composite b+ tree index lookups using sqlite query plans.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 5</span><span class="lab-explorer-meta">O(log_F N) range scan · EXPLAIN QUERY PLAN</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">B+ Tree Range Scans & Query Plans</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Compares full table scans against composite B+ tree index lookups using SQLite query plans.</p>
+<pre class="lab-preview-code">import bisect
+import random
+import sqlite3
+import time
+
+
+class BPlusLeaf:
+    def __init__(self) -&gt; None:
+        self.keys: list[int] = []
+        self.vals: list[str] = []
+        self.next: BPlusLeaf | None = None</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db05_bplus_indexing_plans.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB05_BPlus_Tree_and_Query_Plans.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB05_BPlus_Tree_and_Query_Plans.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M05_Storage_and_BPlus_Indexing_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 6 acid transactions &amp; conflict serializability precedence graph o(n^2) · rollback atomicity tests transaction rollback atomicity in sqlite and detects precedence-graph cycles.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 6</span><span class="lab-explorer-meta">Precedence graph O(n^2) · Rollback atomicity</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">ACID Transactions & Conflict Serializability</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Tests transaction rollback atomicity in SQLite and detects precedence-graph cycles.</p>
+<pre class="lab-preview-code">import sqlite3
+import tempfile
+from pathlib import Path
+
+
+def is_conflict_serializable(schedule: list[tuple[str, str, str]]) -&gt; tuple[bool, list[str]]:
+    &quot;&quot;&quot;Test conflict serializability via precedence (serialization) graph cycle check.
+
+    Each operation is (txn_id, &#x27;R&#x27;|&#x27;W&#x27;, item).
+    &quot;&quot;&quot;
+    txns = sorted({t for t, _, _ in schedule})</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db06_acid_transactions_serializability.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB06_ACID_Transactions_and_Serializability.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB06_ACID_Transactions_and_Serializability.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/M06_Transactions_Recovery_NoSQL_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 7 query optimization &amp; join cost models bnl, sort-merge, grace hash i/o · indexed search models disk page i/o across block nested-loop, sort-merge, and grace hash joins with sqlite plans.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 7</span><span class="lab-explorer-meta">BNL, Sort-Merge, Grace Hash I/O · Indexed SEARCH</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Query Optimization & Join Cost Models</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Models disk page I/O across Block Nested-Loop, Sort-Merge, and Grace Hash Joins with SQLite plans.</p>
+<pre class="lab-preview-code">import math
+import sqlite3
+import tempfile
+from pathlib import Path
+
+
+def cost_block_nested_loop(b_outer: int, b_inner: int, mem_pages: int) -&gt; int:
+    &quot;&quot;&quot;Estimate page I/Os for Block Nested-Loop Join with M buffer pages.&quot;&quot;&quot;
+    if mem_pages &lt; 3:
+        raise ValueError(&quot;Need at least 3 buffer pages (M-2 outer, 1 inner, 1 output)&quot;)
+    chunks = math.ceil(b_outer / (mem_pages - 2))</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db07_query_optimization_joins.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB07_Query_Optimization_Join_Algorithms.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB07_Query_Optimization_Join_Algorithms.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../resources/Z2004_Worked_SQL_and_Normalization_Workbook.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 8 nosql document &amp; graph patterns vs. sqlite json1 aggregation &amp; bfs hops vs. recursive cte parity demonstrates json document queries and bfs property-graph traversal matching sqlite parity.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 8</span><span class="lab-explorer-meta">JSON1 aggregation & BFS hops vs. recursive CTE parity</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">NoSQL Document & Graph Patterns vs. SQLite</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Demonstrates JSON document queries and BFS property-graph traversal matching SQLite parity.</p>
+<pre class="lab-preview-code">import json
+import sqlite3
+from collections import deque
+
+
+def build_document_store(orders: list[dict]) -&gt; dict[str, dict]:
+    &quot;&quot;&quot;Index embedded order documents by order_id for single-lookup document access.&quot;&quot;&quot;
+    return {doc[&quot;order_id&quot;]: doc for doc in orders}
+
+
+def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float]:</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/db08_nosql_document_graph.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="DB08_NoSQL_Document_Graph_Patterns.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z2004/labs/DB08_NoSQL_Document_Graph_Patterns.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../resources/Z2004_Worked_SQL_and_Normalization_Workbook.pdf">Summary PDF</a></div>
+</article>
+</div>
+
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Course Overview</a></span>
+</footer>
+<script>
+(function(){
+  var inp=document.getElementById('lab-search');
+  var cnt=document.getElementById('lab-count');
+  var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
+  if(inp)inp.addEventListener('input',function(){
+    var q=inp.value.trim().toLowerCase();
+    var vis=0;
+    cards.forEach(function(c){
+      var hay=(c.getAttribute('data-search')||'')+' '+c.textContent.toLowerCase();
+      var ok=(!q)||(hay.indexOf(q)!==-1);
+      c.style.display=ok?'':'none';
+      if(ok)vis++;
+    });
+    if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
+  });
+})();
+</script>
+<script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script></body>
+</html>

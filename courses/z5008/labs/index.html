@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>Lab Explorer &amp; Spark/Lakehouse Previews | Z5008 Big Data Lab | Dr. Innocent Nyalala</title>
+<link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
+<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
+<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<!-- portal-seo -->
+<link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html" rel="canonical"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta content="website" property="og:type"/>
+<meta content="Lab Explorer &amp; Spark/Lakehouse Previews | Z5008 Big Data Lab | Dr. Innocent Nyalala" property="og:title"/>
+<meta content="Lab Explorer &amp; Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html" property="og:url"/>
+<meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
+<meta content="image/png" property="og:image:type"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#resource", "name": "Z5008 Lab Explorer &amp; Spark/Lakehouse Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html", "description": "Lab Explorer &amp; Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5008: Big Data Lab", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5008", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html"}]}]}</script>
+<!-- /portal-seo -->
+</head>
+<body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="portal-header">
+<div class="portal-header-inner">
+<a class="portal-brand" href="../../../index.html">IIT Madras Zanzibar · Teaching</a>
+<nav aria-label="Courses and portal links" class="portal-nav">
+<a href="../../../index.html">All Courses</a>
+<a href="../../../courses/z5007/index.html">Z5007</a>
+<a href="../../../courses/dm-scale/index.html">Z3003</a>
+<a href="../../../courses/z2005/index.html">Z2005</a>
+<a href="../../../courses/z2004/index.html">Z2004</a>
+<a class="is-current" href="../../../courses/z5008/index.html">Z5008</a>
+<a href="https://inyalala.github.io/">Faculty Site ↗</a>
+<button aria-label="Toggle color theme" class="theme-switch" data-theme-toggle="" type="button">Dark</button>
+</nav>
+</div>
+</header>
+<main class="portal-container" id="main-content">
+<p class="crumb-line"><a href="../index.html">← Z5008 Overview</a></p>
+<nav aria-label="Course quick links" class="qb-week-nav"><a href="../question-bank/index.html">Question Bank (68 Worked Qs)</a><a href="../resources/Z5008_BigData_Lakehouse_Cheatsheet.pdf">Big Data Cheat Sheet</a><a href="../resources/Z5008_Practical_Capstone_Mock_and_Rubric.pdf">Practical Capstone Mock</a><a href="../tests/test_z5008_all.py">Unittest Suite (.py)</a></nav>
+<h1>Lab Explorer &amp; Spark/Lakehouse Previews</h1>
+<p class="lede">Interactive code browser for Z5008 Lakehouse, PySpark SQL, Airflow DAG orchestration, Structured Streaming, MLlib, MLflow Registry, and Prometheus observability labs.</p>
+<div aria-label="Filter code modules" class="qb-controls-bar" role="search">
+<input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<span aria-live="polite" class="qb-match-status" id="lab-count">7 modules</span>
+</div>
+<div class="lab-explorer-grid">
+<article class="lab-explorer-card" data-search="labs 1–3 lakehouse parquet partitioning &amp; delta log columnar pruning · _delta_log snapshot isolation simulates date-partitioned parquet layout, delta json commit entries, and versioned time travel.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 1–3</span><span class="lab-explorer-meta">Columnar pruning · _delta_log snapshot isolation</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Lakehouse Parquet Partitioning & Delta Log</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Simulates date-partitioned Parquet layout, Delta JSON commit entries, and versioned time travel.</p>
+<pre class="lab-preview-code">from dataclasses import dataclass, asdict
+import json
+from pathlib import Path
+import tempfile
+from typing import Any
+
+
+@dataclass(frozen=True)
+class TxRecord:
+    tx_id: str
+    region: str</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd01_lakehouse_parquet_partitioning.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD01_Lakehouse_Parquet_Partitioning.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD01_Lakehouse_Parquet_Partitioning.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab01_03_Lakehouse_Delta_Iceberg_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="labs 4–5 spark sql dataframes &amp; window ranking rank(), running totals · sqlite window fallback runs pyspark sql window ranking and cumulative revenue aggregations with pure-python/sqlite fallback.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 4–5</span><span class="lab-explorer-meta">RANK(), running totals · SQLite window fallback</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Spark SQL DataFrames & Window Ranking</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Runs PySpark SQL window ranking and cumulative revenue aggregations with pure-Python/SQLite fallback.</p>
+<pre class="lab-preview-code">import sqlite3
+from typing import Any
+
+
+def spark_or_sqlite_window_analytics(orders: list[tuple[str, str, float, str]]) -&gt; list[tuple[Any, ...]]:
+    &quot;&quot;&quot;Execute RANK and running cumulative sum across region partitions via PySpark or SQLite fallback.&quot;&quot;&quot;
+    try:
+        from pyspark.sql import SparkSession, Window
+        import pyspark.sql.functions as F
+
+        spark = SparkSession.builder.master(&quot;local[2]&quot;).appName(&quot;Z5008-BD02&quot;).getOrCreate()</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd02_spark_sql_dataframes.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD02_Spark_SQL_DataFrames_Tuning.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD02_Spark_SQL_DataFrames_Tuning.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab04_05_Spark_SQL_Tuning_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="labs 7–8 spark structured streaming &amp; watermarks event-time tumbling windows · late-event eviction processes out-of-order sensor streams with configurable watermarks and late-drop counters.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 7–8</span><span class="lab-explorer-meta">Event-time tumbling windows · Late-event eviction</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Spark Structured Streaming & Watermarks</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Processes out-of-order sensor streams with configurable watermarks and late-drop counters.</p>
+<pre class="lab-preview-code">from collections import defaultdict
+
+
+def process_event_stream(
+    events: list[tuple[int, str, float]],
+    window_size: int = 10,
+    watermark_delay: int = 5,
+) -&gt; tuple[dict[tuple[int, str], float], list[tuple[int, str, float]]]:
+    &quot;&quot;&quot;Process (event_time_sec, key, amount) events using watermark = max_event_time - delay.&quot;&quot;&quot;
+    max_event_time = 0
+    window_sums: dict[tuple[int, str], float] = defaultdict(float)</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd03_structured_streaming_windows.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD03_Structured_Streaming_Event_Windows.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD03_Structured_Streaming_Event_Windows.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab06_08_Airflow_Kafka_Streaming_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="labs 10–11 distributed ml pipelines &amp; cv tuning estimator/transformer pipelines · precision/f1 constructs leakage-free mllib-style feature pipelines and compares cross-validated tree models.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 10–11</span><span class="lab-explorer-meta">Estimator/Transformer pipelines · Precision/F1</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Distributed ML Pipelines & CV Tuning</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Constructs leakage-free MLlib-style feature pipelines and compares cross-validated tree models.</p>
+<pre class="lab-preview-code">import json
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score, roc_auc_score
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+
+def run_ml_experiment(c_reg: float, seed: int = 5008) -&gt; dict[str, float]:
+    &quot;&quot;&quot;Train leakage-free Pipeline and return logged parameters and evaluation metrics.&quot;&quot;&quot;</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd04_distributed_ml_pipelines.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD04_Distributed_ML_Pipelines_MLlib.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD04_Distributed_ML_Pipelines_MLlib.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab09_12_MLlib_MLflow_Deployment_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="labs 13–15 pipeline telemetry &amp; prometheus metrics counter, gauge &amp; p50/p95/p99 histogram formatting computes interpolated latency quantiles and renders prometheus text exposition output.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 13–15</span><span class="lab-explorer-meta">Counter, Gauge & p50/p95/p99 Histogram formatting</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Pipeline Telemetry & Prometheus Metrics</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Computes interpolated latency quantiles and renders Prometheus text exposition output.</p>
+<pre class="lab-preview-code">import math
+import random
+
+
+def percentile(values: list[float], p: float) -&gt; float:
+    &quot;&quot;&quot;Compute linear-interpolated p-th percentile (0 &lt;= p &lt;= 100).&quot;&quot;&quot;
+    if not values:
+        raise ValueError(&quot;values must be non-empty&quot;)
+    s = sorted(values)
+    k = (len(s) - 1) * (p / 100.0)
+    f, c = math.floor(k), math.ceil(k)</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd05_pipeline_telemetry_observability.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD05_Pipeline_Telemetry_Observability.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD05_Pipeline_Telemetry_Observability.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab13_15_Observability_Capstone_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="lab 6 airflow workflow orchestration &amp; slas topological dag · idempotent retries &amp; xcoms detects cycles via kahn topological sort, tracks retry attempts, passes xcom uris, and flags sla misses.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Lab 6</span><span class="lab-explorer-meta">Topological DAG · Idempotent retries & XComs</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">Airflow Workflow Orchestration & SLAs</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Detects cycles via Kahn topological sort, tracks retry attempts, passes XCom URIs, and flags SLA misses.</p>
+<pre class="lab-preview-code">from collections import deque
+from dataclasses import dataclass, field
+from typing import Callable
+
+
+@dataclass
+class TaskNode:
+    &quot;&quot;&quot;Declarative workflow task mirroring an Apache Airflow operator.&quot;&quot;&quot;
+
+    task_id: str
+    fn: Callable[[dict[str, object]], object]</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd06_airflow_workflow_orchestration.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD06_Airflow_Workflow_Orchestration.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD06_Airflow_Workflow_Orchestration.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../notes/Lab06_08_Airflow_Kafka_Streaming_Summary.pdf">Summary PDF</a></div>
+</article>
+<article class="lab-explorer-card" data-search="labs 11–12 mlflow experiment tracking &amp; registry gates sqlite run store · staging -&gt; production gates logs parameters and f1/auc metrics, ranks runs, and enforces threshold gates before production promotion.">
+<div class="lab-explorer-head"><span class="lab-explorer-meta">Labs 11–12</span><span class="lab-explorer-meta">SQLite run store · Staging -> Production gates</span></div>
+<h2 style="margin:0 0 6px;font-size:1.12rem;">MLflow Experiment Tracking & Registry Gates</h2>
+<p style="margin:0 0 8px;color:var(--ink2);font-size:0.92rem;">Logs parameters and F1/AUC metrics, ranks runs, and enforces threshold gates before Production promotion.</p>
+<pre class="lab-preview-code">import json
+import sqlite3
+import tempfile
+from pathlib import Path
+
+
+class LocalModelRegistry:
+    &quot;&quot;&quot;SQLite-backed experiment tracker and staged model registry (Staging -&gt; Production -&gt; Archived).&quot;&quot;&quot;
+
+    VALID_STAGES = {&quot;None&quot;, &quot;Staging&quot;, &quot;Production&quot;, &quot;Archived&quot;}
+</pre>
+<div class="mat-pills"><a class="mat-pill" href="../code/bd07_mlflow_experiment_registry.py">Python (.py)</a> <a class="mat-pill mat-pill-lab" href="BD07_MLflow_Experiment_Tracking_Registry.ipynb">Notebook (.ipynb)</a> <a class="mat-pill mat-pill-lab" href="https://colab.research.google.com/github/inyalala/iitmz-teaching-site/blob/main/courses/z5008/labs/BD07_MLflow_Experiment_Tracking_Registry.ipynb" rel="noopener" target="_blank">Colab ↗</a> <a class="mat-pill mat-pill-notes" href="../resources/Z5008_Spark_Streaming_Architecture_Workbook.pdf">Summary PDF</a></div>
+</article>
+</div>
+
+</main>
+<footer class="portal-footer">
+<span>© 2026 Dr. Innocent Nyalala, IIT Madras Zanzibar · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank">CC BY-NC-SA 4.0</a></span>
+<span><a href="../index.html">Course Overview</a></span>
+</footer>
+<script>
+(function(){
+  var inp=document.getElementById('lab-search');
+  var cnt=document.getElementById('lab-count');
+  var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
+  if(inp)inp.addEventListener('input',function(){
+    var q=inp.value.trim().toLowerCase();
+    var vis=0;
+    cards.forEach(function(c){
+      var hay=(c.getAttribute('data-search')||'')+' '+c.textContent.toLowerCase();
+      var ok=(!q)||(hay.indexOf(q)!==-1);
+      c.style.display=ok?'':'none';
+      if(ok)vis++;
+    });
+    if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
+  });
+})();
+</script>
+<script>
+(function(){
+  var root=document.documentElement;
+  function sync(){
+    var dark=root.getAttribute('data-theme')==='dark';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+      b.textContent=dark?'Light':'Dark';
+      b.setAttribute('aria-pressed',dark?'true':'false');
+    });
+  }
+  document.querySelectorAll('[data-theme-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('theme',next);}catch(e){}
+      sync();
+    });
+  });
+  sync();
+})();
+</script></body>
+</html>
