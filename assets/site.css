@@ -1322,3 +1322,46 @@ footer.site-footer {
     border-bottom: 1px solid var(--border);
   }
 }
+
+/* Week / Module Quick-Jump Strip (Wave C) */
+.week-jump-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  margin: 10px 0 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+}
+
+.week-jump-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-clove);
+  margin-right: 4px;
+}
+
+.week-jump-strip a {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 2px 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  color: var(--link);
+  background: var(--bg);
+  text-decoration: none;
+}
+
+.week-jump-strip a:hover {
+  border-color: var(--accent);
+  background: var(--surface2);
+  color: var(--accent);
+  text-decoration: none;
+}
