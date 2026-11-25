@@ -1645,3 +1645,86 @@ details.qb-solution[open] summary {
   border-left: 2.5px solid var(--accent);
   padding-left: 12px;
 }
+
+/* Wave H: Question Bank Export/Import & Print Monograph Stylesheet */
+.qb-io-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.qb-io-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.qb-io-msg {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+}
+
+@media print {
+  :root,
+  html[data-theme="dark"] {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface2: #ffffff;
+    --ink: #000000;
+    --ink2: #111111;
+    --ink3: #333333;
+    --border: #cccccc;
+    --border-strong: #999999;
+    --accent: #000000;
+    --accent-clove: #000000;
+    --pre-bg: #f5f5f5;
+    --pre-ink: #000000;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+  }
+  .skip-link,
+  .portal-header,
+  .crumb-line,
+  .qb-week-nav,
+  .qb-formula-bar,
+  .qb-controls-bar,
+  .tier-tabs,
+  .qb-master-btn,
+  .portal-footer {
+    display: none !important;
+  }
+  .portal-container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .week-block,
+  .q-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-color: #cccccc !important;
+  }
+  .qs-panel.shown,
+  .qs-panel.is-search-match {
+    display: block !important;
+  }
+  details.qb-solution {
+    background: #ffffff !important;
+    border: 1px solid #bbbbbb !important;
+  }
+  details.qb-solution summary {
+    color: #000000 !important;
+  }
+  .qb-solution-body,
+  .qb-solution-body pre {
+    background: #f7f7f7 !important;
+    color: #000000 !important;
+  }
+}
