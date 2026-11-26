@@ -21,9 +21,9 @@ Linked directly from the faculty portfolio at `https://inyalala.github.io/course
    ```bash
    pip install -r requirements.txt
    ```
-2. Run all four automated course self-test suites and notebook hygiene checks:
+2. Run all four automated course self-test suites, notebook hygiene checks, and portal HTML integrity checks:
    ```bash
-   python -m unittest courses/z5007/tests/test_z5007_all.py courses/dm-scale/tests/test_z3003_all.py courses/z2004/tests/test_z2004_all.py courses/z5008/tests/test_z5008_all.py tests/test_notebooks_hygiene.py -v
+   python -m unittest courses/z5007/tests/test_z5007_all.py courses/dm-scale/tests/test_z3003_all.py courses/z2004/tests/test_z2004_all.py courses/z5008/tests/test_z5008_all.py tests/test_notebooks_hygiene.py tests/test_portal_html_integrity.py -v
    ```
 3. Preview the static site locally:
    ```bash
