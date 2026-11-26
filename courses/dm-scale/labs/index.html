@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html"/>
@@ -19,6 +19,8 @@
 <link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta name="twitter:title" content="Lab Explorer &amp; Part 2 Code Previews | Z3003 Data Mining"/>
+<meta name="twitter:description" content="Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar."/>
 <meta content="website" property="og:type"/>
 <meta content="Lab Explorer &amp; Part 2 Code Previews | Z3003 Data Mining" property="og:title"/>
 <meta content="Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar." property="og:description"/>
@@ -27,7 +29,7 @@
 <meta content="image/png" property="og:image:type"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="640"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#resource", "name": "Z3003 Lab Explorer and Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html", "description": "Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003: Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003 Data Mining", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#resource", "name": "Z3003 Lab Explorer and Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html", "description": "Interactive Lab Explorer and Part 2 code previews (SVD Recommenders, PageRank/HITS, Streaming Sketches, and Mini-Project Starter) for Z3003 Data Mining at IIT Madras Zanzibar.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003: Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "inLanguage": "en-US", "learningResourceType": "Laboratory Exercise", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003 Data Mining", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -59,8 +61,24 @@
 <a class="mat-pill" href="lab1.html">PySpark Lab 1</a>
 <a class="mat-pill" href="../tests/test_z3003_all.py">Unittest Suite (.py)</a>
 </nav>
+<section aria-labelledby="pr-heading" class="viz-panel">
+<h2 id="pr-heading" style="margin:0 0 4px;font-size:1.15rem;">Interactive PageRank Power-Iteration Convergence Curve</h2>
+<p style="margin:0;color:var(--ink2);font-size:0.88rem;">Adjust damping factor beta on the 4-node spider-trap graph to inspect L1 residual decay across 15 power iterations.</p>
+<div class="viz-card" style="margin-top:10px;">
+<div aria-label="Damping factor presets" class="viz-controls" role="group">
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-beta="0.50" type="button">beta = 0.50</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-beta="0.70" type="button">beta = 0.70</button>
+<button aria-pressed="true" class="lab-copy-btn viz-preset is-active" data-beta="0.85" type="button">beta = 0.85</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-beta="0.95" type="button">beta = 0.95</button>
+<label style="font-family:var(--font-mono);font-size:0.78rem;margin-left:6px;">beta <input class="viz-range" id="pr-beta" max="0.95" min="0.50" step="0.05" type="range" value="0.85"/> <span id="pr-beta-val">0.85</span></label>
+</div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="pr-svg" viewBox="0 0 360 122"></svg></div>
+<div aria-live="polite" class="qb-match-status" id="pr-trace" style="display:block;white-space:normal;margin-top:6px;"></div>
+</div>
+</section>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<button class="module-filter-clear" hidden="" id="lab-search-clear" type="button">Clear</button>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
 <span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
@@ -180,6 +198,7 @@
 </script><script>
 (function(){
   var inp=document.getElementById('lab-search');
+  var clearBtn=document.getElementById('lab-search-clear');
   var cnt=document.getElementById('lab-count');
   var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
@@ -207,6 +226,7 @@
       if(ok)vis++;
     });
     emptyBox.hidden=vis>0;
+    if(clearBtn)clearBtn.hidden=q.length===0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
@@ -222,6 +242,13 @@
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(inp)inp.value='';
+      applyFilters();
+      if(inp)inp.focus();
+    });
+  }
   if(emptyReset){
     emptyReset.addEventListener('click',function(){
       if(inp)inp.value='';
@@ -232,10 +259,11 @@
         p.setAttribute('aria-pressed',act?'true':'false');
       });
       applyFilters();
+      if(inp)inp.focus();
     });
   }
 
-  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+  document.querySelectorAll('.lab-copy-btn:not(.viz-preset)').forEach(function(btn){
     btn.addEventListener('click',function(){
       var card=btn.closest('.lab-explorer-card');
       var pre=card&&card.querySelector('pre.lab-preview-code');
@@ -267,6 +295,101 @@
   }
 
   applyFilters();
+})();
+(function(){
+  var betaEl=document.getElementById('pr-beta');
+  var betaVal=document.getElementById('pr-beta-val');
+  var prSvg=document.getElementById('pr-svg');
+  var prTrace=document.getElementById('pr-trace');
+  var presets=Array.from(document.querySelectorAll('.viz-preset'));
+  var M=[
+    [0,0,0,0.25],
+    [0.5,0,1,0.25],
+    [0.5,1,0,0.25],
+    [0,0,0,0.25]
+  ];
+  function runPageRank(beta){
+    var r=[0.25,0.25,0.25,0.25];
+    var tp=(1-beta)/4;
+    var diffs=[];
+    for(var it=0;it<15;it++){
+      var next=[0,0,0,0];
+      var l1=0;
+      for(var i=0;i<4;i++){
+        var s=0;
+        for(var j=0;j<4;j++)s+=M[i][j]*r[j];
+        next[i]=beta*s+tp;
+        l1+=Math.abs(next[i]-r[i]);
+      }
+      diffs.push(l1);
+      r=next;
+    }
+    return {diffs:diffs,r:r};
+  }
+  function renderPr(beta){
+    if(betaVal)betaVal.textContent=beta.toFixed(2);
+    presets.forEach(function(p){
+      var pb=parseFloat(p.getAttribute('data-beta')||'0');
+      var act=Math.abs(pb-beta)<0.001;
+      p.classList.toggle('is-active',act);
+      p.setAttribute('aria-pressed',act?'true':'false');
+    });
+    var res=runPageRank(beta);
+    if(!prSvg)return;
+    var ns='http://www.w3.org/2000/svg';
+    prSvg.innerHTML='';
+    var x0=36,y0=12,w=308,h=84;
+    var ax=document.createElementNS(ns,'line');
+    ax.setAttribute('x1',String(x0));ax.setAttribute('y1',String(y0));
+    ax.setAttribute('x2',String(x0));ax.setAttribute('y2',String(y0+h));
+    ax.setAttribute('stroke','var(--border-strong)');prSvg.appendChild(ax);
+    var ay=document.createElementNS(ns,'line');
+    ay.setAttribute('x1',String(x0));ay.setAttribute('y1',String(y0+h));
+    ay.setAttribute('x2',String(x0+w));ay.setAttribute('y2',String(y0+h));
+    ay.setAttribute('stroke','var(--border-strong)');prSvg.appendChild(ay);
+    var maxD=Math.max(res.diffs[0],0.45);
+    var pts=res.diffs.map(function(d,i){
+      var x=x0+Math.round((i/14)*w);
+      var y=y0+h-Math.round((d/maxD)*(h-6));
+      return x+','+y;
+    });
+    var poly=document.createElementNS(ns,'polyline');
+    poly.setAttribute('fill','none');
+    poly.setAttribute('stroke','var(--accent-clove)');
+    poly.setAttribute('stroke-width','2');
+    poly.setAttribute('points',pts.join(' '));
+    prSvg.appendChild(poly);
+    res.diffs.forEach(function(d,i){
+      var x=x0+Math.round((i/14)*w);
+      var y=y0+h-Math.round((d/maxD)*(h-6));
+      var c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',String(x));c.setAttribute('cy',String(y));c.setAttribute('r','2.6');
+      c.setAttribute('fill','var(--accent)');prSvg.appendChild(c);
+    });
+    var xl=document.createElementNS(ns,'text');
+    xl.setAttribute('x','190');xl.setAttribute('y','115');xl.setAttribute('text-anchor','middle');
+    xl.setAttribute('font-size','9.5');xl.setAttribute('font-family','monospace');xl.setAttribute('fill','var(--ink3)');
+    xl.textContent='Iteration k = 1..15 (L1 residual decay)';
+    prSvg.appendChild(xl);
+    var yl=document.createElementNS(ns,'text');
+    yl.setAttribute('x','4');yl.setAttribute('y','20');
+    yl.setAttribute('font-size','9');yl.setAttribute('font-family','monospace');yl.setAttribute('fill','var(--ink3)');
+    yl.textContent=maxD.toFixed(2);
+    prSvg.appendChild(yl);
+    var lastD=res.diffs[res.diffs.length-1];
+    if(prTrace){
+      prTrace.textContent='beta = '+beta.toFixed(2)+' | Iter 1 L1 = '+res.diffs[0].toFixed(4)+' -> Iter 15 L1 = '+lastD.toExponential(2)+' | r = ['+res.r.map(function(v){return v.toFixed(3);}).join(', ')+']';
+    }
+  }
+  if(betaEl)betaEl.addEventListener('input',function(){renderPr(parseFloat(betaEl.value||'0.85'));});
+  presets.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var b=parseFloat(btn.getAttribute('data-beta')||'0.85');
+      if(betaEl)betaEl.value=b.toFixed(2);
+      renderPr(b);
+    });
+  });
+  renderPr(0.85);
 })();
 </script>
 </body>

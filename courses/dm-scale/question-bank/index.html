@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html"/>
@@ -19,6 +19,8 @@
 <link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta name="twitter:title" content="Question Bank: Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala"/>
+<meta name="twitter:description" content="Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala."/>
 <meta content="website" property="og:type"/>
 <meta content="Question Bank: Z3003 Data Mining: Scaling to Large Data | Dr. Innocent Nyalala" property="og:title"/>
 <meta content="Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
@@ -27,7 +29,7 @@
 <meta content="image/png" property="og:image:type"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="640"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#resource", "name": "Z3003 Question Bank", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html", "description": "Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003: Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Question Bank", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#resource", "name": "Z3003 Question Bank", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html", "description": "Graded practice question bank with worked solutions for Z3003 Data Mining: Scaling to Large Data at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z3003: Data Mining: Scaling to Large Data", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "inLanguage": "en-US", "learningResourceType": "Practice Problem Set", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z3003", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/index.html"}, {"@type": "ListItem", "position": 3, "name": "Question Bank", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -399,6 +401,26 @@ function showTier(btn, sec, tier) {
     if(status)status.textContent=hits+' matching '+(hits===1?'question':'questions');
   }
 
+  function syncModuleTabsToTier(tier){
+    if(tier!=='e'&&tier!=='m'&&tier!=='h')return;
+    blocks.forEach(function(b){
+      var tabs=Array.from(b.querySelectorAll('.tier-tab'));
+      tabs.forEach(function(t){
+        var oc=t.getAttribute('onclick')||'';
+        var isTarget=oc.indexOf("'"+tier+"'")!==-1;
+        t.className='tier-tab'+(isTarget?' active-'+tier:'');
+        t.setAttribute('aria-selected',isTarget?'true':'false');
+        t.setAttribute('tabindex',isTarget?'0':'-1');
+      });
+      b.querySelectorAll('.qs-panel').forEach(function(p){
+        var isTarget=p.id&&p.id.endsWith('-'+tier);
+        p.classList.toggle('shown',isTarget);
+        if(isTarget)p.removeAttribute('hidden');
+        else p.setAttribute('hidden','hidden');
+      });
+    });
+  }
+
   function setActiveTierPill(nextTier){
     activeTier=nextTier||'all';
     tierPills.forEach(function(p){
@@ -406,6 +428,7 @@ function showTier(btn, sec, tier) {
       p.classList.toggle('is-active',act);
       p.setAttribute('aria-pressed',act?'true':'false');
     });
+    syncModuleTabsToTier(activeTier);
   }
 
   window.__qbOnModuleTabClick=function(tabTier){
@@ -420,6 +443,7 @@ function showTier(btn, sec, tier) {
       if(inp)inp.value='';
       setActiveTierPill('all');
       applyFilters();
+      if(inp)inp.focus();
     });
   }
 

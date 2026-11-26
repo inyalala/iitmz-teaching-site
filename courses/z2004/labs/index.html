@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"/>
@@ -19,6 +19,8 @@
 <link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta name="twitter:title" content="Lab Explorer &amp; SQLite3 Code Previews | Z2004 Database Management Systems | Dr. Innocent Nyalala"/>
+<meta name="twitter:description" content="Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala."/>
 <meta content="website" property="og:type"/>
 <meta content="Lab Explorer &amp; SQLite3 Code Previews | Z2004 Database Management Systems | Dr. Innocent Nyalala" property="og:title"/>
 <meta content="Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
@@ -27,7 +29,7 @@
 <meta content="image/png" property="og:image:type"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="640"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#resource", "name": "Z2004 Lab Explorer & SQLite3 Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html", "description": "Lab Explorer & SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z2004: Database Management Systems", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z2004", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#resource", "name": "Z2004 Lab Explorer & SQLite3 Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html", "description": "Lab Explorer & SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z2004: Database Management Systems", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "inLanguage": "en-US", "learningResourceType": "Laboratory Exercise", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z2004", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -58,8 +60,22 @@
 <a class="mat-pill mat-pill-notes" href="../resources/Z2004_Worked_SQL_and_Normalization_Workbook.pdf">Worked Workbook (PDF)</a>
 <a class="mat-pill" href="../tests/test_z2004_all.py">Unittest Suite (.py)</a>
 </nav>
+<section aria-labelledby="bp-heading" class="viz-panel">
+<h2 id="bp-heading" style="margin:0 0 4px;font-size:1.15rem;">Interactive Order-3 B+ Tree Insert &amp; Split Visualizer</h2>
+<p style="margin:0;color:var(--ink2);font-size:0.88rem;">Insert integer keys into an Order-3 B+ tree (max 2 keys per node) and watch leaf splits promote separator keys to the root.</p>
+<div class="viz-card" style="margin-top:10px;">
+<div class="viz-controls">
+<input aria-label="Integer key to insert into B+ tree" id="bp-val" style="width:82px;padding:4px 7px;font-family:var(--font-mono);font-size:0.8rem;" type="number" value="15"/>
+<button class="lab-copy-btn" id="bp-insert" type="button">Insert Key</button>
+<button class="lab-copy-btn" id="bp-reset" type="button">Reset [5, 12, 19, 25]</button>
+</div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="bp-svg" viewBox="0 0 360 128"></svg></div>
+<div aria-live="polite" class="qb-match-status" id="bp-trace" style="display:block;white-space:normal;margin-top:6px;"></div>
+</div>
+</section>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<button class="module-filter-clear" hidden="" id="lab-search-clear" type="button">Clear</button>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
 <span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
@@ -267,6 +283,7 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
 </script><script>
 (function(){
   var inp=document.getElementById('lab-search');
+  var clearBtn=document.getElementById('lab-search-clear');
   var cnt=document.getElementById('lab-count');
   var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
@@ -294,6 +311,7 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
       if(ok)vis++;
     });
     emptyBox.hidden=vis>0;
+    if(clearBtn)clearBtn.hidden=q.length===0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
@@ -309,6 +327,13 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(inp)inp.value='';
+      applyFilters();
+      if(inp)inp.focus();
+    });
+  }
   if(emptyReset){
     emptyReset.addEventListener('click',function(){
       if(inp)inp.value='';
@@ -319,10 +344,11 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
         p.setAttribute('aria-pressed',act?'true':'false');
       });
       applyFilters();
+      if(inp)inp.focus();
     });
   }
 
-  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+  document.querySelectorAll('.lab-copy-btn:not(#bp-insert):not(#bp-reset)').forEach(function(btn){
     btn.addEventListener('click',function(){
       var card=btn.closest('.lab-explorer-card');
       var pre=card&&card.querySelector('pre.lab-preview-code');
@@ -354,6 +380,149 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
   }
 
   applyFilters();
+})();
+(function(){
+  var bpSvg=document.getElementById('bp-svg');
+  var bpTrace=document.getElementById('bp-trace');
+  var bpVal=document.getElementById('bp-val');
+  var insBtn=document.getElementById('bp-insert');
+  var rstBtn=document.getElementById('bp-reset');
+  var root=null;
+
+  function makeNode(leaf){return {leaf:leaf,keys:[],children:[]};}
+
+  function insertInto(node,k){
+    if(node.leaf){
+      if(node.keys.indexOf(k)!==-1)return {split:null,dup:true};
+      node.keys.push(k);node.keys.sort(function(a,b){return a-b;});
+      if(node.keys.length<=2)return {split:null};
+      var right=makeNode(true);
+      right.keys=node.keys.splice(1);
+      return {split:{key:right.keys[0],right:right},promoted:right.keys[0]};
+    }
+    var idx=0;
+    while(idx<node.keys.length&&k>=node.keys[idx])idx++;
+    var res=insertInto(node.children[idx],k);
+    if(res.dup||!res.split)return res;
+    node.keys.splice(idx,0,res.split.key);
+    node.children.splice(idx+1,0,res.split.right);
+    if(node.keys.length<=2)return {split:null,promoted:res.promoted};
+    var mid=node.keys.splice(1,1)[0];
+    var rightKeys=node.keys.splice(1);
+    var rightChild=node.children.splice(2);
+    var rNode=makeNode(false);
+    rNode.keys=rightKeys;rNode.children=rightChild;
+    return {split:{key:mid,right:rNode},promoted:mid};
+  }
+
+  function insertKey(k,silent){
+    if(!root)root=makeNode(true);
+    var res=insertInto(root,k);
+    if(res.dup){if(!silent)render(k,'Key '+k+' already present in leaf.');return;}
+    var promo=res.promoted!==undefined?res.promoted:null;
+    if(res.split){
+      var nr=makeNode(false);
+      nr.keys=[res.split.key];
+      nr.children=[root,res.split.right];
+      root=nr;
+      promo=res.split.key;
+    }
+    if(!silent){
+      var msg=promo!==null?('Inserted '+k+': leaf/node split promoted separator '+promo+'.'):('Inserted '+k+' without split.');
+      render(promo,msg);
+    }
+  }
+
+  function collectLevels(node){
+    var levels=[];
+    var q=[{n:node,d:0}];
+    while(q.length){
+      var cur=q.shift();
+      if(!levels[cur.d])levels[cur.d]=[];
+      levels[cur.d].push(cur.n);
+      if(!cur.n.leaf){
+        cur.n.children.forEach(function(ch){q.push({n:ch,d:cur.d+1});});
+      }
+    }
+    return levels;
+  }
+
+  function render(highlightKey,msg){
+    if(!bpSvg||!root)return;
+    var ns='http://www.w3.org/2000/svg';
+    bpSvg.innerHTML='';
+    var lvls=collectLevels(root);
+    var posMap=new Map();
+    var h=lvls.length;
+    var rowStep=h>1?Math.min(44,Math.floor(88/(h-1))):0;
+    lvls.forEach(function(arr,d){
+      var y=18+d*rowStep;
+      arr.forEach(function(nd,idx){
+        var x=Math.round(((idx+0.5)/arr.length)*340)+10;
+        posMap.set(nd,{x:x,y:y});
+      });
+    });
+    lvls.forEach(function(arr){
+      arr.forEach(function(nd){
+        if(!nd.leaf){
+          var p=posMap.get(nd);
+          nd.children.forEach(function(ch){
+            var c=posMap.get(ch);
+            var ln=document.createElementNS(ns,'line');
+            ln.setAttribute('x1',String(p.x));ln.setAttribute('y1',String(p.y+12));
+            ln.setAttribute('x2',String(c.x));ln.setAttribute('y2',String(c.y-10));
+            ln.setAttribute('stroke','var(--border-strong)');ln.setAttribute('stroke-width','1.3');
+            bpSvg.appendChild(ln);
+          });
+        }
+      });
+    });
+    var leaves=lvls[lvls.length-1]||[];
+    for(var i=0;i<leaves.length-1;i++){
+      var a=posMap.get(leaves[i]), b=posMap.get(leaves[i+1]);
+      var ln=document.createElementNS(ns,'line');
+      ln.setAttribute('x1',String(a.x+24));ln.setAttribute('y1',String(a.y));
+      ln.setAttribute('x2',String(b.x-24));ln.setAttribute('y2',String(b.y));
+      ln.setAttribute('stroke','var(--accent-clove)');ln.setAttribute('stroke-dasharray','3 2');
+      ln.setAttribute('stroke-width','1.2');
+      bpSvg.appendChild(ln);
+    }
+    lvls.forEach(function(arr,d){
+      arr.forEach(function(nd){
+        var pt=posMap.get(nd);
+        var label='['+nd.keys.join(', ')+']';
+        var w=Math.max(42,label.length*7+10);
+        var hasPromo=highlightKey!==null&&nd.keys.indexOf(highlightKey)!==-1;
+        var rect=document.createElementNS(ns,'rect');
+        rect.setAttribute('x',String(pt.x-w/2));rect.setAttribute('y',String(pt.y-11));
+        rect.setAttribute('width',String(w));rect.setAttribute('height','22');rect.setAttribute('rx','3');
+        rect.setAttribute('fill',d===0?'var(--surface2)':'var(--bg)');
+        rect.setAttribute('stroke',hasPromo?'var(--accent-clove)':(d===0?'var(--accent)':'var(--border-strong)'));
+        rect.setAttribute('stroke-width','1.6');
+        bpSvg.appendChild(rect);
+        var t=document.createElementNS(ns,'text');
+        t.setAttribute('x',String(pt.x));t.setAttribute('y',String(pt.y+4));
+        t.setAttribute('text-anchor','middle');t.setAttribute('font-size','10');
+        t.setAttribute('font-family','monospace');t.setAttribute('font-weight','600');
+        t.setAttribute('fill',hasPromo?'var(--accent-clove)':(d===0?'var(--accent)':'var(--ink)'));
+        t.textContent=label;
+        bpSvg.appendChild(t);
+      });
+    });
+    if(bpTrace)bpTrace.textContent=msg;
+  }
+
+  function resetTree(){
+    root=makeNode(true);
+    [5,12,19,25].forEach(function(v){insertKey(v,true);});
+    render(null,'Order-3 B+ tree initialized with [5, 12, 19, 25] (height 2, max 2 keys/node).');
+  }
+  if(insBtn)insBtn.addEventListener('click',function(){
+    var v=parseInt(bpVal?bpVal.value:'0',10);
+    if(!isNaN(v))insertKey(v,false);
+  });
+  if(rstBtn)rstBtn.addEventListener('click',resetTree);
+  resetTree();
 })();
 </script>
 </body>

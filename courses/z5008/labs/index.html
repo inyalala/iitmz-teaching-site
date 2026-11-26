@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html"/>
@@ -19,6 +19,8 @@
 <link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta name="twitter:title" content="Lab Explorer &amp; Spark/Lakehouse Previews | Z5008 Big Data Lab | Dr. Innocent Nyalala"/>
+<meta name="twitter:description" content="Lab Explorer &amp; Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala."/>
 <meta content="website" property="og:type"/>
 <meta content="Lab Explorer &amp; Spark/Lakehouse Previews | Z5008 Big Data Lab | Dr. Innocent Nyalala" property="og:title"/>
 <meta content="Lab Explorer &amp; Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
@@ -27,7 +29,7 @@
 <meta content="image/png" property="og:image:type"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="640"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#resource", "name": "Z5008 Lab Explorer & Spark/Lakehouse Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html", "description": "Lab Explorer & Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5008: Big Data Lab", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5008", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#resource", "name": "Z5008 Lab Explorer & Spark/Lakehouse Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html", "description": "Lab Explorer & Spark/Lakehouse Previews for Z5008 Big Data Lab at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5008: Big Data Lab", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "inLanguage": "en-US", "learningResourceType": "Laboratory Exercise", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5008", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -60,6 +62,7 @@
 </nav>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<button class="module-filter-clear" hidden="" id="lab-search-clear" type="button">Clear</button>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
 <span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
@@ -229,6 +232,7 @@ class LocalModelRegistry:
 </script><script>
 (function(){
   var inp=document.getElementById('lab-search');
+  var clearBtn=document.getElementById('lab-search-clear');
   var cnt=document.getElementById('lab-count');
   var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
@@ -256,6 +260,7 @@ class LocalModelRegistry:
       if(ok)vis++;
     });
     emptyBox.hidden=vis>0;
+    if(clearBtn)clearBtn.hidden=q.length===0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
@@ -271,6 +276,13 @@ class LocalModelRegistry:
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(inp)inp.value='';
+      applyFilters();
+      if(inp)inp.focus();
+    });
+  }
   if(emptyReset){
     emptyReset.addEventListener('click',function(){
       if(inp)inp.value='';
@@ -281,6 +293,7 @@ class LocalModelRegistry:
         p.setAttribute('aria-pressed',act?'true':'false');
       });
       applyFilters();
+      if(inp)inp.focus();
     });
   }
 

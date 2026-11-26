@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://inyalala.github.io/iitmz-teaching-site/"
+LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/"
 CANONICAL_RE = re.compile(r'<link[^>]+rel=["\']canonical["\'][^>]*>', re.IGNORECASE)
 DESC_RE = re.compile(r'<meta[^>]+name=["\']description["\'][^>]*>', re.IGNORECASE)
 HREFLANG_EN_RE = re.compile(r'<link[^>]+hreflang=["\']en["\'][^>]*>', re.IGNORECASE)
@@ -18,6 +19,12 @@ OG_TITLE_RE = re.compile(r'<meta[^>]+property=["\']og:title["\'][^>]*>', re.IGNO
 OG_W_RE = re.compile(r'<meta[^>]+property=["\']og:image:width["\'][^>]*>', re.IGNORECASE)
 OG_H_RE = re.compile(r'<meta[^>]+property=["\']og:image:height["\'][^>]*>', re.IGNORECASE)
 TWITTER_CARD_RE = re.compile(r'<meta[^>]+name=["\']twitter:card["\'][^>]*>', re.IGNORECASE)
+TWITTER_TITLE_RE = re.compile(r'<meta[^>]+name=["\']twitter:title["\'][^>]*>', re.IGNORECASE)
+TWITTER_DESC_RE = re.compile(r'<meta[^>]+name=["\']twitter:description["\'][^>]*>', re.IGNORECASE)
+ROBOTS_NOINDEX_RE = re.compile(
+    r'<meta[^>]+name=["\']robots["\'][^>]+content=["\']noindex,\s*follow["\']',
+    re.IGNORECASE,
+)
 JSONLD_RE = re.compile(
     r'<script\s+type=["\']application/ld\+json["\']>(.*?)</script>',
     re.IGNORECASE | re.DOTALL,
@@ -72,6 +79,10 @@ class TestSitemapAndSeoParity(unittest.TestCase):
                 CANONICAL_RE.search(text), f"{rel}: missing canonical link"
             )
             if 'http-equiv="refresh"' in text.lower():
+                self.assertTrue(
+                    ROBOTS_NOINDEX_RE.search(text),
+                    f"{rel}: redirect stub missing noindex, follow robots meta",
+                )
                 continue
 
             self.assertTrue(DESC_RE.search(text), f"{rel}: missing meta description")
@@ -82,6 +93,8 @@ class TestSitemapAndSeoParity(unittest.TestCase):
             self.assertTrue(OG_W_RE.search(text), f"{rel}: missing og:image:width meta")
             self.assertTrue(OG_H_RE.search(text), f"{rel}: missing og:image:height meta")
             self.assertTrue(TWITTER_CARD_RE.search(text), f"{rel}: missing twitter:card meta")
+            self.assertTrue(TWITTER_TITLE_RE.search(text), f"{rel}: missing twitter:title meta")
+            self.assertTrue(TWITTER_DESC_RE.search(text), f"{rel}: missing twitter:description meta")
 
             ld_blocks = JSONLD_RE.findall(text)
             self.assertGreaterEqual(
@@ -110,15 +123,16 @@ class TestSitemapAndSeoParity(unittest.TestCase):
                     serialized,
                     f"{rel}: JSON-LD missing BreadcrumbList",
                 )
-                if "@graph" in data:
-                    self.assertTrue(
-                        isinstance(data["@graph"], list) and len(data["@graph"]) > 0,
-                        f"{rel}: JSON-LD @graph must be non-empty list",
-                    )
-                    for item in data["@graph"]:
-                        self.assertIn("@type", item, f"{rel}: @graph item missing @type")
-                else:
-                    self.assertIn("@type", data, f"{rel}: JSON-LD missing @type")
+                items = data.get("@graph", [data])
+                self.assertTrue(isinstance(items, list) and len(items) > 0)
+                for item in items:
+                    self.assertIn("@type", item, f"{rel}: JSON-LD item missing @type")
+                    if item.get("@type") == "LearningResource":
+                        self.assertEqual(item.get("inLanguage"), "en-US", f"{rel}: LearningResource missing inLanguage")
+                        self.assertTrue(item.get("learningResourceType"), f"{rel}: LearningResource missing learningResourceType")
+                        self.assertEqual(item.get("license"), LICENSE_URL, f"{rel}: LearningResource missing license")
+                    if item.get("@type") == "Course":
+                        self.assertEqual(item.get("license"), LICENSE_URL, f"{rel}: Course missing license")
 
 
 if __name__ == "__main__":

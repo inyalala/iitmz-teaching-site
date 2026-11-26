@@ -1034,45 +1034,6 @@ footer.site-footer {
     padding-left: 16px;
     padding-right: 16px;
   }
-  .week-jump-strip {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 10px;
-  }
-  table.materials,
-  table.materials tbody,
-  table.materials tr,
-  table.materials td {
-    display: block;
-    width: 100%;
-  }
-  table.materials tr:first-child th {
-    display: none;
-  }
-  table.materials tr[id] {
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-  }
-  table.materials td {
-    border-bottom: none;
-    padding: 3px 0;
-  }
-  .mat-pill,
-  .week-jump-strip a,
-  .portal-filter-pill,
-  .qb-tier-pill,
-  .lab-topic-pill,
-  .qb-master-btn,
-  .lab-copy-btn,
-  .module-filter-clear,
-  .viz-preset,
-  .qb-ctrl-btn {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
-  }
 }
 
 /* Restored Quiet Monograph Sub-Components (Assignments, Quarto Docs & PySpark Notebooks) */
@@ -2154,4 +2115,80 @@ tr[id] {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Wave O: Visualizer Active & Swap States + Final Mobile Cascade */
+.viz-preset.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface2);
+  font-weight: 600;
+}
+
+.viz-node.is-swap {
+  border-color: var(--accent-clove);
+  color: var(--accent-clove);
+  background: var(--surface2);
+  font-weight: 600;
+}
+
+.viz-range {
+  accent-color: var(--accent);
+  vertical-align: middle;
+}
+
+@media (max-width: 720px) {
+  .week-jump-strip {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+  table.materials,
+  table.materials tbody,
+  table.materials tr,
+  table.materials td {
+    display: block;
+    width: 100%;
+  }
+  table.materials tr:first-child th {
+    display: none;
+  }
+  table.materials tr[id] {
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  table.materials td {
+    border-bottom: none;
+    padding: 3px 0;
+  }
+  .mat-session-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .week-jump-strip a,
+  .portal-filter-pill,
+  .qb-tier-pill,
+  .qb-ctrl-btn,
+  .qb-master-btn,
+  .lab-topic-pill,
+  .lab-copy-btn,
+  .module-filter-clear,
+  .viz-preset,
+  .course-link-pills .mat-pill {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+  #materials .mat-pills {
+    gap: 8px;
+  }
+  #materials .mat-pill {
+    min-height: 34px;
+    padding: 5px 10px;
+    display: inline-flex;
+    align-items: center;
+  }
 }

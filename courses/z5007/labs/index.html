@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"/>
@@ -19,6 +19,8 @@
 <link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
+<meta name="twitter:title" content="Weeks 1–17 Code &amp; Complexity Explorer | Z5007 Programming and Data Structures | Dr. Innocent Nyalala"/>
+<meta name="twitter:description" content="Weeks 1–17 Code &amp; Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala."/>
 <meta content="website" property="og:type"/>
 <meta content="Weeks 1–17 Code &amp; Complexity Explorer | Z5007 Programming and Data Structures | Dr. Innocent Nyalala" property="og:title"/>
 <meta content="Weeks 1–17 Code &amp; Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." property="og:description"/>
@@ -27,7 +29,7 @@
 <meta content="image/png" property="og:image:type"/>
 <meta property="og:image:width" content="1280"/>
 <meta property="og:image:height" content="640"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#resource", "name": "Z5007 Weeks 1–17 Code & Complexity Explorer", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html", "description": "Weeks 1–17 Code & Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5007: Programming and Data Structures", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5007", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#resource", "name": "Z5007 Weeks 1–17 Code & Complexity Explorer", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html", "description": "Weeks 1–17 Code & Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5007: Programming and Data Structures", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}, "inLanguage": "en-US", "learningResourceType": "Laboratory Exercise", "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/"}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5007", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -93,6 +95,7 @@
 </section>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
+<button class="module-filter-clear" hidden="" id="lab-search-clear" type="button">Clear</button>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
 <span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
@@ -443,6 +446,7 @@ class BinaryMinHeap:
 </script><script>
 (function(){
   var inp=document.getElementById('lab-search');
+  var clearBtn=document.getElementById('lab-search-clear');
   var cnt=document.getElementById('lab-count');
   var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
@@ -470,6 +474,7 @@ class BinaryMinHeap:
       if(ok)vis++;
     });
     emptyBox.hidden=vis>0;
+    if(clearBtn)clearBtn.hidden=q.length===0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
@@ -485,6 +490,13 @@ class BinaryMinHeap:
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(inp)inp.value='';
+      applyFilters();
+      if(inp)inp.focus();
+    });
+  }
   if(emptyReset){
     emptyReset.addEventListener('click',function(){
       if(inp)inp.value='';
@@ -495,6 +507,7 @@ class BinaryMinHeap:
         p.setAttribute('aria-pressed',act?'true':'false');
       });
       applyFilters();
+      if(inp)inp.focus();
     });
   }
 
@@ -542,12 +555,13 @@ class BinaryMinHeap:
     if(!mtSvg)return;
     var ratios=[0,1,2,3].map(function(k){return Math.pow(a/Math.pow(b,d),k);});
     var maxR=Math.max.apply(null,ratios)||1;
+    var maxBarW=168;
     var ns='http://www.w3.org/2000/svg';
     mtSvg.innerHTML='';
     var labels=['k=0 (root)','k=1','k=2','k=3'];
     ratios.forEach(function(r,k){
       var y=10+k*24;
-      var w=Math.max(12,Math.round((r/maxR)*190));
+      var w=Math.max(10,Math.round((r/maxR)*maxBarW));
       var fill=(caseNum===1&&k===3)||(caseNum===3&&k===0)?'var(--accent-clove)':'var(--accent)';
       var lbl=document.createElementNS(ns,'text');
       lbl.setAttribute('x','4');lbl.setAttribute('y',String(y+12));
@@ -559,16 +573,28 @@ class BinaryMinHeap:
       rect.setAttribute('width',String(w));rect.setAttribute('height','15');
       rect.setAttribute('rx','2');rect.setAttribute('fill',fill);
       mtSvg.appendChild(rect);
+      var valText=(r>=1000)?r.toExponential(1)+'x':(r>=100?Math.round(r)+'x':r.toFixed(2)+'x');
       var val=document.createElementNS(ns,'text');
       val.setAttribute('x',String(82+w));val.setAttribute('y',String(y+12));
-      val.setAttribute('font-size','10');val.setAttribute('font-family','monospace');
-      val.setAttribute('fill','var(--ink3)');val.textContent=r.toFixed(2)+'x';
+      val.setAttribute('font-size','9.5');val.setAttribute('font-family','monospace');
+      val.setAttribute('fill','var(--ink3)');val.textContent=valText;
       mtSvg.appendChild(val);
+    });
+  }
+  function syncPresets(a,b,d){
+    presets.forEach(function(p){
+      var pa=parseFloat(p.getAttribute('data-a')||'0');
+      var pb=parseFloat(p.getAttribute('data-b')||'0');
+      var pd=parseFloat(p.getAttribute('data-d')||'0');
+      var act=Math.abs(a-pa)<1e-6&&Math.abs(b-pb)<1e-6&&Math.abs(d-pd)<1e-6;
+      p.classList.toggle('is-active',act);
+      p.setAttribute('aria-pressed',act?'true':'false');
     });
   }
   function evalMT(){
     if(!aEl||!bEl||!dEl||!mtOut)return;
     var a=parseFloat(aEl.value), b=parseFloat(bEl.value), d=parseFloat(dEl.value);
+    syncPresets(a,b,d);
     if(!(a>=1 && b>1 && d>=0)){
       mtOut.textContent='Enter a >= 1, b > 1, and d >= 0.';
       return;
@@ -655,6 +681,14 @@ class BinaryMinHeap:
       t.setAttribute('fill',txtColor);t.textContent=String(heap[i]);
       heapSvg.appendChild(t);
     }
+    if(heap.length>15){
+      var more=document.createElementNS(ns,'text');
+      more.setAttribute('x','160');more.setAttribute('y','144');
+      more.setAttribute('text-anchor','middle');more.setAttribute('font-size','9.5');
+      more.setAttribute('font-family','monospace');more.setAttribute('fill','var(--ink3)');
+      more.textContent='+'+(heap.length-15)+' nodes in array below';
+      heapSvg.appendChild(more);
+    }
   }
   function renderHeap(msg,swapPath){
     var swapSet={};
@@ -667,7 +701,7 @@ class BinaryMinHeap:
     }else{
       heap.forEach(function(val,idx){
         var span=document.createElement('span');
-        span.className='viz-node'+(idx===0?' is-root':'');
+        span.className='viz-node'+(idx===0?' is-root':'')+(swapSet[idx]?' is-swap':'');
         span.innerHTML='<strong>'+val+'</strong><small>i='+idx+'</small>';
         boxesEl.appendChild(span);
       });
