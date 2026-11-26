@@ -51,6 +51,38 @@
 <a class="mat-pill mat-pill-notes" href="../resources/Z5007_EndSem_Mock_Exam_and_Solutions.pdf">End-Sem Mock Exam (PDF)</a>
 <a class="mat-pill" href="../tests/test_z5007_all.py">Unittest Suite (.py)</a>
 </nav>
+<section aria-labelledby="viz-heading" class="viz-panel">
+<h2 id="viz-heading" style="margin:0 0 4px;font-size:1.15rem;">Interactive Complexity &amp; Min-Heap Visualizer</h2>
+<p style="margin:0;color:var(--ink2);font-size:0.88rem;">Evaluate divide-and-conquer recurrences via the Master Theorem or trace 0-indexed Binary Min-Heap swaps live in browser.</p>
+<div class="viz-grid">
+<div class="viz-card">
+<strong style="font-size:0.94rem;">Master Theorem: T(n) = a T(n/b) + n^d</strong>
+<div aria-label="Master Theorem presets" class="viz-controls" role="group">
+<button class="lab-copy-btn viz-preset" data-a="1" data-b="2" data-d="0" type="button">Binary Search (1, 2, 0)</button>
+<button class="lab-copy-btn viz-preset" data-a="2" data-b="2" data-d="1" type="button">Merge Sort (2, 2, 1)</button>
+<button class="lab-copy-btn viz-preset" data-a="7" data-b="2" data-d="2" type="button">Strassen (7, 2, 2)</button>
+<button class="lab-copy-btn viz-preset" data-a="4" data-b="2" data-d="3" type="button">n^3 Combine (4, 2, 3)</button>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--font-mono);font-size:0.78rem;">
+<label>a <input id="mt-a" min="1" step="1" style="width:52px;padding:3px 5px;" type="number" value="2"/></label>
+<label>b <input id="mt-b" min="2" step="0.5" style="width:52px;padding:3px 5px;" type="number" value="2"/></label>
+<label>d <input id="mt-d" min="0" step="0.5" style="width:52px;padding:3px 5px;" type="number" value="1"/></label>
+</div>
+<div aria-live="polite" class="out-content" id="mt-output" style="margin-top:10px;font-size:0.8rem;"></div>
+</div>
+<div class="viz-card">
+<strong style="font-size:0.94rem;">Binary Min-Heap (0-Indexed Array)</strong>
+<div class="viz-controls">
+<input aria-label="Integer key to insert" id="heap-val" style="width:76px;padding:4px 7px;font-family:var(--font-mono);font-size:0.8rem;" type="number" value="2"/>
+<button class="lab-copy-btn" id="heap-insert" type="button">Insert</button>
+<button class="lab-copy-btn" id="heap-pop" type="button">Extract Min</button>
+<button class="lab-copy-btn" id="heap-reset" type="button">Reset</button>
+</div>
+<div aria-live="polite" class="viz-heap-boxes" id="heap-boxes"></div>
+<div aria-live="polite" class="qb-match-status" id="heap-trace" style="display:block;white-space:normal;"></div>
+</div>
+</div>
+</section>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
@@ -462,6 +494,110 @@ class BinaryMinHeap:
   }
 
   applyFilters();
+})();
+(function(){
+  var aEl=document.getElementById('mt-a');
+  var bEl=document.getElementById('mt-b');
+  var dEl=document.getElementById('mt-d');
+  var mtOut=document.getElementById('mt-output');
+  function evalMT(){
+    if(!aEl||!bEl||!dEl||!mtOut)return;
+    var a=parseFloat(aEl.value), b=parseFloat(bEl.value), d=parseFloat(dEl.value);
+    if(!(a>=1 && b>1 && d>=0)){
+      mtOut.textContent='Enter a >= 1, b > 1, and d >= 0.';
+      return;
+    }
+    var crit=Math.log(a)/Math.log(b);
+    var eps=1e-6;
+    var caseStr, bound;
+    if(d < crit - eps){
+      caseStr='Case 1 (leaf work dominates: d < log_b(a))';
+      bound='Theta(n^'+crit.toFixed(3)+')';
+    }else if(Math.abs(d - crit) <= eps){
+      caseStr='Case 2 (balanced across tree levels: d = log_b(a))';
+      bound=(d===0)?'Theta(log n)':(d===1?'Theta(n log n)':'Theta(n^'+d+' log n)');
+    }else{
+      caseStr='Case 3 (root combine dominates: d > log_b(a))';
+      bound=(d===0)?'Theta(1)':(d===1?'Theta(n)':'Theta(n^'+d+')');
+    }
+    mtOut.textContent='log_b(a) = '+crit.toFixed(3)+' | '+caseStr+' -> T(n) = '+bound;
+  }
+  [aEl,bEl,dEl].forEach(function(el){if(el)el.addEventListener('input',evalMT);});
+  document.querySelectorAll('.viz-preset').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(aEl)aEl.value=btn.getAttribute('data-a')||'2';
+      if(bEl)bEl.value=btn.getAttribute('data-b')||'2';
+      if(dEl)dEl.value=btn.getAttribute('data-d')||'1';
+      evalMT();
+    });
+  });
+  evalMT();
+
+  var heap=[3,5,8,12,14,19];
+  var boxesEl=document.getElementById('heap-boxes');
+  var traceEl=document.getElementById('heap-trace');
+  var valEl=document.getElementById('heap-val');
+  function renderHeap(msg){
+    if(!boxesEl)return;
+    boxesEl.innerHTML='';
+    if(heap.length===0){
+      boxesEl.textContent='Heap is empty.';
+    }else{
+      heap.forEach(function(val,idx){
+        var span=document.createElement('span');
+        span.className='viz-node'+(idx===0?' is-root':'');
+        span.innerHTML='<strong>'+val+'</strong><small>i='+idx+'</small>';
+        boxesEl.appendChild(span);
+      });
+    }
+    if(traceEl)traceEl.textContent=msg;
+  }
+  var insBtn=document.getElementById('heap-insert');
+  var popBtn=document.getElementById('heap-pop');
+  var rstBtn=document.getElementById('heap-reset');
+  if(insBtn){
+    insBtn.addEventListener('click',function(){
+      var v=parseInt(valEl?valEl.value:'0',10);
+      if(isNaN(v))return;
+      heap.push(v);
+      var i=heap.length-1, swaps=0;
+      while(i>0){
+        var p=Math.floor((i-1)/2);
+        if(heap[p]<=heap[i])break;
+        var tmp=heap[p];heap[p]=heap[i];heap[i]=tmp;
+        i=p;swaps++;
+      }
+      renderHeap('Inserted '+v+' ('+swaps+' sift-up swaps). Min = '+heap[0]+'.');
+    });
+  }
+  if(popBtn){
+    popBtn.addEventListener('click',function(){
+      if(heap.length===0){renderHeap('Heap empty.');return;}
+      var minVal=heap[0];
+      var last=heap.pop();
+      var swaps=0;
+      if(heap.length>0){
+        heap[0]=last;
+        var i=0;
+        while(true){
+          var l=2*i+1, r=2*i+2, sm=i;
+          if(l<heap.length && heap[l]<heap[sm])sm=l;
+          if(r<heap.length && heap[r]<heap[sm])sm=r;
+          if(sm===i)break;
+          var tmp=heap[i];heap[i]=heap[sm];heap[sm]=tmp;
+          i=sm;swaps++;
+        }
+      }
+      renderHeap('Extracted min '+minVal+' ('+swaps+' sift-down swaps).'+(heap.length?' New min = '+heap[0]+'.':' Heap now empty.'));
+    });
+  }
+  if(rstBtn){
+    rstBtn.addEventListener('click',function(){
+      heap=[3,5,8,12,14,19];
+      renderHeap('Reset to valid min-heap [3, 5, 8, 12, 14, 19].');
+    });
+  }
+  renderHeap('Valid min-heap [3, 5, 8, 12, 14, 19]. Parent(i) = floor((i-1)/2).');
 })();
 </script>
 </body>

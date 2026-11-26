@@ -1880,3 +1880,138 @@ details.qb-solution[open] summary {
   background: var(--surface2);
   font-weight: 600;
 }
+
+/* Wave M: Course Links Pill Grid, Live Mastery Pill, Module Search & Visualizer */
+.meta-dl > div.meta-dl-wide {
+  grid-column: 1 / -1;
+  border-bottom: none;
+}
+
+.course-link-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.course-link-pills .mat-pill {
+  margin-right: 0;
+}
+
+.course-mastery-pill.has-progress {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.module-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin: 12px 0 10px;
+}
+
+.module-filter-input {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 7px 11px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+}
+
+.module-filter-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.module-filter-clear {
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink2);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.module-filter-clear:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.module-filter-status {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink3);
+  white-space: nowrap;
+}
+
+.viz-panel {
+  margin: 18px 0 22px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-clove);
+  border-radius: 4px;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.viz-card {
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 10px;
+}
+
+.viz-heap-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 36px;
+  margin: 10px 0 8px;
+}
+
+.viz-node {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 38px;
+  padding: 4px 7px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+.viz-node.is-root {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.viz-node small {
+  font-size: 0.65rem;
+  color: var(--ink3);
+}
