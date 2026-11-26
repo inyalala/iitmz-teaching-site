@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=9" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z5008/labs/index.html"/>
@@ -60,6 +60,22 @@
 <a class="mat-pill mat-pill-notes" href="../resources/Z5008_Spark_Streaming_Architecture_Workbook.pdf">Spark &amp; Streaming Workbook (PDF)</a>
 <a class="mat-pill" href="../tests/test_z5008_all.py">Unittest Suite (.py)</a>
 </nav>
+<section aria-labelledby="wm-heading" class="viz-panel">
+<h2 id="wm-heading" style="margin:0 0 4px;font-size:1.15rem;">Interactive Structured Streaming Watermark &amp; Late-Event Timeline</h2>
+<p style="margin:0;color:var(--ink2);font-size:0.88rem;">Choose watermark lateness delay and inject on-time or late records to see window state admission vs. watermark drops (W = max_event - delay).</p>
+<div class="viz-card" style="margin-top:10px;">
+<div aria-label="Watermark delay presets and stream controls" class="viz-controls" role="group">
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-delay="5" type="button">Delay 5m</button>
+<button aria-pressed="true" class="lab-copy-btn viz-preset is-active" data-delay="10" type="button">Delay 10m</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-delay="15" type="button">Delay 15m</button>
+<button class="lab-copy-btn" id="wm-add-ontime" type="button">Add On-Time Event</button>
+<button class="lab-copy-btn" id="wm-add-late" type="button">Inject Late Record</button>
+<button class="lab-copy-btn" id="wm-reset" type="button">Reset</button>
+</div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="wm-svg" viewBox="0 0 420 128"></svg></div>
+<div aria-live="polite" class="qb-match-status" id="wm-trace" style="display:block;white-space:normal;margin-top:6px;"></div>
+</div>
+</section>
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
 <button class="module-filter-clear" hidden="" id="lab-search-clear" type="button">Clear</button>
@@ -297,7 +313,7 @@ class LocalModelRegistry:
     });
   }
 
-  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+  document.querySelectorAll('.lab-copy-btn:not(.viz-preset):not(#wm-add-ontime):not(#wm-add-late):not(#wm-reset)').forEach(function(btn){
     btn.addEventListener('click',function(){
       var card=btn.closest('.lab-explorer-card');
       var pre=card&&card.querySelector('pre.lab-preview-code');
@@ -329,6 +345,142 @@ class LocalModelRegistry:
   }
 
   applyFilters();
+})();
+(function(){
+  var wmSvg=document.getElementById('wm-svg');
+  var wmTrace=document.getElementById('wm-trace');
+  var presets=Array.from(document.querySelectorAll('.viz-preset'));
+  var addOnBtn=document.getElementById('wm-add-ontime');
+  var addLateBtn=document.getElementById('wm-add-late');
+  var resetBtn=document.getElementById('wm-reset');
+
+  var delay=10;
+  var baseEvents=[
+    {ev:10,proc:11,admitted:true},
+    {ev:14,proc:15,admitted:true},
+    {ev:18,proc:19,admitted:true},
+    {ev:12,proc:20,admitted:true},
+    {ev:22,proc:23,admitted:true}
+  ];
+  var events=baseEvents.map(function(e){return Object.assign({},e);});
+  var nextProc=24;
+
+  function maxEv(){
+    return events.reduce(function(m,e){return Math.max(m,e.ev);},0);
+  }
+
+  function renderWm(msg){
+    if(!wmSvg)return;
+    var ns='http://www.w3.org/2000/svg';
+    wmSvg.innerHTML='';
+    var x0=36, y0=14, w=366, h=82;
+    var wm=Math.max(0,maxEv()-delay);
+    var maxT=Math.max(32,maxEv()+4,nextProc+2);
+
+    var ax=document.createElementNS(ns,'line');
+    ax.setAttribute('x1',String(x0));ax.setAttribute('y1',String(y0));
+    ax.setAttribute('x2',String(x0));ax.setAttribute('y2',String(y0+h));
+    ax.setAttribute('stroke','var(--border-strong)');wmSvg.appendChild(ax);
+
+    var ay=document.createElementNS(ns,'line');
+    ay.setAttribute('x1',String(x0));ay.setAttribute('y1',String(y0+h));
+    ay.setAttribute('x2',String(x0+w));ay.setAttribute('y2',String(y0+h));
+    ay.setAttribute('stroke','var(--border-strong)');wmSvg.appendChild(ay);
+
+    [0,10,20,30].forEach(function(winStart){
+      if(winStart<=maxT){
+        var wx=x0+Math.round((winStart/maxT)*w);
+        var gl=document.createElementNS(ns,'line');
+        gl.setAttribute('x1',String(wx));gl.setAttribute('y1',String(y0));
+        gl.setAttribute('x2',String(wx));gl.setAttribute('y2',String(y0+h));
+        gl.setAttribute('stroke','var(--border)');gl.setAttribute('stroke-width','1');
+        wmSvg.appendChild(gl);
+        var wt=document.createElementNS(ns,'text');
+        wt.setAttribute('x',String(wx+2));wt.setAttribute('y',String(y0+h+12));
+        wt.setAttribute('font-size','8.5');wt.setAttribute('font-family','monospace');
+        wt.setAttribute('fill','var(--ink3)');wt.textContent='t='+winStart+'m';
+        wmSvg.appendChild(wt);
+      }
+    });
+
+    var wmX=x0+Math.round((wm/maxT)*w);
+    var wml=document.createElementNS(ns,'line');
+    wml.setAttribute('x1',String(wmX));wml.setAttribute('y1',String(y0));
+    wml.setAttribute('x2',String(wmX));wml.setAttribute('y2',String(y0+h));
+    wml.setAttribute('stroke','var(--accent-clove)');wml.setAttribute('stroke-dasharray','4 2');
+    wml.setAttribute('stroke-width','1.8');wmSvg.appendChild(wml);
+
+    var wlbl=document.createElementNS(ns,'text');
+    wlbl.setAttribute('x',String(Math.min(x0+w-56,wmX+4)));wlbl.setAttribute('y',String(y0+10));
+    wlbl.setAttribute('font-size','9');wlbl.setAttribute('font-family','monospace');
+    wlbl.setAttribute('font-weight','600');wlbl.setAttribute('fill','var(--accent-clove)');
+    wlbl.textContent='W='+wm+'m';wmSvg.appendChild(wlbl);
+
+    events.forEach(function(e){
+      var cx=x0+Math.round((e.ev/maxT)*w);
+      var cy=y0+h-Math.round((e.proc/maxT)*(h-10));
+      var c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',String(cx));c.setAttribute('cy',String(cy));
+      c.setAttribute('r','4.5');
+      c.setAttribute('fill',e.admitted?'var(--accent)':'var(--accent-clove)');
+      wmSvg.appendChild(c);
+    });
+
+    var xl=document.createElementNS(ns,'text');
+    xl.setAttribute('x',String(x0+w/2));xl.setAttribute('y','122');
+    xl.setAttribute('text-anchor','middle');xl.setAttribute('font-size','9');
+    xl.setAttribute('font-family','monospace');xl.setAttribute('fill','var(--ink3)');
+    xl.textContent='Event Time (Green = Admitted | Clove = Dropped Late)';
+    wmSvg.appendChild(xl);
+
+    var admittedCount=events.filter(function(e){return e.admitted;}).length;
+    var droppedCount=events.length-admittedCount;
+    if(wmTrace){
+      wmTrace.textContent=msg+' | Delay='+delay+'m, Watermark W='+wm+'m | Admitted='+admittedCount+', Dropped='+droppedCount+'.';
+    }
+  }
+
+  presets.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      delay=parseInt(btn.getAttribute('data-delay')||'10',10);
+      presets.forEach(function(p){
+        var act=p===btn;
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
+      renderWm('Updated watermark delay to '+delay+'m');
+    });
+  });
+
+  if(addOnBtn)addOnBtn.addEventListener('click',function(){
+    var newEv=maxEv()+3;
+    nextProc+=2;
+    events.push({ev:newEv,proc:nextProc,admitted:true});
+    renderWm('Admitted on-time event t='+newEv+'m');
+  });
+
+  if(addLateBtn)addLateBtn.addEventListener('click',function(){
+    var wm=Math.max(0,maxEv()-delay);
+    var lateEv=Math.max(2,wm-3);
+    nextProc+=2;
+    var admitted=lateEv>=wm;
+    events.push({ev:lateEv,proc:nextProc,admitted:admitted});
+    renderWm((admitted?'Admitted within watermark':'Dropped late record')+' t='+lateEv+'m (< W='+wm+'m)');
+  });
+
+  if(resetBtn)resetBtn.addEventListener('click',function(){
+    delay=10;
+    nextProc=24;
+    events=baseEvents.map(function(e){return Object.assign({},e);});
+    presets.forEach(function(p){
+      var act=(p.getAttribute('data-delay')==='10');
+      p.classList.toggle('is-active',act);
+      p.setAttribute('aria-pressed',act?'true':'false');
+    });
+    renderWm('Reset stream window state');
+  });
+
+  renderWm('Initialized 10m tumbling windows');
 })();
 </script>
 </body>

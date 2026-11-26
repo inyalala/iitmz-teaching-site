@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=9" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"/>
@@ -69,7 +69,7 @@
 <button class="lab-copy-btn" id="bp-insert" type="button">Insert Key</button>
 <button class="lab-copy-btn" id="bp-reset" type="button">Reset [5, 12, 19, 25]</button>
 </div>
-<div class="viz-svg-wrap"><svg aria-hidden="true" id="bp-svg" viewBox="0 0 360 128"></svg></div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="bp-svg" viewBox="0 0 460 128"></svg></div>
 <div aria-live="polite" class="qb-match-status" id="bp-trace" style="display:block;white-space:normal;margin-top:6px;"></div>
 </div>
 </section>
@@ -455,11 +455,16 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
     var posMap=new Map();
     var h=lvls.length;
     var rowStep=h>1?Math.min(44,Math.floor(88/(h-1))):0;
+    var svgW=460;
     lvls.forEach(function(arr,d){
       var y=18+d*rowStep;
       arr.forEach(function(nd,idx){
-        var x=Math.round(((idx+0.5)/arr.length)*340)+10;
-        posMap.set(nd,{x:x,y:y});
+        var label='['+nd.keys.join(', ')+']';
+        var w=Math.max(38,Math.round(label.length*6.6+10));
+        var hw=w/2;
+        var rawX=Math.round(((idx+0.5)/arr.length)*(svgW-16))+8;
+        var x=Math.max(8+hw,Math.min(svgW-8-hw,rawX));
+        posMap.set(nd,{x:x,y:y,w:w,hw:hw,label:label});
       });
     });
     lvls.forEach(function(arr){
@@ -470,7 +475,7 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
             var c=posMap.get(ch);
             var ln=document.createElementNS(ns,'line');
             ln.setAttribute('x1',String(p.x));ln.setAttribute('y1',String(p.y+12));
-            ln.setAttribute('x2',String(c.x));ln.setAttribute('y2',String(c.y-10));
+            ln.setAttribute('x2',String(c.x));ln.setAttribute('y2',String(c.y-11));
             ln.setAttribute('stroke','var(--border-strong)');ln.setAttribute('stroke-width','1.3');
             bpSvg.appendChild(ln);
           });
@@ -480,32 +485,33 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
     var leaves=lvls[lvls.length-1]||[];
     for(var i=0;i<leaves.length-1;i++){
       var a=posMap.get(leaves[i]), b=posMap.get(leaves[i+1]);
-      var ln=document.createElementNS(ns,'line');
-      ln.setAttribute('x1',String(a.x+24));ln.setAttribute('y1',String(a.y));
-      ln.setAttribute('x2',String(b.x-24));ln.setAttribute('y2',String(b.y));
-      ln.setAttribute('stroke','var(--accent-clove)');ln.setAttribute('stroke-dasharray','3 2');
-      ln.setAttribute('stroke-width','1.2');
-      bpSvg.appendChild(ln);
+      var x1=a.x+a.hw, x2=b.x-b.hw;
+      if(x2>x1+2){
+        var ln=document.createElementNS(ns,'line');
+        ln.setAttribute('x1',String(x1));ln.setAttribute('y1',String(a.y));
+        ln.setAttribute('x2',String(x2));ln.setAttribute('y2',String(b.y));
+        ln.setAttribute('stroke','var(--accent-clove)');ln.setAttribute('stroke-dasharray','3 2');
+        ln.setAttribute('stroke-width','1.2');
+        bpSvg.appendChild(ln);
+      }
     }
     lvls.forEach(function(arr,d){
       arr.forEach(function(nd){
         var pt=posMap.get(nd);
-        var label='['+nd.keys.join(', ')+']';
-        var w=Math.max(42,label.length*7+10);
         var hasPromo=highlightKey!==null&&nd.keys.indexOf(highlightKey)!==-1;
         var rect=document.createElementNS(ns,'rect');
-        rect.setAttribute('x',String(pt.x-w/2));rect.setAttribute('y',String(pt.y-11));
-        rect.setAttribute('width',String(w));rect.setAttribute('height','22');rect.setAttribute('rx','3');
+        rect.setAttribute('x',String(pt.x-pt.hw));rect.setAttribute('y',String(pt.y-11));
+        rect.setAttribute('width',String(pt.w));rect.setAttribute('height','22');rect.setAttribute('rx','3');
         rect.setAttribute('fill',d===0?'var(--surface2)':'var(--bg)');
         rect.setAttribute('stroke',hasPromo?'var(--accent-clove)':(d===0?'var(--accent)':'var(--border-strong)'));
         rect.setAttribute('stroke-width','1.6');
         bpSvg.appendChild(rect);
         var t=document.createElementNS(ns,'text');
         t.setAttribute('x',String(pt.x));t.setAttribute('y',String(pt.y+4));
-        t.setAttribute('text-anchor','middle');t.setAttribute('font-size','10');
+        t.setAttribute('text-anchor','middle');t.setAttribute('font-size','9.5');
         t.setAttribute('font-family','monospace');t.setAttribute('font-weight','600');
         t.setAttribute('fill',hasPromo?'var(--accent-clove)':(d===0?'var(--accent)':'var(--ink)'));
-        t.textContent=label;
+        t.textContent=pt.label;
         bpSvg.appendChild(t);
       });
     });

@@ -11,7 +11,7 @@
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=8" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=9" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html" rel="canonical"/>
 <link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/dm-scale/question-bank/index.html"/>
@@ -56,6 +56,7 @@
 <div class="qb-formula-bar"><span><strong>Reference Sheet:</strong> Pair these problems with the compiled 2-page PDF formula summary before inspecting solutions.</span><span><a href="../resources/Z3003_Data_Mining_Formula_Cheatsheet.pdf">Data Mining Formula Cheat Sheet (PDF)</a> · <a href="../labs/lab1.html">PySpark Lab 1</a></span></div>
 <div aria-label="Filter questions, track mastery, and toggle solutions" class="qb-controls-bar" role="search">
 <input aria-label="Search questions and solutions" class="qb-search-input" id="qb-search" placeholder="Search questions, algorithms, SQL, or formulas..." type="search"/>
+<button class="module-filter-clear" hidden="" id="qb-search-clear" type="button">Clear</button>
 <button class="qb-ctrl-btn" id="qb-expand-all" type="button">Expand All Solutions</button>
 <button class="qb-ctrl-btn" id="qb-collapse-all" type="button">Collapse All</button>
 <span aria-live="polite" class="qb-match-status" id="qb-match-status"></span>
@@ -266,6 +267,7 @@ function showTier(btn, sec, tier) {
   var COURSE_SLUG='dm-scale';
   var STORAGE_KEY='qb_mastery_dm-scale';
   var inp=document.getElementById('qb-search');
+  var clearBtn=document.getElementById('qb-search-clear');
   var expBtn=document.getElementById('qb-expand-all');
   var colBtn=document.getElementById('qb-collapse-all');
   var exportBtn=document.getElementById('qb-export-json');
@@ -358,10 +360,20 @@ function showTier(btn, sec, tier) {
     });
   }
 
+  function syncTierTabVisibility(crossTier){
+    blocks.forEach(function(b){
+      b.querySelectorAll('.tier-tabs').forEach(function(tb){
+        tb.hidden=!!crossTier;
+      });
+    });
+  }
+
   function applyFilters(){
     var q=(inp?inp.value:'').trim().toLowerCase();
+    if(clearBtn)clearBtn.hidden=q.length===0;
     var filteredMode=(q!=='')||(activeTier!=='all');
     if(!filteredMode){
+      syncTierTabVisibility(false);
       items.forEach(function(it){it.classList.remove('is-hidden');});
       blocks.forEach(function(b){
         b.classList.remove('is-hidden');
@@ -376,6 +388,8 @@ function showTier(btn, sec, tier) {
       if(status)status.textContent=items.length+' questions';
       return;
     }
+    var crossTier=(activeTier==='unmastered')||(activeTier==='all'&&q!=='');
+    syncTierTabVisibility(crossTier);
     var hits=0;
     blocks.forEach(function(b){
       var bHits=0;
@@ -399,6 +413,14 @@ function showTier(btn, sec, tier) {
     emptyBox.hidden=hits>0;
     syncWeekNav();
     if(status)status.textContent=hits+' matching '+(hits===1?'question':'questions');
+  }
+
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){
+      if(inp)inp.value='';
+      applyFilters();
+      if(inp)inp.focus();
+    });
   }
 
   function syncModuleTabsToTier(tier){

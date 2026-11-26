@@ -2170,6 +2170,8 @@ tr[id] {
   }
   .week-jump-strip a,
   .portal-filter-pill,
+  .portal-mastery-pill,
+  .tier-tab,
   .qb-tier-pill,
   .qb-ctrl-btn,
   .qb-master-btn,
@@ -2177,6 +2179,7 @@ tr[id] {
   .lab-copy-btn,
   .module-filter-clear,
   .viz-preset,
+  .viz-card input[type='number'],
   .course-link-pills .mat-pill {
     min-height: 40px;
     display: inline-flex;
