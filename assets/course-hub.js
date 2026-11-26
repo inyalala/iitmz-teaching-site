@@ -38,6 +38,23 @@
   if (rows.length === 0) {
     rows = Array.from(table.querySelectorAll('tr')).slice(1);
   }
+  var rowMap = {};
+  rows.forEach(function (row) {
+    if (row.id) {
+      rowMap[row.id] = row;
+    }
+  });
+
+  var jumpLinks = Array.from(document.querySelectorAll('#materials .week-jump-strip a[href^="#"]'));
+  var emptyBox = document.createElement('div');
+  emptyBox.className = 'empty-filter-state';
+  emptyBox.hidden = true;
+  emptyBox.innerHTML = '<span>No modules match the current filter.</span><button type="button" class="module-filter-clear">Reset Filter</button>';
+  var tableWrap = table.closest('.table-wrap') || table;
+  if (tableWrap.parentNode) {
+    tableWrap.parentNode.insertBefore(emptyBox, tableWrap);
+  }
+  var emptyReset = emptyBox.querySelector('button');
 
   function applyFilter() {
     var q = input.value.trim().toLowerCase();
@@ -49,6 +66,22 @@
         visible++;
       }
     });
+    jumpLinks.forEach(function (a) {
+      var tid = (a.getAttribute('href') || '').slice(1);
+      var targetRow = rowMap[tid];
+      if (targetRow) {
+        var isHidden = targetRow.style.display === 'none';
+        a.classList.toggle('is-dimmed', isHidden);
+        if (isHidden) {
+          a.setAttribute('aria-disabled', 'true');
+          a.setAttribute('tabindex', '-1');
+        } else {
+          a.removeAttribute('aria-disabled');
+          a.removeAttribute('tabindex');
+        }
+      }
+    });
+    emptyBox.hidden = visible > 0;
     if (statusEl) {
       statusEl.textContent = 'Showing ' + visible + ' of ' + rows.length + ' modules';
     }
@@ -57,13 +90,18 @@
     }
   }
 
+  function resetAll() {
+    input.value = '';
+    applyFilter();
+    input.focus();
+  }
+
   input.addEventListener('input', applyFilter);
   if (clearBtn) {
-    clearBtn.addEventListener('click', function () {
-      input.value = '';
-      applyFilter();
-      input.focus();
-    });
+    clearBtn.addEventListener('click', resetAll);
+  }
+  if (emptyReset) {
+    emptyReset.addEventListener('click', resetAll);
   }
   applyFilter();
 })();

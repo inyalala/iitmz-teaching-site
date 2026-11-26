@@ -1,5 +1,6 @@
-"""Automated HTML, link, and prose integrity checks for the teaching portal."""
+"""Automated HTML, link, ID uniqueness, and prose integrity checks."""
 
+from collections import Counter
 from pathlib import Path
 import re
 import unittest
@@ -14,10 +15,16 @@ DETAILS_CLOSE_RE = re.compile(r"</details>", re.IGNORECASE)
 SCRIPT_OPEN_RE = re.compile(r"<script\b", re.IGNORECASE)
 SCRIPT_CLOSE_RE = re.compile(r"</script>", re.IGNORECASE)
 ATTR_RE = re.compile(r"""(?:href|src)=["']([^"']+)["']""", re.IGNORECASE)
+ID_RE = re.compile(r"""\bid=["']([^"']+)["']""")
+STRIP_CODE_RE = re.compile(
+    r"<pre\b.*?</pre>|<code\b.*?</code>|<script\b.*?</script>|<style\b.*?</style>",
+    re.IGNORECASE | re.DOTALL,
+)
+LATEX_DOLLAR_RE = re.compile(r"\$(?:\\[A-Za-z]+|[A-Za-z_\\][^\n$<]{0,80})\$")
 
 
 class TestPortalHtmlIntegrity(unittest.TestCase):
-    """Verify structural HTML invariants, local links, and zero em-dashes."""
+    """Verify structural HTML invariants, unique IDs, links, and prose."""
 
     def test_all_html_pages_structure_links_and_prose(self) -> None:
         html_files = sorted(REPO_ROOT.rglob("*.html"))
@@ -57,9 +64,23 @@ class TestPortalHtmlIntegrity(unittest.TestCase):
                 f"{rel_path}: unbalanced <script> ({script_open} vs {script_close})",
             )
 
+            ids = ID_RE.findall(text)
+            dup_ids = {k: v for k, v in Counter(ids).items() if v > 1}
+            self.assertEqual(
+                dup_ids, {}, f"{rel_path}: duplicate HTML id attributes: {dup_ids}"
+            )
+
             self.assertNotIn("\u2014", text, f"{rel_path}: Unicode em-dash found")
             self.assertNotIn("&mdash;", text, f"{rel_path}: &mdash; entity found")
             self.assertNotIn("&#8212;", text, f"{rel_path}: &#8212; entity found")
+
+            prose_only = STRIP_CODE_RE.sub("", text)
+            latex_hits = LATEX_DOLLAR_RE.findall(prose_only)
+            self.assertEqual(
+                latex_hits,
+                [],
+                f"{rel_path}: literal LaTeX $...$ math found in HTML prose: {latex_hits}",
+            )
 
             for raw_ref in ATTR_RE.findall(text):
                 if raw_ref.startswith(("http://", "https://", "mailto:", "tel:", "javascript:", "data:", "#")):

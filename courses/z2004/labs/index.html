@@ -4,15 +4,19 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="light dark" name="color-scheme"/>
+<meta content="Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." name="description"/>
 <title>Lab Explorer &amp; SQLite3 Code Previews | Z2004 Database Management Systems | Dr. Innocent Nyalala</title>
 <link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
-<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" rel="canonical"/>
+<link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"/>
+<link rel="alternate" hreflang="x-default" href="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"/>
+<link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
 <meta content="website" property="og:type"/>
@@ -21,7 +25,9 @@
 <meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html" property="og:url"/>
 <meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#resource", "name": "Z2004 Lab Explorer &amp; SQLite3 Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html", "description": "Lab Explorer &amp; SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z2004: Database Management Systems", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z2004", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"}]}]}</script>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="640"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#resource", "name": "Z2004 Lab Explorer & SQLite3 Code Previews", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html", "description": "Lab Explorer & SQLite3 Code Previews for Z2004 Database Management Systems at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Undergraduate", "isPartOf": {"@type": "Course", "name": "Z2004: Database Management Systems", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z2004", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z2004/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -55,14 +61,15 @@
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
+<span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
 <span class="qb-match-status">Topic:</span>
-<button class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
-<button class="lab-topic-pill" data-topic="schema" type="button">Schema & RA</button>
-<button class="lab-topic-pill" data-topic="sql" type="button">SQL & CTEs</button>
-<button class="lab-topic-pill" data-topic="norm" type="button">Normalization</button>
-<button class="lab-topic-pill" data-topic="indexing" type="button">B+ Trees & ACID</button>
-<button class="lab-topic-pill" data-topic="nosql" type="button">NoSQL & Graph</button>
+<button aria-pressed="true" class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="schema" type="button">Schema & RA</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="sql" type="button">SQL & CTEs</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="norm" type="button">Normalization</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="indexing" type="button">B+ Trees & ACID</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="nosql" type="button">NoSQL & Graph</button>
 </div>
 </div>
 <div class="lab-explorer-grid">
@@ -261,9 +268,18 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
 (function(){
   var inp=document.getElementById('lab-search');
   var cnt=document.getElementById('lab-count');
+  var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
   var pills=Array.from(document.querySelectorAll('.lab-topic-pill'));
+  var grid=document.querySelector('.lab-explorer-grid');
   var activeTopic='all';
+
+  var emptyBox=document.createElement('div');
+  emptyBox.className='empty-filter-state';
+  emptyBox.hidden=true;
+  emptyBox.innerHTML='<span>No code modules match the current filter.</span><button type="button" class="module-filter-clear">Reset Filter</button>';
+  if(grid&&grid.parentNode)grid.parentNode.insertBefore(emptyBox,grid);
+  var emptyReset=emptyBox.querySelector('button');
 
   function applyFilters(){
     var q=(inp?inp.value:'').trim().toLowerCase();
@@ -277,17 +293,34 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
       c.style.display=ok?'':'none';
       if(ok)vis++;
     });
+    emptyBox.hidden=vis>0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
   pills.forEach(function(btn){
     btn.addEventListener('click',function(){
       activeTopic=btn.getAttribute('data-topic')||'all';
-      pills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      pills.forEach(function(p){
+        var act=p===btn;
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
       applyFilters();
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(emptyReset){
+    emptyReset.addEventListener('click',function(){
+      if(inp)inp.value='';
+      activeTopic='all';
+      pills.forEach(function(p){
+        var act=p.getAttribute('data-topic')==='all';
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
+      applyFilters();
+    });
+  }
 
   document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
@@ -298,6 +331,7 @@ def document_revenue_by_region(doc_store: dict[str, dict]) -&gt; dict[str, float
       function markCopied(){
         btn.textContent='Copied!';
         btn.classList.add('is-copied');
+        if(copyLive)copyLive.textContent='Code snippet copied';
         setTimeout(function(){btn.textContent='Copy Snippet';btn.classList.remove('is-copied');},1600);
       }
       if(navigator.clipboard&&navigator.clipboard.writeText){

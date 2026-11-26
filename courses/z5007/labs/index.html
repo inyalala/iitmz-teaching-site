@@ -4,15 +4,19 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="light dark" name="color-scheme"/>
+<meta content="Weeks 1–17 Code &amp; Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala." name="description"/>
 <title>Weeks 1–17 Code &amp; Complexity Explorer | Z5007 Programming and Data Structures | Dr. Innocent Nyalala</title>
 <link rel="preload" href="../../../assets/fonts/cormorant-garamond-600-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../../assets/fonts/newsreader-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../../../assets/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin/>
-<link href="../../../assets/fonts/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/fonts/fonts.css?v=2" rel="stylesheet"/>
 <script>(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',s||(d?'dark':'light'));}catch(e){}})();</script>
-<link href="../../../assets/site.css?v=6" rel="stylesheet"/>
+<link href="../../../assets/site.css?v=7" rel="stylesheet"/>
 <!-- portal-seo -->
 <link href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html" rel="canonical"/>
+<link rel="alternate" hreflang="en" href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"/>
+<link rel="alternate" hreflang="x-default" href="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"/>
+<link rel="alternate" type="text/plain" href="../../../llms.txt" title="LLM site index"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png"/>
 <meta content="website" property="og:type"/>
@@ -21,7 +25,9 @@
 <meta content="https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html" property="og:url"/>
 <meta content="https://inyalala.github.io/iitmz-teaching-site/social-preview.png" property="og:image"/>
 <meta content="image/png" property="og:image:type"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#resource", "name": "Z5007 Weeks 1\u201317 Code &amp; Complexity Explorer", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html", "description": "Weeks 1\u201317 Code &amp; Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5007: Programming and Data Structures", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5007", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"}]}]}</script>
+<meta property="og:image:width" content="1280"/>
+<meta property="og:image:height" content="640"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LearningResource", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#resource", "name": "Z5007 Weeks 1–17 Code & Complexity Explorer", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html", "description": "Weeks 1–17 Code & Complexity Explorer for Z5007 Programming and Data Structures at IIT Madras Zanzibar, taught by Dr. Innocent Nyalala.", "educationalLevel": "Graduate", "isPartOf": {"@type": "Course", "name": "Z5007: Programming and Data Structures", "url": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html#course"}, "author": {"@type": "Person", "@id": "https://inyalala.github.io/#person", "name": "Innocent Nyalala", "url": "https://inyalala.github.io/"}}, {"@type": "BreadcrumbList", "@id": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Teaching Portal", "item": "https://inyalala.github.io/iitmz-teaching-site/"}, {"@type": "ListItem", "position": 2, "name": "Z5007", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/index.html"}, {"@type": "ListItem", "position": 3, "name": "Lab Explorer", "item": "https://inyalala.github.io/iitmz-teaching-site/courses/z5007/labs/index.html"}]}]}</script>
 <!-- /portal-seo -->
 </head>
 <body><a class="skip-link" href="#main-content">Skip to main content</a>
@@ -58,17 +64,18 @@
 <div class="viz-card">
 <strong style="font-size:0.94rem;">Master Theorem: T(n) = a T(n/b) + n^d</strong>
 <div aria-label="Master Theorem presets" class="viz-controls" role="group">
-<button class="lab-copy-btn viz-preset" data-a="1" data-b="2" data-d="0" type="button">Binary Search (1, 2, 0)</button>
-<button class="lab-copy-btn viz-preset" data-a="2" data-b="2" data-d="1" type="button">Merge Sort (2, 2, 1)</button>
-<button class="lab-copy-btn viz-preset" data-a="7" data-b="2" data-d="2" type="button">Strassen (7, 2, 2)</button>
-<button class="lab-copy-btn viz-preset" data-a="4" data-b="2" data-d="3" type="button">n^3 Combine (4, 2, 3)</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-a="1" data-b="2" data-d="0" type="button">Binary Search (1, 2, 0)</button>
+<button aria-pressed="true" class="lab-copy-btn viz-preset is-active" data-a="2" data-b="2" data-d="1" type="button">Merge Sort (2, 2, 1)</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-a="7" data-b="2" data-d="2" type="button">Strassen (7, 2, 2)</button>
+<button aria-pressed="false" class="lab-copy-btn viz-preset" data-a="4" data-b="2" data-d="3" type="button">n^3 Combine (4, 2, 3)</button>
 </div>
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--font-mono);font-size:0.78rem;">
 <label>a <input id="mt-a" min="1" step="1" style="width:52px;padding:3px 5px;" type="number" value="2"/></label>
 <label>b <input id="mt-b" min="2" step="0.5" style="width:52px;padding:3px 5px;" type="number" value="2"/></label>
 <label>d <input id="mt-d" min="0" step="0.5" style="width:52px;padding:3px 5px;" type="number" value="1"/></label>
 </div>
-<div aria-live="polite" class="out-content" id="mt-output" style="margin-top:10px;font-size:0.8rem;"></div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="mt-svg" viewBox="0 0 320 110"></svg></div>
+<div aria-live="polite" class="out-content" id="mt-result" style="margin-top:8px;font-size:0.8rem;"></div>
 </div>
 <div class="viz-card">
 <strong style="font-size:0.94rem;">Binary Min-Heap (0-Indexed Array)</strong>
@@ -78,7 +85,8 @@
 <button class="lab-copy-btn" id="heap-pop" type="button">Extract Min</button>
 <button class="lab-copy-btn" id="heap-reset" type="button">Reset</button>
 </div>
-<div aria-live="polite" class="viz-heap-boxes" id="heap-boxes"></div>
+<div class="viz-svg-wrap"><svg aria-hidden="true" id="heap-svg" viewBox="0 0 320 148"></svg></div>
+<div class="viz-heap-boxes" id="heap-boxes"></div>
 <div aria-live="polite" class="qb-match-status" id="heap-trace" style="display:block;white-space:normal;"></div>
 </div>
 </div>
@@ -86,14 +94,15 @@
 <div aria-label="Filter code modules" class="qb-controls-bar" role="search">
 <input aria-label="Search modules by topic or complexity" class="qb-search-input" id="lab-search" placeholder="Search modules by topic, algorithm, SQL, Spark, or complexity..." type="search"/>
 <span aria-live="polite" class="qb-match-status" id="lab-count"></span>
+<span aria-live="polite" class="qb-match-status" id="lab-copy-live"></span>
 <div aria-label="Filter by topic" class="lab-topic-filters" role="group">
 <span class="qb-match-status">Topic:</span>
-<button class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
-<button class="lab-topic-pill" data-topic="asymptotics" type="button">Asymptotics & Sorts</button>
-<button class="lab-topic-pill" data-topic="trees" type="button">Trees & Heaps</button>
-<button class="lab-topic-pill" data-topic="graphs" type="button">Graphs & MST</button>
-<button class="lab-topic-pill" data-topic="dp" type="button">DP & Strings</button>
-<button class="lab-topic-pill" data-topic="project" type="button">Project & Capstone</button>
+<button aria-pressed="true" class="lab-topic-pill is-active" data-topic="all" type="button">All Topics</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="asymptotics" type="button">Asymptotics & Sorts</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="trees" type="button">Trees & Heaps</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="graphs" type="button">Graphs & MST</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="dp" type="button">DP & Strings</button>
+<button aria-pressed="false" class="lab-topic-pill" data-topic="project" type="button">Project & Capstone</button>
 </div>
 </div>
 <div class="lab-explorer-grid">
@@ -435,9 +444,18 @@ class BinaryMinHeap:
 (function(){
   var inp=document.getElementById('lab-search');
   var cnt=document.getElementById('lab-count');
+  var copyLive=document.getElementById('lab-copy-live');
   var cards=Array.from(document.querySelectorAll('.lab-explorer-card'));
   var pills=Array.from(document.querySelectorAll('.lab-topic-pill'));
+  var grid=document.querySelector('.lab-explorer-grid');
   var activeTopic='all';
+
+  var emptyBox=document.createElement('div');
+  emptyBox.className='empty-filter-state';
+  emptyBox.hidden=true;
+  emptyBox.innerHTML='<span>No code modules match the current filter.</span><button type="button" class="module-filter-clear">Reset Filter</button>';
+  if(grid&&grid.parentNode)grid.parentNode.insertBefore(emptyBox,grid);
+  var emptyReset=emptyBox.querySelector('button');
 
   function applyFilters(){
     var q=(inp?inp.value:'').trim().toLowerCase();
@@ -451,19 +469,36 @@ class BinaryMinHeap:
       c.style.display=ok?'':'none';
       if(ok)vis++;
     });
+    emptyBox.hidden=vis>0;
     if(cnt)cnt.textContent=vis+' of '+cards.length+' modules';
   }
 
   pills.forEach(function(btn){
     btn.addEventListener('click',function(){
       activeTopic=btn.getAttribute('data-topic')||'all';
-      pills.forEach(function(p){p.classList.toggle('is-active',p===btn);});
+      pills.forEach(function(p){
+        var act=p===btn;
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
       applyFilters();
     });
   });
   if(inp)inp.addEventListener('input',applyFilters);
+  if(emptyReset){
+    emptyReset.addEventListener('click',function(){
+      if(inp)inp.value='';
+      activeTopic='all';
+      pills.forEach(function(p){
+        var act=p.getAttribute('data-topic')==='all';
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
+      applyFilters();
+    });
+  }
 
-  document.querySelectorAll('.lab-copy-btn').forEach(function(btn){
+  document.querySelectorAll('.lab-copy-btn:not(.viz-preset):not(#heap-insert):not(#heap-pop):not(#heap-reset)').forEach(function(btn){
     btn.addEventListener('click',function(){
       var card=btn.closest('.lab-explorer-card');
       var pre=card&&card.querySelector('pre.lab-preview-code');
@@ -472,6 +507,7 @@ class BinaryMinHeap:
       function markCopied(){
         btn.textContent='Copied!';
         btn.classList.add('is-copied');
+        if(copyLive)copyLive.textContent='Code snippet copied';
         setTimeout(function(){btn.textContent='Copy Snippet';btn.classList.remove('is-copied');},1600);
       }
       if(navigator.clipboard&&navigator.clipboard.writeText){
@@ -499,7 +535,37 @@ class BinaryMinHeap:
   var aEl=document.getElementById('mt-a');
   var bEl=document.getElementById('mt-b');
   var dEl=document.getElementById('mt-d');
-  var mtOut=document.getElementById('mt-output');
+  var mtOut=document.getElementById('mt-result');
+  var mtSvg=document.getElementById('mt-svg');
+  var presets=Array.from(document.querySelectorAll('.viz-preset'));
+  function renderMtSvg(a,b,d,caseNum){
+    if(!mtSvg)return;
+    var ratios=[0,1,2,3].map(function(k){return Math.pow(a/Math.pow(b,d),k);});
+    var maxR=Math.max.apply(null,ratios)||1;
+    var ns='http://www.w3.org/2000/svg';
+    mtSvg.innerHTML='';
+    var labels=['k=0 (root)','k=1','k=2','k=3'];
+    ratios.forEach(function(r,k){
+      var y=10+k*24;
+      var w=Math.max(12,Math.round((r/maxR)*190));
+      var fill=(caseNum===1&&k===3)||(caseNum===3&&k===0)?'var(--accent-clove)':'var(--accent)';
+      var lbl=document.createElementNS(ns,'text');
+      lbl.setAttribute('x','4');lbl.setAttribute('y',String(y+12));
+      lbl.setAttribute('font-size','10');lbl.setAttribute('font-family','monospace');
+      lbl.setAttribute('fill','var(--ink2)');lbl.textContent=labels[k];
+      mtSvg.appendChild(lbl);
+      var rect=document.createElementNS(ns,'rect');
+      rect.setAttribute('x','76');rect.setAttribute('y',String(y));
+      rect.setAttribute('width',String(w));rect.setAttribute('height','15');
+      rect.setAttribute('rx','2');rect.setAttribute('fill',fill);
+      mtSvg.appendChild(rect);
+      var val=document.createElementNS(ns,'text');
+      val.setAttribute('x',String(82+w));val.setAttribute('y',String(y+12));
+      val.setAttribute('font-size','10');val.setAttribute('font-family','monospace');
+      val.setAttribute('fill','var(--ink3)');val.textContent=r.toFixed(2)+'x';
+      mtSvg.appendChild(val);
+    });
+  }
   function evalMT(){
     if(!aEl||!bEl||!dEl||!mtOut)return;
     var a=parseFloat(aEl.value), b=parseFloat(bEl.value), d=parseFloat(dEl.value);
@@ -509,25 +575,34 @@ class BinaryMinHeap:
     }
     var crit=Math.log(a)/Math.log(b);
     var eps=1e-6;
-    var caseStr, bound;
+    var caseStr, bound, caseNum;
     if(d < crit - eps){
+      caseNum=1;
       caseStr='Case 1 (leaf work dominates: d < log_b(a))';
       bound='Theta(n^'+crit.toFixed(3)+')';
     }else if(Math.abs(d - crit) <= eps){
+      caseNum=2;
       caseStr='Case 2 (balanced across tree levels: d = log_b(a))';
       bound=(d===0)?'Theta(log n)':(d===1?'Theta(n log n)':'Theta(n^'+d+' log n)');
     }else{
+      caseNum=3;
       caseStr='Case 3 (root combine dominates: d > log_b(a))';
       bound=(d===0)?'Theta(1)':(d===1?'Theta(n)':'Theta(n^'+d+')');
     }
     mtOut.textContent='log_b(a) = '+crit.toFixed(3)+' | '+caseStr+' -> T(n) = '+bound;
+    renderMtSvg(a,b,d,caseNum);
   }
   [aEl,bEl,dEl].forEach(function(el){if(el)el.addEventListener('input',evalMT);});
-  document.querySelectorAll('.viz-preset').forEach(function(btn){
+  presets.forEach(function(btn){
     btn.addEventListener('click',function(){
       if(aEl)aEl.value=btn.getAttribute('data-a')||'2';
       if(bEl)bEl.value=btn.getAttribute('data-b')||'2';
       if(dEl)dEl.value=btn.getAttribute('data-d')||'1';
+      presets.forEach(function(p){
+        var act=p===btn;
+        p.classList.toggle('is-active',act);
+        p.setAttribute('aria-pressed',act?'true':'false');
+      });
       evalMT();
     });
   });
@@ -535,9 +610,56 @@ class BinaryMinHeap:
 
   var heap=[3,5,8,12,14,19];
   var boxesEl=document.getElementById('heap-boxes');
+  var heapSvg=document.getElementById('heap-svg');
   var traceEl=document.getElementById('heap-trace');
   var valEl=document.getElementById('heap-val');
-  function renderHeap(msg){
+  function renderHeapSvg(swapSet){
+    if(!heapSvg)return;
+    var ns='http://www.w3.org/2000/svg';
+    heapSvg.innerHTML='';
+    var coords=[];
+    var maxShow=Math.min(heap.length,15);
+    for(var i=0;i<maxShow;i++){
+      var lvl=Math.floor(Math.log2(i+1));
+      var posInLvl=i-(Math.pow(2,lvl)-1);
+      var slots=Math.pow(2,lvl);
+      var x=Math.round(((posInLvl+0.5)/slots)*300)+10;
+      var y=20+lvl*34;
+      coords.push([x,y]);
+    }
+    for(var i=1;i<maxShow;i++){
+      var p=Math.floor((i-1)/2);
+      var line=document.createElementNS(ns,'line');
+      line.setAttribute('x1',String(coords[p][0]));line.setAttribute('y1',String(coords[p][1]));
+      line.setAttribute('x2',String(coords[i][0]));line.setAttribute('y2',String(coords[i][1]));
+      var onPath=swapSet[i]&&swapSet[p];
+      line.setAttribute('stroke',onPath?'var(--accent-clove)':'var(--border-strong)');
+      line.setAttribute('stroke-width',onPath?'2.2':'1.2');
+      heapSvg.appendChild(line);
+    }
+    for(var i=0;i<maxShow;i++){
+      var cx=coords[i][0], cy=coords[i][1];
+      var circ=document.createElementNS(ns,'circle');
+      circ.setAttribute('cx',String(cx));circ.setAttribute('cy',String(cy));circ.setAttribute('r','12');
+      var fill='var(--bg)';
+      var stroke='var(--border-strong)';
+      var txtColor='var(--ink)';
+      if(i===0){stroke='var(--accent)';fill='var(--surface2)';txtColor='var(--accent)';}
+      if(swapSet[i]){stroke='var(--accent-clove)';txtColor='var(--accent-clove)';}
+      circ.setAttribute('fill',fill);circ.setAttribute('stroke',stroke);circ.setAttribute('stroke-width','1.8');
+      heapSvg.appendChild(circ);
+      var t=document.createElementNS(ns,'text');
+      t.setAttribute('x',String(cx));t.setAttribute('y',String(cy+4));
+      t.setAttribute('text-anchor','middle');t.setAttribute('font-size','10');
+      t.setAttribute('font-family','monospace');t.setAttribute('font-weight','600');
+      t.setAttribute('fill',txtColor);t.textContent=String(heap[i]);
+      heapSvg.appendChild(t);
+    }
+  }
+  function renderHeap(msg,swapPath){
+    var swapSet={};
+    (swapPath||[]).forEach(function(idx){swapSet[idx]=true;});
+    renderHeapSvg(swapSet);
     if(!boxesEl)return;
     boxesEl.innerHTML='';
     if(heap.length===0){
@@ -560,14 +682,14 @@ class BinaryMinHeap:
       var v=parseInt(valEl?valEl.value:'0',10);
       if(isNaN(v))return;
       heap.push(v);
-      var i=heap.length-1, swaps=0;
+      var i=heap.length-1, swaps=0, path=[i];
       while(i>0){
         var p=Math.floor((i-1)/2);
         if(heap[p]<=heap[i])break;
         var tmp=heap[p];heap[p]=heap[i];heap[i]=tmp;
-        i=p;swaps++;
+        i=p;swaps++;path.push(i);
       }
-      renderHeap('Inserted '+v+' ('+swaps+' sift-up swaps). Min = '+heap[0]+'.');
+      renderHeap('Inserted '+v+' ('+swaps+' sift-up swaps). Min = '+heap[0]+'.',path);
     });
   }
   if(popBtn){
@@ -575,7 +697,7 @@ class BinaryMinHeap:
       if(heap.length===0){renderHeap('Heap empty.');return;}
       var minVal=heap[0];
       var last=heap.pop();
-      var swaps=0;
+      var swaps=0, path=[0];
       if(heap.length>0){
         heap[0]=last;
         var i=0;
@@ -585,10 +707,10 @@ class BinaryMinHeap:
           if(r<heap.length && heap[r]<heap[sm])sm=r;
           if(sm===i)break;
           var tmp=heap[i];heap[i]=heap[sm];heap[sm]=tmp;
-          i=sm;swaps++;
+          i=sm;swaps++;path.push(i);
         }
       }
-      renderHeap('Extracted min '+minVal+' ('+swaps+' sift-down swaps).'+(heap.length?' New min = '+heap[0]+'.':' Heap now empty.'));
+      renderHeap('Extracted min '+minVal+' ('+swaps+' sift-down swaps).'+(heap.length?' New min = '+heap[0]+'.':' Heap now empty.'),path);
     });
   }
   if(rstBtn){

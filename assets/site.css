@@ -1034,6 +1034,45 @@ footer.site-footer {
     padding-left: 16px;
     padding-right: 16px;
   }
+  .week-jump-strip {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+  table.materials,
+  table.materials tbody,
+  table.materials tr,
+  table.materials td {
+    display: block;
+    width: 100%;
+  }
+  table.materials tr:first-child th {
+    display: none;
+  }
+  table.materials tr[id] {
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  table.materials td {
+    border-bottom: none;
+    padding: 3px 0;
+  }
+  .mat-pill,
+  .week-jump-strip a,
+  .portal-filter-pill,
+  .qb-tier-pill,
+  .lab-topic-pill,
+  .qb-master-btn,
+  .lab-copy-btn,
+  .module-filter-clear,
+  .viz-preset,
+  .qb-ctrl-btn {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 /* Restored Quiet Monograph Sub-Components (Assignments, Quarto Docs & PySpark Notebooks) */
@@ -2014,4 +2053,105 @@ details.qb-solution[open] summary {
 .viz-node small {
   font-size: 0.65rem;
   color: var(--ink3);
+}
+
+/* Wave N: Dark-Mode WCAG AAA Contrast, Inline Links, Focus Ring & Empty State */
+[data-theme='dark'] .qb-master-btn.is-mastered,
+[data-theme='dark'] .qb-master-btn.is-mastered:hover,
+[data-theme='dark'] .lab-copy-btn.is-copied,
+[data-theme='dark'] .lab-copy-btn.is-copied:hover,
+[data-theme='dark'] .course-mastery-pill.has-progress,
+[data-theme='dark'] .course-mastery-pill.has-progress:hover {
+  color: #121413;
+}
+
+.viz-card input[type='number'],
+.module-filter-input {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+}
+
+.course-link-subrow {
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink3);
+  line-height: 1.55;
+}
+
+.course-link-subrow a {
+  color: var(--ink2);
+  text-decoration: underline;
+}
+
+.course-link-subrow a:hover {
+  color: var(--accent);
+}
+
+.mat-links-inline {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink2);
+  margin-right: 6px;
+}
+
+.mat-links-inline a {
+  color: var(--link);
+  text-decoration: underline;
+  margin-right: 0;
+}
+
+.mat-links-inline a:hover {
+  color: var(--accent);
+}
+
+.qb-io-label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+tr[id] {
+  scroll-margin-top: 64px;
+}
+
+.week-jump-strip a.is-dimmed,
+.qb-week-nav a.is-dimmed {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.empty-filter-state {
+  margin: 12px 0;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: var(--ink2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.empty-filter-state[hidden] {
+  display: none;
+}
+
+.viz-svg-wrap {
+  margin: 8px 0 6px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.viz-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
